@@ -1,0 +1,4 @@
+{
+    "python.linting.enabled": false,//忘了是什么东西了，反正有用
+    "python.pythonPath": "D:\\Programing\\Python\\python.exe"
+}
