@@ -1,5 +1,12 @@
-#!/usr/bin/python
-# -*- coding: UTF-8 -*-
+#!/usr/bin/env python 
+# -*- coding:utf-8 -*- 
+# @Author: guojun 
+# @Company: 航天神舟智慧系统技术有限公司 
+# @Site: https://user.qzone.qq.com/350606539/main 
+# @Date: 2018-08-17 11:15:01 
+# @Last Modified by: guojun 
+# @Last Modified time: 2018-08-17 11:15:01 
+# @Software: vscode 
 
 i = int(input('净利润:'))
 arr = [1000000, 600000, 400000, 200000, 100000, 0]

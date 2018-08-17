@@ -6,9 +6,39 @@
 # @File    : 定制类
 # @Software: PyCharm
 
-class Student(object):
+class Test(object):
+    """
+    用于初始化类
+    """
     def __init__(self, name):
         self.name = name
+        print("init name is %s" % self.name)
+
+    def __str__(self):
+        print("隔离")
+        return 'Student object (name: %s)' % self.name
+
+    __repr__=__str__;
+
+    # def __getattribute__(self, attr):
+    #     if attr == 'score':
+    #         return 99
+
+    def __call__(self):
+        print("My name if %s" % self.name)
+
+    def res(self):
+        return (self.name)
+
+t = Test(100)
+print(t.__str__())
+print('-------------------------------------------------------------')
+
+class Student(object): 
+    def __init__(self, name):
+        self.name = name
+        print("init name is %s" % self.name)
+
     def __str__(self):
         print("隔离")
         return 'Student object (name: %s)' % self.name
@@ -17,10 +47,17 @@ class Student(object):
 
     def __getattribute__(self, attr):
         if attr == 'score':
-            return 99
+            return 9922
+        else:
+            return object.__getattribute__(self,attr)
+
+    def __call__(self):
+        print("My name if %s" % self.name)
 
 
 sto = Student("Michael");
+
+sto();
 
 #print(sto)
 print(sto.score);

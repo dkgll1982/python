@@ -8,8 +8,9 @@
 
 
 def fn(self, name):
-    print("Hello，"+name)
+    print("Hello，"+name) 
 
+#动态创建class
 
 Hello = type('dfdfdgdfgdgdgd', (object,), dict(
     hello=fn, hell2=fn))  # 创建Hello class
@@ -17,6 +18,16 @@ Hello = type('dfdfdgdfgdgdgd', (object,), dict(
 c = Hello()
 c.hell2("张三")
 
+print(type(Hello))
+
+def now(who):  # 创建一个方法
+    print('anxious')
+
+Mood = type('me', (object,), dict(now=now))
+s = Mood();
+
+print(type(Mood))
+print(type(s))
 
 class pmethod(object):
     say_hello = ""
@@ -38,6 +49,3 @@ class pmethod(object):
 clr = pmethod("zhangsan")
 plr = clr.method("zhangsan")
 print(plr('2'))
-
-for dfg :
-     self.dsfsfsd sfsdfs 23423

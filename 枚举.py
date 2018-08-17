@@ -6,7 +6,8 @@
 # @File    : 枚举
 # @Software: PyCharm
 
-from enum import IntEnum
+from enum import IntEnum, unique
+@unique
 class my_Enum(IntEnum):
     red=1,
     green=2,
