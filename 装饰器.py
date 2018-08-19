@@ -7,6 +7,10 @@
 # @Software: PyCharm
 
 from functools import wraps
+
+
+
+
 def sum_add(*args1):  # 我们要给我们的装饰器decorator，带上参数
     def decorator(func):
         @wraps(func)  # 加上这句，原函数func被decorator作用后，函数性质不变
@@ -35,7 +39,6 @@ def log(text):
             print('%s %s():' % (text, func.__name__))
             return func(*args, **kw)
         return wrapper
-        print('%s %s():' % (text, func.__name__))
     return decorator
 
 @log('execute')

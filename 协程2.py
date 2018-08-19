@@ -8,50 +8,29 @@
 #! -*- coding: utf-8 -*-
 import inspect
 
-# 协程使用生成器函数定义：定义体中有yield关键字。
-def simple_coroutine():
-    print('-> coroutine started')
-    # yield 在表达式中使用；如果协程只需要从客户那里接收数据，yield关键字右边不需要加表达式（yield默认返回None）
-    x = yield
-    print('-> coroutine received:', x)
+def simple_coro2(a):
+    print('-> coroutine started: a =', a)
+    b = yield a
+    print('-> Received: b =', b)
+    c = yield a + b
+    print('-> Received: c =', c)
 
+my_coro2 = simple_coro2(14)
+print(inspect.getgeneratorstate(my_coro2))
+# 这里inspect.getgeneratorstate(my_coro2) 得到结果为 GEN_CREATED （协程未启动）
 
-my_coro = simple_coroutine()
-my_coro # 和创建生成器的方式一样，调用函数得到生成器对象。
-# 协程处于 GEN_CREATED (等待开始状态)
-print('1:'+inspect.getgeneratorstate(my_coro))
+next(my_coro2)
+# 向前执行到第一个yield 处 打印 “-> coroutine started: a = 14”
+# 并且产生值 14 （yield a 执行 等待为b赋值）
+print(inspect.getgeneratorstate(my_coro2))
+# 这里inspect.getgeneratorstate(my_coro2) 得到结果为 GEN_SUSPENDED （协程处于暂停状态）
 
-my_coro.send(None)
-# 首先要调用next()函数，因为生成器还没有启动，没有在yield语句处暂停，所以开始无法发送数据
-# 发送 None 可以达到相同的效果 my_coro.send(None)
-#next(my_coro)
-# 此时协程处于 GEN_SUSPENDED (在yield表达式处暂停)
-print('2:'+inspect.getgeneratorstate(my_coro))
+my_coro2.send(28)
+# 向前执行到第二个yield 处 打印 “-> Received: b = 28”
+# 并且产生值 a + b = 42（yield a + b 执行 得到结果42 等待为c赋值）
+print(inspect.getgeneratorstate(my_coro2))
+# 这里inspect.getgeneratorstate(my_coro2) 得到结果为 GEN_SUSPENDED （协程处于暂停状态）
 
-# 调用这个方法后，协程定义体中的yield表达式会计算出42；现在协程会恢复，一直运行到下一个yield表达式，或者终止。
-#my_coro.send(42)
-print('3:'+inspect.getgeneratorstate(my_coro))
-
-my_coro.close();
-print('4:'+inspect.getgeneratorstate(my_coro))
-
-# def consumer():
-#     r = ''
-#     while True:
-#         n = yield r
-#         if not n:
-#             return
-#         print('[CONSUMER] Consuming %s...' % n)
-#         r = '200 OK'
-#
-# def produce(c):
-#     c.send(None)
-#     n = 0
-#     while n < 5:
-#         n = n + 1
-#         print('[PRODUCER] Producing %s...' % n)
-#         r = c.send(n)
-#         print('[PRODUCER] Consumer return: %s' % r)
-#     c.close()
-# c = consumer()
-# produce(c)
+my_coro2.send(99)
+# 把数字99发送给暂停协程，计算yield 表达式，得到99，然后把那个数赋值给c 打印 “-> Received: c = 99”
+# 协程终止，抛出StopIteration
