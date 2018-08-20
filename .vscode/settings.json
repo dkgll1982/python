@@ -1,4 +1,15 @@
 {
     "python.linting.enabled": false,//忘了是什么东西了，反正有用
-    "python.pythonPath": "D:\\Programing\\Python\\python.exe"
+    "python.pythonPath": "D:\\Programing\\Python\\python.exe",
+    "python.unitTest.unittestArgs": [
+        "-v",
+        "-s",
+        ".",
+        "-p",
+        "*test.py"
+    ],
+    "python.unitTest.pyTestEnabled": false,
+    "python.unitTest.nosetestsEnabled": false,
+    "python.unitTest.unittestEnabled": false,
+    "python.unitTest.promptToConfigure": false
 }

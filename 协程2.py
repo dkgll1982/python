@@ -25,7 +25,7 @@ next(my_coro2)
 print(inspect.getgeneratorstate(my_coro2))
 # 这里inspect.getgeneratorstate(my_coro2) 得到结果为 GEN_SUSPENDED （协程处于暂停状态）
 
-my_coro2.send(28)
+print('-------'+str(my_coro2.send(28)))
 # 向前执行到第二个yield 处 打印 “-> Received: b = 28”
 # 并且产生值 a + b = 42（yield a + b 执行 得到结果42 等待为c赋值）
 print(inspect.getgeneratorstate(my_coro2))
