@@ -14,6 +14,8 @@ def simple_coro2(a):
     print('-> Received: b =', b)
     c = yield a + b
     print('-> Received: c =', c)
+    d = yield a + c
+    print('-> Received: d =', d)
 
 my_coro2 = simple_coro2(14)
 print(inspect.getgeneratorstate(my_coro2))
@@ -31,6 +33,6 @@ print('-------'+str(my_coro2.send(28)))
 print(inspect.getgeneratorstate(my_coro2))
 # 这里inspect.getgeneratorstate(my_coro2) 得到结果为 GEN_SUSPENDED （协程处于暂停状态）
 
-my_coro2.send(99)
+print('-------'+str(my_coro2.send(99)))
 # 把数字99发送给暂停协程，计算yield 表达式，得到99，然后把那个数赋值给c 打印 “-> Received: c = 99”
 # 协程终止，抛出StopIteration
