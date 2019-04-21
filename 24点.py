@@ -1,5 +1,13 @@
-#!/usr/bin/env python
-#encoding:utf8
+#!/usr/bin/env python 
+# -*- coding:utf-8 -*- 
+# @Author: guojun 
+# @Company: 航天神舟智慧系统技术有限公司 
+# @Site: https://user.qzone.qq.com/350606539/main 
+# @Date: 2018-11-16 15:37:38 
+# @Last Modified by: guojun 
+# @Last Modified time: 2018-11-16 15:37:38 
+# @Software: vscode  
+
 
 import itertools
 import random
