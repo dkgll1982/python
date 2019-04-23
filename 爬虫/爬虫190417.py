@@ -8,4 +8,11 @@
 # @Last Modified time: 2018-08-17 17:56:00 
 # @Software: vscode 
 
+ 
+def fac(n): 
+    return n+fac(n-1) if n>1 else 1; 
+
+print(fac(100));
+
+
 

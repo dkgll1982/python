@@ -6,6 +6,15 @@
 # @File    : 列表生成式
 # @Software: PyCharm
 
+L = [('Bob', 75), ('Adam', 92), ('Bart', 66), ('Lisa', 88)]
+
+def by_name(s):
+    return s[1];
+
+L1 = sorted(L,  key=by_name,reverse=True)
+
+print(L1);
+
 L = []
 for x in range(1, 11):
     L.append(x * x)

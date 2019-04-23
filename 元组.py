@@ -15,6 +15,7 @@ L = [
 print(L[0][2])
 print(L[1][2])
 print(L[2][2])
+print(L[:2])
 
 #print(list(range(len(input("你的名字：")))));
 
