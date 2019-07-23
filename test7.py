@@ -36,3 +36,4 @@ def fub(b):
 if __name__ == '__main__':
     fub(input("请输入参数:"));
 
+

@@ -76,3 +76,34 @@ elif age<200:
     pass
 else:
     print(age)
+
+a = {1,'c',1,(1,2,3),'c'}
+b = {1, 'c', (1, 2, 3)};
+print(a)
+print(type(a))
+
+print('-------------------------------')
+#由于集合中的元素是无序的，因此无法向列表那样使用下标访问元素。Python 中，访问集合元素最常用的方法是使用循环结构，将集合中的数据逐一读取出来。
+for ele in a:
+    print(ele,end=' ')
+print('')
+print('-------------------------------')
+
+set1 = set("c.biancheng.net")
+set2 = set([1,2,3,4,5])
+set3 = set((1,2,3,4,5))
+print("set1:",set1)
+print("set2:",set2)
+print("set3:",set3)
+
+a.add((1,2));
+a.add(123);
+
+print('-------------------------------')
+print(a)
+print('-------------------------------')
+
+a.remove((1,2,3))
+a.discard((1,2,3,3))
+print(a)
+print('-------------------------------')

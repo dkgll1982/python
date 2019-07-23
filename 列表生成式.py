@@ -17,14 +17,38 @@ print(L1);
 
 L = []
 for x in range(1, 11):
-    L.append(x * x)
+    L.append((x,x * x))
 print(L)
 
+# append() 方法传递列表或者元组，此方法也只会将其视为一个元素，直接添加到列表中，从而形成包含列表和元组的新列表
+L2 = []
+for x in range(1, 11):
+    L2.insert(0,x * x)
+print(L2)
+
+print(L2[1::2]);
+del L2[::2]
+
+#remove() 方法会删除第一个和指定值相同的元素，如果找不到该元素，该方法将会引发 ValueError 错误。
+L2.remove(49)
+print(L2);
+L2.clear()
+
+print(L2);
+
+#如果希望不将被追加的列表或元组当成一个整体，而是只追加列表中的元素，则可使用列表提供的 extend() 方法。
+L3 = []
+for x in range(1, 11):
+    L3.extend((x,x * x))
+print(L3)
+
 m = [x*y for x in range(1,11) if x%2==0 for y in range(1,11) if y%3==0]
-2,4,6,8,10
-3,6,9
 
 print(m)
+
+#毕达哥拉斯三元组
+m3 = [(x,y,z) for x in range(1,30) for y in range(x,30)  for z in range(y,30) if x*x+y*y==z*z]
+print(m3);
 
 #列出磁盘目录文件
 import os

@@ -6,6 +6,37 @@
 # @File    : 元组
 # @Software: PyCharm
 
+
+#创建元组 a_typle
+a_tuple =("C语言中文网",)
+print(type(a_tuple))
+print(a_tuple)
+#创建字符串 a
+a = ("C语言中文网")
+print(type(a))
+print(a)
+
+#使用tuple()函数创建元组
+# 将列表转换成元组
+a_list = ['crazyit', 20, -1.2]
+a_tuple = tuple(a_list)
+print(a_tuple)
+
+# 使用range()函数创建区间（range）对象
+a_range = range(1, 5)
+print(a_range)
+# 将区间转换成元组
+b_tuple = tuple(a_range)
+print(b_tuple)
+# 创建区间时还指定步长
+c_tuple = tuple(range(4, 20, 3))
+print(c_tuple)
+
+#通过连接多个元组的方式向元组中添加新元素
+d_tuple=b_tuple+c_tuple;
+
+print((d_tuple))
+
 L = [
     ['Apple', 'Google', 'Microsoft'],
     ['Java', 'Python', 'Ruby', 'PHP'],
@@ -28,7 +59,8 @@ x = input("请输入：");
 
 li = list(set(x));
 
-print(type(li))
+print(type(x))
 
+print(x.index)
 li.sort(key=x.index);
-print (li);
+print(li);
