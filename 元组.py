@@ -64,3 +64,10 @@ print(type(x))
 print(x.index)
 li.sort(key=x.index);
 print(li);
+
+print('--------------------')
+t=((x,y) for x in range(10) for y in range(10));
+#使用元组推导式生成的结果并不是一个元组，而是一个生成器对象（后续会介绍），这一点和列表推导式是不同的。
+#运行结果为：<generator object <genexpr> at 0x0000020BAD136620>
+print(t)
+print(tuple(t))

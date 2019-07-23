@@ -26,7 +26,7 @@ print("".join(reversed(s)))
 #每隔 1 个，取一个字符
 print(s[::2]) # 输出 caytogi eygo
 
-str = "C语言中文网 >>> c.biancheng.net mycro soft Amercia"
+str = "C语言中文网  c.biancheng.net mycro soft Amercia"
 #sep：用于指定分隔符，可以包含多个字符。此参数默认为 None，表示所有空字符，包括空格、换行符“\n”、制表符“\t”等。
 list =s.split();
 
@@ -35,3 +35,37 @@ list4 = str.split(' ')
 list5 = str.split(' ',4)
 print(list4)
 print(list5)
+
+dir = '','usr','bin','env'
+s5 = ''.join(str);
+s3 = '/'.join(dir);
+print(s5)
+print(s3)
+
+#str.find(sub[,start[,end]])
+str = "c.biancheng.net"
+fi = str.find('.',1)
+rfi = str.rfind('.',1)
+#同 find() 方法类似，index() 方法也可以用于检索是否包含指定的字符串，不同之处在于，当指定的字符串不存在时，index() 方法会抛出异常
+#str.index(sub[,start[,end]])
+i = str.index('.',1)
+ri = str.rindex('.',1)
+print("\".\"在字符串\"%s\"第一次出现的位置:%d"%(str,fi))
+print("\".\"在字符串\"%s\"第一次出现的位置:%d"%(str,rfi))
+print('---------------------------------')
+print("\".\"在字符串\"%s\"第一次出现的位置:%d"%(str,i))
+print("\".\"在字符串\"%s\"第一次出现的位置:%d"%(str,ri))
+
+print(s.title())
+
+str = "  c.biancheng.net \t\n\r"
+print(str.strip())
+print(str)
+print('--------------------------------------')
+
+str='中华人民共和国';
+str2=str.encode();
+str3= str.encode("GBK")
+print(str3)
+print(str3.decode("GBK"))
+print(help(print))

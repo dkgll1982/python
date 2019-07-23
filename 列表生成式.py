@@ -64,3 +64,4 @@ L = ['Hello', 'World', 'IBM', 'Apple']
 #Python内置的enumerate函数可以把一个list变成索引-元素对，这样就可以在for循环中同时迭代索引和元素本身：
 l = [ "第" + str(key+1) + "个元素值:" + val.lower() for key,val in enumerate(L)]
 print(l)
+

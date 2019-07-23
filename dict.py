@@ -120,3 +120,7 @@ stu3 = "姓名：{0}，年龄：{1}，性别：{2}，身高:{3},学历：{4}，�
 print(stu1 % users1)
 print(stu2.format(**users2))
 print(stu3.format("王五",12,"女",169,"文盲","汉族"))
+
+olddict={'C语言中文网': 6, 'c.biancheng.net': 15}
+newdict = {v: k for k, v in olddict.items() if v>10}
+print(newdict)
