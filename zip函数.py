@@ -14,5 +14,26 @@ print(list(zipped))
 #[(1, 4), (2, 5), (3, 6)]
 print(list(zip(a,c)))              # 元素个数与最短的列表一致
 #[(1, 4), (2, 5), (3, 6)]
-print(list(zip(*zipped)))          # 与 zip 相反，*zipped 可理解为解压，返回二维矩阵式
+print(zip(*zipped))         # 与 zip 相反，*zipped 可理解为解压，返回二维矩阵式
 #[(1, 2, 3), (4, 5, 6)]
+
+print('------------------')
+x = [1, 2, 3]
+y = [4, 5, 6]
+z = [7, 8, 9]
+
+xyz = zip(x,y,z)
+print(list(xyz))
+u = list(zip(*xyz))
+print('------------------')
+##print(z11)
+print(u)
+
+print('------------------')
+a = [1, 2, 3]
+b = (4, 5, 6)
+z = zip(a, b)
+z2 = list(z)
+z3 = dict(z2)
+print(z2)
+print(z3)
