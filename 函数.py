@@ -7,12 +7,37 @@
 # @Software: PyCharm
 
 def func(func,x):
+    '''
+    通用函数调用
+    :param func:传递函数方法名
+    :param x:参数
+    :return:返回计算结果
+    '''
     return  func(x);
 
 t = func(abs,-122);
 
 print(t)
 
+help(func)
+
+def myfunc(obj):
+    #obj+=obj;
+    obj=obj+obj;
+
+a=[122,22,3,4]
+
+print(a);
+s = myfunc(a);
+print(a)
+print('-----------------')
+#a+=a;
+
+b =a;
+a.append(1)
+#b.__iadd__(a)
+b.__add__(a)
+print(a)
 
 #斐波那契数列
 def fab(n):

@@ -1,9 +1,10 @@
-/*
- * @Author: guojun 
- * @Date: 2018-08-16 15:12:55 
- * @Last Modified by:   guojun 
- * @Last Modified time: 2018-08-16 15:12:55 
- */
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 2018-08-13 15:44
+# @Author  : guojun
+# @Site    : https://user.qzone.qq.com/350606539/main
+# @File    : 偏函数
+# @Software: PyCharm
 
 
 try:

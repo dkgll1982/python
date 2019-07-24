@@ -36,3 +36,15 @@ print(l)
 #在 Python 中，元组通常都是使用一对小括号将所有元素括起来的，但小括号不是必须的，只要将各元素用逗号隔开，Python 就会将其视为元组
 a_tuple = "C语言中文网","http://c.biancheng.net"
 print(a_tuple)
+
+#有些时候，程序需要进行反向遍历，此时可通过 reversed() 函数，该函数可接收各种序列（元组、列表、区间等）参数，然后返回一个“反序排列”的法代器，该函数对参数本身不会产生任何影响。
+b=list(reversed(a_list));
+c=[x for x in reversed(a_list)]
+d=sorted(r,reverse=True)
+print(b)
+print(c)
+print(d)
+
+my_list = ['fkit', 'crazyit', 'Charlie', 'fox', 'Emily']
+for s in sorted(my_list, key=len,reverse=True):
+    print(s)

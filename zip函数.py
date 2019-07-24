@@ -24,6 +24,7 @@ z = [7, 8, 9]
 
 xyz = zip(x,y,z)
 print(list(xyz))
+xyz = zip(x,y,z)
 u = list(zip(*xyz))
 print('------------------')
 ##print(z11)

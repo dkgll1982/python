@@ -69,3 +69,4 @@ str3= str.encode("GBK")
 print(str3)
 print(str3.decode("GBK"))
 print(help(print))
+

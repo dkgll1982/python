@@ -8,10 +8,8 @@
 
 import pymysql.cursors
 
-
 # 连接MySQL数据库
 connection = pymysql.connect(host='127.0.0.1', port=3306, user='root', password='123456', db='cig', charset='utf8', cursorclass=pymysql.cursors.DictCursor)
-
 
 # 通过cursor创建游标
 cursor = connection.cursor()
@@ -24,8 +22,6 @@ for x in range(101):
 
 # 提交SQL
 connection.commit()
-
-
 
 # 通过cursor创建游标
 cursor = connection.cursor()
@@ -48,7 +44,6 @@ cursor.execute(sql)
 result = cursor.fetchall()
 for data in result:
     print(data)
-
 
 # 关闭数据连接
 connection.close()

@@ -7,6 +7,5 @@
 # @Software: PyCharm
 
 x=2;
-a=3(x**2)*(x)=3(x**(2+1))=3x**3
 
-print(a)
+print(x)
