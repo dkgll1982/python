@@ -20,7 +20,7 @@ def fub(b):
 value = ('www.runoob.com', 14)
 s = str(value)
 
-f = open("C:\\Users\dkgll\\Desktop//处理消息.txt", "a")
+f = open(path+"\\处理消息.txt", "a")
 f.write(s+"\n");
 num2 = f.write( "Python 是一个非常好的语言。\n是的，的确非常好!!\n" )
 
@@ -28,7 +28,7 @@ for i in range(100):
     f.write(str(i)+'\r\n')
 f.close();
 
-f2=open("C:\\Users\dkgll\\Desktop//分类施策接口.txt", "r")
+f2=open(path+"\\demo.txt", "r")
 for line in f2.readlines():
     print (line)
 f2.close();
@@ -44,6 +44,17 @@ print("di3—>"+str(type(di3)));
 print("__name__—>"+str(type(__name__)));
 print("{0:'zero'}—>"+str(type({0:'zero'})));
 print("fub—>"+str(type(fub)));
+print("type—>"+str(type(type)));
+print("str—>"+str(type(str)));
+
+#从上面的输出结果可以看出，使用 type() 函数定义的类与直接使用 class 定义的类井没有任何区别。
+#事实上，Python 解释器在执行使用 class 定义的类时，其实依然是使用 type() 函数来创建类的。因此，无论通过哪种方式定义类，程序最终都是创建一个 type 的实例。
+Dog = type('Dog', (object,), dict(walk=fub, age=6))
+d = Dog();
+print("Dog—>"+str(type(Dog)));
+print("d—>"+str(type(d)));
+print(Dog.__dict__)
+print(d.__dir__())
 
 #不存在则创建目录
 #存在则直接写入文件

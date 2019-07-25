@@ -8,9 +8,6 @@
 
 from functools import wraps
 
-
-
-
 def sum_add(*args1):  # 我们要给我们的装饰器decorator，带上参数
     def decorator(func):
         @wraps(func)  # 加上这句，原函数func被decorator作用后，函数性质不变

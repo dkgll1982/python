@@ -12,6 +12,6 @@ a=list(string[:2])+[string[2:]]+['3423']
 print("a=%s"%a)
 
 
-*b,='abcd'
+*b,f='abcd'
 
-print( *b)
+print(*b)
