@@ -13,7 +13,7 @@ def fun2(x):
     return  x+x
 from functools import  reduce;
 
-import  math;
+import math;
 
 rn =reduce(fun,[1,2,3,4,5,6,7,8,9,10]);
 rn1 =list(map(fun2,[1,2,3,4,5,6,7,8,9,10]));

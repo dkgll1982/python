@@ -6,7 +6,10 @@
 # @File    : map.py
 # @Software: PyCharm
 
+import multiprocessing
+from functools import partial
 from functools import reduce
+
 def func(x):
     return x*x;
 
@@ -15,6 +18,9 @@ def func2(x,y):
 
 def aaa(x):
     return x>=2;
+ 
+print(list(map(lambda x:x*x,[1,2,3,4,5,6,7,8,9])))  
+#print(list(map(lambda x,y:x*y,[1,2,3,4,5,6,7,8,9])))  
 
 print(sorted(list(filter(aaa,[1,2,3,4,5,65,6,7,8,9,0])),reverse=True))
 

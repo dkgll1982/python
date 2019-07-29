@@ -1,11 +1,21 @@
+#!/usr/bin/env python 
+# -*- coding:utf-8 -*- 
+# @Author: guojun 
+# @Company: 航天神舟智慧系统技术有限公司 
+# @Site: https://user.qzone.qq.com/350606539/main 
+# @Date: 2018-07-29 16:41:31 
+# @Last Modified by: guojun 
+# @Last Modified time: 2018-07-29 16:41:31 
+# @Software: vscode 
+
 class Animal(object):
     __slots__ = ('gettype','age2',"fuwnc","gettde")  # 用tuple定义允许绑定的属性名称
     __name='';
     name='父类的名字'
     def __init2__(self):
-        __name='11';
+        __name='11'
         #print("初始化方法")
-        return __name;
+        return __name
     def speak(self,tag):
         print("Hello, I'm is Animal."+tag)
 
@@ -76,7 +86,7 @@ a=Animal().__init2__()+Animal().__init2__();
 def hasattribute(cla):
     if(hasattr(cla,"__init2__")):
         return int(cla().__init2__());
-    return  None;
+    return None;
 
 b=hasattribute(Animal)+hasattribute(Animal);
 

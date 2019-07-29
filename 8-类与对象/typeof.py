@@ -75,3 +75,4 @@ file = open(xxoo, 'a')
 
 file.write("append文件测试内容\n")  # 写入内容信息
 file.close();
+
