@@ -39,4 +39,4 @@ for t in range(4):
     draw.text((60 * t + 10, 10), rndChar(), font=font, fill=rndColor2())
 # 模糊:
 image = image.filter(ImageFilter.BLUR)
-image.save('C:\\Users\\dkgll\\Pictures\\2018-04-28\\code'+str(random.randint(10000,99999))+'.jpg', 'jpeg')
+image.save('C:\\Users\\dkgll\\Desktop\\python目录\\image\\code'+str(random.randint(10000,99999))+'.jpg', 'jpeg')
