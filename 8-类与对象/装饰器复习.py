@@ -46,7 +46,7 @@ def sum1():
 sum1()
 print(sum1.__name__)
 
-print('-------------------------------------------------------------')
+print('-'*40)---------------------------------------------------------')
 
 def decorator(func):
     @functools.wraps(func)
@@ -66,7 +66,7 @@ def sum1(a,b):
 print(sum1.__name__);
 t = sum1(12,34)
 print('t=',t)
-print('--------------------------------------------------')
+print('-'*40)
 
 import functools
 

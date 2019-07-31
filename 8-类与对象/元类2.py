@@ -80,7 +80,7 @@ print(CellPhone)
 print(hasattr(CellPhone,"_discount")) 
 print(cp._discount) 
 
-print('----------------------------------------')
+print('-'*40)
 
 class_example = type('class_example', (), {'attr': 1,"name":"张三"})
 print(class_example.__dict__)
@@ -101,7 +101,7 @@ child_example.newfunc = childfunc;
 
 child_example().newfunc()
 
-print('----------------------------------------')
+print('-'*40)
 
 print(cp.discount.__class__)
 print(ListMetaclass.__class__)
@@ -112,7 +112,7 @@ print(child_example.name.__class__)
 print(b.__class__)
 print(childfunc.__class__)
 
-print('----------------------------------------')
+print('-'*40)
 
 #所有的class都来自于type。type，作为metaclass，创建了以上所有的class object。
 print(cp.discount.__class__.__class__)

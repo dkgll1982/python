@@ -32,7 +32,7 @@ class Test(object):
 
 t = Test(100)
 print(t.__str__())
-print('-------------------------------------------------------------')
+printprint('-'*40)
 
 class Student(object): 
     def __init__(self, name):

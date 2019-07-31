@@ -22,11 +22,11 @@ class employee(object):
     def displayEmployee(self):
         print("Name : ", self.__name, ", Salary: ", self.salary)
 
-print('-------------------------------------------------------')
+print('-'*40)
 emp =employee("张三",18000);
 emp._employee__name='李四'
 emp.displayEmployee()
-print('-------------------------------------------------------')
+print('-'*40)
 
 print(emp.salary);
 print(emp.empCount)

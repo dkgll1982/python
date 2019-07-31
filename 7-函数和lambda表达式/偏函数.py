@@ -27,5 +27,3 @@ print(nday2(6))
 print(nday2(13))
 print(nday2(29))
 print('----------------')
-
-for

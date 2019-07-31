@@ -31,13 +31,13 @@ def f():
     print(c)
 
 a = f()
-print('-------------------------------------------------------')
+print('-'*40)
 next(a)
-print('-------------------------------------------------------')
+print('-'*40)
 next(a)
-print('-------------------------------------------------------')
+print('-'*40)
 a.send('msg')
-print('-------------------------------------------------------')
+print('-'*40)
 
 
 def h():
@@ -50,7 +50,7 @@ c = h()
 print('1:',c.__next__())  #相当于c.send(None)
 print('2:',c.send('Fighting!'))  #(yield 5)表达式被赋予了'Fighting!'
 
-print('-------------------------------------------------------')
+print('-'*40)
 def func():
      n = 0
      while 1:
@@ -73,12 +73,12 @@ def test():
 t = test();
 t.send(None)
 x = t.send(2)
-print('---------------')
+print('-'*40)
 
 x = t.send(3)
 print(x)
 
-print('---------------')
+print('-'*40)
 
 def fun():
     for i in range(20):
@@ -107,7 +107,7 @@ class Fab(object):
             self.n = self.n + 1
             return r
         raise StopIteration()
-print('---------------')
+print('-'*40)
 
 def func():
     n = 0;
@@ -123,7 +123,7 @@ print(f.__next__())
 print(f.send(2))
 print(f.send(1))
 
-print('---------------')
+print('-'*40)
 
 
 def fun():
@@ -138,7 +138,7 @@ print(a.send(1))
 print(a.__next__())
 print(a.__next__())
 
-print('---------------')
+print('-'*40)
 
 def xunhuan(i):
     l=0;

@@ -20,4 +20,4 @@ im = Item('鼠标', 29.8)
 x = im   # ①
 # 打印im所引用的Item对象
 del im
-print('--------------')
+print('-'*40)

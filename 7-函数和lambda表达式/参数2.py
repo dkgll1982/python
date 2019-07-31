@@ -11,7 +11,7 @@ def test(name, message):
     print("欢迎消息: ", message)
 my_list = ['孙悟空', '欢迎来C语言中文网']
 test(*my_list)
-print('-------------------------------')
+print('-'*40)
 def foo(name, *nums):
     print("name参数: ", name)
     print("nums参数: ", nums)
@@ -21,10 +21,10 @@ str='fkit'
 foo('fkit', *str)
 foo('fkit', *my_tuple)
 foo(*my_tuple)
-print('-------------------------------')
+print('-'*40)
 foo(my_tuple,my_tuple)
 
-print('-------------------------------')
+print('-'*40)
 def bar(book, price, desc):
     print(book, "VIP价格是:", price)
     print('描述信息', desc)

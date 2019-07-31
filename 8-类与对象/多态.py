@@ -37,7 +37,7 @@ c.talk()
 Animal.animal_talk(c)
 Animal.animal_talk(d) 
 
-print('--------------------------------------')
+print('-'*40)
 
 class Animal(object):
     def run(self):

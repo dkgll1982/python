@@ -20,7 +20,7 @@ class Mouse(Item, Product): # ①
 #        print("Product中方法:", '这是一个军工产品')
 m = Mouse()
 m.info()
-print('---------------------------------------------')
+print('-'*40)
 
 class BaseClass:
     def foo (self):

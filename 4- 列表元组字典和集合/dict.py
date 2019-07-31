@@ -109,7 +109,7 @@ print(temp % book)
 book = {'name':'C语言小白变怪兽', 'price':159, 'publish': 'C语言中文网'}
 # 使用字典为字符串模板中的key传入值
 print(temp % book)
-print('------------------------------------------------------------')
+print('-'*40)
 users1 = {"name":"张三","age":22,"sex":"男","height":176,"edu":"研究生","nation":"汉族"}
 users2 = {"name":"李四","age":32,"sex":"男","height":186,"edu":"博士","nation":"汉族"}
 users3 = {"name":"柯洁","age":25,"sex":"男","height":166,"edu":"小学未毕业","nation":"汉族"}

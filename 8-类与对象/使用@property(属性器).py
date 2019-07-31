@@ -28,7 +28,7 @@ s.score = 8
 
 print(s.score);
 
-print('------------------------------------------------------');
+print('-'*40)
 
 class Student2(object):
 

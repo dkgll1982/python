@@ -28,11 +28,11 @@ math_func = get_math_func("square")
 print(math_func(5)) # 输出25
 math_func = get_math_func("other")
 print(math_func(5)) # 输出15.0
-print('---------------------------------');
+print('-'*40);
 x = lambda x,y:x*y
 print(x(2,4))
 
-print('---------------------------------')
+print('-'*40)
 x = map(lambda x,y: x*y ,[3,4],[3,4])
 print([e for e in x])
 # 传入计算平方的lambda表达式作为参数

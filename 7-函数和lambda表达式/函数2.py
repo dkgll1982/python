@@ -38,7 +38,7 @@ print("计算数组元素的立方")
 print(map(data , cube))
 print("计算数组元素的阶乘")
 print(map(data , factorial))
-print('------------------------------------------------')
+print('-'*40)
 #函数内部返回函数
 def get_math_func(type) :
     # 定义一个计算面的局部函数

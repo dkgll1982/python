@@ -20,7 +20,7 @@ print(Address.detail)
 addr = Address()
 addr.info()
 
-print('-------------------------------------------------');
+print('-'*40)
 
 # 修改Address类的类变量
 Address.detail = '佛山'

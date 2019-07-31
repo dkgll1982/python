@@ -58,10 +58,10 @@ b=Botany();
 c=Animal();
 c.gettype=func;
 a.speak('1');
-print('-------------------------------------');
+print('-'*40)
 #多重继承顺序：Botany,Dog,Cat,Animal
 b.speak('2');
-print('-------------------------------------');
+print('-'*40)
 print(a.namef)
 
 start_perform(Botany,'***')

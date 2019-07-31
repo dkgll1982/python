@@ -30,7 +30,7 @@ print(my_Enum['red'].value)
 for i in my_Enum:
     print(i.name,'->',i.value)
 
-print('-----------------------------------------')
+print('-'*40)
 
 Season = enum.Enum('Season', ('SPRING', 'SUMMER', 'FALL', 'WINTER'))
 # 直接访问指定枚举
@@ -43,7 +43,7 @@ print(Season.SPRING.value)
 print(Season['SUMMER']) # Season.SUMMER
 # 根据枚举值访问枚举对象
 print(Season(3)) # Season.FALL
-print('-----------------------------------------')
+print('-'*40)
 
 for index, item in Season.__members__.items():
     print(index,'=>',item,',',item.value);

@@ -1,4 +1,4 @@
-# -*- encoding=UTF-8 -*-
+t# -*- encoding=UTF-8 -*-
 __author__ = 'fyby'
 from tkinter import *
 

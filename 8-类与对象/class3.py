@@ -47,7 +47,7 @@ del person1.name
 print('-------删除属性name后，查询出的是类对象的name值')
 print(person1.name)  # AttributeError
 
-print('--------------------------------------------')
+print('-'*40)
 # 先定义一个函数
 def info(self):
     print("---info函数---", self)
@@ -62,13 +62,13 @@ p.bar = lambda self: print('--lambda表达式--', self)
 p.bar(p) # ②
 
 #如果希望动态增加的方法也能自动绑定到第一个参数，则可借助于 types 模块下的 MethodType 进行包装
-print('---------------------------------------------')
+print('-'*40)
 from types import MethodType
 
 p.foot =MethodType(info,p);
 p.foot();
 
-print('---------------------------------------------')
+print('-'*40)
 class Dog:
     # 定义一个jump()方法
     def jump(self):

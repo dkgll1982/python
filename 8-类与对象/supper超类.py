@@ -30,7 +30,7 @@ m = Manager('IT产品', '广州')
 m.info()
 print(m.__dir__())
 
-print('-------------------------------------------------------')
+print('-'*40)
 
 # Manager继承了Employee、Customer
 class Manager(Customer,Employee):

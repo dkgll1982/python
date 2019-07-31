@@ -20,7 +20,7 @@ except ArithmeticError:
 except Exception:
     print("未知异常")
 
-print('-------------------------------------')
+print('-'*40)
 
 try:
      s = None

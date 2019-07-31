@@ -52,7 +52,7 @@ i = str.index('.',1)
 ri = str.rindex('.',1)
 print("\".\"在字符串\"%s\"第一次出现的位置:%d"%(str,fi))
 print("\".\"在字符串\"%s\"第一次出现的位置:%d"%(str,rfi))
-print('---------------------------------')
+print('-'*40)
 print("\".\"在字符串\"%s\"第一次出现的位置:%d"%(str,i))
 print("\".\"在字符串\"%s\"第一次出现的位置:%d"%(str,ri))
 
@@ -61,7 +61,7 @@ print(s.title())
 str = "  c.biancheng.net \t\n\r"
 print(str.strip())
 print(str)
-print('--------------------------------------')
+print('-'*40)
 
 str='中华人民共和国';
 str2=str.encode();

@@ -43,7 +43,7 @@ del rect.size
 print(rect.width) # 0
 print(rect.height) # 0
 
-print('---------------------------------------')
+print('-'*40)
 
 class Person:
     # 定义构造方法
@@ -67,7 +67,7 @@ Person1.listperson = {'name': '者行孙', 'age': 1000}
 print(Person1.name);
 print(Person1.age);
 
-print('---------------------------------------')
+print('-'*40)
 
 class User :
     def __init__ (self, first, last):
@@ -90,7 +90,7 @@ u.fullname = '八戒,朱'
 print(u.first)
 print(u.last)
 
-print('---------------------------------------')
+print('-'*40)
 class Cell:
     # 使用@property修饰方法，相当于为该属性设置getter方法
     @property
@@ -115,7 +115,7 @@ c.state = 'Alive'
 print(c.state)
 # 访问is_dead属性
 print(c.is_dead)
-print('---------------------------------------------------------------------')
+print('-'*40)
 
 class People(object):
     def __init__(self, name, age):
@@ -163,4 +163,4 @@ del p1.number
 # 会去执行@property装饰number函数，函数执行完成后返回一个结果
 print(p1.number)
 
-print('-------------------------------------------------')
+print('-'*40)
