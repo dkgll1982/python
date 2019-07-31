@@ -24,7 +24,7 @@ timeit(sum1)
 
 timeit(avg,12,32);
 
-print('------------------------------------------------------')
+print('-'*40)
 
 import time
 
@@ -46,7 +46,7 @@ def sum1():
 sum1()
 print(sum1.__name__)
 
-print('-'*40)---------------------------------------------------------')
+print('-'*40)
 
 def decorator(func):
     @functools.wraps(func)

@@ -13,7 +13,7 @@ text()
 #此处获取局部变量值会引发错误
 #print('局部变量 demo 的值为：',demo)
 
-print('-----------------------------')
+print('-'*40)
 
 demo = 'python编程'
 def text():
@@ -25,7 +25,7 @@ text()
 #此处获取局部变量值会引发错误
 print('全局变量 demo 的值为：',demo)
 
-print('-----------------------------')
+print('-'*40)
 def test(arg):
     a=1
     b=2
@@ -37,7 +37,7 @@ if __name__ == '__main__':
     test(3)
 
 
-print('-----------------------------')
+print('-'*40)
 def foo(arg, a):
     x = 1
     y = 'xxxxxx'
@@ -57,11 +57,11 @@ x=122222
 # 调用函数的打印结果
 foo(1, 2)
 
-print('-----------------------------')
+print('-'*40)
 print(locals()['x'])
 print(globals())
 
-print('-----------------------------')
+print('-'*40)
 global name;
 name="查叫天"
 def foo ():

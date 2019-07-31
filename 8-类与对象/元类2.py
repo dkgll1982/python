@@ -126,7 +126,7 @@ print(b.__class__.__class__.__class__)
 print(childfunc.__class__.__class__)
 echo(childfunc.__class__)         
 
-print('-------------------------------------------')
+print('-'*40)
 
 # 元类会自动将你通常传给‘type’的参数作为自己的参数传入
 def upper_attr(future_class_name, future_class_parents, future_class_attr):
@@ -154,7 +154,7 @@ f = Foo()
 print(f.BAR)
 # 输出:'bip' 
 
-print('---------------------------------------------------')
+print('-'*40)
 
 
 #以下代码来自：https://www.jianshu.com/p/e017bc810702 （深刻理解Python中的元类(metaclass)

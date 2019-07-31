@@ -50,7 +50,7 @@ m = Manager(25000, 'IT产品', '广州');
 m.work();
 m.info();
 
-print('-------------------------')
+print('-'*40)
 
 class A():
     def go(self):
@@ -88,22 +88,22 @@ d = D()
 e = E()
 # 说明下列代码的输出结果
 a.go()                  #"go A go!"
-print('--------')
+print('-'*40)
 b.go()                  #"go A go!"  "go B go!"
-print('--------')
+print('-'*40)
 c.go()                  #"go A go!"  "go C go!"
-print('--------')
+print('-'*40)
 d.go()                  ##"go A go!"  go C go!" "go B go!"  "go D go!"
-print('--------')
+print('-'*40)
 e.go()                  #"go A go!"  "go B go!"
-print('--------')
+print('-'*40)
 a.stop()                #"stop A stop!"
-print('--------')
+print('-'*40)
 b.stop()                #"stop A stop!"
-print('--------')
+print('-'*40)
 c.stop()                #"stop A stop!" "stop C stop!"
-print('--------')
+print('-'*40)
 d.stop()                #"stop A stop!" "stop C stop!" "stop D stop!"
-print('--------')
+print('-'*40)
 e.stop()                #"stop A stop!"  "stop C stop!"
 print(D.mro())

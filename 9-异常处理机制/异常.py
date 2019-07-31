@@ -56,4 +56,4 @@ finally:
     print('finally...')
 print('END')
 
-print('------------------------------')
+print('-'*40)

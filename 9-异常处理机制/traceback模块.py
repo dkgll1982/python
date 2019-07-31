@@ -45,8 +45,8 @@ def myFunc():
         #traceback.print_exc()
         # 捕捉异常，并将异常传播信息输出指定文件中
         traceback.print_exc(file=open('C:\\Users\\dkgll\\Desktop\\python目录\\python——error.log.txt','a+'));
-        print('-------------------')
+        print('-'*40)
         print(traceback.format_exc());
     print("继续执行")
 myFunc()
-print('-----------------------------------------------------------')
+print('-'*40)

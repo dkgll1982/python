@@ -30,7 +30,7 @@ u.name=lambda self:print("my name is ",self);
 print(hasattr(u.name, '__call__')) # True
 u.name("ffff")
 
-print('******************************************************')
+print('*'*40)
 
 def myfun(self): 
     print("call方法调用")
@@ -50,7 +50,7 @@ print("foo的属性",dir(foo))
 foo.__init__()
 print(getattr(foo, '__init__')) # '疯狂Python讲义很不错'
 
-print('******************************************************')
+print('*'*40)
 
 class Entity:
     '''调用实体来改变实体的位置。''' 
