@@ -10,6 +10,12 @@ __author__ = 'Michael Liao'
 
 import sys
 def test():
+    '''
+    这是我们编写的第一个模块，该模块包含以下内容：
+    xxx：字符串变量
+    say_hi：简单的函数
+    User：代表用户的类
+    '''
     args = sys.argv
     if len(args)==1:
         print('Hello, world!%s'% args[0])
@@ -26,3 +32,5 @@ if __name__=='__main__':
     test()
 else:
     print("不是通过main函数启动的，不会进行初始化！")
+
+print(sys.path)

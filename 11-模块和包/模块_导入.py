@@ -8,3 +8,13 @@
 from 模块 import test
 
 test();
+help(test)
+print(test.__doc__)
+
+print('-'*40)
+
+import print_shape as p
+print(p.__doc__)
+
+p.print_triangle(12)
+  

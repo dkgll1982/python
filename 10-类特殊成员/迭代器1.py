@@ -92,6 +92,7 @@ print('-'*40)
 # 将列表转换为迭代器
 my_iter = iter([2, 'fkit', 4])
 # 依次获取迭代器的下一个元素
+print(type(my_iter))
 print(my_iter.__next__()) # 2
 print(my_iter.__next__()) # fkit
 
