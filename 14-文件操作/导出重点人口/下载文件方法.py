@@ -12,15 +12,8 @@ import cx_Oracle
 import os
 import urllib.request
 import xlsxwriter
-from PIL import Image
 
-def get_FileSize(filePath):
-     
-    fsize = os.path.getsize(filePath)
-    fsize = fsize/float(1024)
- 
-    return round(fsize, 2)
-
+api_token = "fklasjfljasdlkfjlasjflasjfljhasdljflsdjflkjsadljfljsda"
 
 #获取重点人员
 def get_person(control_type):
@@ -38,10 +31,10 @@ def get_person(control_type):
     "    TRUNC((to_char(sysdate, 'yyyyMMdd') - to_char(BIRTH_DATE, 'yyyyMMdd')) /10000) as 年龄,nvl(nvl(R_ADDR,d_addr),'浙江省湖州市长兴县') 户籍	,'cx_zz' 所属库,'' 照片,replace(visit_path,'\\','/') URL,name||'_'||card_num||'.png' FILENAME "+
     "FROM CIGPROXY.ZZ_PERSON@DLINK2  TA "+
     "    JOIN TB ON TA.ID=TB.B_ID AND FILE_TYPE='per-image'"+
-    "WHERE  FOCUS_CONTROL like '%"+control_type+"%' and rownum<300")
+    "WHERE  FOCUS_CONTROL like '%"+control_type+"%'")
 
     #print(sql)
-
+    
     cursor.execute(sql);
     rows = cursor.fetchall()  # 得到所有数据集
     li =[];
@@ -86,23 +79,8 @@ def save_excel(li,dirname):
         sheet.write(i+1, 3, li[i]["age"])
         sheet.write(i+1, 4, li[i]["addr"])
         sheet.write(i+1, 5, "cx_zz")
-
-        #下载证照
-        #filename = download_img(li[i]["FILENAME"],li[i]["URL"], dirname,api_token)
-
-        filename = "C:\\Users\\dkgll\\Desktop\\python目录\\长兴重点人口\\"+dirname+"\\img\\"+ li[i]["FILENAME"]
-
-        im = Image.open(filename)#返回一个Image对象
-        #print('宽：%d,高：%d'%(im.size[0],im.size[1]),end ='  ')
-        x_scale,y_scale= round(70.0/im.size[0],2),round(78.0/im.size[1],2)
-        #print('宽比例：%s,高比例：%s'%(x_scale,y_scale))
-
-        #缩放比例调整有问题，需要图片自适应单元格大小
-        size = get_FileSize(filename) 
-        if size<50:
-            x_scale,y_scale= 1.0,1.0  
-
-        sheet.insert_image(i+1, 6, filename, {'x_scale': x_scale, 'y_scale': y_scale,'x_offset': 5,'y_offset': 5})
+        filename = download_img(li[i]["FILENAME"],li[i]["URL"], dirname,api_token)
+        sheet.insert_image(i+1, 6, filename, {'x_scale': 0.2, 'y_scale': 0.18,'x_offset': 5,'y_offset': 5})
 
     book.close();
 
@@ -117,43 +95,4 @@ def download_img(img_name,img_url, dirname,api_token):
                 f.write(response.read()) # 将内容写入图片
             return filename
     except:
-        return "failed"
-
-def imgtoexcel(filename):
-    book = xlsxwriter.Workbook('C:\\Users\\dkgll\\Desktop\\python目录\\pict.xlsx')
-    sheet = book.add_worksheet('demo')
-
-    bold = book.add_format({'bold': True})
-
-    sheet.set_row(1,95)  # 将行高从1改为20.
-    sheet.set_row(2,95)  # 将行高从1改为20.
-    sheet.set_column("A:B", 15)  # 设置A到D列的列宽为25
-    sheet.set_column("C:C", 21)  # 设置A到D列的列宽为25
-    # Write some data headers. 带自定义粗体blod格式写表头
-    sheet.write('A1', '姓名', bold)
-    sheet.write('B1', '身份证号', bold)
-    sheet.write('C1', '证照', bold)
-
-    #for x in range(0,10):
-    sheet.write(1,0, "张三")
-    sheet.write(1,1, "311000000000")
-    sheet.insert_image(1,2, filename, {'x_scale': 0.5, 'y_scale': 0.5})
-
-    sheet.write(2,0, "李四")
-    sheet.write(2,1, "314000000000")
-    sheet.insert_image(2,2, filename, {'x_scale': 0.5, 'y_scale': 0.5})
-
-    book.close()
-
-if __name__ == '__main__':
-    # 下载要的图片
-    #img_url = "https://img-bss.csdn.net/1564022305551.jpg"
-    api_token = "fklasjfljasdlkfjlasjflasjfljhasdljflsdjflkjsadljfljsda"
-    #f = download_img(img_url, api_token)
-    #imgtoexcel(f);
-
-    li = get_person('204');
-    save_excel(li,"吸毒");
-
-    print("")
-    print("导入完成！！！")
+        return "failed" 

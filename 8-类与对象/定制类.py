@@ -32,7 +32,7 @@ class Test(object):
 
 t = Test(100)
 print(t.__str__())
-printprint('-'*40)
+print('-'*40)
 
 class Student(object): 
     def __init__(self, name):
@@ -80,7 +80,7 @@ class Fib(object):
 
 print(dir(object))
 print(dir(Student))
-print(dir(Fib))
+print('Fib的方法属性：',dir(Fib))
 
 for n in Fib():
     print(n)
