@@ -12,7 +12,7 @@ import socket
 
 #创建一个socket
 client = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-client.connect(("127.0.0.1",8081))
+client.connect(("127.0.0.1",9876))
 
 while True:
     data =input("请输入发送给服务器的数据:")
