@@ -12,12 +12,55 @@
 import json
 import urllib
 import math
+from urllib import parse
+import hashlib
+import urllib.request
+import json
 
 x_pi = 3.14159265358979324 * 3000.0 / 180.0
 pi = 3.1415926535897932384626  # π
 a = 6378245.0  # 长半轴
 ee = 0.00669342162296594323  # 偏心率平方
 
+class bdapi:  
+    def __init__(self, ak, sk):
+        self.ak = ak
+        self.sk = sk
+
+    #百度地图API获取某地址的经纬度
+    def get_url(self,address):
+        
+        # 以get请求为例http://api.map.baidu.com/geocoder/v2/?address=百度大厦&output=json&ak=你的ak
+        queryStr = '/geocoder/v2/?address=%s&output=json&ak=%s' %(address,self.ak)
+    
+        # 对queryStr进行转码，safe内的保留字符不转换
+        encodedStr = parse.quote(queryStr, safe="/:=&?#+!$,;'@()*[]")
+    
+        # 在最后直接追加上yoursk
+        rawStr = encodedStr + self.sk
+    
+        #计算sn
+        sn = (hashlib.md5(parse.quote_plus(rawStr).encode("utf8")).hexdigest())
+        
+        #由于URL里面含有中文，所以需要用parse.quote进行处理，然后返回最终可调用的url
+        url = parse.quote("http://api.map.baidu.com"+queryStr+"&sn="+sn, safe="/:=&?#+!$,;'@()*[]")  
+        
+        return url
+
+    def get_zb(self,url):
+        doc = urllib.request.urlopen(url)
+
+        if doc.getcode() == 200:
+            s = doc.read().decode('utf-8')  #一定要解码！！！！ 
+            jsonData = json.loads(s)
+            if jsonData['status'] == 0:
+                lat=jsonData['result']['location']['lat']
+                lng =jsonData['result']['location']['lng']
+                return [lng, lat]
+            else:
+                return None
+        else:
+                    return None
 
 class Geocoding:
     def __init__(self, api_key):
@@ -170,7 +213,13 @@ def out_of_china(lng, lat):
     return not (lng > 73.66 and lng < 135.05 and lat > 3.86 and lat < 53.55)
 
 
-# if __name__ == '__main__':
+#if __name__ == '__main__':
+    # g = bdaip();
+    # url =g.get_url("浙江省湖州市长兴县人民政府")
+    # bd_zb = g.get_zb(url)
+    # wgs_zb =  bd09_to_wgs84(bd_zb[0], bd_zb[1])
+    # print("百度：%s,WGS84：%s"%(bd_zb,wgs_zb))
+    
 #     lng = 128.543
 #     lat = 37.065
 #     result1 = gcj02_to_bd09(lng, lat)
