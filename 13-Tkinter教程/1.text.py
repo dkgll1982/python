@@ -88,7 +88,7 @@ t.insert('end',' you')
 t.pack()
 
 #主窗口LOGO图片
-Window.iconbitmap(r'D:\Programing\pdi-ce-8.3.0.0-371\data-integration\spoon.ico')
+Window.iconbitmap('images\spoon.ico')
 
 # 第6步，主窗口循环显示
 Window.mainloop()

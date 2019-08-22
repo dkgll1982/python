@@ -234,7 +234,7 @@ class App:
             self.cv.delete(self.choose_item)
 root = Tk()
 root.title("绘图工具")
-root.iconbitmap(r'D:\Programing\pdi-ce-8.3.0.0-371\data-integration\spoon.ico')
+root.iconbitmap('images\spoon.ico')
 root.geometry('800x680') 
 app = App(root)
 root.bind('<Delete>', app.delete_item)

@@ -23,7 +23,7 @@ window.geometry('400x300')  # 这里的乘是小x
  
 # 第4步，加载 wellcome image
 canvas = tk.Canvas(window, width=400, height=135, bg='green')
-image_file = tk.PhotoImage(file=r'C:\Users\dkgll\Desktop\python目录\image\foobar.png')
+image_file = tk.PhotoImage(file=r'E:\100-航天智慧\2-源码库\python\images\football.png')
 image = canvas.create_image(200, 0, anchor='n', image=image_file)
 canvas.pack(side='top')
 tk.Label(window, text='Wellcome',font=('Arial', 16)).pack()

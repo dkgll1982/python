@@ -54,6 +54,6 @@ class App:
 root = Tk()
 root.title("OptionMenu测试")
 # 改变窗口图标
-root.iconbitmap(r'D:\Programing\pdi-ce-8.3.0.0-371\data-integration\spoon.ico')
+root.iconbitmap('images\spoon.ico')
 App(root)
 root.mainloop()
