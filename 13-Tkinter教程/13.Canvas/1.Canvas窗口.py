@@ -22,7 +22,7 @@ window.geometry('500x300')  # 这里的乘是小x
 # 第4步，在图形界面上创建 500 * 200 大小的画布并放置各种元素
 canvas = tk.Canvas(window, bg='green', height=200, width=500)
 # 说明图片位置，并导入图片到画布上
-image_file = tk.PhotoImage(file=r'C:\Users\dkgll\Desktop\python目录\image\foobar.png')  # 图片位置（相对路径，与.py文件同一文件夹下，也可以用绝对路径，需要给定图片具体绝对路径）
+image_file = tk.PhotoImage(file=r'images\football.png')  # 图片位置（相对路径，与.py文件同一文件夹下，也可以用绝对路径，需要给定图片具体绝对路径）
 image = canvas.create_image(250, 0, anchor='n',image=image_file)        # 图片锚定点（n图片顶端的中间点位置）放在画布（250,0）坐标处
 # 定义多边形参数，然后在画布上画出指定图形
 x0, y0, x1, y1 = 100, 100, 150, 150
