@@ -8,6 +8,7 @@
 # @Last Modified time: 2019-08-23 23:10:08 
 # @Software: vscode 
 
+from collections import OrderedDict
 
 dict ={}
 for i in range(1,20,2):
@@ -20,10 +21,13 @@ for k in sorted(dict.items(),key=lambda x:str(x[1]),reverse=True):
     print(k)
 
 import collections  
-d = collections.OrderedDict()  
+d = collections.OrderedDict() 
 d[3] = 'A'  
 d[2] = 'B'  
 d[1] = 'C'  
   
 for k, v in d.items():  
    print (k, v  )    
+
+r = OrderedDict([('红色','red'), ('绿色','green'), ('蓝色', 'blue')])
+print(r)  
