@@ -20,10 +20,10 @@ window.title('My Window')
 window.geometry('500x300')  # 这里的乘是小x
  
 # 第4步，pack 放置方法
-tk.Label(window, text='P',bg='pink', fg='red').pack(side='top')    # 上
-tk.Label(window, text='P',bg='pink', fg='red').pack(side='bottom') # 下
-tk.Label(window, text='P',bg='pink', fg='red').pack(side='left')   # 左
-tk.Label(window, text='P',bg='pink', fg='red').pack(side='right')  # 右
+tk.Label(window, text='P',bg='pink', fg='red').pack(side='top',fill='x')    # 上
+tk.Label(window, text='P',bg='pink', fg='red').pack(side='bottom',fill='x') # 下
+tk.Label(window, text='P',bg='pink', fg='red').pack(side='left',fill='y' )   # 左
+tk.Label(window, text='P',bg='pink', fg='red').pack(side='right',fill='y')  # 右
  
 # 第5步，主窗口循环显示
 window.mainloop()

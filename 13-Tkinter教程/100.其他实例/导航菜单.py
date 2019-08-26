@@ -1,18 +1,15 @@
-t# -*- encoding=UTF-8 -*-
+# -*- encoding=UTF-8 -*-
 __author__ = 'fyby'
 from tkinter import *
 
-root = Tk()
-
+root = Tk() 
 
 def hello():
-    print('hello')
-
+    print('hello') 
 
 def about():
     w = Label(root,text="开发者感谢名单\nfuyunbiyi\nfyby尚未出现的女朋友\nhttp://www.programup.com网站")
-    w.pack(side=TOP)
-
+    w.pack(side=TOP) 
 
 menubar = Menu(root)
 
