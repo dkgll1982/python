@@ -72,6 +72,17 @@ class App:
         Button(f, text="清除选中3项", command=self.clear_select).pack(side=LEFT)
         Button(f, text="删除3项", command=self.delete).pack(side=LEFT)
         Button(f, text="绑定变量", command=self.var_select).pack(side=LEFT)
+        self.lb.insert(ACTIVE, '第一列2') 
+        self.lb.insert(ACTIVE, '第一列3')
+        self.lb.insert(ACTIVE, '第一列4')
+        self.lb.insert(ACTIVE, '第一列1')
+        self.lb.delete(0,1)
+        #选中
+        self.lb.select_set(1,4)
+        self.lb.select_clear(2)
+        #print(self.lb.get(2,4))
+        #返回当前选中的项的索引
+        print(self.lb.curselection())
     def select(self):
         # 选中指定项
         self.lb.selection_set(0, 9) 

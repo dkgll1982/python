@@ -9,6 +9,7 @@
 # @Software: vscode 
 
 import tkinter as tk
+from tkinter import ttk
 
 # 第1步：实例化obvbject，建立窗口window
 Window = tk.Tk()
@@ -46,7 +47,7 @@ def hit_me():
         var.set('紫菜')
 ####################################################################################
 
-b = tk.Button(Window,text="点我",font=('宋体',12),width = 12,height = 1,command =hit_me)
+b = ttk.Button(Window,text="点我",width = 12,command =hit_me)
 b.pack()
 
 # 在图形界面上设定输入框空间entry并放置控件
@@ -67,13 +68,22 @@ def insert_end():   # 在文本框内容最后接着插入输入内容
     t.insert('end', var)
 ####################################################################################
  
+style = ttk.Style()
+style.configure("TLabel", foreground="black", background="white") 
+style.configure("dsf.TLabel", foreground="red", background="black",size=23,height=3,width=12,) 
+
+l1 = ttk.Label(text="Test", style="TLabel")
+l2 = ttk.Label(text="Test", style="dsf.TLabel")
+
+l1.pack()
+l2.pack()
+
 # 第6步，创建并放置两个按钮分别触发两种情况
-b1 = tk.Button(Window, text='insert point', width=10,
-               height=2, command=insert_point)
+b1 = ttk.Button(Window, text='insert point', width=10,command=insert_point)
 b1.pack()
-b2 = tk.Button(Window, text='insert end', width=10,
-               height=2, command=insert_end)
+b2 = tk.Button(Window, text='insert end', width=10,command=insert_end)
 b2.pack()
+
 
 # 在图形界面上设定输入框控件entry框并放置
 # Text是tkinter类中提供的的一个多行文本区域，显示多行文本，可用来收集(或显示)用户输入的文字(类似 HTML 中的 textarea)，
