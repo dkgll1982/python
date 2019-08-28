@@ -56,7 +56,16 @@ listbox.bind('<ButtonRelease-3>',lambda e:print(str(e)+"鼠标右键释放"))
 listbox.bind('<Enter>',lambda e:print(str(e)+"鼠标移入")) 
 listbox.bind('<Leave>',lambda e:print(str(e)+"鼠标移出")) 
 
-listbox.bind('<Key>',lambda e:print(str(e)+"键盘按下")) 
+#listbox.bind('<Key>',lambda e:print(str(e)+"键盘按下")) 
+listbox.bind('<Key-A>',lambda e:print(str(e)+"A按下")) 
+listbox.bind('<KeyPress-.>',lambda e:print(str(e)+".按下")) 
+listbox.bind('<Control-V>',lambda e:print(str(e)+"Control-V按下")) 
+listbox.bind('<Control-Shift-Key-H>',lambda e:print(str(e)+"Control+Shift+-H按下")) 
+listbox.bind('<F1>',lambda e:print(str(e)+"F1按下")) 
+listbox.bind('<F2>',lambda e:print(str(e)+"F2按下")) 
+listbox.bind('<F3>',lambda e:print(str(e)+"F3按下")) 
+listbox.bind('<F4>',lambda e:print(str(e)+"F4按下")) 
+listbox.bind('<F5>',lambda e:print(str(e)+"F5按下")) 
 
 #键位绑定事件
 listbox.bind('<Return>',lambda e:print(str(e)+"你按下了回车键")) 

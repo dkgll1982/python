@@ -18,6 +18,8 @@ Window = tk.Tk()
 # width x height + x_offset + y_offset
 Window.geometry("500x300+300+300")   
 
+#设置窗口透明度为50%　　
+Window.attributes('-alpha',0.8)
 # 第3步：给窗口起名字
 Window.title("我的窗口程序")
 
@@ -69,10 +71,10 @@ def insert_end():   # 在文本框内容最后接着插入输入内容
 ####################################################################################
  
 style = ttk.Style()
-style.configure("TLabel", foreground="black", background="white") 
+style.configure("A.TLabel", foreground="black", background="white",width=10) 
 style.configure("dsf.TLabel", foreground="red", background="black",size=23,height=3,width=12,) 
 
-l1 = ttk.Label(text="Test", style="TLabel")
+l1 = ttk.Label(text="Test", style="A.TLabel")
 l2 = ttk.Label(text="Test", style="dsf.TLabel")
 
 l1.pack()
