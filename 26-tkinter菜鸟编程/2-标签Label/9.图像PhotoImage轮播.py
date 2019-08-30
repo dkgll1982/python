@@ -62,20 +62,4 @@ btn2.place(x=650, y=610, anchor=NW)
 #root.resizable(width = False, height = False)
 #或简单些，直接：
 root.resizable(False, False)
-root.mainloop()
-
-
-
-
-#定义函数
-
-def fun_timer():
-    print('hello timer')   #打印输出
-    global timer  #定义变量
-    timer = threading.Timer(1,fun_timer)   #60秒调用一次函数
-    #定时器构造函数主要有2个参数，第一个参数为时间，第二个参数为函数名
-
-    timer.start()    #启用定时器
-
-# timer = threading.Timer(1,fun_timer)  #首次启动
-# timer.start()
+root.mainloop() 
