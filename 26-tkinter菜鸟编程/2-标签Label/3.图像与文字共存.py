@@ -47,4 +47,5 @@ Label(root,textvariable = var,fg = "red",bg = "pink").pack()
 btn = Button(root,text="改变图像显示",command=changelabel)
 btn.pack()
 
+print('标签lbl属性:',lbl.info())
 root.mainloop()
