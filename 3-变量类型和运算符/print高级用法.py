@@ -24,6 +24,20 @@ print(40,'\t',end="");
 print(50,'\t',end="");
 print(60,'\t',end="");
 
+formatter = "%r %r %r %r"
+ 
+print(formatter % (1, 2, 3, 4))
+print(formatter % ("one", "two", "three", "four"))
+print(formatter % (True, False, False, True))
+print(formatter % (formatter, formatter, formatter, formatter))
+print(formatter % (
+"I had this thing.",
+"That you could type up right.",
+ "But it didn't sing.",
+ "So I said goodnight."
+ ))
+
+
 f = open("C:\\Users\\dkgll\\Desktop\\python目录\\demo.txt","w")#打开文件以便写入
 print('沧海月明珠有泪',file=f)
 print('明月何时照我还',file=f)
