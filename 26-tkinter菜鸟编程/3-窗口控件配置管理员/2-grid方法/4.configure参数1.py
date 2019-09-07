@@ -9,6 +9,7 @@ from singlewindow  import *
 root = Tk()   
 window.show(root)     
 
+#设置当窗口改变大小时的第几行第几列的缩放比例
 root.rowconfigure(1,weight=1)
 root.columnconfigure(0,weight=1)
 

@@ -11,11 +11,15 @@ def leave(event):                                       #Esc事件处理程序
     else:
         return
 
+def key_char(event):
+    print('你按下了：'+event.char)       
+
 root = Tk()
 root.geometry('500x400+550+200')
 root.title('键盘事件')
 
 root.bind('<Escape>',leave)
+root.bind('<Control-Shift-KeyPress-F>',key_char)
 
 lbl = Label(root,
             text="测试Esc键",
