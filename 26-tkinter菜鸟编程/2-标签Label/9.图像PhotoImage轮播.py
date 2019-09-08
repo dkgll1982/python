@@ -59,7 +59,7 @@ btn2 = Button(text="停止轮播",command=stop)
 btn1.place(x=580, y=610, anchor=NW)
 btn2.place(x=650, y=610, anchor=NW)
 
-#root.resizable(width = False, height = False)
-#或简单些，直接：
+#root.resizable(width = False, height = False) or resizable(0,0)
+#或简单些，直接： 意思是窗口的大小在水平方向和垂直方向上都不能改变
 root.resizable(False, False)
 root.mainloop() 

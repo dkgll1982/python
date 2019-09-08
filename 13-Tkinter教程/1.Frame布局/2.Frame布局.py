@@ -86,7 +86,7 @@ button_cancel = Button(button_Frame, text='Cancel', command=cancel)
 button_cancel.grid(row=0, column=1, sticky=W)
 
 ## 标签显示图片
-photo = PhotoImage(file='E:\100-航天智慧\2-源码库\python\images\football.png')
+photo = PhotoImage(file=r'images\football.png')
 label = Label(pic_right_Frame, image=photo)
 label.image = photo
 label.grid()
