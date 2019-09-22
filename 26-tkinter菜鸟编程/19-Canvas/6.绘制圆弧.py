@@ -9,6 +9,9 @@ canvas.pack()
 canvas.create_arc(10,10,110,110,extent=45,style=ARC) 
 canvas.create_arc(210,10,310,110,extent=90,style=PIESLICE) 
 canvas.create_arc(410,10,510,110,extent=180,fill='yellow') 
+
+canvas.create_rectangle(210,110,310,220,width=5)
+#style：指定绘制弧的样式。该选项仅对 create_arc 方法起作用。该选项支持 PIESLICE（扇形）、CHORD（弓形）、ARC（仅绘制弧）选项值
 canvas.create_arc(210,110,310,220,extent=359,style=ARC,width=5) 
  
 #以下以椭圆形为基础 

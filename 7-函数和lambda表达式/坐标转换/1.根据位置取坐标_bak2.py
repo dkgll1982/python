@@ -18,18 +18,18 @@ import json
 import datetime 
 
 #百度ak,sk
-ak = "Ge8QStRhgzfk5WajB2uHzlpO9Wul40oh"
-sk = "c9zBPUBLw3TQqEriSCWEz6vgSpjjLM4q"
+ak = "LKnE67ysMkrG0LHwyG2GHPlc00LtMfSW"
+sk = "3hPe7iy3Ydq003v6wYbKn6pq7sHgGCRj"
 #坐标计算网格服务
-geoserver = 'http://huzhou-jczl-wx.spacecig.com/    ';
+geoserver = 'http://huzhou-jczl-dq.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
 
 #地址前缀
-city = '浙江省湖州市吴兴区'
+city = '浙江省湖州市德清县'
 
 #线程数量
-threadcount = 10
+threadcount = 20
 #数据分段区间
-pagecount = 4000
+pagecount = 5000
 #每次取数据行数
 rowcount = 100
 #线程循环次数
@@ -61,7 +61,7 @@ def request_data(urt):
 #获取查询的数据列表
 def get_zb(index):
     os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
-    conn = cx_Oracle.connect('cigproxy','cigproxy','172.21.244.94:15225/orcl')
+    conn = cx_Oracle.connect('cigproxy','cigproxy','172.21.188.219:15223/orcl')
     cursor = conn.cursor() 
 
     #取数据起始位置
@@ -69,7 +69,7 @@ def get_zb(index):
     #取数据结束位置
     end = str(pagecount*(index))
     #查询数据的sql
-    sql1 =  ("select * from (select ADDR from BASE_ZB_WG where update_date is null and rn<="+end+" and rn>"+start+") where rownum<="+str(rowcount))      
+    sql1 =  ("select * from (select ADDR from BASE_ZB_WG where RESULT is null and rn<="+end+" and rn>"+start+") where rownum<="+str(rowcount))      
     sql2 = ""
 
     cursor.execute(sql1);    
