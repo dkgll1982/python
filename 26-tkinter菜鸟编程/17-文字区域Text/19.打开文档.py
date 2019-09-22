@@ -10,7 +10,8 @@ def openFile():
     #读取打开的文档
     filename = askopenfilename(initialdir = r'C:\Users\dkgll\Desktop',
                                 title='打开文本文件', 
-                                filetypes=[('*.TXT', '*.txt'), ('All Files', '*')])
+                                #第一个显示的类型名称，第二个是类型过滤
+                                filetypes=[('文本文档XXX', '*.txt'), ('All Files', '*')])
     if filename == "":                     #如果没有选择文档
         return 
     with open(filename,'r') as fileobj:    #打开文档

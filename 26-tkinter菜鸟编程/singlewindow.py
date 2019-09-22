@@ -13,6 +13,7 @@ class window:
 
         root.configure(bg = 'lightgray')
 
+        #设置窗口小图标（必须位于geometry、resizeable方法之后）
         root.iconbitmap(r'images\ico\Porsche.ico') 
         
 # if __name__ =="__main__":

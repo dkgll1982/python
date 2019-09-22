@@ -1,6 +1,8 @@
 from tkinter import *
+from time import *
 
 def cal(*args):
+    sleep(0.1)
     xl.set(xe.get())
     print("data changed:",xe.get())
 

@@ -30,10 +30,16 @@ body = tab_view.body
 
 label_1 = tk.Label(tab_view.body, text="this is tab1")
 label_2 = tk.Label(tab_view.body, text="this is tab2")
+label_3 = tk.Label(tab_view.body, text="this is tab3")
+label_4 = tk.Label(tab_view.body, text="this is tab4")
+label_5 = tk.Label(tab_view.body, text="this is tab5")
 
 # 第一个参数是向body中添加的widget, 第二个参数是tab标题
 tab_view.add_tab(label_1, "tabs1")
 tab_view.add_tab(label_2, "tabs2")
+tab_view.add_tab(label_3, "tabs3")
+tab_view.add_tab(label_4, "tabs4") 
+tab_view.add_tab(label_5, "tabs5") 
 
 # TabView需要向x、y方向填充，且expand应设置为yes
 tab_view.pack(fill="both", expand='yes', pady=2)
