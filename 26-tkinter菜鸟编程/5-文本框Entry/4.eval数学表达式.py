@@ -7,7 +7,7 @@ root = Tk()
 root.geometry('400x220+400+100')
 root.title("计算数据表达式使用eval()")
 
-lb = Label(root,text='请输入数学表达式')
+lb = Label(root,text='输入数学表达式')
 lb.pack()
 
 entry = Entry(root)
