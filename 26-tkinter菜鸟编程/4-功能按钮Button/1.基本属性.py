@@ -6,6 +6,7 @@ import sys,os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)) )   
 from singlewindow  import *
 from PIL import Image,ImageTk
+import Pmw
 
 root = Tk()   
 window.show(root)    
@@ -24,4 +25,8 @@ btn2 = Button(root,text="结束",width=15,command=root.destroy,padx=5)
 
 btn1.pack(side=LEFT)
 btn2.pack(side=LEFT)
+
+ballon = Pmw.Balloon(root)
+ballon.bind(btn1,'这是一个按钮撒')
+
 root.mainloop()

@@ -6,7 +6,7 @@ import os
  
 def read_image():
     #choose a image
-    imagefile = tkinter.filedialog.askopenfilename(parent=root, initialdir="./images/jpg", filetypes=[('image files', '.jpg')],title='Pick a image')
+    imagefile = tkinter.filedialog.askopenfilename(parent=root, initialdir="./images/jpg", filetypes=[('二次元美少女', '.jpg')],title='我的后宫')
  
     # use PIL.Image to open a image
     image = Image.open(imagefile)
