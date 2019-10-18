@@ -58,6 +58,18 @@ class MyWindow(Tk):
                 #将查询出的数据渲染导表格
                 self._setgrid(data) 
 
+    #列排序
+    def treeview_sort_column(self,tv, col, reverse):#Treeview、列名、排列方式
+        print(tv.get_children(''))
+        l = [(tv.set(k, col), k) for k in tv.get_children('')]
+        print(l)
+        l.sort(reverse=reverse)                 #排序方式
+        # rearrange items in sorted positions
+        for index, (val, k) in enumerate(l):    #根据排序后索引移动
+            tv.move(k, '', index)
+            #print(k)
+        tv.heading(col, command=lambda: self.treeview_sort_column(tv, col, not reverse))  #重写标题，使之成为再点倒序的标题 
+
     #设置数据库连接配置
     def _setconfig(self):
         parent = self.lrm1
@@ -130,23 +142,27 @@ class MyWindow(Tk):
         #for x in data[0]:
             # 如果该菜单是顶层菜单的一个菜单项，则它添加的是下拉菜单的菜单项。
         #    fmenu1.add_command(label=item) 
-        self.tree = ttk.Treeview(frm,column=(data[0]))
+        self.tree = ttk.Treeview(frm,column=(data[0]), show="headings")
         index = 1
-        self.tree.heading('#0',text='序号')
-        self.tree.column('#0',width=3)
+        self.tree.heading('#0',text = '序号')
+        self.tree.column('#0',width = 3)
         for x in data[0]: 
             #建立栏目标题
-            self.tree.heading('#'+str(index),text=x)
+            self.tree.heading('#'+str(index),text=x,command=lambda _col='#'+str(index):self.treeview_sort_column(self.tree, _col, False))
+            
             #格式化栏位 
-            self.tree.column('#'+str(index),anchor=W,width=1)
-            index+=1  
+            if index == 1: 
+                self.tree.column('#1',anchor=W,width=35,minwidth=35)
+            else:
+                self.tree.column('#'+str(index),anchor=W,width=105,)
+            index+=1   
 
         #格式栏位
-        self.tree.tag_configure('evenColor1',background='lightblue')         #设置标签  
-        self.tree.tag_configure('evenColor2',background='white')             #设置标签  
-        self.tree.tag_configure('evenColor3',background='#FF6347')           #设置标签  
+        self.tree.tag_configure('evenColor1', background='lightblue')     #设置标签  
+        self.tree.tag_configure('evenColor2', background='white')         #设置标签  
+        self.tree.tag_configure('evenColor3', background='#FF6347')       #设置标签  
         
-        index = 0 
+        index = 0   
         for x in data:
             if index!=0:
                 #建立内容
@@ -194,7 +210,7 @@ class MyWindow(Tk):
         self.sqltxt.pack(side=LEFT,fill=BOTH,expand=True)
 
         #SQL语句
-        self.sqltxt.insert(END, '''select card_num,name,to_char(birth_date,'yyyy-mm-dd') birth_date,decode(gender,'1','男','2','女') sex,
+        self.sqltxt.insert(END, '''select rownum as rn,card_num,name,to_char(birth_date,'yyyy-mm-dd') birth_date,decode(gender,'1','男','2','女') sex,
             r_addr,displayname,to_char(create_date,'yyyy-mm-dd') create_date,create_user
         from cigproxy.zz_person ta join a4_sys_department tb on ta.g_id = tb.departmentid
             where create_user is not null and create_date is not null and g_id is not null and rownum<=100''')
