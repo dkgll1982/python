@@ -19,6 +19,9 @@ for i in range(min(len(name),len(ipcode))): # 写入数据
  
  
 def treeview_sort_column(tv, col, reverse):  # Treeview、列名、排列方式
+    # t = tv.get_children()
+    # for i in t:
+    #     print(tv.item(i,'tags'))
     l = [(tv.set(k, col), k) for k in tv.get_children('')]
     l.sort(reverse=reverse)  # 排序方式
     # rearrange items in sorted positions

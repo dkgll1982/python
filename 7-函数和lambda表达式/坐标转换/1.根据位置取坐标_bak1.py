@@ -21,10 +21,10 @@ import datetime
 ak = "Ge8QStRhgzfk5WajB2uHzlpO9Wul40oh"
 sk = "c9zBPUBLw3TQqEriSCWEz6vgSpjjLM4q"
 #坐标计算网格服务
-geoserver = 'http://huzhou-jczl-nx.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
+geoserver = 'http://huzhou-jczl-dq.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
 
 #地址前缀
-city = '浙江省湖州市南浔区'
+city = '浙江省湖州市德清县'
 
 #线程数量
 threadcount = 1
@@ -61,7 +61,7 @@ def request_data(urt):
 #获取查询的数据列表
 def get_zb(index):
     os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
-    conn = cx_Oracle.connect('cigproxy','cigproxy','172.21.244.81:15227/orcl')
+    conn = cx_Oracle.connect('cigproxy','cigproxy','172.21.188.219:15223/orcl')
     cursor = conn.cursor() 
 
     #取数据起始位置

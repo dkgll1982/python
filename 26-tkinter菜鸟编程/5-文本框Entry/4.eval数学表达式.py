@@ -10,7 +10,8 @@ root.title("计算数据表达式使用eval()")
 lb = Label(root,text='输入数学表达式')
 lb.pack()
 
-entry = Entry(root)
+# highlightthickness 这两个属性一起指定了控件如何绘制高亮区域. 
+entry = Entry(root,highlightthickness=5,highlightcolor ="red")
 entry.pack(pady=5)
 
 out =Label(root)

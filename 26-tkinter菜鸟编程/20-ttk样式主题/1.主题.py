@@ -19,6 +19,8 @@ def set_theme():
     #切换主题
     style.theme_use(themename=style.theme_names()[index])
     var.set('按钮的风格：'+style.theme_names()[index])
+    #获取当前使用的主题
+    print("当前主题切换为：%s"%style.theme_use())
     index+=1
     if index>6:
         index=0

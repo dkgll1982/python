@@ -6,11 +6,12 @@ root.title('设置Combobox默认选项')
 root.geometry('300x120')
 
 def comboSelection(event):
-    lbvar.set('您喜欢吃：%s'%var.get())
+    lbvar.set('您喜欢吃：%s'%cb.get())
+    #lbvar.set('您喜欢吃：%s'%var.get()) 
 
-var = StringVar()
-cb = Combobox(root,textvariable=var)
-
+#var = StringVar()
+#cb = Combobox(root,textvariable=var)
+cb = Combobox(root)
 #或者在combobox外设置选项值
 cb['value'] = ("芒果",'苹果','香蕉','桔子','菠萝','椰子','榴莲','山竹')
 cb.pack(pady=10)
@@ -24,7 +25,7 @@ style.configure("BW.TLabel", foreground="red", background="white",width=36,ancho
 
 lbvar = StringVar()
 lbl = Label(root,textvariable=lbvar,style='BW.TLabel')
-lbvar.set('你使用的样式:%s,您喜欢吃：%s'%(lbl.winfo_class(),var.get()))
+lbvar.set('你使用的样式:%s,您喜欢吃：%s'%(lbl.winfo_class(),cb.get()))
 lbl.pack()
 
 root.mainloop()

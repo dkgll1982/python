@@ -20,11 +20,11 @@ def showmsg():
     labl.pack()
 
 btn1 = Button(root,text="打印消息",width=15,command=showmsg)
-btn2 = Button(root,text="结束",width=15,command=root.destroy,padx=5)
+btn2 = Button(root,text="结束",width=15,command=root.destroy,padx=5,state=DISABLED)
 
 
-btn1.pack(side=LEFT)
-btn2.pack(side=LEFT)
+btn1.pack(side=LEFT,anchor=S,pady=10,padx=10)
+btn2.pack(side=LEFT,anchor=S,pady=10)
 
 ballon = Pmw.Balloon(root)
 ballon.bind(btn1,'这是一个按钮撒')

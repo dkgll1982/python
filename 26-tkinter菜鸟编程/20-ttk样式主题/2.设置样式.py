@@ -30,6 +30,7 @@ ttk.Button(root,text="不同状态不同样式",style='new_state_style.TButton')
 #覆盖Entry当前主题（即使没有指定样式，也会受到主题更改的影响）
 #1：先获取当前主题
 current_theme = style.theme_use()
+print('当前主题：%s'%current_theme)
 #设置Entry控件的主题
 style.theme_settings(current_theme,
                      {'TEntry':{
@@ -42,5 +43,5 @@ style.theme_settings(current_theme,
                      })
 
 ttk.Entry(root).pack()
-ttk.Label(root,text='全局label样式已被更改').pack()
+ttk.Label(root,text='全局label样式已被更改').pack()  #全局样式加上TLabel样式 
 root.mainloop();

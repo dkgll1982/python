@@ -17,7 +17,6 @@ var.set('ruby')
 #也可以采用元组变量名称+索引方式设置默认选项
 var.set(omTuple[4])
 
-
 btn = Button(root,text='获取选中项',command = printselection)
 btn.pack(pady=10,anchor=S,side=BOTTOM)
 

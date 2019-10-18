@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter.ttk import *
 from PIL import Image,ImageTk
 
-def removeItem():                       #删除所选项目 
+def removeItem():                       #删除所选项目  
     iids = tree.selection()             #取的所选项目，通常也可称此所选的项目是iid，这是tkinter内部使用的id,调试可看出为I001,I002,I003....之类的格式
     for iid in iids:                    #循环获取每个选中项
         tree.delete(iid)                #删除所选项目

@@ -1,7 +1,7 @@
 from tkinter import *
 
 def calW(*args):
-    xl.set(xe.get())
+    xl.set('跟踪:'+xe.get())
 
 def calR(*args): 
     print("Waring:数据被读取！！！")

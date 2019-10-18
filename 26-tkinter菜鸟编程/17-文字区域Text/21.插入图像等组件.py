@@ -9,11 +9,13 @@ img = Image.open(r'images\jpg\timg7.jpg')
 myPhoto = ImageTk.PhotoImage(img)
 
 text = Text()
+#添加图片——image_create（END，image=photo）
 text.image_create(END,image=myPhoto)
 text.insert(END,'\n')
 text.insert(END,'二次元美少女')
 
 b1 = Button(text,text='文中钮')
+#text插入按钮（Button）——window_create(INSERT，window=函数名)
 text.window_create(INSERT,window=b1)
 
 l1 = Label(text,text='文中标签')

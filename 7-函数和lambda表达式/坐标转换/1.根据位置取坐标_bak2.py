@@ -27,13 +27,13 @@ geoserver = 'http://huzhou-jczl-dq.spacecig.com/CIGService/rest/services/0/inter
 city = '浙江省湖州市德清县'
 
 #线程数量
-threadcount = 20
+threadcount = 210
 #数据分段区间
 pagecount = 5000
 #每次取数据行数
-rowcount = 100
+rowcount = 10
 #线程循环次数
-xhcount = 50
+xhcount = 1
 
 # 大致计算公式如下
 # 公式1：线程循环次数 = 数据分段区间/每次取数据行数，如5000/100=50，即需要约50次循环才能跑完区间的所有的数据 
@@ -69,7 +69,7 @@ def get_zb(index):
     #取数据结束位置
     end = str(pagecount*(index))
     #查询数据的sql
-    sql1 =  ("select * from (select ADDR from BASE_ZB_WG where RESULT is null and rn<="+end+" and rn>"+start+") where rownum<="+str(rowcount))      
+    sql1 =  ("select * from (select ADDR from BASE_ZB_WG2 where RESULT is null and rn<="+end+" and rn>"+start+") where rownum<="+str(rowcount))      
     sql2 = ""
 
     cursor.execute(sql1);    
@@ -87,9 +87,9 @@ def get_zb(index):
                 geo = geoserver+"?x="+wgs_x+"&y="+wgs_y
                 result = request_data(geo) 
                 print("子线程(%s)处理；百度：%s；WGS84：%s；获取网格地址：%s"%(threading.current_thread().name,bd_zb,wgs_zb,geo)) 
-                sql2 = "update BASE_ZB_WG set wgs_x ='%s',wgs_y='%s',bd_x ='%s',bd_y='%s',result='%s',update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where ADDR='%s'"%(wgs_x,wgs_y,bd_x,bd_y,str(result),update_date,row[0]) 
+                sql2 = "update BASE_ZB_WG2 set wgs_x ='%s',wgs_y='%s',bd_x ='%s',bd_y='%s',result='%s',update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where ADDR='%s'"%(wgs_x,wgs_y,bd_x,bd_y,str(result),update_date,row[0]) 
             else:       
-                sql2 = "update BASE_ZB_WG set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where ADDR='%s'"%(update_date,row[0])            
+                sql2 = "update BASE_ZB_WG2 set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where ADDR='%s'"%(update_date,row[0])            
             cursor.execute(sql2)
         except Exception as e:
             print('Error:',e)
@@ -113,6 +113,7 @@ if __name__ == "__main__":
             ThreadList.append(threading.Thread(target=get_zb,name="Thread"+str(x),args=(x,)))
         #启动子线程
         for thread in ThreadList:
+            thread.setDaemon(True)#守护线程  
             thread.start() 
         #等待线程结束
         for thread in ThreadList:

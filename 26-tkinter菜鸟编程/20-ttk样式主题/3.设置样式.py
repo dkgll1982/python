@@ -12,7 +12,7 @@ from tkinter import ttk
 
 def set_app_style():
     style = ttk.Style()
-    style.theme_create("st_app", parent="alt", settings={
+    style.theme_create("htsz-app", parent="alt", settings={
         ".": {"configure": {"background": StColors.dark_grey,
                             "foreground": StColors.light_grey,
                             "relief": "flat",
@@ -42,4 +42,16 @@ def set_app_style():
         "TEntry": {"configure": {"foreground": "black"}},
         "Horizontal.TProgressbar": {"configure": {"background": StColors.mid_grey}}
     })
-    style.theme_use("st_app")
+    style.theme_use("htsz_app")
+
+root = Tk()
+root.geometry('600x500+300+200')
+style = ttk.Style()
+
+#定义一个全局样式作为默认样式（"."表示此样式将应用于顶级窗口以及所有子元素）
+set_app_style()
+
+#未指定样式时，使用全局默认样式
+ttk.Button(root,text="默认样式").pack()
+
+root.mainloop();
