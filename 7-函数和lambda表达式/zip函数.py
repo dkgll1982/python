@@ -38,3 +38,7 @@ z2 = list(z)
 z3 = dict(z2)
 print(z2)
 print(z3)
+
+print('-'*40)
+
+print(list(zip(*zip((1,2,3),(4,5,6)))))

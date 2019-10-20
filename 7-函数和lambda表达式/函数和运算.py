@@ -88,6 +88,8 @@ print(dict['name']);
 
 list = set(['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'])
 
+print(list)
+
 for i, val in enumerate(list):
     print("序号：%s   值：%s" % (i + 1, val), end='  ***  ')
 

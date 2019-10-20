@@ -29,5 +29,5 @@ d[1] = 'C'
 for k, v in d.items():  
    print (k, v  )    
 
-r = OrderedDict([('红色','red'), ('绿色','green'), ('蓝色', 'blue')])
+r = OrderedDict([('红色','red'), ('1绿色','green'), ('蓝色', 'blue')])
 print(r)  
