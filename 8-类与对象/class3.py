@@ -98,5 +98,5 @@ class ReturnSelf :
         return self
 rs = ReturnSelf()
 # 可以连续调用同一个方法
-rs.grow().grow().grow()
+rs.grow().grow().grow().grow().grow()
 print("rs的age属性值是:", rs.age)

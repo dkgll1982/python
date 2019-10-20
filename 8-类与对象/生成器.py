@@ -31,7 +31,6 @@ n2 = list(filter(fil,map(f, [x for x in range(1,100)])))
 random.shuffle(n2)
 print(n2)
 
-
 print(m)
 
 print(r.__next__())
@@ -46,6 +45,7 @@ def gen_generator(n):
 
 def gen_value():
     return 1
+
 if __name__ == '__main__':
     ret = gen_generator(12)
     print(ret.__next__(), type(ret))  # <generator object gen_generator at 0x02645648> <type 'generator'>
