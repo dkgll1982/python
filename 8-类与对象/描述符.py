@@ -14,7 +14,14 @@
 # @Site    : https://user.qzone.qq.com/350606539/main
 # @File    : 装饰器
 # @Software: PyCharm
- 
+
+# 参考链接：
+# https://www.cnblogs.com/Jimmy1988/p/6808237.html
+# https://www.cnblogs.com/sfencs-hcy/p/10540469.html
+# https://www.jianshu.com/p/eec3c964470d
+# https://www.cnblogs.com/cjsword/p/10664189.html
+# https://www.cnblogs.com/oceanicstar/p/8852418.html
+# https://www.cnblogs.com/chjbbs/p/5757595.html
 
 #描述符类基于以下 3 个特殊方法，换句话说，这 3 个方法组成了描述符协议：
 #__set__(self, obj, type=None)：在设置属性时将调用这一方法（本节后续用 setter 表示）；
@@ -36,6 +43,7 @@ class revealAccess:
         print("updating",self.name)
         self.val = val
 
+#其他类
 class myClass:
     x = revealAccess(10,'var "x"')
     y = 5

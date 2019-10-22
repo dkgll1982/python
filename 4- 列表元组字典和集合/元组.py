@@ -71,3 +71,13 @@ t=((x,y) for x in range(10) for y in range(10));
 #运行结果为：<generator object <genexpr> at 0x0000020BAD136620>
 print(t)
 print(tuple(t))
+
+print('-'*40)
+
+l =[('Apple', 'Google', 'Microsoft'),
+    ('Apple', 'Google', 'Microsoft'),  
+    ('Apple', 'Google', 'Microsoft')]
+
+for x in (l):
+    for y in (x):
+        print(y)
