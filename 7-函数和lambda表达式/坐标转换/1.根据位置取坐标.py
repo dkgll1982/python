@@ -18,22 +18,22 @@ import json
 import datetime 
 
 #百度ak,sk
-ak = "Ge8QStRhgzfk5WajB2uHzlpO9Wul40oh"
-sk = "c9zBPUBLw3TQqEriSCWEz6vgSpjjLM4q"
+ak = "ZRyBcN55hT7nYsWUta0hfyTkn3NeBNNG"
+sk = "NGKBzEx1Qv66aq8xjvE2V6AXgr5oyinZ"
 #坐标计算网格服务
-geoserver = 'http://jczl.giscloud.cx/CIGService/rest/services/0/intersectFeaturesByXY';
+geoserver = 'http://huzhou-jczl-dq.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
 
 #地址前缀
-city = '浙江省湖州市长兴县'
+city = '浙江省湖州市德清县'
 
 #线程数量
 threadcount = 10
 #数据分段区间
-pagecount = 4000
+pagecount = 100
 #每次取数据行数
 rowcount = 100
 #线程循环次数
-xhcount = 30
+xhcount = 12
 
 # 大致计算公式如下
 # 公式1：线程循环次数 = 数据分段区间/每次取数据行数，如5000/100=50，即需要约50次循环才能跑完区间的所有的数据 
@@ -61,7 +61,7 @@ def request_data(urt):
 #获取查询的数据列表
 def get_zb(index):
     os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
-    conn = cx_Oracle.connect('test','esri@123','10.21.198.127:15223/xe')
+    conn = cx_Oracle.connect('cigproxy','cigproxy','172.21.188.219:15223/orcl')
     cursor = conn.cursor() 
 
     #取数据起始位置
@@ -69,7 +69,7 @@ def get_zb(index):
     #取数据结束位置
     end = str(pagecount*(index))
     #查询数据的sql
-    sql1 =  ("select * from (select ADDR from CIGPROXY.BASE_ZB_WG where update_date is null and rn<="+end+" and rn>"+start+") where rownum<="+str(rowcount))      
+    sql1 =  ("select * from (select ADDR from BASE_ZB_WG where ADDR not in(select ADDR from TEMP_ZB_WG) and RESULT is null and rn<="+end+" and rn>"+start+") where rownum<="+str(rowcount))      
     sql2 = ""
 
     cursor.execute(sql1);    
@@ -110,7 +110,7 @@ if __name__ == "__main__":
 
         #创建子线程
         for x in range(threadcount):
-            ThreadList.append(threading.Thread(target=get_zb,name="Thread"+str(x),args=(x,)))
+            ThreadList.append(threading.Thread(target=get_zb,name="Thread"+str(x),args=(x+1,)))
         #启动子线程
         for thread in ThreadList:
             thread.start() 

@@ -30,6 +30,7 @@ def get_data(conn,tablename,comment,sql):
     cursor.close() 
     return  li; 
 
+#将数据按照行列保存到Excel中
 def save_excel(li,dirname,sheetname):
     book = xlsxwriter.Workbook('C:\\Users\\dkgll\\Desktop\\样例数据'+'\\'+dirname+'.xlsx')
     sheet = book.add_worksheet(sheetname)

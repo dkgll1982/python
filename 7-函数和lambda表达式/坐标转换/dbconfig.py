@@ -25,4 +25,13 @@ wx = {
         "port":'15225',
         "sid":'orcl', 
 }
-all = [dq,nx,wx]
+aj = {
+        "city":'浙江省湖州市安吉县',
+        "url":'https://anji.spacecig.com:8000/CIGService/rest/services/0/intersectFeaturesByXY',
+        "userid":'cigproxy',
+        "pwd":'cigproxy',
+        "ip":'172.21.145.30',
+        "port":'15211',
+        "sid":'xe', 
+}
+all = [dq,nx,wx,aj]

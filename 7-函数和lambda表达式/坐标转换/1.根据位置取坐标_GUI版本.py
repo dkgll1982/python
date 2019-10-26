@@ -32,7 +32,7 @@ threadcount = 10
 #数据分段区间
 pagecount = 5000
 #每次取数据行数
-rowcount = 10 
+rowcount = 100
 
 # 大致计算公式如下
 # 公式1：线程循环次数 = 数据分段区间/每次取数据行数，如5000/100=50，即需要约50次循环才能跑完区间的所有的数据 
@@ -115,7 +115,7 @@ class MyWindow(Tk):
             self.lblstatus.config(fg="red")  
 
     #查询服务并更新坐标到数据表里
-    def get_zb(self,index,cn,event):
+    def get_zb(self,index,cn,sThread,event):
         if(self.status.get() is None or self.status.get() ==''):    #先连接数据库
             self._getconn()
         if not event.is_set():
@@ -128,8 +128,11 @@ class MyWindow(Tk):
                 start = str(pagecount*(index-1))
                 #取数据结束位置
                 end = str(pagecount*(index))
+                # if sThread:             #单线程
+                #     start = '0'
+                #     end = '100000000'
                 #查询数据的sql
-                sql1 =  ("select * from (select ADDR from BASE_ZB_WG2 where RESULT is null and rn<="+end+" and rn>"+start+") where rownum<="+str(rowcount))      
+                sql1 =  ("select * from (select ADDR from BASE_ZB_WG where ADDR not in(select ADDR from TEMP_ZB_WG) and RESULT is null and rn<="+end+" and rn>"+start+") where rownum<="+str(rowcount))      
                 sql2 = ""
 
                 cursor.execute(sql1);    
@@ -147,19 +150,19 @@ class MyWindow(Tk):
                             geo = self.db.url+"?x="+wgs_x+"&y="+wgs_y
                             result = request_data(geo) 
                             cdate = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
-                            self.txtresult.insert(END,"子线程(%s)处理——当前时间：%s,循环次数：%d/%d,百度坐标：%s,WGS84坐标：%s\r\n"%(threading.current_thread().name,cdate,cn,self.xhcount,bd_zb,wgs_zb)) 
+                            self.txtresult.insert(END,"子线程(%s)处理——当前时间：%s,index:%d,循环次数：%d/%d,百度坐标：%s,WGS84坐标：%s\r\n"%(threading.current_thread().name,cdate,index,cn,self.xhcount,bd_zb,wgs_zb)) 
                             self.txtresult.update()
                             self.txtresult.see(END)
-                            sql2 = "update BASE_ZB_WG2 set wgs_x ='%s',wgs_y='%s',bd_x ='%s',bd_y='%s',result='%s',update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where ADDR='%s'"%(wgs_x,wgs_y,bd_x,bd_y,str(result),update_date,row[0]) 
+                            sql2 = "INSERT INTO TEMP_ZB_WG(ADDR,WGS_X,WGS_Y,BD_X,BD_Y,RESULT,UPDATE_DATE) VALUES('%s','%s','%s','%s','%s','%s',to_date('%s','YYYY-MM-DD HH24:MI:SS'))"%(row[0],wgs_x,wgs_y,bd_x,bd_y,str(result),update_date) 
                         else:       
-                            sql2 = "update BASE_ZB_WG2 set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where ADDR='%s'"%(update_date,row[0])            
+                            sql2 = "INSERT INTO TEMP_ZB_WG(ADDR,UPDATE_DATE) VALUES('%s',to_date('%s','YYYY-MM-DD HH24:MI:SS'))"%(row[0],update_date)        
                         cursor.execute(sql2)
                     except Exception as e:
                         self.txtresult.insert(END,('Error:%s\r\n'%e))
                         self.txtresult.update()
                         self.txtresult.see(END)     #保持焦点始终在最底部
                     finally:
-                        if(len(self.txtresult.get(0.0,END))>30000):
+                        if(len(self.txtresult.get(0.0,END))>300000):
                             self.txtresult.delete(0.0,END)
                             self.update()
                 conn.commit() 
@@ -172,8 +175,8 @@ class MyWindow(Tk):
         else:
             event.clear() 
    
-    #调用服务
-    def _callapi(self,event=None):
+    #调用服务(sThread=True是单线程，默认为多线程)
+    def _callapi(self,sThread=False,event=None):
         self.txtresult.insert(END,"主线程(%s)启动\r\n"%threading.current_thread().name)
         self.txtresult.update()
         start = time.time()  
@@ -183,11 +186,11 @@ class MyWindow(Tk):
             #任何进程默认就会启动一个线程，成为主线程，主线程就可以启动新的子线程
             #current_thread(): 返回当前线程的实例 
             ThreadList = []
-            self.EventList = []
+            self.EventList = [] 
             #创建子线程
-            for x in range(threadcount):
+            for x in range(1 if sThread else threadcount):
                 event = threading.Event()
-                ThreadList.append(threading.Thread(target=self.get_zb,args=(x,cn+1,event,)))
+                ThreadList.append(threading.Thread(target=self.get_zb,args=(x,cn+1,sThread,event)))
                 self.EventList.append(event)   
             #启动子线程
             for thread in ThreadList:
@@ -279,7 +282,7 @@ class MyWindow(Tk):
         btnconn =ttk.Button(self.lrm1,text="测试连接",width=10,cursor='heart',command=self._getconn)
         btnconn.grid(column=6,row=0,padx=10)
 
-        btnsing =ttk.Button(self.lrm1,text="单线程调用",width=10,command=self._callapi)
+        btnsing =ttk.Button(self.lrm1,text="单线程调用",width=10,command=lambda:self._callapi(True,None))
         btnsing.grid(column=7,row=0)
         
         btnclr =ttk.Button(self.lrm1,text="多线程调用",width=10,command=self._callapi)

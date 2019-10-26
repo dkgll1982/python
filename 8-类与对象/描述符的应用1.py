@@ -31,15 +31,15 @@ class Student:
     chinese = Score()
     english = Score()
 
-    def __init__(self, name, math, chinese, english):
+    def __init__(self, name='', math=0, chinese=0, english=0):
         self.name = name
 
         self.math = math
         self.chinese = chinese
         self.english = english
 
-    def __str__(self):
-        return "Student类"
+    # def __str__(self):
+    #     return "Student类"
 
     def __repr__(self):
         return "<Student: {}, math:{}, chinese: {}, english:{}>".format(
@@ -48,6 +48,9 @@ class Student:
 
 # 当把对象作为参数传入print()时，会自动调用对象的__str__方法，但是当__str__方法不存在时，则会调用__repr__方法。
 # 所以，如果你只想实现这两个特殊方法中的一个，建议还是选择__repr__方法。            
-s = Student("张三",2,40,50)
-s.math=23
+s = Student('李四',1,1,1)
+s.name = '张三'
+s.math = 100
+s.chinese = 99
+s.english = 100
 print(s)
