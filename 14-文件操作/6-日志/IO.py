@@ -44,16 +44,17 @@ print(os.path.dirname('abc/xyz/README.txt')) #abc/xyz
 # 判断指定目录是否存在
 print(os.path.exists('abc/xyz/README.txt')) # False
 # 获取最近一次访问时间
-print(time.ctime(os.path.getatime('E:\\100-航天智慧\\2-源码库\\python\\14-文件操作\\IO.py')))
+fileName = 'E:\\100-航天智慧\\2-源码库\\python\\14-文件操作\\6-日志\\IO.py'
+print(time.ctime(os.path.getatime(fileName)))
 # 获取最后一次修改时间
-print(time.ctime(os.path.getmtime('E:\\100-航天智慧\\2-源码库\\python\\14-文件操作\\IO.py')))
+print(time.ctime(os.path.getmtime(fileName)))
 # 获取创建时间
-print(time.ctime(os.path.getctime('E:\\100-航天智慧\\2-源码库\\python\\14-文件操作\\IO.py'))) 
+print(time.ctime(os.path.getctime(fileName))) 
 # 获取文件大小
-print(os.path.getsize('E:\\100-航天智慧\\2-源码库\\python\\14-文件操作\\IO.py'))
+print(os.path.getsize(fileName))
 # 判断是否为文件
-print(os.path.isfile('E:\\100-航天智慧\\2-源码库\\python\\14-文件操作\\IO.py')) # True
+print(os.path.isfile(fileName)) # True
 # 判断是否为目录
-print(os.path.isdir('E:\\100-航天智慧\\2-源码库\\python\\14-文件操作\\IO.py')) # False
+print(os.path.isdir(fileName)) # False
 # 判断是否为同一个文件
-# print(os.path.samefile('E:\\100-航天智慧\\2-源码库\\python\\14-文件操作\\IO.py', './E:\\100-航天智慧\\2-源码库\\python\\14-文件操作\\IO.py')) # True
+print(os.path.samefile(fileName, fileName)) # True
