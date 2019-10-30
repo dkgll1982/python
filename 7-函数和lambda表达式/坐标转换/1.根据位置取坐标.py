@@ -18,8 +18,8 @@ import json
 import datetime 
 
 #百度ak,sk
-ak = "ZRyBcN55hT7nYsWUta0hfyTkn3NeBNNG"
-sk = "NGKBzEx1Qv66aq8xjvE2V6AXgr5oyinZ"
+ak = "LKnE67ysMkrG0LHwyG2GHPlc00LtMfSW"
+sk = "3hPe7iy3Ydq003v6wYbKn6pq7sHgGCRj"
 #坐标计算网格服务
 geoserver = 'http://huzhou-jczl-dq.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
 
@@ -27,13 +27,13 @@ geoserver = 'http://huzhou-jczl-dq.spacecig.com/CIGService/rest/services/0/inter
 city = '浙江省湖州市德清县'
 
 #线程数量
-threadcount = 10
+threadcount = 1
 #数据分段区间
-pagecount = 100
+pagecount = 2000
 #每次取数据行数
-rowcount = 100
+rowcount = 200
 #线程循环次数
-xhcount = 12
+xhcount = 1
 
 # 大致计算公式如下
 # 公式1：线程循环次数 = 数据分段区间/每次取数据行数，如5000/100=50，即需要约50次循环才能跑完区间的所有的数据 
@@ -69,7 +69,7 @@ def get_zb(index):
     #取数据结束位置
     end = str(pagecount*(index))
     #查询数据的sql
-    sql1 =  ("select * from (select ADDR from BASE_ZB_WG where ADDR not in(select ADDR from TEMP_ZB_WG) and RESULT is null and rn<="+end+" and rn>"+start+") where rownum<="+str(rowcount))      
+    sql1 =  ("select * from (select REPLACE(replace(ADDR,'安吉县公安局',''),'安吉县浙江省安吉县') ADDR from BASE_ZB_WG where ADDR in (select YHDZ from ZZ_SDQ_RECORD) and RESULT is null ) where rownum<="+str(rowcount))      
     sql2 = ""
 
     cursor.execute(sql1);    
