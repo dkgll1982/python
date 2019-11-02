@@ -6,9 +6,10 @@
 # @File    : time.py
 # @Software: PyCharm
 
-
-import datetime
-i = datetime.datetime.now()
+from datetime import datetime
+i = datetime.now()
+cday = i.strftime('%Y-%m-%d %H:%M:%S')
+print(cday)
 print ("当前的日期和时间是 %s" % i)
 print ("ISO格式的日期和时间是 %s" % i.isoformat() )
 print ("当前的年份是 %s" %i.year)
