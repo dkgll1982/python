@@ -31,7 +31,7 @@ class Test(object):
         return (self.name)
 
 t = Test(100)
-print(t.__str__())
+t
 print('-'*40)
 
 class Student(object): 
@@ -49,7 +49,11 @@ class Student(object):
         if attr == 'score':
             return 9922
         else:
+            #return None
             return object.__getattribute__(self,attr)
+
+    def __getattr__(self, attr):
+        return '不存在的属性'
 
     def __call__(self):
         print("My name if %s" % self.name)
@@ -60,7 +64,10 @@ sto = Student("Michael");
 sto();
 
 #print(sto)
-print(sto.score);
+# 当调用不存在的属性时，比如score，Python解释器会试图调用__getattr__(self, 'score')来尝试获得属性，
+# 这样，我们就有机会返回score的值：
+# 注意，只有在没有找到属性的情况下，才调用__getattr__，已有的属性，比如name，不会在__getattr__中查找。
+print(sto.score23);
 
 class Fib(object):
     def __init__(self):
@@ -84,4 +91,4 @@ print('Fib的方法属性：',dir(Fib))
 
 for n in Fib():
     print(n)
-print(Fib()[123])
+print(Fib()[15])
