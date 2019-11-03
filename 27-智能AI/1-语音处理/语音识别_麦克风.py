@@ -8,7 +8,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 from aip import AipSpeech
  
-filename = './audio/test.wav'
+#filename = './audio/test.wav'
  
 BAIDU_APP_ID = '17680061'
 BAIDU_API_KEY = 'CXlUYNeSxyhlpvMIqFVZCPVD'
