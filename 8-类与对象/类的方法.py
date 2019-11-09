@@ -7,6 +7,8 @@
 # @Software: PyCharm
 
 class Bird:
+    # classmethod 修饰符对应的函数不需要实例化，不需要 self 参数，
+    # 但第一个参数需要是表示自身类的 cls 参数，可以来调用类的属性，类的方法，实例化对象等。        
     # classmethod修饰的方法是类方法
     @classmethod
     def fly (cls):
@@ -48,6 +50,9 @@ class Test:
         print("类方法！args：",args," kwargs:",kwargs)
 
 t = Test()
+print('+'*40)
+Test.prt(1);
+print('+'*40)
 t.prt()
 #通过实例化对象引用静态方法
 t.mystaticmethon()

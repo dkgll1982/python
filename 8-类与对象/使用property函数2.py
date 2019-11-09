@@ -6,6 +6,8 @@
 # @File    : 使用property函数2
 # @Software: PyCharm
 
+import  math
+
 # -*- coding: utf-8 -*-
 class Screen(object):
     @property
@@ -36,8 +38,20 @@ s.height = 100
 
 print(s.resolution)
 
+print('{0} and {1}'.format('spam', 'eggs'))
 
+print(max([1,2,3]))
 
+import random
+print(random.choice(['apple', 'pear', 'banana']))
 
+import statistics
+data = [2.75, 1.75, 1.25, 0.25, 0.5, 1.25, 3.5]
+print(statistics.mean([x for x in range(1,11)]))
+
+a = 2
+c = 100
+c = a + b
+print(b)
 
 
