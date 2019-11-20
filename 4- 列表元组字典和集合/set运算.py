@@ -8,7 +8,7 @@
 
 set1={1,2,3}
 set2={3,4,5}
-set3=set()
+set3=set() 
 
 print("求交集(取两集合公共的元素)：set1 & set2 = ",set1 & set2);
 print("求并集(取两集合全部的元素)：set1 | set2 = ",set1 | set2);
@@ -26,3 +26,5 @@ set1.add(t2)
 print(t)
 print(set1)
 print(type(set3))
+print(set1.pop())
+print(set1.pop()) 

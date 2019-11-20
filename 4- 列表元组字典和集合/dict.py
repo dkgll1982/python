@@ -6,18 +6,27 @@
 # @File    : dict
 # @Software: PyCharm
 
-scores = {'语文': 89, '数学': 92, '英语': 93}
+scores = {'语文': 89, '数学': 92, '英语': 93} 
+scores['政治']=40
+scores['数学']=40  
+#删除元素，找不到传回Default设定的内容，没有设定则传回KeyError
+scores.pop('2语文','DDDD')  
+#存在则返回对应键的值数据，不存在则将键-值假如字典设置默认值，返回该默认值，如果未设置默认值，则返回None
+yw = scores.setdefault('语文',182)  
+wl = scores.setdefault('物理',82) 
+print('语文：%d,物理：%d'%(yw,wl))
+scores.setdefault('化学',92)
 print(scores)
 # 空的花括号代表空的dict
 empty_dict = {}
 print(empty_dict)
 # 使用元组作为dict的key
-dict2 = {(20, 30):'good', 30:[1,2,3]}
+dict2 = {(20, 30):'good',30:[1,2,3]}
 print(dict2[(20, 30)])
 print(dict2[30])
 
-knowledge = {'语文', '数学', '英语'}
-scores = dict.fromkeys(knowledge)
+knowledge = {'语文':22, '数学':1, '英语':2}
+scores = dict.fromkeys(knowledge,[22,88])
 print(scores)
 
 #通过 dict() 映射函数创建字典

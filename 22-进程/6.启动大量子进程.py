@@ -25,7 +25,7 @@ if __name__ == "__main__":
     #创建多个进程
     #进程池
     #表示可以同时执行的进程数量，默认大小是CPU核心数 
-    pp = Pool()
+    pp = Pool(3)
     for i in range(4): 
         #创建进程，放入进程池统一管理
         pp.apply_async(run,args=(i,))

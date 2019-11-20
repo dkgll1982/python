@@ -10,6 +10,7 @@
 #创建元组 a_typle
 a_tuple =("C语言中文网",)
 print(type(a_tuple))
+print(dir(a_tuple))
 print(a_tuple)
 #创建字符串 a
 a = ("C语言中文网")
@@ -20,6 +21,7 @@ print(a)
 # 将列表转换成元组
 a_list = ['crazyit', 20, -1.2]
 a_tuple = tuple(a_list)
+print('List方法：',dir(a_list))
 print(a_tuple)
 
 # 使用range()函数创建区间（range）对象
@@ -47,6 +49,8 @@ print(L[0][2])
 print(L[1][2])
 print(L[2][2])
 print(L[:2])
+
+print('max：%s，min：%s'%(max(L),min(L)))
 
 #print(list(range(len(input("你的名字：")))));
 

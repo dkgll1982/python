@@ -19,6 +19,7 @@ existing_pdf = PdfFileReader(open(r"C:\Users\dkgll\Desktop\python目录\pdf\test
 output = PdfFileWriter()
 
 page = existing_pdf.getPage(0)
+page.rotateClockwise(90)                #将第0页旋转90度
 page.mergePage(new_pdf.getPage(0))
 output.addPage(page)
 

@@ -41,8 +41,11 @@ if __name__ == "__main__":
     pp = Pool(4)
     for fileName in fileList:
         pp.apply_async(copyFile,args=(os.path.join(path,fileName),os.path.join(toPath,fileName)))
-
-    pp.close()
-    pp.join()
+   
+    #当进程池close的时候并未关闭进程池，只是会把状态改为不可再插入元素的状态，完全关闭进程池使用
+    pp.close()          #关闭进程池，不再接受新的进程
+    
+    #进程池对象调用Join，会等待进程池所有子进程结束之后在去执行父进程
+    pp.join()           #主进程阻塞等待子进程的退出
     end = time.time()
     print("总耗时：%0.6f"%(end -start));

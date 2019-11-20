@@ -8,11 +8,11 @@
 
 import  threading,time
 
-def run():
-    print("线程执行")
+def run(args):
+    print("线程执行,%s"%args)
 
 #延迟5秒执行
-t = threading.Timer(5,run)
+t = threading.Timer(5,run, args=("mike",))
 
 t.start()
 

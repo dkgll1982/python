@@ -1,9 +1,11 @@
 {
   "ExpandedNodes": [
     "",
+    "\\10-类特殊成员",
     "\\13-Tkinter教程",
-    "\\13-Tkinter教程\\8-Menu部件"
+    "\\27-Python王者归来",
+    "\\27-Python王者归来\\19-正则表达式"
   ],
-  "SelectedNode": "\\13-Tkinter教程\\2-button.py",
+  "SelectedNode": "\\27-Python王者归来\\19-正则表达式\\3.re.sub.py",
   "PreviewInSolutionExplorer": false
 }

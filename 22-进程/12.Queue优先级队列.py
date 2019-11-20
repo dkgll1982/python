@@ -9,8 +9,12 @@
 # @Software: vscode 
 
 import queue
+from multiprocessing import Process,Queue
 
+'''------------------------------优先级队列-----------------------------'''
+#特点：数字越小，优先级越高
 q = queue.PriorityQueue(4)
+#q = Queue(4)
 q.put((1,'abcb'))
 q.put((1,'abc1'))
 q.put((1,'abc3'))

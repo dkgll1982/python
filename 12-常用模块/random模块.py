@@ -7,6 +7,7 @@
 # @Last Modified by: guojun 
 # @Last Modified time: 2019-08-04 10:14:37 
 # @Software: vscode 
+# 参考链接：https://www.cnblogs.com/Grace-gao/p/10956226.html
 
 import random
 #生成范围为0.0≤x<1.0 的伪随机浮点数
@@ -38,4 +39,10 @@ print (random.sample([10, 20 , 30 , 40 , 50], k=4))
 # 在内部，在进行选择之前，相对权重被转换为累积权重，因此提供累积权重节省了工作。返回一个列表。
  
 #指定随机抽取6 个元素，各元素被抽取的权重（概率）不同
-print(random.choices(['Python','Swift','Kotlin'], [5, 5, 1], k=60))  
+print(random.choices(['Python','Swift','Kotlin'], [5, 5, 1], k=6))  
+
+seq = ['red1','yellow2','blue3', 'green4' ]
+random.shuffle(seq)           #列表重新排序
+print(seq)
+import time
+print(time.localtime()) 

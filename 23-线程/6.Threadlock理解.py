@@ -1,14 +1,14 @@
-#!/usr/bin/env python 
-# -*- coding:utf-8 -*- 
-# @Author: guojun 
-# @Company: 航天神舟智慧系统技术有限公司 
-# @Site: https://user.qzone.qq.com/350606539/main 
-# @Date: 2019-08-11 18:14:10 
-# @Last Modified by: guojun 
-# @Last Modified time: 2019-08-11 18:14:10 
-# @Software: vscode  
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+# @Author: guojun
+# @Company: 航天神舟智慧系统技术有限公司
+# @Site: https://user.qzone.qq.com/350606539/main
+# @Date: 2019-08-11 18:14:10
+# @Last Modified by: guojun
+# @Last Modified time: 2019-08-11 18:14:10
+# @Software: vscode
 
-import threading 
+import threading
 
 # def show(num):
 #     print(threading.current_thread().getName(), num)
@@ -30,18 +30,19 @@ import threading
 
 
 global_data = threading.local()
+
 def show():
-    print (threading.current_thread().getName(), global_data.num)
-def thread_cal():
-    global_data.num = 0
+    print(threading.current_thread().getName(), global_data.num)
+
+def thread_cal(i):
+    global_data.num = i
     for _ in range(1000):
         global_data.num += 1
     show()
+
 threads = []
-
-print ("Main thread: ", global_data.__dict__) # {}   
-
+print("Main thread: ", global_data.__dict__)  # {}
 
 for i in range(10):
-    threads.append(threading.Thread(target=thread_cal))
+    threads.append(threading.Thread(target = thread_cal,args=(i,)))
     threads[i].start()

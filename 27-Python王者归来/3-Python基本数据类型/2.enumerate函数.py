@@ -21,3 +21,9 @@ print(e.__next__())
 
 for i, element in enumerate(seasons):
     print(i, element)
+
+e = enumerate(seasons) 
+print('转换成元组：',tuple(e))
+
+e = enumerate(seasons,start=10)
+print('转换成列表：',list(e))
