@@ -5,51 +5,45 @@
 # @Site    : https://user.qzone.qq.com/350606539/main
 # @File    : 11.线程通信.py
 # @Software: PyCharm
-
-from threading import Thread, Event
+import threading
 import time
 
-event = Event()
+event = threading.Event()
 
-def student(name):
-    print("学生%s 正在听课" % name)
-    # 学生听课在等待命令下课
-    event.wait()
-    # 参数可以设置超时时间 秒数，过了这个时间，即使没有收到信号，都可以活动
-    #event.wait(2) 
-    
-    # 收到下课信号 学生去活动
-    print("学生%s 课间活动" % name)
+# 两个线程，一个线程每隔一秒输出一个数，另一个线程每隔五秒控制一次开关变化（开变关，关变开）
+def MainThread():
+    i = 0
+    while(True):
+        event.wait()
+        print(i)
+        i += 1
+        time.sleep(1)
 
-def teacher(name):
-    print("老师%s 正在授课" % name)
-    time.sleep(7)
+def ControlThread():
+    while(True):
+        print('start')
+        event.set()     #将标志设为True，并通知所有处于等待阻塞状态的线程恢复运行状态。
+        time.sleep(5)
+        print('stop，等待5秒')
+        event.clear()   #将标志设为False。
+        time.sleep(5)
 
-    print()
-    # 老师发送下课信号，学生也收到
-    event.set()
-    print("老师%s 通知下课" % name)
-
-if __name__ == "__main__":
-    stu1 = Thread(target=student, args=("小马",),)
-    stu2 = Thread(target=student, args=("小红",),)
-    stu3 = Thread(target=student, args=("小刚",),)
-
-    t1 = Thread(target=teacher, args=("mike",),)
-
-    stu1.start()
-    stu2.start()
-    stu3.start()
+if __name__ == '__main__':
+    t1 = threading.Thread(target = MainThread)
+    t2 = threading.Thread(target = ControlThread)
     t1.start()
+    t2.start()
 
-'''
-
-学生小马 正在听课
-学生小红 正在听课
-学生小刚 正在听课
-老师mike 正在授课
-
-学生小马 课间活动
-学生小红 课间活动
-学生小刚 课间活动
-'''
+#第一步：event.wait()，阻塞
+#第二步：print('start')，输出:start
+#第三步：event.set()
+#第四步：print(i)，输出:0
+#第五步：print(i)，输出:1
+#第六步：print(i)，输出:2
+#第七步：print(i)，输出:3
+#第八步：print(i)，输出:4
+#第九步：print('stop')，输出:stop
+#第十步：event.clear(),此时的wait()方法将阻塞
+#第十一步：time.sleep(5)之后循环重新回到print('start')
+#         重复第二步到第十步，依次为start 5 6 7 8 9 stop start 10 11 12 13 14 ...
+  

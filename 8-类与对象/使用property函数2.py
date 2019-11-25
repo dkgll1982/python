@@ -50,7 +50,7 @@ data = [2.75, 1.75, 1.25, 0.25, 0.5, 1.25, 3.5]
 print(statistics.mean([x for x in range(1,11)]))
 
 a = 2
-c = 100
+b = 100
 c = a + b
 print(b)
 

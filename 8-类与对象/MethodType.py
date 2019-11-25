@@ -10,8 +10,9 @@
 # -*-coding:utf-8-*-
 
 from types import MethodType
+
 class Student(object):
-    __slots__ = ('set_age2', 'age') # 用tuple定义允许绑定的属性名称
+    __slots__ = ('set_ages', 'age') # 用tuple定义允许绑定的属性名称
 
 def set_name(self,name):
     self.name = name
@@ -26,15 +27,15 @@ def set_sc(self,x,y):
 x1 = Student()   #类的实例化
 x2 = Student()
 
-x1.set_age = MethodType(set_age,x1)   #实例绑定一个方法
-x2.set_age = MethodType(set_age,x2)
+x1.set_ages = MethodType(set_age,x1)   #实例绑定一个方法
+x2.set_ages = MethodType(set_age,x2)
 
 Student.setsc = MethodType(set_sc,Student)  #另一种绑定
 
 Student.set_name = MethodType(set_name,Student)  #给此类绑定一个方法
 
-x1.set_age(12)    #初始化
-x2.set_age(13)
+x1.set_ages(12)    #初始化
+x2.set_ages(13)
 
 x1.setsc("xmc","xu")
 

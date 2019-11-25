@@ -10,8 +10,11 @@
 
 # 导入first_package包（模块）
 import first_package
+import  cx_Oracle
 
 print('==========')
 print(first_package.__doc__)
 print(type(first_package))
 print(first_package)
+
+print(cx_Oracle.__version__)

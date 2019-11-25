@@ -15,13 +15,13 @@ connection = pymysql.connect(host='127.0.0.1', port=3306, user='root', password=
 cursor = connection.cursor()
 
 # ③、执行DDL语句创建数据表
-cursor.execute('''create table user_tb(
+cursor.execute('''create table user_tb1(
     user_id int primary key auto_increment,
     name varchar(255),
     pass varchar(255),
     gender varchar(255))''')
 # 执行DDL语句创建数据表
-cursor.execute('''create table order_tb(
+cursor.execute('''create table order_tb1(
     order_id integer primary key auto_increment,
     item_name varchar(255),
     item_price double,
