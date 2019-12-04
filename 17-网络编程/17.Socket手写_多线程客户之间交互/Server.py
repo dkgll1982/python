@@ -4,9 +4,10 @@ import threading
 
 #实例化对象
 serversock = socket(family=AF_INET,type=SOCK_STREAM)
+serversock.setsockopt(SOL_SOCKET,SO_REUSEADDR,1)   #端口复用
 
 ip =''
-port = 15243
+port = 15245
 HOST = (ip,port)
 
 #客户端用户列表
