@@ -22,6 +22,8 @@ while True:                     #客户端链接循环
             #if not cmd:break               #适用于Linux操作系统
             
             #2.执行命令，拿到结果
+            # 如果是windows，那么res.stdout.read()读出的就是GBK编码的，
+            # 在接收端需要用GBK解码且只能从管道里读一次结果
             obj = subprocess.Popen(cmd.decode('gbk'),shell=True,
                                   stdout=subprocess.PIPE,
                                   stderr=subprocess.PIPE)

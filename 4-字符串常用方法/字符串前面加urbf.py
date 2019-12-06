@@ -4,8 +4,8 @@ import time
 print(u"我是含有中文字符组成的字符串。")
 
 # b' ' 表示这是一个 bytes 对象
-response = b'<h1>Hello World!</h1>'
-bytes = '<h1>Hello World!</h1>'.encode('utf-8')
+response = b'<h1>人Hello World!</h1>'
+bytes = '<h1>的Hello World!</h1>'.encode('utf-8')
 str = bytes.decode('utf-8')
 print(response,type(response),bytes,type(bytes),str,type(str))
 

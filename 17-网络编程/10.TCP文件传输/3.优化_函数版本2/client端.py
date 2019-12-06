@@ -4,7 +4,7 @@ import json
 import os.path
 
 # 定义下载的目录路径，注意：这部分一般应该写在配置文件中
-DOWNLOAD_DIR = r'C:\download'
+DOWNLOAD_DIR = r'C:\Users\dkgll\Desktop\python目录'
 
 
 def get(client):

@@ -11,7 +11,7 @@ class MYTCPServer:
     max_packet_size = 8192
     coding = 'utf-8'
     request_queue_size = 5
-    server_dir = r'C:\Users\xudachen\PycharmProjects\Python全栈开发\第三模块\网络编程\通过socket发送文件\服务端\file_upload'
+    server_dir = r'C:\Users\dkgll\Downloads'
 
     def __init__(self, server_address, bind_and_active=True):
         """Constructor. May be extended, do not override"""

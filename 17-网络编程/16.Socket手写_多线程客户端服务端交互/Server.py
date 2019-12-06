@@ -32,4 +32,5 @@ while True:
     clientSocket,clientAddress = serversock.accept()
     t = threading.Thread(target=run,args=(clientSocket,clientAddress,))
     t.start()
+    #run(clientSocket,clientAddress)
     print(clientAddress,'连接上服务器...',sep='')

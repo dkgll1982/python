@@ -6,7 +6,7 @@ import math
 
 phone = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-phone.connect(('10.21.198.201', 15212))
+phone.connect(('127.0.0.1',8081))
 
 while True:
     # 1.发命令
@@ -30,9 +30,9 @@ while True:
     header_dict = json.loads(header_str)
 
     total_size = header_dict['file_size']
-    file_name = header_dict['file_name'].split('\\')[-1:][0] 
-    
-    file_path = r'E:\100-航天智慧\2-源码库\python\17-网络编程\10.文件传输\\'+file_name
+    file_name = header_dict['file_name'].split("\\")[-1]
+    print(file_name)
+    file_path = r"C:\Users\dkgll\Desktop\python目录\\"+file_name
     print(file_path)
 
     start = time.time()

@@ -31,7 +31,7 @@ class MYTCPClient:
 
     def run(self):
         while True:
-            inp = input(">>:").strip()  # put test.py
+            inp = input(">>:").strip()  # put test.py | put D:\data.rar,文件上传到服务端
             if not inp:
                 continue
             l = inp.split()  # ['put','test.py']

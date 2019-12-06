@@ -29,7 +29,7 @@ def analyse_img(file1,file2):
     params=read_img(file1,file2)
     api=get_token()
     content=requests.post(api,params).text
-    # print(content)
+    print(content)
     score=eval(content)['result']['score']
     if score>80:
         print('图片识别相似度度为'+str(score)+',是同一人')
@@ -37,7 +37,7 @@ def analyse_img(file1,file2):
         print('图片识别相似度度为'+str(score)+',不是同一人')
 
 analyse_img(r"C:\Users\dkgll\Desktop\python目录\image\C_Users_dkgll_Desktop_python目录_pdf_测试.pdf_img4.png",
-r"C:\Users\dkgll\Desktop\python目录\image\MTXX_20190730225114.jpg")
+r"C:\Users\dkgll\Desktop\python目录\image\33050119741128002X.png")
 
 # 打印执行结果：图片识别相似度度为88.23068237,是同一人
 # 换图片zly02.jpg和lyf01.jpg：图片识别相似度度为29.28668785,不是同一人
