@@ -16,4 +16,4 @@ bar.title = '编程教程的历年销量'
 bar.x_title = '年份'
 bar.y_title = '销量'
 # 指定将数据图输出到SVG文件中
-bar.render_to_file('C:\\Users\\dkgll\\Desktop\\python目录\\fk_books.svg')
+bar.render_to_file(r'backup\\fk_books.svg')

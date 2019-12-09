@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
-im = Image.open(r"C:\Users\dkgll\Desktop\python目录\image\card_num\33052219960919454X.png")
-logo=Image.open(r"C:\Users\dkgll\Desktop\python目录\image\sy.png") 
+im = Image.open(r"backup\image\card_num\33052219960919454X.png")
+logo=Image.open(r"backup\image\sy.png") 
 
 layer=Image.new('RGBA', im.size, (0,0,0,0))
 

@@ -56,7 +56,7 @@ def get_person(control_type):
     return  li;
 
 def save_excel(li,dirname):
-    book = xlsxwriter.Workbook('C:\\Users\\dkgll\\Desktop\\python目录\\长兴重点人口\\'+dirname+'\\'+dirname+'人员.xlsx')
+    book = xlsxwriter.Workbook(r'backup\\长兴重点人口\\'+dirname+'\\'+dirname+'人员.xlsx')
     sheet = book.add_worksheet('重点人口')
 
     # Write some data headers. 带自定义粗体blod格式写表头
@@ -90,7 +90,7 @@ def save_excel(li,dirname):
         #下载证照
         #filename = download_img(li[i]["FILENAME"],li[i]["URL"], dirname,api_token)
 
-        filename = "C:\\Users\\dkgll\\Desktop\\python目录\\长兴重点人口\\"+dirname+"\\img\\"+ li[i]["FILENAME"]
+        filename = r"backup\\长兴重点人口\\"+dirname+"\\img\\"+ li[i]["FILENAME"]
 
         im = Image.open(filename)#返回一个Image对象
         #print('宽：%d,高：%d'%(im.size[0],im.size[1]),end ='  ')
@@ -111,7 +111,7 @@ def download_img(img_name,img_url, dirname,api_token):
     request = urllib.request.Request(img_url, headers=header)
     try:
         response = urllib.request.urlopen(request)
-        filename = "C:\\Users\\dkgll\\Desktop\\python目录\\长兴重点人口\\"+dirname+"\\img\\"+ img_name
+        filename = r"backup\\长兴重点人口\\"+dirname+"\\img\\"+ img_name
         if (response.getcode() == 200):
             with open(filename, "wb") as f:
                 f.write(response.read()) # 将内容写入图片
@@ -120,7 +120,7 @@ def download_img(img_name,img_url, dirname,api_token):
         return "failed"
 
 def imgtoexcel(filename):
-    book = xlsxwriter.Workbook('C:\\Users\\dkgll\\Desktop\\python目录\\pict.xlsx')
+    book = xlsxwriter.Workbook(r'backup\\pict.xlsx')
     sheet = book.add_worksheet('demo')
 
     bold = book.add_format({'bold': True})

@@ -14,7 +14,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)  # Log等级总开关
 # 第二步，创建一个handler，用于写入日志文件
 rq = time.strftime('%Y%m%d%H%M', time.localtime(time.time()))
-log_path = 'C:\\Users\\dkgll\\Desktop\\python目录\\Logs\\'
+log_path = r'backup\\Logs\\'
 log_name = log_path + rq + '.log'
 logfile = log_name
 fh = logging.FileHandler(logfile, mode='w')

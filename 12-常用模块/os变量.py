@@ -7,8 +7,12 @@
 # @Last Modified by: guojun 
 # @Last Modified time: 2019-08-04 09:59:55 
 # @Software: vscode 
-
+import sys 
 import os
+python = os.path.dirname(sys.executable)    #解释器所在的文件夹
+curpath = os.path.dirname(os.path.realpath(__file__))
+path = os.path.join(curpath, "sys变量.py") 
+
 # 显示导入依赖模块的操作系统的名称
 print(os.name)
 # 获取PYTHONPATH环境变量的值
@@ -35,8 +39,8 @@ import os
 # 运行平台上的cmd命令
 # os.system('cmd')    
 # 使用Excel打开g:\abc.xls文件
-os.startfile('C:\\Users\\dkgll\\Desktop\\python目录\\省科技中小企业_科技局.xls')
+os.startfile(r'backup\省科技中小企业_科技局.xls')
 #os.spawnl(os.P_NOWAIT, 'D:\\Programing\\pdi-ce-8.1.0.0-365\\data-integration\\Spoon.bat', ' ')
 # 使用python命令执行os_test.py程序
-# os.execl("D:\\Python\\Python36\\python.exe", " ", 'os_test.py', 'i')
-os.execl('D:\\Programing\\Python\\python.exe', " ", 'E:\\100-航天智慧\\2-源码库\\python\\12-常用模块\\sys变量.py', 'i')
+# os.execl(python+'\\'+'python.exe', " ", 'os_test.py', 'i')
+os.execl(python+'\\'+'python.exe', " ", path, 'i')

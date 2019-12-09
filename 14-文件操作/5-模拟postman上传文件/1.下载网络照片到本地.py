@@ -19,7 +19,7 @@ url = "http://jczl.giscloud.cx/zhzlbackend/common/uploadFile"
 
 
 #文件名
-#files = {'file': open(r"C:\Users\dkgll\Desktop\7692A53708F95425049F79672A679C08.png", 'rb')}
+#files = {'file': open(r"backup\7692A53708F95425049F79672A679C08.png", 'rb')}
 
 #测试发现：Accept、User-Agent这俩必不可少
 head1={
@@ -64,7 +64,7 @@ def download_img(VISIT_PATH,FILE_NAME):
     request = urllib.request.Request(VISIT_PATH, headers=header)
     try:
         response = urllib.request.urlopen(request)
-        filename = "C:\\Users\\dkgll\\Desktop\\python目录\\网格员\\"+FILE_NAME
+        filename = r"backup\\网格员\\"+FILE_NAME
         with open(filename, "wb") as f:
             f.write(response.read()) # 将内容写入图片
         return filename

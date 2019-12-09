@@ -38,7 +38,7 @@ print(formatter % (
  ))
 
 
-f = open("C:\\Users\\dkgll\\Desktop\\python目录\\demo.txt","w")#打开文件以便写入
+f = open(r"backup\\demo.txt","w")#打开文件以便写入
 print('沧海月明珠有泪',file=f)
 print('明月何时照我还',file=f)
 print('蓝回日暖玉生烟',file=f)

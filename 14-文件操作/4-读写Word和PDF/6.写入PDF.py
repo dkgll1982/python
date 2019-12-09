@@ -15,7 +15,7 @@ packet.seek(0)
 new_pdf = PdfFileReader(packet)
 
 #读取已有的PDF
-existing_pdf = PdfFileReader(open(r"C:\Users\dkgll\Desktop\python目录\pdf\test.pdf", "rb"))
+existing_pdf = PdfFileReader(open(r"backup\pdf\test.pdf", "rb"))
 output = PdfFileWriter()
 
 page = existing_pdf.getPage(0)
@@ -33,6 +33,6 @@ output.addPage(page)
 #'a+' ==a+r（可追加可写，文件若不存在就创建） 
 #对应的，如果是二进制文件，就都加一个b就好啦： 
 #'rb'　　'wb'　　'ab'　　'rb+'　　'wb+'　　'ab+' 
-outputStream = open(r"C:\Users\dkgll\Desktop\python目录\pdf\test2.pdf", "wb+")
+outputStream = open(r"backup\pdf\test2.pdf", "wb+")
 output.write(outputStream)
 outputStream.close()

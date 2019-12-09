@@ -1,7 +1,7 @@
 import subprocess
 
 #打开文本
-subprocess.Popen(["notepad.exe", r"C:\Users\dkgll\Desktop\备忘录.txt"])
+subprocess.Popen(["notepad.exe", r"backup\备忘录.txt"])
 
 #打开QQ
 #subprocess.Popen(r'D:\应用程序\Tencent\QQ\Bin\QQScLauncher.exe')

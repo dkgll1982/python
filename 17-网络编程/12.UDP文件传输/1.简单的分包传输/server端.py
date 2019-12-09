@@ -32,7 +32,7 @@ server.bind(server_addr)
 
 count=0
 flag=1
-f=open(r'C:\Users\dkgll\Downloads\zipfile.zip','rb')
+f=open(r'backup\zipfile.zip','rb')
 while True:
     if count==0:
         print ("Are You Ready?")

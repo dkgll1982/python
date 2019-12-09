@@ -1,7 +1,7 @@
 #参考链接：https://www.cnblogs.com/gl1573/p/10064438.html
 import pdfplumber
 
-path = r'C:\Users\dkgll\Desktop\python目录\pdf\测试.pdf'
+path = r'backup\pdf\测试.pdf'
 pdf = pdfplumber.open(path)
 
 #可以读取电子表格

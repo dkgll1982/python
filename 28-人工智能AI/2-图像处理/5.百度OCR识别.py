@@ -34,7 +34,7 @@ def img_to_str(image_path):
     return result    
 
 if __name__=='__main__':
-    filename = r'C:\Users\dkgll\Desktop\3.jpg'
+    filename = r'backup\3.jpg'
     img_to_str(filename)
 
 #参考链接：https://blog.csdn.net/apollo_miracle/article/details/99056926    

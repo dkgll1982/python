@@ -22,7 +22,7 @@ def get(phone):
     total_size = header_dict['file_size']
     file_name = header_dict['file_name'].split('\\')[-1:][0]
 
-    file_path = r'E:\100-航天智慧\2-源码库\python\17-网络编程\10.文件传输\\' + file_name
+    file_path = r'17-网络编程\10.文件传输\\' + file_name
     print(file_path)
 
     start = time.time()

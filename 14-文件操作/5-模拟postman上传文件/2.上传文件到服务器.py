@@ -43,7 +43,7 @@ def update_bid(cardnum,id1,id2):
     conn.close()   
 
 def upload_img(FILE_NAME):
-    files = {'file': open("C:\\Users\\dkgll\\Desktop\\python目录\\网格员\\"+FILE_NAME, 'rb')}
+    files = {'file': open(r"backup\\网格员\\"+FILE_NAME, 'rb')}
     r = requests.post(url, files=files,headers=head)  
     card_num = FILE_NAME[0:18]
     response = r.json()
@@ -57,7 +57,7 @@ def del_img(FILE_NAME):
         os.remove(FILE_NAME)
 
 if __name__ == "__main__":   
-    dir = r"C:\Users\dkgll\Desktop\python目录\网格员"
+    dir = r"backup\网格员"
     fileNames = os.listdir(dir)
     for file in fileNames:
         #print(file)

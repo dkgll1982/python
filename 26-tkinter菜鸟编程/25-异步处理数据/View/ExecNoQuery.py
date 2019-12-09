@@ -3,7 +3,7 @@ from tkinter import ttk,filedialog, messagebox
 from DataManage import * 
 import os 
 # 动态添加g:\fk_ext路径作为模块加载路径
-sys.path.append(r'E:\100-航天智慧\2-源码库\python\26-tkinter菜鸟编程\24-数据查询器\Model')  
+sys.path.append(r'26-tkinter菜鸟编程\24-数据查询器\Model')  
 from Db  import *
 import threading,time,datetime
 

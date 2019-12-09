@@ -5,7 +5,7 @@ import pytesseract
 from PIL import Image
  
 # open image
-image = Image.open(R'C:\Users\dkgll\Desktop\3.jpg')
+image = Image.open(r'backup\3.jpg')
 code = pytesseract.image_to_string(image, lang='chi_sim')
 
 print(code)

@@ -1,8 +1,8 @@
-fsstream1 = open(r'C:\Users\dkgll\Desktop\1.txt',mode='w')
+fsstream1 = open(r'backup\1.txt',mode='w')
 print('test output',file=fsstream1)
 fsstream1.close()
 
-fsstream2 = open(r'C:\Users\dkgll\Desktop\1.txt',mode='a')
+fsstream2 = open(r'backup\1.txt',mode='a')
 print('append output',file=fsstream2)
 fsstream2.close()
 

@@ -82,7 +82,7 @@ class info():
         """逐行读取文件"""    
         
         #读取gbk编码文件，需要加encoding='utf-8'
-        f = open(r'E:\100-航天智慧\2-源码库\python\26-tkinter菜鸟编程\18-Treeview\result.txt','r',encoding='utf-8')
+        f = open(r'26-tkinter菜鸟编程\18-Treeview\result.txt','r',encoding='utf-8')
         line = f.readline()
         while line:
             yield line

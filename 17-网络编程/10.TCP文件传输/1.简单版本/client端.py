@@ -32,7 +32,7 @@ while True:
     total_size = header_dict['file_size']
     file_name = header_dict['file_name'].split("\\")[-1]
     print(file_name)
-    file_path = r"C:\Users\dkgll\Desktop\python目录\\"+file_name
+    file_path = r"backup\\"+file_name
     print(file_path)
 
     start = time.time()

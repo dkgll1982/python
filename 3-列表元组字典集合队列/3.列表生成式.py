@@ -52,7 +52,7 @@ print(m3);
 
 #列出磁盘目录文件
 import os
-o = [d for d in os.listdir('E:\\100-航天智慧\\1-文档库\\1-CIG聚合服务\\数据资源\\Data')];
+o = [d for d in os.listdir('.')];
 
 print(o)
 

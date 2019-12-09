@@ -8,13 +8,13 @@
 
 import pickle
 #序列化保存到磁盘文件
-f = open('C:\\Users\\dkgll\\Desktop\\python目录\\2.txt', 'wb')
+f = open(r'backup\\2.txt', 'wb')
 d = dict(name='Bob', age=20, scoree=88)
 pickle.dump(d, f)
 f.close()
 
 #反序列化读取文件
-f = open('C:\\Users\\dkgll\\Desktop\\python目录\\2.txt', 'rb')
+f = open(r'backup\\2.txt', 'rb')
 d = pickle.load(f)
 f.close()
 print(d)

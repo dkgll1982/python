@@ -80,5 +80,5 @@ result  = client.synthesis(txt, 'zh', 1, {
  
 # 识别正确返回语音二进制 错误则返回dict 参照下面错误码
 if not isinstance(result, dict):
-    with open(r'E:\100-航天智慧\2-源码库\python\audio\auido.mp3', 'wb') as f:
+    with open(r'audio\auido.mp3', 'wb') as f:
         f.write(result)

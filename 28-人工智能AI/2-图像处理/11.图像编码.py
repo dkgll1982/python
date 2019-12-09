@@ -14,6 +14,6 @@ data_encode = np.array(img_encode)
 str_encode = data_encode.tostring()
  
 # 缓存数据保存到本地
-with open(r'C:\Users\dkgll\Desktop\python目录\img_encode.txt', 'wb') as f:
+with open(r'backup\img_encode.txt', 'wb') as f:
     f.write(str_encode)
     f.flush

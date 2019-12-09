@@ -6,7 +6,7 @@ import time
 print("开始处理...")
 start = time.time()
 #file = r'14-文件操作\1-IO操作\测试.txt'
-file = r'C:\Users\dkgll\Desktop\python目录\stus.txt'
+file = r'backup\stus.txt'
 
 # with open(file,'r', encoding='UTF-8') as f:
 #     for line in f:

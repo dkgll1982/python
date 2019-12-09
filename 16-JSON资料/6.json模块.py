@@ -32,7 +32,7 @@ print(s6)
 # 使用JSONEncoder的encode方法将Python转JSON
 s7 = json.JSONEncoder().encode({"names": ("孙悟空", "齐天大圣")})
 print(s7) # {"names": ["\u5b59\u609f\u7a7a", "\u9f50\u5929\u5927\u5723"]}
-f = open('E:\\100-航天智慧\\2-源码库\\python\\12-常用模块\\a.json', 'w')
+f = open(r'16-JSON资料\a.json', 'w')
 # 使用dump()函数将转换得到JSON字符串输出到文件
 json.dump(['Kotlin', {'Python': 'excellent'}], f)
 
@@ -55,7 +55,7 @@ def as_complex(dct):
 result3 = json.loads('{"__complex__": true, "real": 1, "imag": 2}',\
     object_hook=as_complex)
 print(result3) # (1+2j)
-f = open('E:\\100-航天智慧\\2-源码库\\python\\12-常用模块\\a.json')
+f = open(r'16-JSON资料\a.json')
 # 从文件流恢复JSON列表
 result4 = json.load(f)
 print(result4) # ['Kotlin', {'Python': 'excellent'}]

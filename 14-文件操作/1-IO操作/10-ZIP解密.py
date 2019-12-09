@@ -10,7 +10,7 @@ flag = True
 def extract(password, file):
     try:
         password = str(password)
-        file.extractall(path=r'C:\Users\dkgll\Desktop\python目录\zipfile2', pwd=password.encode('utf-8'))
+        file.extractall(path=r'backup\zipfile2', pwd=password.encode('utf-8'))
         print("the password is {}".format(password))
         nowTime = time.time()
         print("spend time is {}".format(nowTime-startTime))
@@ -22,7 +22,7 @@ def extract(password, file):
  
  
 def do_main():
-    zfile = zipfile.ZipFile(r"C:\Users\dkgll\Desktop\python目录\zipfile.zip", 'r')
+    zfile = zipfile.ZipFile(r"backup\zipfile.zip", 'r')
     # 开始尝试（暴力破解）
     #for number in range(123,124):
     #    if flag is True:

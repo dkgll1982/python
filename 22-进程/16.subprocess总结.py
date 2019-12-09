@@ -23,7 +23,7 @@ def pingme(i, queue):
         ip = queue.get()
         print('Thread %s pinging %s' % (i, ip))
         ret = subprocess.call('ping %s' % ip, shell=True,
-                              stdout=open(r'C:\Users\dkgll\Desktop\python目录\ping.txt', 'w'), stderr=subprocess.STDOUT)
+                              stdout=open(r'backup\ping.txt', 'w'), stderr=subprocess.STDOUT)
         if ret == 0:
             print('%s is alive!' % ip)
         elif ret == 1:

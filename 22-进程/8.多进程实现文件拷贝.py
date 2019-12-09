@@ -20,8 +20,8 @@ def copyFile(rPath,wPath):
     fr.close()
     fw.close()
 
-path=r"E:\100-航天智慧\1-文档库\1-CIG聚合服务\数据资源\江都\公安局"
-toPath=r"C:\Users\dkgll\Desktop\python目录\copy"
+path=r"images"
+toPath=r"backup\copy"
 
 # #读取path下的所有文件
 # fileList = os.listdir(path);

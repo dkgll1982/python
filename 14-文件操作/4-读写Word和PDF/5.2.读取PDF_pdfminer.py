@@ -53,7 +53,7 @@ if __name__ == '__main__':
   '''''
    解析pdf 文本，保存到txt文件中
   '''
-  path = r'C:\Users\dkgll\Desktop\python目录\pdf\测试.pdf'
+  path = r'backup\pdf\测试.pdf'
   pdf2TxtManager = CPdf2TxtManager()
   pdf2TxtManager.changePdfToText(path)
   # print result[0]

@@ -25,13 +25,13 @@ while True:
 
         #1：接收报头长度
         header_len = struct.unpack('i',client.recv(4))[0]
-        #2：接收包头
+        #2：接收报头
         header = client.recv(header_len)
-        #解析包头信息
+        #解析报头信息
         header_str = header.decode('gbk')
         header_json = json.loads(header_str)
         file_size = header_json['file_size']
-        full_path = r"C:\Users\dkgll\Desktop\python目录\\"+file_name
+        full_path = r"backup\\"+file_name
         #3：接收文件
         with open(full_path,'wb') as f:
             recv_size = 0

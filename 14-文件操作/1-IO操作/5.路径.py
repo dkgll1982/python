@@ -1,6 +1,6 @@
 import os
 print(os.path,os.path.abspath('.'),os.path.abspath('..'))
-print(os.path.relpath(r'E:\\100-航天智慧\\2-源码库\\'))
+print(os.path.relpath(r'E:\\'))
 print(os.getcwd())
 print(os.curdir)
 

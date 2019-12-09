@@ -61,7 +61,7 @@ while True:         #链接循环
                 header_str = header.decode('gbk')
                 header_json = json.loads(header_str)
                 file_size = header_json['file_size']
-                full_path = r"C:\Users\dkgll\Desktop\python目录\server\\"+file_name
+                full_path = r"backup\server\\"+file_name
                 #3：接收文件
                 with open(full_path,'wb') as f:
                     recv_size = 0

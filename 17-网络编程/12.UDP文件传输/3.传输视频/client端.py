@@ -25,7 +25,7 @@ class ChatRoomPlus:
 
     def send(self):
         """发送广播"""
-        cap = cv2.VideoCapture(r'F:\2-教育学习\2-视频教程\第二十七天\07-正则表达式概述.mp4')
+        cap = cv2.VideoCapture(r'video\07-正则表达式概述.mp4')
         # cap.set(3, 224)
         # cap.set(4, 224)
         print("UDP发送器启动成功...")

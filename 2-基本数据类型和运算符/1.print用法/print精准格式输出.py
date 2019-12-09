@@ -6,3 +6,6 @@ print('{}的物理成绩是{}'.format('郭君','100'))
 
 print(r'e:/cmd'.replace(r'/',"\\"))
 print(r'e:/cmd'.replace(r'/',r"\\"))
+
+data = {1,2,3}
+print(f"data:{data}")

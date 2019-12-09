@@ -1,7 +1,7 @@
 import json
 from matplotlib import pyplot as plt
 import numpy as np
-filename = 'E:\\100-航天智慧\\2-源码库\\python\\20-数据可视化\\gdp_json.json'
+filename = r'20-数据可视化\\gdp_json.json'
 # 读取JSON格式的GDP数据
 with open(filename) as f:
     gpd_list = json.load(f)

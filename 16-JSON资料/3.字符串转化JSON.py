@@ -31,11 +31,11 @@ dicts = {
 json_dicts = json.dumps(dicts, indent=4, ensure_ascii=False)
 print(json_dicts)
 
-with open(r'C:\Users\dkgll\Desktop\python目录\stus.txt', 'w') as f:  # 打开文件
+with open(r'backup\stus.txt', 'w') as f:  # 打开文件
     f.write(json_dicts)  # 在文件里写入转成的json串
 
 stus = {'xiaojun': '123456', 'xiaohei': '7890', 'lrx': '111111'}
-f = open(r'C:\Users\dkgll\Desktop\python目录\stus.txt', 'w', encoding='utf-8')
+f = open(r'backup\stus.txt', 'w', encoding='utf-8')
 #indent：应该是一个非负的整型，如果是0，或者为空，则一行显示数据，
 # 否则会换行且按照indent的数量显示前面的空白，这样打印出来的json数据也叫pretty-printed json
 json.dump(stus, f, indent=4, ensure_ascii=False)
