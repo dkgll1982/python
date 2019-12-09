@@ -2,7 +2,7 @@
 import time
 import os;
 
-path="C:\\Users\dkgll\\Desktop\python目录";
+path=r"backup";
 time2=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime());
 isExists=os.path.exists(path);
 

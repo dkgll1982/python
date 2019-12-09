@@ -36,8 +36,8 @@ def analyse_img(file1,file2):
     else:
         print('图片识别相似度度为'+str(score)+',不是同一人')
 
-analyse_img(r"C:\Users\dkgll\Desktop\python目录\image\C_Users_dkgll_Desktop_python目录_pdf_测试.pdf_img4.png",
-r"C:\Users\dkgll\Desktop\python目录\image\33050119741128002X.png")
+analyse_img(r"backup\image\2.png",
+r"backup\image\33050119741128002X.png")
 
 # 打印执行结果：图片识别相似度度为88.23068237,是同一人
 # 换图片zly02.jpg和lyf01.jpg：图片识别相似度度为29.28668785,不是同一人

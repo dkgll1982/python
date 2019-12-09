@@ -4,7 +4,7 @@ import json
 import os.path
 
 # 定义一个共享用文件夹的路径，注意：这部分一般应该写在配置文件中
-SHARE_DIR = r'C:\Users\dkgll\Downloads'
+SHARE_DIR = r'backup'
 
 
 def get(conn, cmds):  # get内容放入函数中

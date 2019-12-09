@@ -1,0 +1,53 @@
+[DEFAULT]
+serveraliveinterval = 45
+compression = yes
+compressionlevel = 9
+forwardx11 = yes
+
+[bitbucket.org]
+user = Atlan
+
+[topsecret.server.com]
+host port = 50022
+forwardx11 = no
+
+[section1]
+key1 = value1
+key2 = value2
+key3 = value3
+
+[section2]
+keya = valueA
+keyb = valueB
+keyc = valueC
+
+[section3]
+foo = x
+bar = y
+fun = z
+
+[myini]
+serveraliveinterval = 45
+compression = yes
+compressionlevel = 9
+forwardx11 = yes
+
+[db]
+db_host = 127.0.0.1
+db_port = 2269
+db_user = root
+db_pass = root
+host_port = 69
+
+[concurrent]
+thread = 10
+processor = 20
+
+[alex]
+name = erdanw
+pwd = 123
+
+[suixin]
+name = suixin
+pwd = 1234
+

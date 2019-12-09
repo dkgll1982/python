@@ -1,6 +1,6 @@
 import os
 
-for dir,subdir,file in os.walk(r'E:\100-航天智慧\2-源码库\python\2-练习例子'):
+for dir,subdir,file in os.walk(r'2-练习例子'):
     print('目前目录名称：',dir)
     print('目前子目录名称：',subdir)
     print('目前文件名称：',file)

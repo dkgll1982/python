@@ -12,11 +12,11 @@ data_encode = np.array(img_encode)
 str_encode = data_encode.tostring()
  
 # 缓存数据保存到本地，以txt格式保存
-with open(r'C:\Users\dkgll\Desktop\python目录\img_encode.txt', 'wb') as f:
+with open(r'backup\img_encode.txt', 'wb') as f:
     f.write(str_encode)
     f.flush
  
-with open(r'C:\Users\dkgll\Desktop\python目录\img_encode.txt', 'rb') as f:
+with open(r'backup\img_encode.txt', 'rb') as f:
     str_encode = f.read()
  
 image = np.asarray(bytearray(str_encode), dtype="uint8")

@@ -1,0 +1,19 @@
+platformName: Android
+platformVersion: "7.0"
+deviceName: A5RNW18316011440
+appPackage: com.tencent.mm
+appActivity: .ui.LauncherUI
+automationName: Uiautomator2
+unicodeKeyboard: true
+resetKeyboard: true
+noReset: true
+chromeOptions:
+  androidProcess: com.tencent.mm:tools
+  data:
+    username: alex
+    pwd: "123445"
+    url: jczl.giscloud.com
+    sub:
+      books: mysql_host = 10.20.0.0
+      aihao: skitboard
+      reduce: program

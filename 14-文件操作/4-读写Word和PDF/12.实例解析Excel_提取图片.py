@@ -86,4 +86,4 @@ def compenent(excel_file_path):
 
 # main
 if __name__ == '__main__':
-    compenent(r'C:\Users\dkgll\Desktop\python目录\excel\测试.xlsx')
+    compenent(r'backup\excel\测试.xlsx')

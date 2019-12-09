@@ -11,5 +11,28 @@
     "python.testing.pytestEnabled": false,
     "python.testing.nosetestsEnabled": false,
     "python.testing.unittestEnabled": false,
-    "python.testing.promptToConfigure": false
+    "python.testing.promptToConfigure": false,
+     //-------- Search configuration --------
+
+    // Configure glob patterns for excluding files and folders in searches. Inherits all glob patterns from the files.exclude setting.
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true
+    },
+
+    //-------- Files configuration --------
+
+    // Configure glob patterns for excluding files and folders.
+    //vscode中设置工作区隐藏文件或文件夹
+    //https://www.jianshu.com/p/8856c99d13b5?utm_campaign
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true, 
+        "**/.DS_Store": true,
+        "**/node_modules": true,
+        "**/iOS": true,
+        "**/backup": true,            //隐藏目录
+        "**/__pycache__": true,       //隐藏目录 
+        "**/pip3": true,              //隐藏目录 
+    } 
 }

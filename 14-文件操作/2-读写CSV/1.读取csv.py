@@ -7,7 +7,7 @@ import csv
 #解决办法
 #with open(文件名,encoding='gbk',errors="ignore") as f:
 
-csv_reader = csv.reader(open(R'C:\Users\dkgll\Desktop\python目录\污染企业分布.csv', encoding='GBK',errors="ignore"))
+csv_reader = csv.reader(open(r'backup\污染企业分布.csv', encoding='GBK',errors="ignore"))
 
 # rows=[row for row in  csv_reader]
 # print(rows[0])

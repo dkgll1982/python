@@ -59,8 +59,8 @@ def pdf2pic(path, pic_path):
 
 if __name__=='__main__':
     # pdf路径
-    path = r'C:\Users\dkgll\Desktop\python目录\pdf\测试.pdf'
-    pic_path = r'C:\Users\dkgll\Desktop\python目录\image'
+    path = r'backup\pdf\测试.pdf'
+    pic_path = r'backup\image'
     # 创建保存图片的文件夹
     if os.path.exists(pic_path):
         pass

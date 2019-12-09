@@ -15,7 +15,7 @@ def read_file(fpath):
             else:
                 return
 
-r = read_file("C:\\Users\\dkgll\\Desktop\\note.txt");
+r = read_file(r"backup\\note.txt");
 r.__next__();
 print(r.send(1000));
 

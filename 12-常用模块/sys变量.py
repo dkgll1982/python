@@ -31,7 +31,7 @@ print('-'*40)
 #动态修改模块加载路径
 import sys
 # 动态添加g:\fk_ext路径作为模块加载路径
-sys.path.append('E:\\100-航天智慧\\2-源码库\\python\\11-模块和包') 
+sys.path.append(r'11-模块和包') 
 # 导入fk_package包，实际上就是导入包下__init__.py文件
 import fk_package
 # 直接使用fk_package前缀即可调用它所包含的模块内的程序单元。

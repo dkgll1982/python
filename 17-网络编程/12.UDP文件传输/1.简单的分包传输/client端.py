@@ -17,7 +17,7 @@ client = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 
 count=0;
 #不停的发送数据 ,没发一次尝试接受一次数据并打印
-f=open(r'C:\Users\dkgll\Desktop\python目录\zipfile.zip','wb')
+f=open(r'backup\zipfile.zip','wb')
 while True:
      if count==0:
           data='Yes,I\'m Ready'

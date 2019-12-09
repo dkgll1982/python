@@ -4,6 +4,13 @@
 
 import struct
 
+a=b'hello'
+b=b'world!'
+c=2
+d=45.123
+bytes = struct.pack('5s6sif',a,b,c,d) 
+print(struct.unpack('5s6sif',bytes))
+
 '''
 数据格式
 名字  职业   年
@@ -15,7 +22,7 @@ job = b'coder'
 year = 2018
 
 
-file = open(r'C:\Users\dkgll\Desktop\python目录\2.txt', 'rb+')
+file = open(r'backup\2.txt', 'wb+')
 
 file.write(struct.pack('4s5si', name, job, year))
 file.flush()

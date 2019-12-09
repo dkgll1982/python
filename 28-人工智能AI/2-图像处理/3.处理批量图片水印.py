@@ -11,7 +11,7 @@ from PIL import ImageFont
  
 def watermark():
     dir_list,file_list=[],[]
-    root_path = r'C:\Users\dkgll\Desktop\python目录\image\card_num'
+    root_path = r'backup\image\card_num'
     #获取该目录下所有的文件名称和目录名称
     dir_or_files = os.listdir(root_path)
     for dir_file in dir_or_files:
@@ -31,7 +31,7 @@ def watermark():
         draw = ImageDraw.Draw(im)
         draw.text((im.size[0] / 2, im.size[1] / 2), u"这是一个测试图片", fill=(255, 0, 0), font=font1)
         draw.text((11, 11), u"等会去看电影", fill=(134, 153, 153), font=font2) 
-        dir = "C:\\Users\\dkgll\\Desktop\\python目录\\syimg\\"
+        dir = r"backup\\syimg\\"
         name = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
         filename = dir + os.path.split(files)[1]
         im.save(filename)

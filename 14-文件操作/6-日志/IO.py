@@ -17,7 +17,7 @@ import time
 logger = logging.getLogger()
 logger.setLevel(logging.INFO);
 #第二步：创建一个Handler，写入日志文件
-logpath = "C:\\Users\\dkgll\\Desktop\\python目录\\Logs\\"
+logpath = r"backup\\Logs\\"
 logname=logpath+"3.txt"
 
 fh = logging.FileHandler(logname,'w');
@@ -55,7 +55,7 @@ try:
     # 判断指定目录是否存在
     print(os.path.exists('abc/xyz/README.txt')) # False
     # 获取最近一次访问时间
-    fileName = 'E:\\100-航天智慧\\2-源码库\\python\\14-文件操作\\6-日志\\IO2.py'
+    fileName = r'14-文件操作\\6-日志\\IO2.py'
     print(time.ctime(os.path.getatime(fileName)))
     # 获取最后一次修改时间
     print(time.ctime(os.path.getmtime(fileName)))

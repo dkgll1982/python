@@ -23,7 +23,7 @@ class Application(Frame):
         # 创建Label对象，第一个参数指定该Label放入root
         w = Label(self)
         # 创建一个位图
-        bm = PhotoImage(file = 'C:\\Users\\dkgll\\Desktop\\python目录\\image\\2-1Z226140142564.png')
+        bm = PhotoImage(file = r'backup\\image\\2-1Z226140142564.png')
         # 必须用一个不会被释放的变量引用该图片，否则该图片会被回收
         w.x = bm
         # 设置显示的图片是bm

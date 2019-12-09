@@ -19,10 +19,10 @@ def encryptYouN(fn):
     else:
         print('%s 文件没有加密'% fn)
 
-encryptYouN(r'C:\Users\dkgll\Desktop\python目录\zipfile\13240119730222428X.pdf')
-encryptYouN(r'C:\Users\dkgll\Desktop\python目录\zipfile\new.pdf')
+encryptYouN(r'backup\zipfile\13240119730222428X.pdf')
+encryptYouN(r'backup\zipfile\new.pdf')
 
-pdfobj = open(r'C:\Users\dkgll\Desktop\python目录\zipfile\new.pdf','rb')
+pdfobj = open(r'backup\zipfile\new.pdf','rb')
 pdfRd = PyPDF2.PdfFileReader(pdfobj)
 
 # 可能报错（NotImplementedError: only algorithm code 1 and 2 are supported）：因为加密软件本身版本过高导致

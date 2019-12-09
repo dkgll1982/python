@@ -9,7 +9,7 @@ def saveasFile():
     global filename
     textcontent = text.get('1.0',END)
     #开启"另存为"对话框，所输入的文档路径回传会给filename，默认所存储的文档扩展名为.txt
-    filename = asksaveasfilename(initialdir = r'C:\Users\dkgll\Desktop',
+    filename = asksaveasfilename(initialdir = r'backup',
                                 title='另存为',
                                 defaultextension='.txt')
     if filename == "":                     #如果没有输入文件名
@@ -18,7 +18,7 @@ def saveasFile():
         output.write(textcontent)
     root.title(filename)
         
-filename=r'C:\Users\dkgll\Desktop\mydict.txt'        
+filename=r'backup\mydict.txt'        
 root = Tk()
 root.title(filename)
 root.geometry("400x300+300+200")

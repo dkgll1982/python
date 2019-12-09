@@ -2,7 +2,7 @@ from docx import Document
 import re
 #参考链接：https://blog.csdn.net/xtfge0915/article/details/83479922
 
-doc = Document(r'C:\Users\dkgll\Desktop\python目录\电子表格.docx')
+doc = Document(r'backup\电子表格.docx')
 for p in doc.paragraphs:
      if p.style.name=='Normal':                 #读取正文
         print(p.text)

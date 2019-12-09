@@ -10,6 +10,7 @@ conn,   addr=server.accept()
 print('connect by ',addr)
 res1 = conn.recv(100)
 print('第一次',res1.decode('utf-8'))
+#conn.send(b'1')     #解决粘包
 res2=conn.recv(110)
 print('第二次', res2.decode('utf-8'))
 res3=conn.recv(110)

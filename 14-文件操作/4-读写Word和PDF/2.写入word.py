@@ -27,6 +27,6 @@ doc.add_paragraph('This is on the second page!')
 doc.paragraphs[1].runs[0].add_break(docx.enum.text.WD_BREAK.PAGE) 
 
 #添加图像  
-doc.add_picture(r'E:\100-航天智慧\2-源码库\python\images\miaomiao.png',width=docx.shared.Inches(2.5),height=docx.shared.Cm(7))
+doc.add_picture(r'images\miaomiao.png',width=docx.shared.Inches(2.5),height=docx.shared.Cm(7))
 
-doc.save(r'C:\Users\dkgll\Desktop\python目录\写入word.docx')
+doc.save(r'backup\写入word.docx')

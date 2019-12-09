@@ -5,7 +5,7 @@
 
 import xlsxwriter,datetime,io,urllib.request
 
-workbook = xlsxwriter.Workbook(r'C:\Users\dkgll\Desktop\python目录\excel\Demo1.xlsx')    # 创建一个名为‘Demo1.xlsx’的工作表
+workbook = xlsxwriter.Workbook(r'backup\excel\Demo1.xlsx')    # 创建一个名为‘Demo1.xlsx’的工作表
 worksheet = workbook.add_worksheet("人生苦短我用python")                                  # 创建一个工作表对象
 worksheet2 = workbook.add_worksheet("C#")                                  
 worksheet3 = workbook.add_worksheet("Java")                                     

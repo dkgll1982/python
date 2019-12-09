@@ -38,11 +38,11 @@ def getshnum(f):
 #函数入口
 if __name__=='__main__':
     #定义要合并的excel文件列表
-    allxls=[r'C:\Users\dkgll\Desktop\python目录\excel\工业企业20180914144634.xlsx',
-            r'C:\Users\dkgll\Desktop\python目录\excel\工业企业20180914144600.xlsx',
-            r'C:\Users\dkgll\Desktop\python目录\excel\工业企业201809171646.xlsx',
-            r'C:\Users\dkgll\Desktop\python目录\excel\工业企业201809171645.xlsx',
-            r'C:\Users\dkgll\Desktop\python目录\excel\工业企业201809171647.xlsx'] #列表中的为要读取文件的路径
+    allxls=[r'backup\excel\工业企业20180914144634.xlsx',
+            r'backup\excel\工业企业20180914144600.xlsx',
+            r'backup\excel\工业企业201809171646.xlsx',
+            r'backup\excel\工业企业201809171645.xlsx',
+            r'backup\excel\工业企业201809171647.xlsx'] #列表中的为要读取文件的路径
     #存储所有读取的结果
     datavalue=[]
     for fl in allxls:
@@ -52,7 +52,7 @@ if __name__=='__main__':
             print("正在读取文件："+str(fl)+"的第"+str(shnum)+"个sheet表的内容...")
             rvalue=getFile(fl,shnum)
     #定义最终合并后生成的新文件
-    endfile=r'C:\Users\dkgll\Desktop\python目录\excel\合并后的.xlsx'
+    endfile=r'backup\excel\合并后的.xlsx'
     wb=xlsxwriter.Workbook(endfile)
     #创建一个sheet工作对象
     ws=wb.add_worksheet()

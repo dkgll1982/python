@@ -72,7 +72,7 @@ import xlrd
 #error：5
 
 # 1. 打开文件
-work_book = xlrd.open_workbook(r"C:\Users\dkgll\Desktop\python目录\长兴县国家重点扶持高新技术企业_科技局.xls")
+work_book = xlrd.open_workbook(r"backup\长兴县国家重点扶持高新技术企业_科技局.xls")
 # 2. 显示所有的sheet页
 sheet_names = work_book.sheet_names()
 print(sheet_names)

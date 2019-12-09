@@ -49,11 +49,11 @@ def word2pic(path, zip_path, tmp_path, store_path):
 
 if __name__ == '__main__':
     # 源文件
-    path = r'C:\Users\dkgll\Desktop\python目录\word\测试.docx'
+    path = r'backup\word\测试.docx'
     # docx重命名为zip
-    zip_path = r'C:\Users\dkgll\Desktop\python目录\word\log.zip'
+    zip_path = r'backup\word\log.zip'
     # 中转图片文件夹
-    tmp_path = r'C:\Users\dkgll\Desktop\python目录\word\tmp'
+    tmp_path = r'backup\word\tmp'
     # 最后保存结果的文件夹
-    store_path = r'C:\Users\dkgll\Desktop\python目录\word'
+    store_path = r'backup\word'
     m = word2pic(path, zip_path, tmp_path, store_path)

@@ -11,7 +11,7 @@
 import os;
 from pathlib import *
 import fnmatch
-rootdir = "E:\\100-航天智慧\\2-源码库\\python"
+rootdir = "."
 #遍历文件夹   
 def iter_files(rootDir):
     #遍历根目录

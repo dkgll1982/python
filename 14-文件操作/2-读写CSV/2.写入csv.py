@@ -1,7 +1,7 @@
 # 写入csv文件
 import csv,uuid
 
-csvfile = open(r'C:\Users\dkgll\Desktop\python目录\python写入.csv', 'a',newline='')
+csvfile = open(r'backup\python写入.csv', 'a',newline='')
 # 如果不指定newline='',有时则每写入一行将有一空行被写入
 writer = csv.writer(csvfile)
 writer.writerow(['主键','姓名','年龄','电话']) # 写入一行用writerow

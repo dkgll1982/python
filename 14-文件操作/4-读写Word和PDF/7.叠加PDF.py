@@ -54,7 +54,7 @@ def MergePDF(filepath, outfile):
 # 主函数
 def main():
     time1 = time.time()
-    file_dir = r'C:\Users\dkgll\Desktop\python目录\pdf' # 存放PDF的原文件夹
+    file_dir = r'backup\pdf' # 存放PDF的原文件夹
     outfile = "Cheat_Sheets.pdf" # 输出的PDF文件的名称
     MergePDF(file_dir, outfile)
     time2 = time.time()

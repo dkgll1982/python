@@ -32,7 +32,7 @@ def get_data(conn,tablename,comment,sql):
 
 #将数据按照行列保存到Excel中
 def save_excel(li,dirname,sheetname):
-    book = xlsxwriter.Workbook('C:\\Users\\dkgll\\Desktop\\样例数据'+'\\'+dirname+'.xlsx')
+    book = xlsxwriter.Workbook(r'backup\样例数据'+'\\'+dirname+'.xlsx')
     sheet = book.add_worksheet(sheetname)
 
     # Write some data headers. 带自定义粗体blod格式写表头

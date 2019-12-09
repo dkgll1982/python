@@ -7,5 +7,5 @@ client.connect(('127.0.0.1',9905))
  
  
 client.send('hello'.encode('utf-8'))
-time.sleep(5)
+#client.recv(1)
 client.send('world'.encode('utf-8'))

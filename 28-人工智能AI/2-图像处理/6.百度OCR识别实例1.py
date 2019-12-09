@@ -16,7 +16,7 @@ def get_file_content(filePath):
  
  
 """ 调用通用文字识别, 图片参数为本地图片 """
-image = get_file_content(r'C:\Users\dkgll\Desktop\3.jpg')
+image = get_file_content(r'backup\3.jpg')
 client.basicGeneral(image)
  
 """ 如果有可选参数 """

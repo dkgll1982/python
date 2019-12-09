@@ -9,7 +9,7 @@ class App:
         # 创建第一个Text组件
         text1 = Text(self.master, height=27, width=32)
         # 创建图片
-        book = PhotoImage(file=r'C:\Users\dkgll\Desktop\python目录\image\2-1Z226140142564.png')
+        book = PhotoImage(file=r'backup\image\2-1Z226140142564.png')
         text1.bm = book
         text1.insert(END,'\n')
         # 在结尾处插入图片
@@ -35,7 +35,7 @@ class App:
         # 插入文本内容，设置使用title样式
         text2.insert(END,'C语言中文网\n', 'title')
         # 创建图片
-        star = PhotoImage(file=r'C:\Users\dkgll\Desktop\python目录\image\2-1Z226140142564.png')
+        star = PhotoImage(file=r'backup\image\2-1Z226140142564.png')
         text2.bm = star
         details = ('C语言中文网成立于 2012 年初，目前已经运营了将近 5 年，' +\
             '我们致力于分享精品教程，帮助对编程感兴趣的读者。\n' ,

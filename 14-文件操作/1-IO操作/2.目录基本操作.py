@@ -5,18 +5,18 @@ import shutil
 print(os.path.abspath('.'))
 #'/Users/michael'
 # 在某个目录下创建一个新目录，首先把新目录的完整路径表示出来:
-print(os.path.join(r'C:\Users\dkgll\Desktop\python目录', 'testdir'))
+print(os.path.join(r'backup', 'testdir'))
 #'/Users/michael/testdir'
 
-dir = r'C:\Users\dkgll\Desktop\python目录\txt' 
+dir = r'backup\txt' 
 # 然后创建一个目录:
 if not os.path.exists(dir): 
-    os.mkdir(r'C:\Users\dkgll\Desktop\python目录\txt')
+    os.mkdir(r'backup\txt')
 else:
     print('%s已存在！'%dir)
 
 # os.makedirs（）函数创建多级目录。
-subdir = r'C:\Users\dkgll\Desktop\python目录\txt\subtxt\subsubtxt'
+subdir = r'backup\txt\subtxt\subsubtxt'
 if not os.path.exists(subdir): 
     os.makedirs(subdir)
 else:
@@ -25,7 +25,7 @@ else:
 time.sleep(2)
 
 # 删掉一个目录:
-#os.rmdir(r'C:\Users\dkgll\Desktop\python目录\txt')
+#os.rmdir(r'backup\txt')
 # 注意：要删除的目录必须是空目录，,
 #os.removedirs(path)   #删除空文件夹
 shutil.rmtree(os.path.join(dir,'subtxt'))
@@ -48,7 +48,7 @@ def get_file_path(root_path,file_list,dir_list):
  
 if __name__ == "__main__":
     #根目录路径
-    root_path = r"C:\Users\dkgll\Desktop\python目录"
+    root_path = r"backup"
     #用来存放所有的文件路径
     file_list = []
     #用来存放所有的目录路径

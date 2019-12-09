@@ -12,11 +12,11 @@ def add_num(img,logo):
     layer.paste(logo, (img.size[0]-logo.size[0],img.size[1]-logo.size[1])) 
     out = Image.composite(layer,img,layer)    
     #保存图片到目录下 
-    out.save(r'C:\Users\dkgll\Desktop\python目录\image\result.jpg','jpeg')
+    out.save(r'backup\image\result.jpg','jpeg')
     out.show()  
 
 if __name__ == '__main__':
-    image = Image.open(r"C:\Users\dkgll\Desktop\python目录\image\card_num\330522200509102025.png")
-    logo=Image.open(r"C:\Users\dkgll\Desktop\python目录\image\sy.png") 
+    image = Image.open(r"backup\image\card_num\330522200509102025.png")
+    logo=Image.open(r"backup\image\sy.png") 
     add_num(image,logo)
     #image.show()

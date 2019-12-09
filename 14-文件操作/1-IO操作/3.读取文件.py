@@ -9,7 +9,7 @@
 # @Software: vscode 
 import codecs
 
-file = "C:\\Users\\dkgll\\Desktop\\note.txt"; 
+file = r"backup\\note.txt"; 
 #指定使用utf-8 字符集读取文件内容
 f = codecs.open(file, 'r', 'GBK', buffering=True)
 while True:

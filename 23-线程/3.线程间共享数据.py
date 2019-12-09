@@ -38,6 +38,13 @@ if __name__ == "__main__":
     t2 = threading.Thread(target=run, args=(9,))
     t1.start()
     t2.start()
+
+    #查看线程数量    
+    print(len(threading.enumerate()),threading.active_count(),threading.activeCount())
+    #线程创建之后，可以使用Thread对象的isAlive方法查看线程是否运行，为True则运行
+    print(t1.is_alive(),t2.is_alive())
+
     t1.join()
+    print(t1.is_alive(),t1.is_alive())
     t2.join()
     print("num=", num)

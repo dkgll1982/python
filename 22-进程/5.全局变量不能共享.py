@@ -14,18 +14,22 @@ import os;
 num = 100;
 
 def run(str):
-    print("子进程启动")
+    print("子进程启动,参数：%s"%str)
     global num
     num+=1
     sleep(1);
     print("子进程结束%d"%(num))
 
 if __name__ == "__main__":
+    # run('')
+    # run('')
+    # print(num)
+
     print("主进程启动")
     #创建子进程
     #target说明执行的任务
     p = Process(target = run,args=("bad",))
-    #启动任务
+    #启动任务 
     p.start()
     #sleep(1);
     p.join()

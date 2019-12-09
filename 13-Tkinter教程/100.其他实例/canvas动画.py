@@ -45,7 +45,7 @@ class App:
         self.cv.bms = []
         # 初始化小球的动画帧
         for i in range(8):
-            self.cv.bms.append(PhotoImage(file='E:\\100-航天智慧\\2-源码库\\python\\images\\ball_' + str(i+1) + '.gif'))
+            self.cv.bms.append(PhotoImage(file='images\\ball_' + str(i+1) + '.gif'))
         # 绘制小球
         self.ball = self.cv.create_image(self.curx, self.cury,
             image=self.cv.bms[self.ball_index])
@@ -97,7 +97,7 @@ class App:
             self.t.start()
 root = Tk()
 root.title("弹球游戏")
-root.iconbitmap('E:\\100-航天智慧\\2-源码库\\python\\images\\football.png')
+root.iconbitmap(r'images\\football.png')
 root.geometry('%dx%d' % (GAME_WIDTH, GAME_HEIGHT)) 
 # 禁止改变窗口大小
 root.resizable(width=False, height=False)
