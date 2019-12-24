@@ -27,6 +27,7 @@
     //https://www.jianshu.com/p/8856c99d13b5?utm_campaign
     "files.exclude": {
         "**/.git": true,
+<<<<<<< HEAD
         "**/.svn": true, 
         "**/.DS_Store": true,
         "**/node_modules": true,
@@ -34,5 +35,13 @@
         "**/backup": true,            //隐藏目录
         "**/__pycache__": true,       //隐藏目录 
         "**/pip3": true,              //隐藏目录 
+=======
+        "**/.svn": true,
+        "**/.DS_Store": true,
+        "**/node_modules": true,
+        "**/iOS": true,
+        "**/backup": true,           //隐藏目录
+        "**/__pycache__": true,       //隐藏目录 
+>>>>>>> 8c71f90a755f435117c304b5b10d4370e123be32
     } 
 }

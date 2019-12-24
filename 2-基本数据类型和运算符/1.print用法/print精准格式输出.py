@@ -8,6 +8,4 @@ print(r'e:/cmd'.replace(r'/',"\\"))
 print(r'e:/cmd'.replace(r'/',r"\\"))
 
 data = {1,2,3}
-# 格式化的字符串文字前缀为’f’和接受的格式字符串相似str.format()。
-# 它们包含由花括号包围的替换区域。替换字段是表达式，在运行时进行评估，然后使用format()协议进行格式化。
 print(f"data:{data}")
