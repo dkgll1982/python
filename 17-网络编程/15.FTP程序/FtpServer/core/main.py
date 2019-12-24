@@ -1,11 +1,21 @@
+<<<<<<< HEAD
 
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+=======
+>>>>>>> 8c71f90a755f435117c304b5b10d4370e123be32
 from conf import settings
 import socketserver
 from core.ftp_server import FtpHandler
 import optparse
+<<<<<<< HEAD
+=======
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
+>>>>>>> 8c71f90a755f435117c304b5b10d4370e123be32
 
 class ArgvHandler(object):
     def __init__(self, sys_args):

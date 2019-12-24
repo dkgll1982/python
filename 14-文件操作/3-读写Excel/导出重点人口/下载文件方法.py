@@ -151,7 +151,11 @@ def get_person(control_type):
     return  li;
 
 def save_excel(li,dirname):
+<<<<<<< HEAD
     book = xlsxwriter.Workbook(r'backup\长兴重点人口\\'+dirname+'\\'+dirname+'人员.xlsx')
+=======
+    book = xlsxwriter.Workbook(r'backup\\长兴重点人口\\'+dirname+'\\'+dirname+'人员.xlsx')
+>>>>>>> 8c71f90a755f435117c304b5b10d4370e123be32
     sheet = book.add_worksheet('重点人口')
 
     # Write some data headers. 带自定义粗体blod格式写表头
@@ -191,7 +195,11 @@ def download_img(img_name,img_url, dirname,api_token):
     request = urllib.request.Request(img_url, headers=header)
     try:
         response = urllib.request.urlopen(request)
+<<<<<<< HEAD
         filename = r"backup\长兴重点人口\\"+dirname+r"\img\\"+ img_name
+=======
+        filename = r"backup\\长兴重点人口\\"+dirname+"\\img\\"+ img_name
+>>>>>>> 8c71f90a755f435117c304b5b10d4370e123be32
         if (response.getcode() == 200):
             with open(filename, "wb") as f:
                 f.write(response.read()) # 将内容写入图片
