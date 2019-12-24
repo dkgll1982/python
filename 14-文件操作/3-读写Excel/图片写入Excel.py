@@ -111,11 +111,7 @@ def download_img(img_name,img_url, dirname,api_token):
     request = urllib.request.Request(img_url, headers=header)
     try:
         response = urllib.request.urlopen(request)
-<<<<<<< HEAD
-        filename = r"backup\长兴重点人口\\"+dirname+r"\img\\"+ img_name
-=======
         filename = r"backup\\长兴重点人口\\"+dirname+"\\img\\"+ img_name
->>>>>>> 8c71f90a755f435117c304b5b10d4370e123be32
         if (response.getcode() == 200):
             with open(filename, "wb") as f:
                 f.write(response.read()) # 将内容写入图片
@@ -124,11 +120,7 @@ def download_img(img_name,img_url, dirname,api_token):
         return "failed"
 
 def imgtoexcel(filename):
-<<<<<<< HEAD
-    book = xlsxwriter.Workbook(r'backup\pict.xlsx')
-=======
     book = xlsxwriter.Workbook(r'backup\\pict.xlsx')
->>>>>>> 8c71f90a755f435117c304b5b10d4370e123be32
     sheet = book.add_worksheet('demo')
 
     bold = book.add_format({'bold': True})

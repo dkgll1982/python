@@ -2,10 +2,6 @@ import socketserver
 import json
 import os,sys
 import configparser
-<<<<<<< HEAD
-
-=======
->>>>>>> 8c71f90a755f435117c304b5b10d4370e123be32
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
 
@@ -96,10 +92,7 @@ class FtpHandler(socketserver.BaseRequestHandler):
         data = args[0]
         if (data.get('filename')) is None:
             self.send_response(255) 
-<<<<<<< HEAD
             
-=======
->>>>>>> 8c71f90a755f435117c304b5b10d4370e123be32
         user_home_dir = "%s/%s" %(settings.USER_HOME,self.user["username"]) 
         file_abs_path = "%s/%s" %(user_home_dir,data.get('filename')) 
         print('file abs path:',file_abs_path)
@@ -107,11 +100,7 @@ class FtpHandler(socketserver.BaseRequestHandler):
         if os.path.isfile(file_abs_path):
             file_obj = open(file_abs_path,"rb")
             file_size = os.path.getsize(file_abs_path)
-<<<<<<< HEAD
             self.send_response(257,data={'file_size':file_size}) 
-=======
-            self.send_response(257,data={'file_size':file_size})
->>>>>>> 8c71f90a755f435117c304b5b10d4370e123be32
 
             if data.get('md5'):
                 md5_obj = hashlib.md5()
@@ -121,7 +110,6 @@ class FtpHandler(socketserver.BaseRequestHandler):
                 else:
                     file_obj.close()
                     md5_val = md5_obj.hexdigest()
-<<<<<<< HEAD
                     ######################################################################################
                     # 2019-12-11:花了三天时间才定位到粘包的问题,在此处sleep一下,可以解决发送粘包的问题.....   #
                     # 标记：需要想别的办法                                                                 #
@@ -136,20 +124,12 @@ class FtpHandler(socketserver.BaseRequestHandler):
                     self.send_response(258,data={'md5':md5_val})
                     print({'md5':md5_val})
                 print('send file done!...')
-=======
-                    self.send_response(258,{'md5':md5_val})
-                    print('send file done...')
->>>>>>> 8c71f90a755f435117c304b5b10d4370e123be32
             else:
                 for line in file_obj:
                     self.request.send(line)
                 else:
                     file_obj.close()
-<<<<<<< HEAD
                     print('send file done。...')
-=======
-                    print('send file done...')
->>>>>>> 8c71f90a755f435117c304b5b10d4370e123be32
         else:
             self.send_response(256)
 

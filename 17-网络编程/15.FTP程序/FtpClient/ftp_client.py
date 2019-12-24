@@ -11,9 +11,19 @@ import socket
 import os,json,struct
 import optparse
 import getpass
+<<<<<<< HEAD
 import hashlib
 import time
 import math,sys
+=======
+<<<<<<< HEAD
+import hashlib
+import time
+import math,sys
+=======
+import  hashlib
+>>>>>>> 8c71f90a755f435117c304b5b10d4370e123be32
+>>>>>>> 5c086a7ee8903ab9f617c5e6c4e89225b9241b7c
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -39,7 +49,15 @@ class FTPClient(object):
 
         if options.server or options.port:
             #print(options)
+<<<<<<< HEAD
             if options.port > 0 and options.port < 65535:
+=======
+<<<<<<< HEAD
+            if options.port > 0 and options.port < 65535:
+=======
+            if options.port >0 and options.port <65525:
+>>>>>>> 8c71f90a755f435117c304b5b10d4370e123be32
+>>>>>>> 5c086a7ee8903ab9f617c5e6c4e89225b9241b7c
                 return True
             else:
                 exit('error:host port must in 0-65535')
@@ -84,8 +102,18 @@ class FTPClient(object):
                 choice = input('[%s]:'%self.user).strip()
                 if len(choice) == 0:continue
                 cmd_list = choice.split()
+<<<<<<< HEAD
                 if hasattr(self,"_%s" %cmd_list[0]):
                     func = getattr(self,"_%s"%cmd_list[0]) 
+=======
+<<<<<<< HEAD
+                if hasattr(self,"_%s" %cmd_list[0]):
+                    func = getattr(self,"_%s"%cmd_list[0]) 
+=======
+                if hasattr(self,"_%s"%cmd_list[0]):
+                    func = getattr(self,"_%s"%cmd_list[0])
+>>>>>>> 8c71f90a755f435117c304b5b10d4370e123be32
+>>>>>>> 5c086a7ee8903ab9f617c5e6c4e89225b9241b7c
                     func(cmd_list)
                 else:
                     print("Invalid cmd.")
@@ -96,6 +124,10 @@ class FTPClient(object):
             return True
 
     def show_process(self,total):
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5c086a7ee8903ab9f617c5e6c4e89225b9241b7c
         received_size = 0
         current_percent = 0
         while received_size < total:
@@ -118,6 +150,21 @@ class FTPClient(object):
             new_size = yield
             received_size += new_size 
  
+<<<<<<< HEAD
+=======
+=======
+        recive_size = 0
+        current_percent = 0
+        while recive_size < total:
+            if (recive_size / total) * 100 > current_percent:
+                print('#',end='',flush=True)
+                current_percent =  (recive_size / total) * 100
+            new_size = yield
+            recive_size += new_size 
+
+            new_size 
+>>>>>>> 8c71f90a755f435117c304b5b10d4370e123be32
+>>>>>>> 5c086a7ee8903ab9f617c5e6c4e89225b9241b7c
     def _get(self,cmd_list):
         print('get--',cmd_list)
         if len(cmd_list) == 1:
@@ -130,6 +177,10 @@ class FTPClient(object):
         if self._md5_required(cmd_list):
             data_header['md5'] = True
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5c086a7ee8903ab9f617c5e6c4e89225b9241b7c
         self.sock.send(json.dumps(data_header).encode('gbk'))
         response = self.get_response()
         print(response)
@@ -204,6 +255,51 @@ class FTPClient(object):
             end = time.time()
             print("下载文件完成！！！""总耗时：%0.6fs"%(end -start)); 
 
+<<<<<<< HEAD
+=======
+=======
+
+        self.sock.send(json.dumps(data_header).encode('gbk'))
+        response = self.get_response()
+        print(response)
+        if response['status_code'] == 257:  #ready to revice
+            base_file_name = cmd_list[1].split('/')[-1]            
+            recived_size = 0
+            file_obj = open(BASE_DIR+'/'+base_file_name,'wb')
+            if self._md5_required(cmd_list):
+                md5_obj = hashlib.md5()
+
+                progress = self.show_process(response['file_size']) #generator
+                progress.__next__()
+                
+                while recived_size < response['file_size']:
+                    data = self.sock.recv(4096)
+                    recived_size += len(data)
+                    try:
+                        progress.send(len(data))
+                    except  StopIteration as e:
+                        print('100%')
+                    
+                    file_obj.write(data)
+                    md5_obj.update(data)
+                else:
+                    print("--->file recive done---")
+                    file_obj.close()
+                    md5_val = md5_obj.hexdigest()
+                    md5_from_server = self.get_response()
+                    if md5_from_server['status_code'] == 258:
+                        if md5_from_server['md5'] == md5_val:
+                            print('%s 文件一致性校验成功'%base_file_name)
+            else:
+                while recived_size < response['file_size']:
+                    data = self.sock.recv(4096)
+                    recived_size += len(data)
+                    file_obj.write(data) 
+                else:
+                    print("--->file recive done---")
+                    file_obj.close()
+>>>>>>> 8c71f90a755f435117c304b5b10d4370e123be32
+>>>>>>> 5c086a7ee8903ab9f617c5e6c4e89225b9241b7c
 if __name__ == '__main__':
     ftp = FTPClient()
     ftp.interactive()   #交互
