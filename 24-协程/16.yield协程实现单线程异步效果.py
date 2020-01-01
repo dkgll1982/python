@@ -14,8 +14,7 @@ def producer(name):
     d.__next__()
 
     print('\r\n%s开始做包子拉...'%name)
-    for i in range(10):
-        time.sleep(1)
+    for i in range(10): 
         print('\r\n%s做了俩笼包子！'%name)
         c.send('雪菜肉丝')
         d.send('馒头%d'%i)

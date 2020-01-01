@@ -9,8 +9,7 @@
 
 from collections import namedtuple
 
-Result = namedtuple('Result', 'count average')
-
+Result = namedtuple('Result', 'count average') 
 
 def averager(s):
     total = 0.0

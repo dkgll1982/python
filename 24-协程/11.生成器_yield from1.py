@@ -10,17 +10,19 @@
 # 使用 for 循环的生成器推导式。
 # 调用带 yield 语句的生成器函数。
 
-f = ((x,y) for x in range(5) for y in range(5))
-print(f)
+#要创建一个generator,有很多种方法。第一种方法很简单,只要把一个列表生成式的[]改成(),就创建了一个generator：
+#f = [(x,y) for x in range(5) for y in range(5)]        #列表生成式 
+f = ((x,y) for x in range(5) for y in range(5))         #由[]改为()就是一个generator
+print(type(f))
 for item in f:
     print(item,end = ' ')
-print('')
+print('\r\n','-'*40)
 
 f1 = ({x:y} for x in range(5) for y in range(5))
 print(f1)
 for key in f1:
     print(key,end = ' ')
-print('')
+print('\r\n','-'*40)
 
 def g1(x):
     yield range(x) 
@@ -31,12 +33,15 @@ def g2(x):
 it1 = g1(5)
 it2 = g2(5)
 
-print(type(it1))
-print(type(it2))
+print('it1 is ',type(it1))
+print('it2 is ',type(it2))
 
-print(type([x for x in it1]))
+l1 = [x for x in it1]
+l2 = [x for x in it2]
+
+print(type(l1),l1)
 # out [range(0, 5)]
-print(type([x for x in it2]))
+print(type(l2),l2)
 # out [0, 1, 2, 3, 4]
 
 def test(val, step):
@@ -48,7 +53,7 @@ def test(val, step):
         cur += i * step
         #print(cur,end =' ');
         yield cur
-t= test(12,1)
+t = test(12,1)
 
 print('-'*40)
 
@@ -61,7 +66,7 @@ print(t.__next__(),end = ' ')
 print(t.__next__(),end = ' ')
 print(t.__next__(),end = ' ')
 
-print('-'*40)
+print('\r\n','-'*40)
 
 #将生成器转换成列表
 print (list (t))

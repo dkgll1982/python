@@ -17,7 +17,7 @@ def pdf2pic(dir, pic_path):
     files = os.listdir(dir)
     for fi in files:
         path = os.path.join(dir,fi)
-        t0 = time.clock()
+        t0 = time.time()
         # 使用正则表达式来查找图片
         checkXO = r"/Type(?= */XObject)" 
         checkIM = r"/Subtype(?= */Image)"  
@@ -58,7 +58,7 @@ def pdf2pic(dir, pic_path):
                 pix0 = None
             # 释放资源
             pix = None
-            t1 = time.clock()
+            t1 = time.time()
             print("运行时间:{}s".format(t1 - t0))
             print("提取了{}张图片".format(imgcount))  
 

@@ -1,4 +1,5 @@
 import optparse
+# optparse模块(从2.7开始废弃，建议使用argparse)
 
 class Wang_opt:
     def __init__(self):

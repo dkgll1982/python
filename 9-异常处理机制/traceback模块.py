@@ -9,6 +9,10 @@
 # @Software: vscode 
 import traceback
 
+class BaseError(Exception):
+    def __init__(self,err='my error！'):  
+        self.err=err
+
 class SelfException(Exception): pass
 
 def main():
@@ -35,7 +39,8 @@ def myFunc():
         d=a*b
         #f=((a**b)**b)**b/0
         #print(f)
-        raise BaseError
+        #raise RuntimeError("没事找事，怎么了")
+        raise BaseError('自定义错误')
 
     except Exception as e:
         print('222222222222222')

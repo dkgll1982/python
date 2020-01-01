@@ -6,6 +6,7 @@
 # @File    : 协程
 # @Software: PyCharm
 #! -*- coding: utf-8 -*-
+#inspect模块用于收集python对象的信息，可以获取类或函数的参数的信息，源码，解析堆栈，对对象进行类型检查等等
 import inspect
 
 # 协程使用生成器函数定义：定义体中有yield关键字。

@@ -5,9 +5,8 @@ gevent: 通过greenlet实现协程，核心就是遇到IO操作，会自动切�
 # 将python标准库中的一些阻塞操作变为非阻塞
 import gevent
 from gevent import monkey
-monkey.patch_all()
-# 使用猴子补丁要写在第一行
-
+monkey.patch_all() 
+# 注意：使用猴子补丁要写在第一行
 
 def test1():
     print("test1")

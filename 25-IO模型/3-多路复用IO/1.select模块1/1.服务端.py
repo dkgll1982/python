@@ -4,6 +4,7 @@ import queue
 import sys
 # 参考链接：https://www.cnblogs.com/bigberg/p/8044581.html
 # 参考链接：https://www.cnblogs.com/huchong/p/8613308.html
+# 参考链接：https://www.cnblogs.com/liugp/p/11027878.html
 
 # Create a TCP/IP socket
 server = socket.socket()
@@ -54,6 +55,8 @@ while True:
             # 客户端的数据过来了,在这接收
             data = s.recv(1024)
             if data:
+                #getpeername:获取远端sock连接地址
+                #getsockname:获取本地sock连接地址
                 print('received [%s] from %s' % (data, s.getpeername()[0]))
                 message_queues[s].put(data)  # 收到的数据先放到queue里,一会返回给客户端
                 if s not in outputs:

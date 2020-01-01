@@ -4,3 +4,5 @@ __pycache__
 .vs
 .idea
 video
+dist
+build
