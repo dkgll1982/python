@@ -76,7 +76,6 @@ if __name__ == "__main__":
                     print("\n[input] Client  {0} disconnected".format(addr))  
   
         # 如果现在没有客户端请求,也没有客户端发送消息时,开始对发送消息列表进行处理,是否需要发送消息  
-        del_output = []
         for sendobj in output_list:  
             try:  
                 # 如果消息队列中有消息,从消息队列中获取要发送的消息  
@@ -86,14 +85,10 @@ if __name__ == "__main__":
                     sendobj.sendall(send_data)  
                 else:  
                     # 将监听移除等待下一次客户端发送消息  
-                    del_output.append(sendobj)          #不要在循环里删除remove list项
+                    output_list.remove(sendobj)  
   
             except ConnectionResetError:  
                 # 客户端连接断开了  
                 del message_queue[sendobj]  
-                del_output.append(sendobj) 
+                output_list.remove(sendobj)  
                 print("\n[output] Client  {0} disconnected".format(addr))
-
-        for item in del_output:
-            #print('del: ',item)
-            output_list.remove(item)
