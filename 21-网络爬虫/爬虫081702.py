@@ -8,11 +8,9 @@
 # @Last Modified time: 2018-08-17 17:56:00 
 # @Software: vscode 
 
-
-
 from urllib import request
 
-with request.urlopen('https://api.douban.com/v2/book/2129650') as f:
+with request.urlopen('https://www.qidian.com') as f:
     data = f.read()
     print('Status:', f.status, f.reason)
     for k, v in f.getheaders():

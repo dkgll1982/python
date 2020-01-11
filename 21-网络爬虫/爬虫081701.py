@@ -21,10 +21,12 @@ def getJPGs(html):
 
 # 用图片url下载图片并保存成制定文件名
 def downloadJPG(imgUrl, fileName):
+    #参数url:传入的网址，网址必须得是个字符串 
+    #参数filename:指定了保存本地路径（如果参数未指定，urllib会生成一个临时文件保存数据)
     urllib.request.urlretrieve(imgUrl, fileName)
 
 # 批量下载图片，保存到F盘zdl文件夹
-def batchDownloadJPGs(imgUrls, path='d:/temp/'):
+def batchDownloadJPGs(imgUrls, path=r'C:\Users\dkgll\Downloads\drugs\\'):
     # 用于给图片命名
     count = 1
     for url in imgUrls:
@@ -36,13 +38,10 @@ def batchDownloadJPGs(imgUrls, path='d:/temp/'):
 # 封装：从百度贴吧网页下载图片
 def download(url):
     html = getHtmlContent(url)
-    html=html.decode('utf-8')#python3这句代码
+    html=html.decode('utf-8')  
     jpgs = getJPGs(html)
     batchDownloadJPGs(jpgs)
-
-def main():
+ 
+if __name__ == '__main__':
     url = 'http://tieba.baidu.com/p/2256306796'
     download(url)
-
-if __name__ == '__main__':
-    main()
