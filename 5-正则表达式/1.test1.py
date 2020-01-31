@@ -22,7 +22,7 @@ class Seq():
         return self.__index__
 s = Seq(24) 
 # re.match 尝试从字符串的起始位置匹配一个模式，如果不是起始位置    . 匹配除换行符（\n）以外的任意字符
-print(str(s.__next__())+":",re.match(r".*\bname\b.*","my name is guojun"))
+print(str(s.__next__())+":",re.match(r".*\bname\b.*","my.name|is guojun"))
 print(str(s.__next__())+":",re.match(".","Ab"))
 print(str(s.__next__())+":",re.match(".","8"))
 print(str(s.__next__())+":",re.match(".","-"))
@@ -40,19 +40,20 @@ print(str(s.__next__())+":",re.match(".*(\\bgood\\b).*","today is a good day").g
 print(str(s.__next__())+":",re.match("[123456789]","6这个真是一个悲伤的故事 "))       
 print(str(s.__next__())+":",re.match("[0-9]","6这个真是一个悲伤的故事 "))       
 print(str(s.__next__())+":",re.match("[a-z\s]+","this is good day"))                           #\s为匹配空格
-print(str(s.__next__())+":",re.match("[a-z0-9A-Z王小明]","小this is good day")) 
+print(str(s.__next__())+":",re.match("[a-z0-9A-Z王小明]+","小this is good day")) 
 print(str(s.__next__())+":",re.match("[\u4e00-\u9fa5]+","大幅的发生"))                          #汉字。匹配中文字符的正则表达式： [\u4e00-\u9fa5]
 
-s = Seq(47) 
+s = Seq(48) 
 #1、一个正则表达式，只含有汉字、数字、字母、下划线不能以下划线开头和结尾：
 #?!表示之后的字符串内容需要不匹配表达式才能成功，即字符串不能等于后边的内容
+print(str(s.__next__())+":",re.match("^(?!_)(?<!_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$","大幅的发生")) 
 print(str(s.__next__())+":",re.match("^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$","大幅的发生"))   
 print(str(s.__next__())+":",re.match("我今年\d*岁了","我今年5岁了")) 
 print(str(s.__next__())+":",re.match("我今年\d+岁了","我今年5岁了")) 
 print(str(s.__next__())+":",re.match("我今年\d?岁了","我今年5岁了")) 
 print(str(s.__next__())+":",re.match("我今年\d{0,10}岁了","我今年5岁了")) 
 
-s = Seq(56) 
+s = Seq(57) 
 #字符转义
 #print(str(s.__next__())+":",re.match("c:\\","c:\\a\\b"))     # error 报错，因为\\转义后就变成了\了 
 print(str(s.__next__())+":",re.match("c:\\\\","c:\\a\\b"))    #正确 
@@ -61,7 +62,7 @@ print(str(s.__next__())+":",re.match(".*\\bliu\\b","i is liu fas fsa5 662 2a")) 
 print(str(s.__next__())+":",re.match(r".*\bliu","i is liu fas fsa5 662 2a"))   #结果同上      
 
 #分组
-s = Seq(63) 
+s = Seq(64) 
 print(str(s.__next__())+":",re.match("100|[1-9][0-9]|[0-9]","2"))            # 匹配100以内的数
 print(str(s.__next__())+":",re.match("0|100|[1-9]?\d$","22"))                #[1-9]?\d$匹配的是1位数或2位数，不含0，因此加上0和100两组
 print(str(s.__next__())+":",re.match("\d+(183|192|168)\.(li|wang|liu)","452168.wang").groups()) #groups()返回一个包含所有分组字符串的元组。
@@ -71,7 +72,7 @@ s1 = r'abc\.\|123'
 s2 = r'abc\1\3|123'
 print(re.escape(s),re.escape(s1),re.escape(s2)) 
 
-s = Seq(77) 
+s = Seq(79) 
 # re.search 扫描整个字符串并返回第一个成功的匹配，如果匹配失败search()就返回None。
 # re.match方法与re.search方法的区别
 # re.match只匹配字符串的开始，如果字符串开始不符合正则表达式， 则匹配失败，并返货None； 
@@ -92,41 +93,36 @@ mylist = ['010-8989345','020-321532','0103425431','0111-3713456','03743713456'] 
 for i in mylist:
     a = re.match('(?P<G1>0[1-9][0-9]{1,2})-?(?P<G2>\d{6,8})',i)        #（）表示分组，分组的编码是从1开始,也可以自定义分组?P<G1>
     if a:
-        print('95：区号：%s,号码：%s'%(a.group('G1'),a.group('G2')))    #表示分组1的内容 
+        print('96：区号：%s,号码：%s'%(a.group('G1'),a.group('G2')))    #表示分组1的内容 
     else:
         print('没有找到') 
 
-s = Seq(99) 
+s = Seq(101) 
 #用空格分割
 print(str(s.__next__())+":",re.split(r'\s+', 'a b   c'))
-print(str(s.__next__())+":",re.split(r'([\s\,\|])+', 'a,b, c | d'))
-
+print(str(s.__next__())+":",re.split(r'[\s\,\|\\\、]+', 'a,b,c | d\j、dd\ddf、dfd'))
 
 '''
 正则一般是用来匹配，比如电话号码和人匹配
 '''
 
 '''
-
 re.match函数                            #match   ：re.match 尝试从字符串的起始位置匹配一个模式，如果不是起始位置
 函数语法：
 re.match(pattern, string, flags=0)
-
 
 re.search函数                           #search ：re.search 扫描整个字符串并返回第一个成功的匹配。      
 函数语法：
 re.search(pattern, string, flags=0)
 
-
 pattern 匹配的正则表达式
 string  要匹配的字符串。
 flags   标志位，用于控制正则表达式的匹配方式，如：是否区分大小写，多行匹配等等。参见：正则表达式修饰符 - 可选标志
 
-
 pattern:
-^   匹配字符串的开头
-$  匹配字符串的末尾。
-.   匹配任意字符，除了换行符，当re.DOTALL标记被指定时，则可以匹配包括换行符的任意字符。
+^ 匹配字符串的开头
+$ 匹配字符串的末尾。
+. 匹配任意字符，除了换行符，当re.DOTALL标记被指定时，则可以匹配包括换行符的任意字符。
 [...]   用来表示一组字符,单独列出：[amk] 匹配 'a'，'m'或'k'
 [^...]  不在[]中的字符：[^abc] 匹配除了a,b,c之外的字符。
 re* 匹配0个或多个的表达式。
@@ -167,19 +163,19 @@ flags : 可选，表示匹配模式，比如忽略大小写，多行模式等，
 re.I 忽略大小写
 re.L 表示特殊字符集 \w, \W, \b, \B, \s, \S 依赖于当前环境
 re.M 多行模式
-re.S 即为 . 并且包括换行符在内的任意字符（. 不包括换行符）
+re.S 即为.并且包括换行符在内的任意字符（.不包括换行符）
 re.U 表示特殊字符集 \w, \W, \b, \B, \d, \D, \s, \S 依赖于 Unicode 字符属性数据库
 re.X 为了增加可读性，忽略空格和 # 后面的注释
 
 
 正则表达式实例:
 实例:           描述:
-[Pp]ython        匹配 "Python" 或 "python"
-rub[ye]          匹配 "ruby" 或 "rube"
-[aeiou]          匹配中括号内的任意一个字母
-[0-9]            匹配任何数字。类似于 [0123456789]
-[a-z]            匹配任何小写字母
-[A-Z]            匹配任何大写字母
+[Pp]ython       匹配 "Python" 或 "python"
+rub[ye]         匹配 "ruby" 或 "rube"
+[aeiou]         匹配中括号内的任意一个字母
+[0-9]           匹配任何数字。类似于 [0123456789]
+[a-z]           匹配任何小写字母
+[A-Z]           匹配任何大写字母
 [a-zA-Z0-9]     匹配任何字母及数字
 [^aeiou]        除了aeiou字母以外的所有字符
 [^0-9]          匹配除了数字外的字符

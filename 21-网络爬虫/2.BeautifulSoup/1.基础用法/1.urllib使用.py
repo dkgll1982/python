@@ -17,7 +17,7 @@ print(parse)
 #运行程序会提示如下错误：socket.timeout: timed out
 try:
     #res = urllib.request.urlopen('http://httpbin.org/post', data=parse, timeout=1)
-    res = urllib.request.urlopen('http://www.baidu.com')
+    res = urllib.request.urlopen('https://www.baidu.com')
     #响应类型、状态码、响应头
     #通过response.status、response.getheaders().response.getheader("server")，获取状态码以及头部信息
     print("info:%s,code:%s;url:%s;status:%s;headers:%s;header['server']:%s"%(res.info(),#获取响应头

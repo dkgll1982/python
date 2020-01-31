@@ -3,10 +3,10 @@
 # @Author: guojun 
 # @Company: 航天神舟智慧系统技术有限公司 
 # @Site: https://user.qzone.qq.com/350606539/main 
-# @Date: 2019-08-14 15:38:25 
+# @Date: 2019-08-21 19:38:25 
 # @Last Modified by: guojun 
-# @Last Modified time: 2019-08-14 15:38:25 
-# @Software: vscode  
+# @Last Modified time: 2019-08-21 19:38:25 
+# @Software: vscode   
 
 import cx_Oracle
 import os
@@ -14,26 +14,23 @@ import urllib.request
 from 坐标转换 import bd09_to_wgs84,bdapi 
 import threading,time
 import urllib.request
-import json 
+import json
 import datetime 
 
 #百度ak,sk
 ak = "Ge8QStRhgzfk5WajB2uHzlpO9Wul40oh"
 sk = "c9zBPUBLw3TQqEriSCWEz6vgSpjjLM4q"
 #坐标计算网格服务
-geoserver = 'http://huzhou-jczl-dq.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
-
-#地址前缀
-city = ''
+geoserver = 'https://jd.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
 
 #线程数量
-threadcount = 20
+threadcount = 1
 #数据分段区间
-pagecount = 100
+pagecount = 5000
 #每次取数据行数
 rowcount = 100
 #线程循环次数
-xhcount = 2
+xhcount = 1
 
 # 大致计算公式如下
 # 公式1：线程循环次数 = 数据分段区间/每次取数据行数，如5000/100=50，即需要约50次循环才能跑完区间的所有的数据 
@@ -61,7 +58,8 @@ def request_data(urt):
 #获取查询的数据列表
 def get_zb(index):
     os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
-    conn = cx_Oracle.connect('cigproxy','cigproxy','127.0.0.1:1521/orcl')
+    #ORACLE连接参数
+    conn = cx_Oracle.connect('cigproxy','Htzhcig123','172.21.104.155:15211/xe')
     cursor = conn.cursor() 
 
     #取数据起始位置
@@ -69,7 +67,8 @@ def get_zb(index):
     #取数据结束位置
     end = str(pagecount*(index))
     #查询数据的sql
-    sql1 =  ("select * from (select ID,CASE WHEN NVL(R_ADDR,D_ADDR) LIKE '陕西省%' THEN NVL(R_ADDR,D_ADDR)  ELSE '陕西省西咸新区'||NVL(R_ADDR,D_ADDR) end ADDR from ZZ_PERSON_XX_ALL_0126 WHERE (X IS NULL OR Y IS NULL) and xh<="+end+" and xh>"+start+") where rownum<="+str(rowcount))
+    sql1 =  ("select ID,'江苏省扬州市'||R_ADDR from ZZ_PERSON WHERE create_user='ADMIN-01-30-4'")      
+    #修改返回结果的sql
     sql2 = ""
 
     cursor.execute(sql1);    
@@ -78,18 +77,18 @@ def get_zb(index):
     update_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     g = bdapi(ak,sk)
     for row in rows: 
-        url =g.get_url(city+row[1])
+        url =g.get_url(row[1])
         try:
             bd_zb = g.get_zb(url)                                                               #得到百度坐标
             if bd_zb is not None:
                 wgs_zb =  bd09_to_wgs84(bd_zb[0], bd_zb[1])                                     #将百度坐标转为WGS84坐标                
                 bd_x,bd_y,wgs_x,wgs_y = str(bd_zb[0]),str(bd_zb[1]),str(wgs_zb[0]),str(wgs_zb[1])
-                #geo = geoserver+"?x="+wgs_x+"&y="+wgs_y
-                #result = request_data(geo) 
-                print("子线程(%s)处理；百度：%s；WGS84：%s；获取网格地址：%s"%(threading.current_thread().name,bd_zb,wgs_zb,'')) 
-                sql2 = "update ZZ_PERSON_XX_ALL_0126 set X ='%s',Y='%s',update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where ID='%s'"%(wgs_x,wgs_y,update_date,row[0]) 
+                geo = geoserver+"?x="+wgs_x+"&y="+wgs_y
+                result = request_data(geo) 
+                print("子线程(%s)处理；百度：%s；WGS84：%s；获取网格地址：%s"%(threading.current_thread().name,bd_zb,wgs_zb,geo)) 
+                sql2 = "update ZZ_PERSON set RESULT='%s' where id='%s'"%(str(result),row[0]) 
             else:       
-                sql2 = "update ZZ_PERSON_XX_ALL_0126 set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where ID='%s'"%(update_date,row[0])            
+                sql2 = "update ZZ_PERSON set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where id='%s'"%(update_date,row[0])            
             cursor.execute(sql2)
         except Exception as e:
             print('Error:',e)
