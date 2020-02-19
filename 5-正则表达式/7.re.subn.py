@@ -14,10 +14,13 @@ p = re.compile( '(blue|white|red)')
 s = p.subn('color','blue shine red book white board')
 print(s)
 
+s = p.sub('color','blue shine red book white board')
+print(s)
+
 # 1.开启re.VERBOSE，空格将被忽略。因为这里一堆符号，用空格隔开看着才不会乱糟糟的......
 # 2.这里r'subsection{\1}' 使用 \1 引用匹配模式中的 ([^}]*) 匹配的字符串内容。
 p = re.compile('section{(?P<GroupName>[^}]*)}', re.X)
 # 使用Python 的扩展语法 (?P<name>...) 指定命名组，引用命名组的语法是 \g<name>
 # 另外，\g<数字>是通过组的序号进行引用。\g<2> 其实就相当于\2，但我们更提倡使用 \g<2>，因为这样可以避免歧义
-s = p.subn(r'subsection{\g<GroupName>}','section{}First} section{second}')
+s = p.subn(r'subsection{\g<GroupName>}','section{er}First} section{second}')
 print(s)

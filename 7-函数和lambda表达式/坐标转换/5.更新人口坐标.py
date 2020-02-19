@@ -67,7 +67,7 @@ def get_zb(index):
     #取数据结束位置
     end = str(pagecount*(index))
     #查询数据的sql
-    sql1 =  ("select ID,'江苏省扬州市'||R_ADDR from ZZ_PERSON WHERE create_user='ADMIN-01-30-4'")      
+    sql1 =  ("select ID,'江苏省扬州市'||R_ADDR from ZZ_PERSON WHERE create_user='ADMIN-01-31-5'")      
     #修改返回结果的sql
     sql2 = ""
 
