@@ -31,3 +31,4 @@ print(re.findall(r'(?P<name>\d+)','987java678abc891abe2345stu2454dy'))#结果是
 print(re.findall(r'(?P<name>\D+)','java678abc891abe2345stu2454dy'))
 
 print(re.findall(r'[\s|\S]+?','ads fvsdd gfdgd fgdg d'))
+print(re.findall(r'\S+','ads fvsdd gfdgd fgdg d'))

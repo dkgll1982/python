@@ -53,16 +53,16 @@ print(str(s.__next__())+":",re.match("我今年\d+岁了","我今年5岁了"))
 print(str(s.__next__())+":",re.match("我今年\d?岁了","我今年5岁了")) 
 print(str(s.__next__())+":",re.match("我今年\d{0,10}岁了","我今年5岁了")) 
 
-s = Seq(57) 
+s = Seq(58) 
 #字符转义
 #print(str(s.__next__())+":",re.match("c:\\","c:\\a\\b"))     # error 报错，因为\\转义后就变成了\了 
 print(str(s.__next__())+":",re.match("c:\\\\","c:\\a\\b"))    #正确 
 print(str(s.__next__())+":",re.match(r"c:\\","c:\\a\\b"))     # 正确，在前面加“r”表示匹配的字符不进行转义，以后匹配符不要再写出上面的的转义了
-print(str(s.__next__())+":",re.match(".*\\bliu\\b","i is liu fas fsa5 662 2a"))  # 注意为什么使用点  
+print(str(s.__next__())+":",re.match(".*\\bliu","i is liu fas fsa5 662 2a"))  # 注意为什么使用点  
 print(str(s.__next__())+":",re.match(r".*\bliu","i is liu fas fsa5 662 2a"))   #结果同上      
 
 #分组
-s = Seq(64) 
+s = Seq(65) 
 print(str(s.__next__())+":",re.match("100|[1-9][0-9]|[0-9]","2"))            # 匹配100以内的数
 print(str(s.__next__())+":",re.match("0|100|[1-9]?\d$","22"))                #[1-9]?\d$匹配的是1位数或2位数，不含0，因此加上0和100两组
 print(str(s.__next__())+":",re.match("\d+(183|192|168)\.(li|wang|liu)","452168.wang").groups()) #groups()返回一个包含所有分组字符串的元组。
@@ -77,7 +77,7 @@ s = Seq(79)
 # re.match方法与re.search方法的区别
 # re.match只匹配字符串的开始，如果字符串开始不符合正则表达式， 则匹配失败，并返货None； 
 # re.search匹配整个字符串， 直到找到一个匹配，如果整个字符串都没匹配到，则返回None。
-print(str(s.__next__())+":",re.search("\d+","10086d0f8g6233fd234fdds23fddsf"))     
+print(str(s.__next__())+":",re.search("\d+","10086d0f8g6233fd234fdds23fddsf").group(0))     
 print(str(s.__next__())+":",re.search("\d?","10086d0f8g6233fd234fdds23fddsf"))         
 print(str(s.__next__())+":",re.search("\d*","10086d0f8g6233fd234fdds23fddsf"))         
 print(str(s.__next__())+":",re.search("\d{1,2}","10086d0f8g6233fd234fdds23fddsf"))        
