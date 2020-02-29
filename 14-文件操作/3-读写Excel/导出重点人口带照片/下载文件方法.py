@@ -151,8 +151,8 @@ def get_person(control_type):
     return  li;
 
 def save_excel(li,dirname):
-    book = xlsxwriter.Workbook(r'backup\\长兴重点人口\\'+dirname+'\\'+dirname+'人员.xlsx')
-    sheet = book.add_worksheet('重点人口')
+    book = xlsxwriter.Workbook(r'backup\\长兴重点人口\\'+dirname+'\\'+dirname+'人员.xlsx') 
+    sheet = book.add_worksheet('重点人口') 
 
     # Write some data headers. 带自定义粗体blod格式写表头
     bold = book.add_format({'bold': True})
