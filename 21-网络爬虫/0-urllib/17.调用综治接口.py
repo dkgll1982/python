@@ -16,9 +16,9 @@ import os,cx_Oracle
 import threading,time,datetime
  
 #每次取数据行数
-rowcount = 100
+rowcount = 50
 #循环次数
-xhcount = 10
+xhcount = 15
 
 class ZongZhiSpider():
     def __init__(self):
@@ -74,32 +74,32 @@ class ZongZhiSpider():
     
     def start(self):
         os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
-        conn = cx_Oracle.connect('cigwbj','esri@123','10.21.198.126:15214/xe')
+        conn = cx_Oracle.connect('cigproxy','cigproxy','172.21.188.219:15223/orcl')
         cursor = conn.cursor()  
         
         sql1 = """ SELECT * FROM (
             SELECT * FROM (  
-               select 身份证号 sfzh, '绿码' mzt,'湖州市' mffd,1 SORT_TYPE from base_健康码0224 WHERE 身份证号 NOT IN
+               select DISTINCT 身份证号 sfzh, '绿码' mzt,'湖州市' mffd,1 SORT_TYPE from BASE_jkm0302 WHERE 身份证号 NOT IN
                 (
-                select A from excel_table WHERE TYPE='jkm' AND d='绿码'
+                select A from excel_table WHERE TYPE='jkm2' AND d='绿码'
                 ) and length(身份证号)=18  
                 UNION ALL
-               select 身份证号 sfzh,'红码' mzt,'湖州市' mffd,2 from base_健康码0224 WHERE 身份证号 IN
+               select DISTINCT 身份证号 sfzh,'红码' mzt,'湖州市' mffd,2 from BASE_jkm0302 WHERE 身份证号 IN
                 (
-                select A from excel_table WHERE TYPE='jkm' AND d='绿码' AND TO_SINGLE_BYTE(JSON_VALUE(b,'$.msg'))='查询失败' 
+                select A from excel_table WHERE TYPE='jkm2' AND d='绿码' AND TO_SINGLE_BYTE(JSON_VALUE(b,'$.msg'))='查询失败' 
                 ) 
                 AND 身份证号 NOT IN
                 (
-                    select A from excel_table WHERE TYPE='jkm' AND d='红码'
+                    select A from excel_table WHERE TYPE='jkm2' AND d='红码'
                 ) and length(身份证号)=18  
                 UNION ALL
-               select 身份证号 sfzh,'黄码' mzt,'湖州市' mffd,3 from base_健康码0224 WHERE 身份证号 IN
+               select DISTINCT 身份证号 sfzh,'黄码' mzt,'湖州市' mffd,3 from BASE_jkm0302 WHERE 身份证号 IN
                 (
-                select A from excel_table WHERE TYPE='jkm' AND d='红码' AND TO_SINGLE_BYTE(JSON_VALUE(b,'$.msg'))='查询失败' 
+                select A from excel_table WHERE TYPE='jkm2' AND d='红码' AND TO_SINGLE_BYTE(JSON_VALUE(b,'$.msg'))='查询失败' 
                 ) 
                 AND 身份证号 NOT IN
                 (
-                    select A from excel_table WHERE TYPE='jkm' AND d='黄码'
+                    select A from excel_table WHERE TYPE='jkm2' AND d='黄码'
                 ) and length(身份证号)=18  
             ) ORDER BY SORT_TYPE 
         ) WHERE ROWNUM<""" + str(rowcount)
@@ -111,7 +111,7 @@ class ZongZhiSpider():
             data = {"sfzh":row[0],"mzt":row[1],"mffd":row[2]}
             jsonstr = self.send_request(data)
             print('获取%s健康码（%s）成功!'%(row[0],row[1]))
-            sql2 = "INSERT INTO excel_table(TYPE,A,B,C,D) VALUES('jkm','%s','%s','%s','%s')"%(row[0],jsonstr,datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),row[1])
+            sql2 = "INSERT INTO excel_table(TYPE,A,B,C,D) VALUES('jkm2','%s','%s','%s','%s')"%(row[0],jsonstr,datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),row[1])
             cursor.execute(sql2)
           
         conn.commit() 
