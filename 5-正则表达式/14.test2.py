@@ -12,6 +12,7 @@ Partitions {
   dt                              string      # 分区字段：yyyymmdd
 }'''
 
+<<<<<<< HEAD
 tb_name = 'stg_person_photo' 
 t = re.findall('(\w+)\s+(\w+)\s+#\s+(\S+)',strd)
 c = 'create table %s\n(\n'%tb_name
@@ -28,3 +29,7 @@ c += 'comment on table {} is \'{}\';'.format(tb_name,'表注释')
 print(c)
 print('')
 print(s)
+=======
+print(re.match(r'\s+',strd)) 
+print(re.findall('(\w+)\s+(\w+)\s+#\s+(\S+)',strd))
+>>>>>>> b47e55d18c45997bf4bd6e62449b072570fe8c9f
