@@ -14,6 +14,8 @@ import openpyxl
 from openpyxl.cell.cell import ILLEGAL_CHARACTERS_RE
 import re
 import time
+import logging  # 引入logging模块
+import os.path 
 
 os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'                                        #设置plsql客户端字符集
 
@@ -25,6 +27,7 @@ class Matedata_odps:
         self.project = 'hzdn_mplc_dev'                                                          # odps上的项目名称
         self.endpoint = 'http://service.cn-huzhou-hzdsj-d01.odps.ops.cloud.huzhou.gov.cn/api'   # 官方提供的接口
         self.rowcount = 100
+        self.path = r'样例数据\\'                                                                #导出样例数据存放路径
 
         # 链接odps
         self.op = ODPS(access_id=self.access_id,
@@ -50,27 +53,51 @@ class Matedata_odps:
                     l.append(par.name)
             except Exception as e: 
                 pass 
-            l = None if l == [] else l[-1]
-            print(table_name,table_comment)
+            #l = None if l == [] else l[-1] 
+            data = []                                    #每个分区取部分数据进行叠加
             try:
-                data = [value for value in self.op.read_table(  
-                        table_name, start = 0, limit = self.rowcount, partition = l)] 
+                if l == []:
+                    data = [value for value in self.op.read_table(  
+                            table_name, start = 0, limit = self.rowcount, partition = None)] 
+                    print('查询:{}表({})_无分区成功！'.format(table_comment,table_name))
+                else:
+                    for item in l: 
+                        try:  
+                            for value in self.op.read_table(table_name, start = 0, limit = self.rowcount, partition = item):
+                                data.append(value) 
+                            print('查询:{}表({})分区[{}]成功！'.format(table_comment,table_name,item))
+                        except Exception as e:
+                            msg = '错误1:查询{}表({})分区[{}]错误,错误信息：{}！'.format(table_comment,table_name,item,e)
+                            print(msg)  
+                            self.save_log(msg)
+                            
                 self.write_excel(data,col_comment,table_comment[0:30],table_name[0:30])    
-                print('导出:{}表({})分区[{}]成功！'.format(table_comment,table_name,l))
+                print('导出:{}表({})全部分区[{}]成功！\n'.format(table_comment,table_name,l))
             except Exception as e:      
-                print('查询:{}表({})分区[{}]错误！'.format(table_comment,table_name,l))
+                self.write_excel([],col_comment,table_comment[0:30]+"_未推送",table_name[0:30])   
+                msg = '错误2:查询{}表({})分区[{}]错误,错误信息：{}！\n'.format(table_comment,table_name,l,e)
+                print(msg)
+                self.save_log(msg)
     
     # 将数据写入excel
     def write_excel(self,data,colname,workbook_name,sheet_name): 
-        data = self.illegal_char_rm(data)                   # 写入前进行非法字符处理
-        workbook = openpyxl.Workbook()                      # 创建工作簿workbook
-        sheet = workbook.active                             # 创建工作表sheet，默认使用active页
-        sheet.title = sheet_name                            # 给工作表赋名
-        #list(data[0]._name_indexes.keys())                 # 取sql查询结果的字段名 
+        data = self.illegal_char_rm(data)                           # 写入前进行非法字符处理
+        workbook = openpyxl.Workbook()                              # 创建工作簿workbook
+        sheet = workbook.active                                     # 创建工作表sheet，默认使用active页
+        sheet.title = sheet_name                                    # 给工作表赋名
+        #list(data[0]._name_indexes.keys())                         # 取sql查询结果的字段名 
         sheet.append(colname)    
         for record in data:
-            sheet.append(record.values)                     # 取每条记录
-        workbook.save(r'backup\样例数据\\'+workbook_name+'.xlsx')                # 保存工作薄并命名
+            sheet.append(record.values)                             # 取每条记录
+            
+        if len(data) == 0:
+            workbook_name = '(记录为0)'+workbook_name
+            
+        # 然后创建一个目录:
+        if not os.path.exists(self.path): 
+            os.mkdir(self.path)  
+               
+        workbook.save(self.path+workbook_name+'.xlsx')   # 保存工作薄并命名
         
     # 定义处理非法字符的方法
     def illegal_char_rm(self,l):
@@ -81,11 +108,32 @@ class Matedata_odps:
                 record[index] = ILLEGAL_CHARACTERS_RE.sub('', value) if isinstance(
                     value, str) else value  # 如果值类型为字符串，替换为空，否则保留原值
             la.append(record)
-        return la 
-
+        return la  
+      
+    #写入日志            
+    def save_log(self,msg):
+        # 第一步，创建一个logger
+         logger = logging.getLogger()
+         logger.setLevel(logging.INFO)  # Log等级总开关
+         # 第二步，创建一个handler，用于写入日志文件
+         rq = time.strftime('%m%d%H', time.localtime(time.time())) 
+         log_name = self.path + '导出错误_' + rq + '.log'
+         logfile = log_name
+         fh = logging.FileHandler(logfile, mode='w')
+         fh.setLevel(logging.ERROR)  # 输出到file的log等级的开关
+         # 第三步，定义handler的输出格式
+         formatter = logging.Formatter("%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s")
+         fh.setFormatter(formatter)
+         # 第四步，将logger添加到handler里面
+         logger.addHandler(fh)
+         logger.error(msg)
+         
     # 获取所有存储的odps的表名，并将样例数据写入excel
+    # 测试无分区的表：dws_prsn_company_represent_person_info_mmsb_d
+    # 测试分区表：dws_disaster_shelter_memb
+    # 测试错误表：dws_prsn_severe_psychopath_mpsb_m
     def start(self):
-        sql = 'SELECT "推送后的表名" table_name FROM test."BASE_表结构0228" where "推送后的表名" is not null'
+        sql = 'SELECT "推送后的表名" table_name FROM test."BASE_表结构0228" where "推送后的表名" IS NOT NULL'
         conn = cx_Oracle.connect(self.conn)
         cursor = conn.cursor()
         cursor.execute(sql)

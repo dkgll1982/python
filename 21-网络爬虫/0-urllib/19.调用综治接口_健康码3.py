@@ -215,7 +215,7 @@ class JKMSpider():
             
         book.close()
         print('导出%s完成！'%(file_name))
-        
+        os.startfile(file_name)
         cursor.close()
         conn.close()  
         
