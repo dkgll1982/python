@@ -31,8 +31,8 @@ class JKMSpider():
         self.file_name = file_name  
         self.file_md5 = self.getfilemd5()
         
-        self.pagecount = 200        #每次取数据行数
-        self.totalcount = 0         #总行数
+        self.pagecount = 1000        #每次取数据行数
+        self.totalcount = 0          #总行数
         
         self.collist = '' 
         self.key_column = ''
@@ -137,6 +137,8 @@ class JKMSpider():
             row.insert(1,self.datatype)
             row.insert(2,self.file_md5) 
             db_cursor.execute(sql_cmd, row) 
+            if rn%1000 == 0:            #每1000次提交一次结果
+                db_conn.commit() 
 
         db_conn.commit() 
         db_cursor.close()
@@ -149,12 +151,12 @@ class JKMSpider():
         
         #查询人口数据
         sql1 = """with T as (
-            select {} sfzh from excel_table where type='{}' and z='{}' and exists(select * from excel_table where {} LIKE '身份证%' )    
+            select {} sfzh from excel_table where type='{}' and z='{}' and exists(select * from excel_table where {} LIKE '%身份证%' )    
         ) 
         select sfzh,mzt,mffd FROM (  
             select DISTINCT replace(replace(trim(replace(replace(replace(replace(sfzh,chr(10)),CHR(32)),chr(13),chr(9)),' ')),'	'),'	') sfzh, '绿码' mzt,'{}' mffd from T 
             where sfzh NOT IN (
-                select A from excel_table where TYPE='jkm' and c=to_char(sysdate,'YYYY-MM-DD HH24')
+                select A from excel_table where TYPE='jkm' and to_date(c,'YYYY-MM-DD HH24')>sysdate-0.25
             )  
         ) where LENGTH(SFZH)=18 and ROWNUM<""".format(self.key_column,self.datatype,self.file_md5,self.key_column,self.city) + str(self.pagecount) 
         sql2 = "" 
@@ -215,7 +217,8 @@ class JKMSpider():
             
         book.close()
         print('导出%s完成！'%(file_name))
-        os.startfile(file_name)
+        #打开文件
+        os.startfile(file_name+'.xlsx') 
         cursor.close()
         conn.close()  
         

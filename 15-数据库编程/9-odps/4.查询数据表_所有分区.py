@@ -26,7 +26,7 @@ class Matedata_odps:
         self.access_key = '0RG5GJpo2WjCCwpUkQzcwjGGzKX8Tn'                                      # 登陆密码
         self.project = 'hzdn_mplc_dev'                                                          # odps上的项目名称
         self.endpoint = 'http://service.cn-huzhou-hzdsj-d01.odps.ops.cloud.huzhou.gov.cn/api'   # 官方提供的接口
-        self.rowcount = 100
+        self.rowcount = 10
         self.path = r'样例数据\\'                                                                #导出样例数据存放路径
 
         # 链接odps
@@ -71,16 +71,17 @@ class Matedata_odps:
                             print(msg)  
                             self.save_log(msg)
                             
-                self.write_excel(data,col_comment,table_comment[0:30],table_name[0:30])    
+                self.write_excel(data,col_comment,table_comment[0:100],table_name[0:100])    
                 print('导出:{}表({})全部分区[{}]成功！\n'.format(table_comment,table_name,l))
             except Exception as e:      
-                self.write_excel([],col_comment,table_comment[0:30]+"_未推送",table_name[0:30])   
+                self.write_excel([],col_comment,table_comment[0:100]+"_未推送",table_name[0:100])   
                 msg = '错误2:查询{}表({})分区[{}]错误,错误信息：{}！\n'.format(table_comment,table_name,l,e)
                 print(msg)
                 self.save_log(msg)
     
     # 将数据写入excel
-    def write_excel(self,data,colname,workbook_name,sheet_name): 
+    def write_excel(self,data,colname,workbook_name,sheet_name):
+        workbook_name = workbook_name+"({})".format(sheet_name)
         data = self.illegal_char_rm(data)                           # 写入前进行非法字符处理
         workbook = openpyxl.Workbook()                              # 创建工作簿workbook
         sheet = workbook.active                                     # 创建工作表sheet，默认使用active页
@@ -91,7 +92,7 @@ class Matedata_odps:
             sheet.append(record.values)                             # 取每条记录
             
         if len(data) == 0:
-            workbook_name = '(记录为0)'+workbook_name
+            workbook_name = '(记录为0)' + workbook_name
             
         # 然后创建一个目录:
         if not os.path.exists(self.path): 
@@ -133,7 +134,7 @@ class Matedata_odps:
     # 测试分区表：dws_disaster_shelter_memb
     # 测试错误表：dws_prsn_severe_psychopath_mpsb_m
     def start(self):
-        sql = 'SELECT "推送后的表名" table_name FROM test."BASE_表结构0228" where "推送后的表名" IS NOT NULL'
+        sql = 'SELECT DISTINCT "推送后的表名" table_name FROM test."BASE_表结构0228" where "推送后的表名" IS NOT NULL'
         conn = cx_Oracle.connect(self.conn)
         cursor = conn.cursor()
         cursor.execute(sql)

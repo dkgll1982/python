@@ -75,4 +75,9 @@ for li in req_list:
     # 7. 打印响应内容
     with open(r'backup\爬虫\{}.json'.format(li["name"]),'w',encoding='utf8') as f:
         f.write(response.read().decode('utf-8'))  
+        print('成功获取%s！'%li["descript"]) # 打印响应内容
+        
+    # 7. 打印响应内容
+    with open(r'backup\爬虫\{}.json'.format(li["name"]),'w',encoding='utf8') as f:
+        f.write(response.read().decode('utf-8'))  
         print('成功获取%s！'%li["descript"])
