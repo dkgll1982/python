@@ -13,20 +13,23 @@ import os
 import urllib.request
 import xlsxwriter
 import time
- 
-town_list = ['雷甸镇','舞阳街道','莫干山镇','德清县','阜溪街道','新市镇','新安镇','武康街道','下渚湖街道','乾元镇','洛舍镇','禹越镇','钟管镇']
-zd_list = ['特困儿童','留守人员','临时救助','低保人员','刑满释放人员','社区矫正人员','精神病人','吸毒人员','信访人员','重点青少年']
+  
+zd_list = ['特困儿童','留守人员','临时救助','低保人员','刑满释放人员','社区矫正人员','精神病人','吸毒人员','信访人员','重点青少年','邪教人员']
 
-#town_list = ['新市镇']
-#zd_list = ['精神病人']
+db_list = {
+        "沣西新城":'136.2.34.65:15299/xe',
+        "沣东新城":'136.2.34.65:15227/xe',
+        "泾河新城":'136.2.34.65:15229/xe',
+        "秦汉新城":'136.2.34.65:15233/xe',
+        "空港新城":'136.2.34.65:15231/xe'} 
 
 #获取重点人员
 def get_person():
     os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
-    conn = cx_Oracle.connect('cigproxy','cigproxy','172.21.188.219:15223/orcl')
-    cursor = conn.cursor() 
- 
-    for town in town_list:
+    for db in db_list:
+        conn = cx_Oracle.connect('cigproxy','cigproxy',db_list[db])
+        cursor = conn.cursor() 
+    
         for zd in zd_list:
             sql =  ("""
                     SELECT * FROM (
@@ -53,7 +56,7 @@ def get_person():
                                 '210', '其他人员'),
                                 '211', '危险品从业人员') 重点类型,DISPLAYNAME 所属网格,
                             CASE D_LEVEL 
-                                WHEN 1 THEN '德清县' 
+                                WHEN 1 THEN '{}' 
                                 when 2 then TO_CHAR(DISPLAYNAME)
                                 else TO_CHAR(SUBSTR(DISPLAYNAME,0,instr(DISPLAYNAME,'/')-1)) 
                             END 乡镇, 
@@ -67,23 +70,23 @@ def get_person():
                                 WHEN 4 THEN TO_CHAR(SUBSTR(DISPLAYNAME,instr(DISPLAYNAME,'/',-1)+1))  
                                 else null
                             END 四级网格
-                        FROM CIGPROXY.ZZ_PERSON_0224 TA
-                        JOIN A4_SYS_DEPARTMENT_0220 TB ON TA.G_ID=TB.DEPARTMENTID
+                        FROM CIGPROXY.ZZ_PERSON  TA
+                        LEFT JOIN A4_SYS_DEPARTMENT  TB ON TA.G_ID=TB.DEPARTMENTID
                         where G_ID is not null and del_flag=0 and PERSON_TAB is not null
                         order by g_id
-                    ) WHERE 乡镇="""+"'{}' and 重点类型 like '%{}%'".format(town,zd)) 
-            
+                    ) WHERE 重点类型 like '%{}%'""".format(db,zd)) 
+             
             cursor.execute(sql);
             rows = cursor.fetchall()  # 得到所有数据集
-            save_excel(rows,town,zd)
+            save_excel(rows,db,zd)
                 
-            print("已导出{}-{}人员数量: {}人".format(town,zd,cursor.rowcount))
+            print("已导出{}-{}人员数量: {}人".format(db,zd,cursor.rowcount))
 
-    cursor.close()
-    conn.close()
+        cursor.close()
+        conn.close()
 
 def save_excel(rows,town,zd):    
-    dir = r'backup\德清重点人口'
+    dir = r'backup\西咸重点人口'
     # 然后创建一个目录:
     if not os.path.exists(dir): 
         os.mkdir(dir) 

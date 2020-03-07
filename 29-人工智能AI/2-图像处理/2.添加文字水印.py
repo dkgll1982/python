@@ -1,11 +1,12 @@
 from PIL import Image, ImageDraw, ImageFont
+import time
 
 def add_num(img,logo):
     draw = ImageDraw.Draw(img)
     myfont = ImageFont.truetype('C:/windows/fonts/Arial.ttf', size=40)
     fillcolor = "#ff0000"
     width, height = img.size
-    draw.text((width-250, 5), 'Hu huahua', font=myfont, fill=fillcolor)  
+    draw.text((width-340, 1), time.strftime("%Y%m%d%H:%M:%S", time.localtime()), font=myfont, fill=fillcolor)  
 
     # #添加图片 
     layer = Image.new('RGBA', img.size, (0,0,0,0)) 

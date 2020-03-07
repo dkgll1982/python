@@ -11,6 +11,7 @@ from urllib import request
 import http.cookiejar as cookielib
 import urllib
 import json
+import pandas as pd
  
 # 通过CookieJar()类构建一个cookieJar()对象，用来保存cookie的值
 cookie = cookielib.CookieJar()
@@ -53,7 +54,8 @@ req_list=[
         "url":"realPerson/person/familyPersons1?keyword=&personType=&dwdm=null&name=&cardNum=&gender=&maritalStatus=&politicalStatus=&education=&startBirthdayDate=&endBirthdayDate=&focusService=&focusControl=&isActualAddr=&death=&offset=0&limit=500&orderby=&ordertype=",
         "name":"户籍人口",
         "descript":"户籍人口列表消息"
-    },{
+    }
+    ,{
         "url":"places/placeMain/placeCommons?offset=0&limit=800&orderby=&ordertype=&keyword=&departmentId=&placeTypeMax=all&placeType=&createStartDate=&createEndDate=&visitSit=&visitStartDate=&visitEndDate=",
         "name":"场所总况",
         "descript":"场所列表信息"
@@ -71,13 +73,21 @@ for li in req_list:
     req = request.Request("https://jd.spacecig.com/zhzlbackend/%s"%(li["url"]))
     response = opener.open(req)
 
+    res = response.read().decode('utf-8')
     # 打印响应内容
     # 7. 打印响应内容
     with open(r'backup\爬虫\{}.json'.format(li["name"]),'w',encoding='utf8') as f:
-        f.write(response.read().decode('utf-8'))  
-        print('成功获取%s！'%li["descript"]) # 打印响应内容
-        
-    # 7. 打印响应内容
-    with open(r'backup\爬虫\{}.json'.format(li["name"]),'w',encoding='utf8') as f:
-        f.write(response.read().decode('utf-8'))  
-        print('成功获取%s！'%li["descript"])
+        f.write(res)  
+        print('成功获取%s！'%li["descript"]) # 打印响应内容 
+    
+    
+    j = json.loads(res)  
+    data = j['data']['rows'] 
+  
+    df = pd.DataFrame() # 最后转换得到的结果
+    for line in data:
+        df1 = pd.DataFrame([line])
+        df = df.append(df1)
+
+    #在excel表格的第1列写入, 不写入index
+    df.to_excel(r'backup/excel/{}.xlsx'.format(li["name"]), sheet_name='sheet1', startcol=0, index=False)
