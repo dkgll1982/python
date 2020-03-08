@@ -2,6 +2,7 @@
 #导入需要使用的包
 import xlrd  #读取Excel文件的包
 import xlsxwriter   #将文件写入Excel的包
+import time
 
 #打开一个excel文件
 def open_xls(file):
@@ -37,17 +38,16 @@ def getshnum(f):
 
 #函数入口
 if __name__=='__main__':
+    start = time.time()
     #定义要合并的excel文件列表
-    allxls=[r'backup\excel\人口\户籍_0_10000.xlsx',
-            r'backup\excel\人口\户籍_10000_20000.xlsx',
-            r'backup\excel\人口\户籍_20000_30000.xlsx',
-            r'backup\excel\人口\户籍_30000_40000.xlsx',
-            r'backup\excel\人口\户籍_40000_50000.xlsx',
-            r'backup\excel\人口\户籍_50000_60000.xlsx',
-            r'backup\excel\人口\户籍_60000_70000.xlsx',
-            r'backup\excel\人口\户籍_70000_80000.xlsx',
-            r'backup\excel\人口\户籍_80000_90000.xlsx',
-            r'backup\excel\人口\户籍_90000_100000.xlsx'] #列表中的为要读取文件的路径
+    allxls=[r'backup\excel\人口\户籍_0_100000.xlsx',
+            r'backup\excel\人口\户籍_100000_200000.xlsx',
+            r'backup\excel\人口\户籍_200000_300000.xlsx',
+            r'backup\excel\人口\户籍_300000_400000.xlsx',
+            r'backup\excel\人口\户籍_400000_500000.xlsx',
+            r'backup\excel\人口\户籍_500000_600000.xlsx',
+            r'backup\excel\人口\户籍_600000_700000.xlsx',
+            r'backup\excel\人口\户籍_700000_800000.xlsx'] #列表中的为要读取文件的路径
     #存储所有读取的结果
     datavalue=[]
     for fl in allxls:
@@ -66,5 +66,5 @@ if __name__=='__main__':
             c=rvalue[a][b]
             ws.write(a,b,c)
     wb.close()
-
-    print("文件合并完成")
+    end =time.time()
+    print("文件合并完成,耗时%0.2fs"%(end-start))

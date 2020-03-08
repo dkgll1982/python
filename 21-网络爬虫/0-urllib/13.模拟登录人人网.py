@@ -19,6 +19,7 @@ data = {"email":"dkgll@qq.com", "password":"3221160"}
 
 # 通过urlencode()转码
 postdata = urllib.parse.urlencode(data).encode('utf8')
+print(postdata)
 
 # 构建Request请求对象，包含需要发送的用户名和密码
 request = request.Request("http://www.renren.com/PLogin.do", data = postdata)
