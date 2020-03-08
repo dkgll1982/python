@@ -38,11 +38,16 @@ def getshnum(f):
 #函数入口
 if __name__=='__main__':
     #定义要合并的excel文件列表
-    allxls=[r'backup\excel\工业企业20180914144634.xlsx',
-            r'backup\excel\工业企业20180914144600.xlsx',
-            r'backup\excel\工业企业201809171646.xlsx',
-            r'backup\excel\工业企业201809171645.xlsx',
-            r'backup\excel\工业企业201809171647.xlsx'] #列表中的为要读取文件的路径
+    allxls=[r'backup\excel\人口\户籍_0_10000.xlsx',
+            r'backup\excel\人口\户籍_10000_20000.xlsx',
+            r'backup\excel\人口\户籍_20000_30000.xlsx',
+            r'backup\excel\人口\户籍_30000_40000.xlsx',
+            r'backup\excel\人口\户籍_40000_50000.xlsx',
+            r'backup\excel\人口\户籍_50000_60000.xlsx',
+            r'backup\excel\人口\户籍_60000_70000.xlsx',
+            r'backup\excel\人口\户籍_70000_80000.xlsx',
+            r'backup\excel\人口\户籍_80000_90000.xlsx',
+            r'backup\excel\人口\户籍_90000_100000.xlsx'] #列表中的为要读取文件的路径
     #存储所有读取的结果
     datavalue=[]
     for fl in allxls:

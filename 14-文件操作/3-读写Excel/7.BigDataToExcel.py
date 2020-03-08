@@ -25,32 +25,33 @@ def get_person(page_index):
     conn = cx_Oracle.connect('test','esri@123','10.21.198.127:15223/XE')
     cursor = conn.cursor()   
     
-    total_count = 100000                        #总行数
+    total_count = 100000                       #总行数
     page_size = 1000                           #每页行记录数,1000
     total_page = int(total_count/page_size)    #总页数 
 
     workbook = openpyxl.Workbook(write_only=True)
     sheet = workbook.create_sheet()
     
-    for i in range(10):  
-        rn_start,rn_end = page_size*(i)+10000*page_index,page_size*(i+1)+10000*page_index
+    for i in range(100):  
+        rn_start,rn_end = page_size*(i)+100000*page_index,page_size*(i+1)+100000*page_index
         sql = """select * FROM (SELECT row_number() over(order by card_num) as rn,CARD_NUM 身份证号码,NAME 姓名,D_ADDR 户籍地址,
                     R_ADDR 现住地址,DISPLAYNAME 网格全称,DEPARTMENTNAME 网格,DECODE(GENDER,'1','男','2','女') 性别,BIRTH_DATE 出生日期 
                 FROM CIGPROXY.ZZ_PERSON ta
-                join CIGPROXY.a4_sys_department tb on ta.g_id=tb.departmentid ) WHERE RN>{} AND RN<={}""".format(rn_start,rn_end)
+                join CIGPROXY.a4_sys_department tb on ta.g_id=tb.departmentid) WHERE RN>{} AND RN<={}""".format(rn_start,rn_end)
     
         cursor.execute(sql) 
         person_list = cursor.fetchall()         
-             
+        
+        print('线程{}查询第{}-{}条数据'.format(page_index+1,rn_start,rn_end))      
         for x in person_list:
             sheet.append(x) 
         
-    workbook.save(r'backup\excel\人口\户籍_{}_{}.xlsx'.format(10000*page_index,10000*(page_index+1)))
+    workbook.save(r'backup\excel\人口\户籍_{}_{}.xlsx'.format(100000*page_index,100000*(page_index+1)))
     workbook.close()
     workbook = None 
                     
     end = time.time() 
-    print("线程-%d：已导出第%d-%d页人员数量: %d人,当前页耗时：%0.2fs"%(page_index+1,10000*page_index,10000*(page_index+1),cursor.rowcount,end-start))
+    print("线程-%d：已导出第%d-%d页人员数量: %d人,当前页耗时：%0.2fs"%(page_index+1,100000*page_index,100000*(page_index+1),100000,end-start))
 
     cursor.close()
     conn.close()
@@ -60,7 +61,7 @@ if __name__ == "__main__":
     
     ThreadList = []
     
-    for x in range(10): 
+    for x in range(8): 
         ThreadList.append(Thread(name=x, target=get_person, args=(x,)))
 
     for tr in ThreadList:
