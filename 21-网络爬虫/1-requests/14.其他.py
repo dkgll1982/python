@@ -1,6 +1,12 @@
 import requests
 import json
 
+#获取cookie
+r = requests.get('https://www.baidu.com')
+print(r.cookies)
+for key,value in r.cookies.items():
+    print(key + '=' + value)
+
 # 添加cookie
 url = 'http://api.nnzhp.cn/api/user/gold_add'
 data = {'stu_id':231,'gold':123}
@@ -9,9 +15,10 @@ req = requests.post(url,data,cookies=cookie)
 print(req.json())
 
 #上传文件
-url = 'http://api.nnzhp.cn/api/file/file_upload'
+url = 'http://httpbin.org/post'
 f = open(r'backup\1.html','rb')
 r = requests.post(url,files={'file':f})
+print(r.text)
 users_dic = r.json()
 print(users_dic)
 
