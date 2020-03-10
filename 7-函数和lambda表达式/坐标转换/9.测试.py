@@ -16,6 +16,7 @@ import threading,time
 import urllib.request
 import json
 import datetime 
+import sys
 
 #百度ak,sk
 ak = "LKnE67ysMkrG0LHwyG2GHPlc00LtMfSW"
@@ -33,7 +34,7 @@ pagecount = 1000
 #每次取数据行数
 rowcount = 20
 #线程循环次数
-xhcount = 100
+xhcount = 55
 
 # 大致计算公式如下
 # 公式1：线程循环次数 = 数据分段区间/每次取数据行数，如5000/100=50，即需要约50次循环才能跑完区间的所有的数据 
@@ -50,7 +51,7 @@ def request_data(urt):
         #'Accept-Encoding':'gzip, deflate', 
         #'Connection':'keep-alive',
         'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
-        'Cookie':"passport=31ceee57-878d-481c-b026-a9e36581c304; CIGToken=7e93cbce-ff6b-4979-b685-d268b9d27631; CIGUsername=%E7%AE%A1%E7%90%86%E5%91%98; CIGUserid=ADMIN; ASP.NET_SessionId=4zmqmaeojnx0tvhwkoeaesaf"
+        'Cookie':"passport=75a948d0-36b6-4a45-a95b-1a772e6681e6; CIGToken=6b2e5acc-7ac6-4e4e-b9e5-c924c7f1e816; CIGUsername=%E7%AE%A1%E7%90%86%E5%91%98; CIGUserid=ADMIN"
     }      
     request = urllib.request.Request(url=urt,headers=head) 
     response = urllib.request.urlopen(request)
@@ -59,7 +60,7 @@ def request_data(urt):
     return s
     
 #获取查询的数据列表
-def get_zb(index):
+def get_zb(index,biao):
     os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
     conn = cx_Oracle.connect('cigproxy','cigproxy','127.0.0.1:1521/orcl')
     cursor = conn.cursor() 
@@ -69,7 +70,7 @@ def get_zb(index):
     #取数据结束位置
     end = str(pagecount*(index))
     #查询数据的sql
-    sql1 =  ("select * from (select ADDR from BASE_ZB_WG2 where RESULT is null and rn<="+end+" and rn>"+start+") where rownum<="+str(rowcount))      
+    sql1 =  ("select * from (select ADDR from "+ biao+" where RESULT is null and rn<="+end+" and rn>"+start+") where rownum<="+str(rowcount))      
     sql2 = ""
 
     cursor.execute(sql1);    
@@ -87,9 +88,9 @@ def get_zb(index):
                 geo = geoserver+"?x="+wgs_x+"&y="+wgs_y
                 result = request_data(geo) 
                 print("子线程(%s)处理；百度：%s；WGS84：%s；获取网格地址：%s"%(threading.current_thread().name,bd_zb,wgs_zb,geo)) 
-                sql2 = "update BASE_ZB_WG2 set wgs_x ='%s',wgs_y='%s',bd_x ='%s',bd_y='%s',result='%s',update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where ADDR='%s'"%(wgs_x,wgs_y,bd_x,bd_y,str(result),update_date,row[0]) 
+                sql2 = "update "+ biao+" set wgs_x ='%s',wgs_y='%s',bd_x ='%s',bd_y='%s',result='%s',update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where ADDR='%s'"%(wgs_x,wgs_y,bd_x,bd_y,str(result),update_date,row[0]) 
             else:       
-                sql2 = "update BASE_ZB_WG2 set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where ADDR='%s'"%(update_date,row[0])            
+                sql2 = "update "+ biao+" set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where ADDR='%s'"%(update_date,row[0])            
             cursor.execute(sql2)
         except Exception as e:
             print('Error:',e)
@@ -100,6 +101,9 @@ def get_zb(index):
     conn.close()    
 
 if __name__ == "__main__":  
+    args = sys.argv 
+    biao = args[1]
+    print(biao)
     print("主线程(%s)启动"%(threading.current_thread().name))
     start = time.time() 
 
@@ -110,7 +114,7 @@ if __name__ == "__main__":
 
         #创建子线程
         for x in range(threadcount):
-            ThreadList.append(threading.Thread(target=get_zb,name="Thread"+str(x),args=(x,)))
+            ThreadList.append(threading.Thread(target=get_zb,name="Thread"+str(x),args=(x,biao)))
         #启动子线程
         for thread in ThreadList:
             thread.setDaemon(True)#守护线程  
