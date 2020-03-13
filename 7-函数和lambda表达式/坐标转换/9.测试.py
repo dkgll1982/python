@@ -19,8 +19,8 @@ import datetime
 import sys
 
 #百度ak,sk
-ak = "LKnE67ysMkrG0LHwyG2GHPlc00LtMfSW"
-sk = "3hPe7iy3Ydq003v6wYbKn6pq7sHgGCRj"
+ak = "ZRyBcN55hT7nYsWUta0hfyTkn3NeBNNG"
+sk = "NGKBzEx1Qv66aq8xjvE2V6AXgr5oyinZ"
 #坐标计算网格服务
 geoserver = 'https://xixian.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
 
@@ -28,13 +28,13 @@ geoserver = 'https://xixian.spacecig.com/CIGService/rest/services/0/intersectFea
 city = ''
 
 #线程数量
-threadcount = 10
+threadcount = 1
 #数据分段区间
 pagecount = 1000
 #每次取数据行数
-rowcount = 20
+rowcount = 10001
 #线程循环次数
-xhcount = 55
+xhcount = 1
 
 # 大致计算公式如下
 # 公式1：线程循环次数 = 数据分段区间/每次取数据行数，如5000/100=50，即需要约50次循环才能跑完区间的所有的数据 
@@ -62,7 +62,7 @@ def request_data(urt):
 #获取查询的数据列表
 def get_zb(index,biao):
     os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
-    conn = cx_Oracle.connect('cigproxy','cigproxy','127.0.0.1:1521/orcl')
+    conn = cx_Oracle.connect('cigproxy','cigproxy','10.21.197.159:1521/orcl')
     cursor = conn.cursor() 
 
     #取数据起始位置
@@ -70,7 +70,7 @@ def get_zb(index,biao):
     #取数据结束位置
     end = str(pagecount*(index))
     #查询数据的sql
-    sql1 =  ("select * from (select ADDR from "+ biao+" where RESULT is null and rn<="+end+" and rn>"+start+") where rownum<="+str(rowcount))      
+    sql1 =  ("select * from (select ADDR from "+ biao+" where RESULT is null  ) where rownum<="+str(rowcount))      
     sql2 = ""
 
     cursor.execute(sql1);    
@@ -102,7 +102,7 @@ def get_zb(index,biao):
 
 if __name__ == "__main__":  
     args = sys.argv 
-    biao = args[1]
+    biao = "BASE_ZB_WG9"
     print(biao)
     print("主线程(%s)启动"%(threading.current_thread().name))
     start = time.time() 

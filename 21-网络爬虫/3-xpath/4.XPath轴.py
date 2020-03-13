@@ -27,7 +27,7 @@ print(result)
 result =  html.xpath('//ul/descendant::*')#descendant表示选取当前节点的所有后代元素（子、孙等），*表示所有节点。合：选择ul节点的所有子节点。
 print(result)
 result =  html.xpath('//ul/descendant::a/text()')#descendant表示选取当前节点的所有后代元素（子、孙等），a/test()表示a节点的文本内容。合：选择ul节点的所有a节点的文本内容。
-print(result)
+print('-',result)
 result =  html.xpath('//li[1]/following::*')#following表示选取文档中当前节点的结束标签之后的所有节点。，*表示所有节点。合：选择第一个li节点后的所有节点。
 print(result)
 result =  html.xpath('//li[1]/following-sibling::*')#following-sibling表示选取当前节点之后的所有同级节点。，*表示所有节点。合：选择第一个li节点后的所有同级节点。
@@ -40,3 +40,6 @@ result =  html.xpath('//li[3]/preceding-sibling::*')#preceding-sibling表示选�
 print(result)
 result =  html.xpath('//li[3]/self::*')#选取当前节点。
 print(result)
+result =  html.xpath('//li[3]')#选取当前节点。
+print(result)
+
