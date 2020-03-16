@@ -9,9 +9,9 @@ wb_data = """
                  <li class="item-1"><a href="link4.html">fourth item</a></li>
                  <li class="item-0"><a href="link5.html">fifth item 
         """
-html = etree.HTML(wb_data)
+html = etree.HTML(wb_data)          #初始化生成一个XPath解析对象
 print(html)
-result = etree.tostring(html)
+result = etree.tostring(html)        #解析对象输出代码
 print(result.decode("utf-8"))
 
 html_data = html.xpath('/html/body/div/ul/li/a')

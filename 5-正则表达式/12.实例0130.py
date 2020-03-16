@@ -9,6 +9,8 @@
 # @Software: vscode 
 
 import re
+a = "‘甜圈’袋鼠花Nematanthus 'Cheerio'"
+print(''.join(re.findall(r'[\u4e00-\u9fa5]+', a)))
 a = 'xxIxxjshdxxlovexxsffaxxpythonxxFXXxxxxf' 
 print(re.findall('(xx(.*?)xx)', a))
 a = '<a src="/">这是一个链接地址</a><p>这是一个段落<P><div>这是一个div</div>' 
