@@ -37,7 +37,7 @@ class DouTuLaSpider(object):
             html = etree.HTML(content)
             a_list = html.xpath("//a[@class='list-group-item random_list']") 
             for item in a_list:
-                #通过 / 或 // 即可查找元素的子节点或子孙节点
+                #要注意/和//的区别，其中/用于获取直接子节点，//用于获取子孙节点
                 title = item.xpath("./div[1]/text()")       #套图目录名称
                 pic_list = item.xpath('.//img/@data-backup')   
                 if title: 
@@ -65,9 +65,9 @@ class DouTuLaSpider(object):
             f.write(response.content)
     
     def start(self,page_count):
-        for i in range(page_count): 
-            req = self.send_request(self.url+str(i+2))          #发送请求
-            self.parse_request(req)                             #解析HTML
+        for i in range(2,page_count): 
+            req = self.send_request(self.url+str(i))          #发送请求
+            self.parse_request(req)                           #解析HTML
 
 if __name__ == '__main__':
     page_count = 20

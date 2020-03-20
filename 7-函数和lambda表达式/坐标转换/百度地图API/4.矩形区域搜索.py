@@ -27,12 +27,12 @@ class bdapi:
         self.ak = ak
         self.sk = sk
 
-    #百度地图API获取某地址的经纬度
-    def get_url(self,address):
+    #百度地图API根据经纬度获取地址
+    def get_url(self,query,bounds):
         
         # 以get请求为例http://api.map.baidu.com/geocoder/v2/?address=百度大厦&output=json&ak=你的ak
         # 地理编码接口
-        queryStr = '/geocoding/v3/?address=%s&output=json&ak=%s' %(address,self.ak)
+        queryStr = '/place/v2/search?query=%s&output=json&bounds=%s&ak=%s&radius=2000&output=json'%(query,bounds,self.ak)
     
         # 对queryStr进行转码，safe内的保留字符不转换
         encodedStr = parse.quote(queryStr, safe="/:=&?#+!$,;'@()*[]")
@@ -48,16 +48,15 @@ class bdapi:
         
         return url
 
-    def get_zb(self,url):
+    def get_addr(self,url):
         doc = urllib.request.urlopen(url)
 
         if doc.getcode() == 200:
             s = doc.read().decode('utf-8')  #一定要解码！！！！ 
             jsonData = json.loads(s)
             if jsonData['status'] == 0:
-                lat=jsonData['result']['location']['lat']
-                lng =jsonData['result']['location']['lng']
-                return [lng, lat]
+                addr = jsonData['results']
+                return addr
             else:
                 return None
         else:
@@ -216,14 +215,15 @@ def out_of_china(lng, lat):
 
 if __name__ == '__main__':
     #百度ak,sk
-    # ak = "LKnE67ysMkrG0LHwyG2GHPlc00LtMfSW"
-    # sk = "3hPe7iy3Ydq003v6wYbKn6pq7sHgGCRj"
-    # g = bdapi(ak,sk);
-    # url = g.get_url("浙江省湖州市长兴县人民政府")
-    # print(url)
-    # bd_zb = g.get_zb(url)
-    # wgs_zb =  bd09_to_wgs84(bd_zb[0], bd_zb[1])
-    # print("百度：%s,WGS84：%s"%(bd_zb,wgs_zb))
+    ak = "LKnE67ysMkrG0LHwyG2GHPlc00LtMfSW"
+    sk = "3hPe7iy3Ydq003v6wYbKn6pq7sHgGCRj"
+    g = bdapi(ak,sk);
+    addr = '办大寨村113号'
+    bounds = '34.3659453,108.7953627,34.4389647,108.8851039'
+    url = g.get_url(addr,bounds)
+    print(url)
+    addr = g.get_addr(url) 
+    print("地址：%s"%(addr))
     
 #     lng = 128.543
 #     lat = 37.065

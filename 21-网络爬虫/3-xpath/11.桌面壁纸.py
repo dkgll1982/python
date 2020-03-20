@@ -61,9 +61,9 @@ class AnaimalSpider(object):
             f.write(response.content)
     
     def start(self,page_count):
-        for i in range(page_count): 
-            req = self.send_request(self.url.format(str(i+1)))   #发送请求
-            self.parse_request(req,i+1)                          #解析HTML
+        for i in range(1,page_count): 
+            req = self.send_request(self.url.format(str(i)))   #发送请求
+            self.parse_request(req,i)                          #解析HTML
 
 if __name__ == '__main__':
     page_count = 100
