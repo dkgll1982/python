@@ -24,12 +24,12 @@ s = '''{
                 }
         ]
 }''' 
-res=json.loads(s) 
+res=json.loads(s)                       #json转换成字典
 
-print(res)#打印字典 
+print(res)                              #打印字典 
 
-print(type(res))#打印res类型
-for dict in res['stu_info']:
+print(type(res))                        #打印res类型
+for dict in res.get('stu_info'):        #字典类型可以用get方法取值
     print('-'*40)
     for key,value in dict.items():
         print(key,':',value) 

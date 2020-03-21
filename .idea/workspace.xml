@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b3a0996-de09-4dc6-aff8-e200647590a8" name="Default" comment="tijiao">
-<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/1-练习例子/exit函数.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/10-类特殊成员/yield例子1.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/10-类特殊成员/yield例子2.py" afterDir="false" />
@@ -105,67 +104,6 @@
       <change beforePath="$PROJECT_DIR$/23-线程/30线程通信_手写Queue2.py" beforeDir="false" afterPath="$PROJECT_DIR$/23-线程/33.线程通信_手写Queue2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/23-线程/9.可重入锁RLock使用.py" beforeDir="false" afterPath="$PROJECT_DIR$/23-线程/10.可重入锁RLock使用.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/6-流程控制/for_else.py" beforeDir="false" />
-=======
-      <change afterPath="$PROJECT_DIR$/12-常用模块/1.命令行参数解析/optparse模块.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/12-常用模块/1.命令行参数解析/sys.args.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/12-常用模块/2.加密解密模块/1.md5加密基本方法.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/12-常用模块/2.加密解密模块/2.文件一致性校验.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/12-常用模块/2.加密解密模块/3.对明文密码进行加密.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/12-常用模块/2.加密解密模块/4.破解用户注册的密码.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/12-常用模块/2.加密解密模块/5.hmac模块的加密方式.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/12-常用模块/2.加密解密模块/学习总结.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/12-常用模块/3.configparser模块/setting.ini" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/17-网络编程/10.TCP文件传输/作业20191206_SSH命令/客户端.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/17-网络编程/10.TCP文件传输/作业20191206_SSH命令/服务端.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/17-网络编程/14.Socket_Server/Client端.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/17-网络编程/14.Socket_Server/Server端.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/17-网络编程/15.FTP程序/FtpClient/1.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/17-网络编程/15.FTP程序/FtpClient/1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/17-网络编程/15.FTP程序/FtpClient/ftp_client.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/17-网络编程/15.FTP程序/FtpServer/bin/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/17-网络编程/15.FTP程序/FtpServer/bin/ftp_server.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/17-网络编程/15.FTP程序/FtpServer/conf/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/17-网络编程/15.FTP程序/FtpServer/conf/accounts.cfg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/17-网络编程/15.FTP程序/FtpServer/conf/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/17-网络编程/15.FTP程序/FtpServer/core/ftp_server.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/17-网络编程/15.FTP程序/FtpServer/core/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/17-网络编程/15.FTP程序/FtpServer/home/alex/1.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/17-网络编程/15.FTP程序/FtpServer/home/alex/1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/17-网络编程/9.解决粘包现象/strcut示例2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/17-网络编程/ISO模型.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2-基本数据类型和运算符/print_flush刷新.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1-练习例子/正则表达式.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/10-类特殊成员/类特殊成员_attr_函数.py" beforeDir="false" afterPath="$PROJECT_DIR$/10-类特殊成员/类特殊成员_attr_函数.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/12-常用模块/a.json" beforeDir="false" afterPath="$PROJECT_DIR$/16-JSON资料/a.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/12-常用模块/json模块.py" beforeDir="false" afterPath="$PROJECT_DIR$/16-JSON资料/6.json模块.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/12-常用模块/re正则表达式.py" beforeDir="false" afterPath="$PROJECT_DIR$/5-正则表达式/re正则表达式.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/12-常用模块/set和frozenset集合.py" beforeDir="false" afterPath="$PROJECT_DIR$/3-列表元组字典集合队列/12.set和frozenset集合.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/16-JSON资料/Json.py" beforeDir="false" afterPath="$PROJECT_DIR$/16-JSON资料/5.Json实例.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/17-网络编程/10.TCP文件传输/作业20191206/客户端.py" beforeDir="false" afterPath="$PROJECT_DIR$/17-网络编程/10.TCP文件传输/作业20191206_文件传输/客户端.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/17-网络编程/10.TCP文件传输/作业20191206/服务端.py" beforeDir="false" afterPath="$PROJECT_DIR$/17-网络编程/10.TCP文件传输/作业20191206_文件传输/服务端.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/17-网络编程/15.Socket手写_单线程/Client.py" beforeDir="false" afterPath="$PROJECT_DIR$/17-网络编程/16.Socket手写_单线程/Client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/17-网络编程/15.Socket手写_单线程/Server.py" beforeDir="false" afterPath="$PROJECT_DIR$/17-网络编程/16.Socket手写_单线程/Server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/17-网络编程/16.Socket手写_多线程客户端服务端交互/Client1.py" beforeDir="false" afterPath="$PROJECT_DIR$/17-网络编程/17.Socket手写_多线程客户端服务端交互/Client1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/17-网络编程/16.Socket手写_多线程客户端服务端交互/Client2.py" beforeDir="false" afterPath="$PROJECT_DIR$/17-网络编程/17.Socket手写_多线程客户端服务端交互/Client2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/17-网络编程/16.Socket手写_多线程客户端服务端交互/Server.py" beforeDir="false" afterPath="$PROJECT_DIR$/17-网络编程/17.Socket手写_多线程客户端服务端交互/Server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/17-网络编程/17.Socket手写_多线程客户之间交互/Client1.py" beforeDir="false" afterPath="$PROJECT_DIR$/17-网络编程/18.Socket手写_多线程客户之间交互/Client1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/17-网络编程/17.Socket手写_多线程客户之间交互/Client2.py" beforeDir="false" afterPath="$PROJECT_DIR$/17-网络编程/18.Socket手写_多线程客户之间交互/Client2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/17-网络编程/17.Socket手写_多线程客户之间交互/Server.py" beforeDir="false" afterPath="$PROJECT_DIR$/17-网络编程/18.Socket手写_多线程客户之间交互/Server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/17-网络编程/9.解决粘包现象/2.简单版本2/server端.py" beforeDir="false" afterPath="$PROJECT_DIR$/17-网络编程/9.解决粘包现象/2.简单版本2/server端.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/17-网络编程/9.解决粘包现象/2.终极版本/client端copy.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/17-网络编程/9.解决粘包现象/strcut示例1.py" beforeDir="false" afterPath="$PROJECT_DIR$/17-网络编程/9.解决粘包现象/strcut示例1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3-列表元组字典集合队列/12.序列概述.py" beforeDir="false" afterPath="$PROJECT_DIR$/3-列表元组字典集合队列/13.序列概述.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3-列表元组字典集合队列/13.序列化.py" beforeDir="false" afterPath="$PROJECT_DIR$/3-列表元组字典集合队列/14.序列化.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3-列表元组字典集合队列/14.切片.py" beforeDir="false" afterPath="$PROJECT_DIR$/3-列表元组字典集合队列/15.切片.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3-列表元组字典集合队列/15.切片0.py" beforeDir="false" afterPath="$PROJECT_DIR$/3-列表元组字典集合队列/16.切片0.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3-列表元组字典集合队列/16.切片1.py" beforeDir="false" afterPath="$PROJECT_DIR$/3-列表元组字典集合队列/17.切片1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3-列表元组字典集合队列/17.切片2.py" beforeDir="false" afterPath="$PROJECT_DIR$/3-列表元组字典集合队列/18.切片2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3-列表元组字典集合队列/18.星号运算符.py" beforeDir="false" afterPath="$PROJECT_DIR$/3-列表元组字典集合队列/19.星号运算符.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3-列表元组字典集合队列/19.enumerate函数.py" beforeDir="false" afterPath="$PROJECT_DIR$/3-列表元组字典集合队列/20.enumerate函数.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3-列表元组字典集合队列/20.单向队列queue.py" beforeDir="false" afterPath="$PROJECT_DIR$/3-列表元组字典集合队列/21.单向队列queue.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3-列表元组字典集合队列/21.双向队列dqueue.py" beforeDir="false" afterPath="$PROJECT_DIR$/3-列表元组字典集合队列/22.双向队列dqueue.py" afterDir="false" />
->>>>>>> 8c71f90a755f435117c304b5b10d4370e123be32
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

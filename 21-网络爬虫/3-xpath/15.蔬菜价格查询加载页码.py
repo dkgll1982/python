@@ -47,9 +47,9 @@ class ShuCaiSpider():
             "user_agent":'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36'
         }
         #查询的蔬菜品名
-        self.pname = ''
+        self.pname = '黄瓜'
         #根据页码自动加载,本例暂定加载最多100页
-        self.max_pagesize = 100
+        self.max_pagesize = 150
     
     def send_request(self,pageNum=0):
         form_data={
@@ -90,7 +90,7 @@ class ShuCaiSpider():
                 req = self.send_request(x)
                 if req:
                     self.parse_request(req,x)
-                    print('爬取第{}页{}价格成功！'.format(x+1,self.pname))
+                    print('爬取第{}/{}页{}价格成功！'.format(x+1,num,self.pname))
             
 
 if __name__ == '__main__':

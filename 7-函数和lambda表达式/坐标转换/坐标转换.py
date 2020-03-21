@@ -214,7 +214,7 @@ def out_of_china(lng, lat):
     return not (lng > 73.66 and lng < 135.05 and lat > 3.86 and lat < 53.55)
 
 
-if __name__ == '__main__':
+#if __name__ == '__main__':
     #百度ak,sk
     # ak = "LKnE67ysMkrG0LHwyG2GHPlc00LtMfSW"
     # sk = "3hPe7iy3Ydq003v6wYbKn6pq7sHgGCRj"
