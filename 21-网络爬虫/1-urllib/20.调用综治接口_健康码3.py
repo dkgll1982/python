@@ -27,11 +27,11 @@ class JKMSpider():
         self.dbpwd = 'cigproxy'
         self.dbserver = '172.21.246.244:15211/xe'
         self.datatype = 'jkm_person'
-        self.city = '湖州市'
+        self.city = '杭州市'
         self.file_name = file_name  
         self.file_md5 = self.getfilemd5()
         
-        self.pagecount = 1000        #每次取数据行数
+        self.pagecount = 9000        #每次取数据行数
         self.totalcount = 0          #总行数
         
         self.collist = '' 
@@ -156,7 +156,7 @@ class JKMSpider():
         select sfzh,mzt,mffd FROM (  
             select DISTINCT replace(replace(trim(replace(replace(replace(replace(sfzh,chr(10)),CHR(32)),chr(13),chr(9)),' ')),'	'),'	') sfzh, '绿码' mzt,'{}' mffd from T 
             where sfzh NOT IN (
-                select A from excel_table where TYPE='jkm' and to_date(c,'YYYY-MM-DD HH24')>sysdate-0.25
+                select A from excel_table where TYPE='jkm' --and to_date(c,'YYYY-MM-DD HH24')>sysdate-0.25
             )  
         ) where LENGTH(SFZH)=18 and ROWNUM<""".format(self.key_column,self.datatype,self.file_md5,self.key_column,self.city) + str(self.pagecount) 
         sql2 = "" 
@@ -231,13 +231,13 @@ if __name__ == '__main__':
             start = time.time()  
             
             jkm = JKMSpider(file_name)  
-            dcol = jkm.savedb()  
+            jkm.savedb()  
             pagesize = math.ceil(jkm.totalcount/jkm.pagecount)+1
-            for x in range(pagesize): 
+            for x in range(1,2): 
                 jkm.get_data()
                 print('第%d遍查询完毕！'%(x+1))
                 
-            jkm.imp_excel()
+            # jkm.imp_excel()
                 
             end = time.time()
             print("主线程(%s)结束,总耗时：%0.6f秒"%(threading.current_thread().name,end-start)) 
@@ -245,4 +245,4 @@ if __name__ == '__main__':
             print('Waring!!!,excel file path is not exist.') 
     else:
         print('Erorr!!!,please enter excel file path.') 
-        
+            

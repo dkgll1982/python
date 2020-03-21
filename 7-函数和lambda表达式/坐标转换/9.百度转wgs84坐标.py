@@ -49,7 +49,6 @@ def get_zb(index):
     cursor.close()
     conn.close()
 
-
 if __name__ == "__main__":
     print("主线程(%s)启动" % (threading.current_thread().name))
     start = time.time()
