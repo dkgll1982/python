@@ -26,6 +26,21 @@ class AnaimalSpider(object):
         self.headers = { 
             "user_agent":'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.100 Safari/537.36'
         } 
+        #建表语句
+        #   CREATE TABLE "CIGPROXY"."BASE_LJ_HOUSE" 
+        #     (	"IMG" VARCHAR2(2000 BYTE), 
+        #         "DESCRIPT" VARCHAR2(2000 BYTE), 
+        #         "TITLE" VARCHAR2(2000 BYTE), 
+        #         "FANGXIANG" VARCHAR2(2000 BYTE), 
+        #         "LOUCEN" VARCHAR2(2000 BYTE), 
+        #         "CHANQUAN" VARCHAR2(2000 BYTE), 
+        #         "JIANJIE" VARCHAR2(2000 BYTE), 
+        #         "ZHONGJIE" VARCHAR2(2000 BYTE), 
+        #         "DEALDATE" VARCHAR2(2000 BYTE), 
+        #         "TOTALPRICE" VARCHAR2(2000 BYTE), 
+        #         "UNITPRICE" VARCHAR2(2000 BYTE), 
+        #         "CITY" VARCHAR2(200 BYTE)
+        #     )
     
     def send_request(self,url):
         return requests.get(url,headers = self.headers)
