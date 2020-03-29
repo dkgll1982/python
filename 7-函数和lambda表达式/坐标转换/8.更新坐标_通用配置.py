@@ -29,8 +29,8 @@ class ZuoBiaoZhuanHuan():
         }
         self.conn = cx_Oracle.connect(*self.dbconfig[city])
         self.cursor = self.conn.cursor() 
-        self.tb_name = 'zz_place_common'         #表名
-        self.addr_col = 'PLACE_ADDR'        #地址列名
+        self.tb_name = 'zz_place_common'      #表名
+        self.addr_col = 'PLACE_NAME'          #地址列名
         self.location_col = 'remark'          #坐标列名
         #百度ak,sk
         self.ak = "LKnE67ysMkrG0LHwyG2GHPlc00LtMfSW"
