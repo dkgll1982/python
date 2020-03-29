@@ -3,7 +3,7 @@
 # @Author: guojun 
 # @Company: Aerospace Shenzhou Intelligent System Technology Co., Ltd 
 # @Site: https://user.qzone.qq.com/350606539/main 
-# @Date: 2020-03-24 20:23:17 
+# @Date: 2020-03-29 15:39:23 
 # @Remark: 人生苦短，我用python！
 
 import requests
@@ -12,46 +12,95 @@ import re
 from lxml import etree
 import os
 import time
+import cx_Oracle
+import json
+import copy
 
-class WeiBoSpider():
+os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
+
+class CarSpider():
     def __init__(self):
         super().__init__()
-        self.url = 'https://s.weibo.com/weibo?q=%E6%88%90%E9%83%BD%E4%B8%83%E4%B8%AD%E7%BE%8E%E9%A3%9F&Refer=SWeibo_box'
-        self.base_dir = r'backup/爬虫/微博'
+        self.host = 'https://www.autohome.com.cn'
+        self.url = parse.urljoin(self.host,'/all/{}/#liststart')
+        self.comment_url='https://reply.autohome.com.cn/api/getData_ReplyCounts.ashx'   #获取评论数的URL
+        self.base_dir = r'backup/爬虫/汽车之家'
         self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.87 Safari/537.36',
-            'Cookie': 'SINAGLOBAL=3141108771060.63.1553863967185; UM_distinctid=16e88aa439529a-00db7a6cc5b9e6-7711439-144000-16e88aa43961ae; _s_tentry=www.baidu.com; Apache=2775841346126.4995.1585024132452; ULV=1585024132491:46:2:1:2775841346126.4995.1585024132452:1584718911865; login_sid_t=662130e3fdfa40e5398d791ace11dd1a; cross_origin_proto=SSL; WBtopGlobal_register_version=3d5b6de7399dfbdb; UOR=,,www.sina.com.cn; un=dkgll; wvr=6; SCF=Akw6l0ddwQgGEnkzbbUnAm3ALPNZ7pGVsWUJLLEjSLXhPOcPxcjDl_7ZK_UezieNS0QunCCtnzgsPDBKUFPZCMo.; SUB=_2A25zfcxoDeRhGedO7FEZ9S_MzD2IHXVQCrqgrDV8PUNbmtAfLUqjkW9NXP80YGpoFZu8AennUCo51DTP2t0VCrtE; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WWCdf6o_QAvdcfTjm28zmwZ5JpX5K2hUgL.Fo27S0eRSK27S022dJLoIEBLxKqL1hnL1K2LxKqLB-eLBozLxK.L1-2L12qLxK-LB.qL1het; SUHB=0pHgRwrWQfI9jJ; ALF=1616572342; SSOLoginState=1585036344; webim_unReadCount=%7B%22time%22%3A1585036469638%2C%22dm_pub_total%22%3A2%2C%22chat_group_client%22%3A0%2C%22allcountNum%22%3A69%2C%22msgbox%22%3A0%7D; WBStorage=42212210b087ca50|undefined'
-        }
-        self.form_data={
-            'q':'成都七中美食',
-            'Refer':'SWeibo_box'
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.87 Safari/537.36', 
+        } 
+        self.params ={
+            "appid": "1",
+            "dateType": "jsonp" 
         }
         if not os.path.exists(self.base_dir):
             os.mkdir(self.base_dir)
-    
-    def send_request(self,url):
-        response = requests.get(url = url,headers = self.headers)
+        #ORACLE连接参数
+        self.conn = cx_Oracle.connect('cigproxy','cigproxy','localhost/orcl')
+        self.cursor = self.conn.cursor() 
+        #建表语句
+        # create table base_CAR_INFO
+        # (
+        #     objid varchar2(20),
+        #     title varchar2(200),
+        #     pub_time  varchar2(200),
+        #     liulan_num varchar2(200),
+        #     c_num varchar2(200),
+        #     descript varchar2(2000)
+        # )
+        
+    #发送请求
+    def send_request(self,url,params = None):
+        response = requests.get(url = url,headers = self.headers,params = params)
         if response.status_code == 200:
             return response
         else:
             print('URL：{}，状态码：{}'.format(url,response.status_code))
     
+    #解析请求
     def parse_content(self,response):
-        #html = etree.HTML(response.content)
-        self.write_content(self.base_dir+'/weibo.html',response.text)
-        
-    def write_content(self,path,content):
-        with open(path,'w',encoding = 'utf-8') as f:
-            f.write(content)
+        html = etree.HTML(response.content)
+        li_list = html.xpath('//div[@id="auto-channel-lazyload-article"]/ul//li') 
+        dict,para = [],{}
+        for li in li_list:
+            #获取文章ID，特殊属性注意需要用小写表示，可能是bug
+            objid = li.xpath(".//em[contains(@data-class,'icon12-infor')]/@data-articleid")
+            if objid:
+                para["objid"] = objid[0]                                                     #文章ID
+                para["title"] = li.xpath('.//h3/text()')[0]                                  #标题
+                para["pub_time"] = li.xpath('.//span[@class="fn-left"]/text()')[0]           #发表时间
+                para["liulan_num"] = li.xpath('.//span[@class="fn-right"]/em[1]/text()')[0]  #浏览量
+                para["descript"] = li.xpath('.//p/text()')[0]                                #文章描述
+                self.params["objids"] = objid[0]
+                comment_response = self.send_request(self.comment_url,params = self.params)  #获取评论数
+                para["c_num"] = "0"
+                if comment_response:
+                    result = json.loads(comment_response.text.replace('\'','"').replace('(','').replace(')',''))  
+                    para["c_num"] = result["commentlist"][0]["replycount"]                   #评论数
+                dict.append(copy.deepcopy(para))
+        self.insert_records(dict)      
+        self.conn.commit()           
+    
+    # 执行添加记录的SQL    
+    def insert_records(self,params):
+        sql = """INSERT INTO base_CAR_INFO(objid,title,pub_time,liulan_num,c_num,descript) 
+                 SELECT :objid,:title,:pub_time,:liulan_num,:c_num,:descript FROM DUAL"""
+        self.cursor.executemany(sql,params) 
     
     def start(self):
-        response = self.send_request(self.url)
-        if response:
-            self.parse_content(response)
+        for x in range(1,101):
+            response = self.send_request(self.url.format(x))
+            if response:
+                self.parse_content(response)
+            time.sleep(1)
+            print('第{}页文章爬取完成！'.format(x))
         
+        print('全部文章爬取完成！')
+        self.cursor.close()
+        self.conn.close()      
+            
 if __name__ == "__main__":
     start = time.time()
-    wbs = WeiBoSpider()
-    wbs.start()
+    cars = CarSpider()
+    cars.start()
     end = time.time()
-    print('爬取新浪微博完成，耗时%.2fs'%(end-start))
+    print('爬取汽车之家文章完成，耗时%.2fs'%(end-start))
