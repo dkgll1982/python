@@ -70,7 +70,11 @@ class CarSpider():
                 para["pub_time"] = li.xpath('.//span[@class="fn-left"]/text()')[0]           #发表时间
                 para["liulan_num"] = li.xpath('.//span[@class="fn-right"]/em[1]/text()')[0]  #浏览量
                 para["descript"] = li.xpath('.//p/text()')[0]                                #文章描述
+                
                 self.params["objids"] = objid[0]
+                #此处是关键：需要分析评论数这个值在页面源码上为什么是0，分析发现此处的值是通过调用js ajax请求
+                #另一个url地址获取的数据，传递的参数是objids，可以搜到类似下边一行的url地址
+                #url:"//reply.autohome.com.cn/api/getData_ReplyCounts.ashx?appid=1&dateType=jsonp&objids="
                 comment_response = self.send_request(self.comment_url,params = self.params)  #获取评论数
                 para["c_num"] = "0"
                 if comment_response:
