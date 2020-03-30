@@ -15,6 +15,7 @@ import hashlib
 import requests
 import threading
 from PIL import Image, ImageDraw, ImageFont
+import copy
 
 class photo_shuiying():
     def __init__(self, file_name):
@@ -37,6 +38,7 @@ class photo_shuiying():
         }
         self.mk_dir(self.base_dir)
         self.mk_dir(self.sy_dir)
+        self.sheet_list =[]
 
     # 创建文件目录
     def mk_dir(self, dir):
@@ -96,6 +98,7 @@ class photo_shuiying():
 
     # 读取excel,保存到db
     def savecard_todb(self):
+        self.sheet_list =[]
         filemd5 = self.getfilemd5()
         # 1.打开文件
         work_book = xlrd.open_workbook(self.file_name)
@@ -107,8 +110,8 @@ class photo_shuiying():
         db_cursor = db_conn.cursor()
 
         # 先删除已导入的数据
-        # sql_del = "delete from cigproxy.excel_table where type='{}' and z='{}'".format(self.datatype,self.file_md5)
-        # db_cursor.execute(sql_del)
+        sql_del = "delete from cigproxy.excel_table where type='{}' and z='{}'".format(self.datatype,self.file_md5)
+        db_cursor.execute(sql_del)
 
         # 2.通过sheet页索引创建sheet页对象
         for i in range(sheet_count):
@@ -120,6 +123,9 @@ class photo_shuiying():
             num_collist = work_sheet.row_values(0)
             sheet_name = work_sheet.name
 
+            self.mk_dir(self.base_dir+'\\'+sheet_name)
+            self.mk_dir(self.sy_dir+'\\'+sheet_name)
+            self.sheet_list.append(copy.deepcopy(sheet_name))
             print("正在导入Excel文件[{}],md5值:{},sheet[{}]的列为:{}...".format(os.path.basename(self.file_name),
                                                                       self.file_md5, sheet_name, num_collist))
 
@@ -135,21 +141,22 @@ class photo_shuiying():
             col = ''
             for l in letter[0:num_cols]:
                 col = col + ',:' + l
-            col = ':XH,:TYPE,:Z' + col
+            col = ':XH,:TYPE,:Z,:Y' + col
 
-            # sql_cmd = 'insert into cigproxy.excel_table({}) values ({})'.format(col.replace(':', ''), col)
+            sql_cmd = 'insert into cigproxy.excel_table({}) values ({})'.format(col.replace(':', ''), col)
 
-            # rn = 0
-            # for curr_row in range(self.totalcount):
-            #     rn = rn + 1
-            #     row = work_sheet.row_values(curr_row)
-            #     row.insert(0, rn)
-            #     row.insert(1, self.datatype)
-            #     row.insert(2, self.file_md5)
-            #     db_cursor.execute(sql_cmd, row)
-            #     if rn % 1000 == 0:                     # 每1000次提交一次结果
-            #         db_conn.commit()
-            # db_conn.commit()
+            rn = 0
+            for curr_row in range(self.totalcount):
+                rn = rn + 1
+                row = work_sheet.row_values(curr_row)
+                row.insert(0, rn)
+                row.insert(1, self.datatype)
+                row.insert(2, self.file_md5)
+                row.insert(3, sheet_name)
+                db_cursor.execute(sql_cmd, row)
+                if rn % 1000 == 0:                     # 每1000次提交一次结果
+                    db_conn.commit()
+            db_conn.commit()
 
             print("导入Excel文件[{}],md5值:{},sheet[{}]完成！".format(
                 os.path.basename(self.file_name), self.file_md5, sheet_name))
@@ -167,7 +174,8 @@ class photo_shuiying():
         # 查询人口数据
         sql1 = """SELECT * FROM (
                     select {} sfzh,tb.id,TC.FILE_NAME,TC.FILE_PATH,lower(substr(file_name,instr(file_name,'.',-1)+1)) file_type,
-                        case when TC.visit_path like '/%' then 'http://jczl.giscloud.cx'||TC.visit_path else TC.visit_path end visit_path,ROW_NUMBER() OVER(PARTITION BY TC.B_ID ORDER BY TC.CREATE_DATE DESC NULLS LAST,TC.FILE_SIZE DESC NULLS LAST) AS RN
+                        case when TC.visit_path like '/%' then 'http://jczl.giscloud.cx'||TC.visit_path else TC.visit_path end visit_path,
+                        ROW_NUMBER() OVER(PARTITION BY TC.B_ID ORDER BY TC.CREATE_DATE DESC NULLS LAST,TC.FILE_SIZE DESC NULLS LAST) AS RN,TC.Y SHEET_NAME
                     from cigproxy.excel_table  ta
                     join cigproxy.zz_person tb on ta.{}=tb.card_num 
                     left join cigproxy.zz_attachment tc on tc.file_type='per-image' and tc.b_id=tb.id
@@ -180,9 +188,10 @@ class photo_shuiying():
             card_num = row[0]
             file_type = row[4] 
             url = row[5].replace('\\','/')      #url地址\\不能识别，替换成/
+            sheet_name = row[6]
             res = self.send_request(url)
             if res:
-                full_path = r"{}\{}.{}".format(self.base_dir, card_num, file_type)
+                full_path = r"{}\{}\{}.{}".format(self.base_dir,sheet_name,card_num,file_type)
                 self.write_content(res.content, full_path)
                 print('下载身份证%s的照片成功!' %(card_num))
 
@@ -192,16 +201,17 @@ class photo_shuiying():
 
     # 添加水印并保存在相应目录
     def save_sy_img(self):
-        for file_name in os.listdir(self.base_dir):
-            card_num = file_name.split('.')[0]
-            try:
-                new_img = self.img_add_sy(self.base_dir+'/'+file_name, self.sy_img)
-                new_img.save(self.sy_dir+'/'+card_num+'.JPG')
-                print('身份证%s水印添加完成!' % (card_num))
-            except Exception as e:
-                msg = '身份证%s水印添加失败,错误原因:%s' % (card_num,e)
-                print(msg)
-                self.write_content(msg, self.log_file, 'a')
+        for sheet_name in self.sheet_list:
+            for file_name in os.listdir(self.base_dir+'/'+sheet_name):
+                card_num = file_name.split('.')[0]
+                try:
+                    new_img = self.img_add_sy(self.base_dir+'/'+sheet_name+'/'+file_name, self.sy_img)
+                    new_img.save(self.sy_dir+'/'+sheet_name+'/'+sheet_name+'/'+card_num+'.JPG')
+                    print('身份证%s水印添加完成!' % (card_num))
+                except Exception as e:
+                    msg = '身份证%s水印添加失败,错误原因:%s' % (card_num,e)
+                    print(msg)
+                    self.write_content(msg, self.log_file, 'a')
 
     def start(self):
         self.savecard_todb()    # 读取excel,保存到db

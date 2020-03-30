@@ -14,8 +14,9 @@ import urllib
 import math
 from urllib import parse
 import hashlib
-import urllib.request
+import requests
 import json
+import urllib.request
 
 x_pi = 3.14159265358979324 * 3000.0 / 180.0
 pi = 3.1415926535897932384626  # π
@@ -49,10 +50,10 @@ class bdapi:
         return url
 
     def get_zb(self,url):
-        doc = urllib.request.urlopen(url)
+        doc = requests.get(url)
 
-        if doc.getcode() == 200:
-            s = doc.read().decode('utf-8')  #一定要解码！！！！ 
+        if doc.status_code == 200:
+            s = doc.text
             jsonData = json.loads(s)
             if jsonData['status'] == 0:
                 lat=jsonData['result']['location']['lat']
@@ -214,16 +215,16 @@ def out_of_china(lng, lat):
     return not (lng > 73.66 and lng < 135.05 and lat > 3.86 and lat < 53.55)
 
 
-#if __name__ == '__main__':
-    #百度ak,sk
-    # ak = "LKnE67ysMkrG0LHwyG2GHPlc00LtMfSW"
-    # sk = "3hPe7iy3Ydq003v6wYbKn6pq7sHgGCRj"
-    # g = bdapi(ak,sk);
-    # url = g.get_url("浙江省湖州市长兴县人民政府")
-    # print(url)
-    # bd_zb = g.get_zb(url)
-    # wgs_zb =  bd09_to_wgs84(bd_zb[0], bd_zb[1])
-    # print("百度：%s,WGS84：%s"%(bd_zb,wgs_zb))
+# if __name__ == '__main__':
+#     #百度ak,sk
+#     ak = "LKnE67ysMkrG0LHwyG2GHPlc00LtMfSW"
+#     sk = "3hPe7iy3Ydq003v6wYbKn6pq7sHgGCRj"
+#     g = bdapi(ak,sk);
+#     url = g.get_url("浙江省湖州市长兴县人民政府")
+#     print(url)
+#     bd_zb = g.get_zb(url)
+#     wgs_zb =  bd09_to_wgs84(bd_zb[0], bd_zb[1])
+#     print("百度：%s,WGS84：%s"%(bd_zb,wgs_zb))
     
 #     lng = 128.543
 #     lat = 37.065

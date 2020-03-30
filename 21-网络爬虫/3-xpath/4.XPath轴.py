@@ -42,4 +42,7 @@ result =  html.xpath('//li[3]/self::*')#选取当前节点。
 print(result)
 result =  html.xpath('//li[3]')#选取当前节点。
 print(result)
+result =  html.xpath('//li[position()=2 or position()=4]/a/text()') #选取某个指定的或者某个区间的节点。
+for r in result:
+    print('---->',r)
 
