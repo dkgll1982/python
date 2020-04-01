@@ -175,12 +175,12 @@ class photo_shuiying():
         sql1 = """SELECT * FROM (
                     select {} sfzh,tb.id,TC.FILE_NAME,TC.FILE_PATH,lower(substr(file_name,instr(file_name,'.',-1)+1)) file_type,
                         case when TC.visit_path like '/%' then 'http://jczl.giscloud.cx'||TC.visit_path else TC.visit_path end visit_path,
-                        ROW_NUMBER() OVER(PARTITION BY TC.B_ID ORDER BY TC.CREATE_DATE DESC NULLS LAST,TC.FILE_SIZE DESC NULLS LAST) AS RN,TC.Y SHEET_NAME
+                        ROW_NUMBER() OVER(PARTITION BY TC.B_ID ORDER BY TC.CREATE_DATE DESC NULLS LAST,TC.FILE_SIZE DESC NULLS LAST) AS RN,TA.Y SHEET_NAME
                     from cigproxy.excel_table  ta
                     join cigproxy.zz_person tb on ta.{}=tb.card_num 
                     left join cigproxy.zz_attachment tc on tc.file_type='per-image' and tc.b_id=tb.id
                     where type='{}' and ta.z='{}'  
-                ) where RN=1 and visit_path like '%jczl.giscloud.cx%'""".format(self.key_column, self.key_column, self.datatype, self.file_md5)
+                ) where RN=1 and visit_path is not null""".format(self.key_column, self.key_column, self.datatype, self.file_md5)
 
         cursor.execute(sql1)
         rows = cursor.fetchall()                # 得到所有数据集
@@ -188,7 +188,7 @@ class photo_shuiying():
             card_num = row[0]
             file_type = row[4] 
             url = row[5].replace('\\','/')      #url地址\\不能识别，替换成/
-            sheet_name = row[6]
+            sheet_name = row[7]
             res = self.send_request(url)
             if res:
                 full_path = r"{}\{}\{}.{}".format(self.base_dir,sheet_name,card_num,file_type)
@@ -206,7 +206,7 @@ class photo_shuiying():
                 card_num = file_name.split('.')[0]
                 try:
                     new_img = self.img_add_sy(self.base_dir+'/'+sheet_name+'/'+file_name, self.sy_img)
-                    new_img.save(self.sy_dir+'/'+sheet_name+'/'+sheet_name+'/'+card_num+'.JPG')
+                    new_img.save(self.sy_dir+'/'+sheet_name+'/'+card_num+'.JPG')
                     print('身份证%s水印添加完成!' % (card_num))
                 except Exception as e:
                     msg = '身份证%s水印添加失败,错误原因:%s' % (card_num,e)

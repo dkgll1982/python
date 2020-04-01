@@ -33,7 +33,7 @@ class bdapi:
         
         # 以get请求为例http://api.map.baidu.com/geocoder/v2/?address=百度大厦&output=json&ak=你的ak
         # 地理编码接口
-        queryStr = '/geocoding/v3/?address=%s&output=json&ak=%s' %(address,self.ak)
+        queryStr = '/geocoder/v2/?address=%s&output=json&ak=%s' %(address,self.ak)
     
         # 对queryStr进行转码，safe内的保留字符不转换
         encodedStr = parse.quote(queryStr, safe="/:=&?#+!$,;'@()*[]")

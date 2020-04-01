@@ -24,7 +24,7 @@ sk = "3hPe7iy3Ydq003v6wYbKn6pq7sHgGCRj"
 geoserver = 'https://xixian.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
  
 #线程循环次数
-xhcount = 2
+xhcount = 200
 
 # 大致计算公式如下
 # 公式1：线程循环次数 = 数据分段区间/每次取数据行数，如5000/100=50，即需要约50次循环才能跑完区间的所有的数据 
@@ -50,14 +50,14 @@ def request_data(urt):
 def get_zb():
     os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
     #ORACLE连接参数
-    conn = cx_Oracle.connect('cigproxy','cigproxy','136.2.34.65:15227/xe')
+    conn = cx_Oracle.connect('cigproxy','cigproxy','136.2.34.65:15233/xe')
     cursor = conn.cursor() 
 
     #查询数据的sql
     sql1 =  ("""select ID,case when R_ADDR not like '%西咸新区%' then '西咸新区'||R_ADDR ELSE R_ADDR END ADDR 
                 from zz_person
                 where g_id not in(select departmentid from a4_sys_department where d_level=4 and state=1) 
-                and r_addr is not null AND result is null and ROWNUM<10 """)      
+                and r_addr is not null AND update_date is null and ROWNUM<100 """)      
     #修改返回结果的sql
     sql2 = ""
 
@@ -67,7 +67,7 @@ def get_zb():
     update_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     g = bdapi(ak,sk)
     for row in rows: 
-        url =g.get_url(row[1]) 
+        url =g.get_url(row[1][0:30]) 
         try:
             bd_zb = g.get_zb(url)                                                               #得到百度坐标
             if bd_zb is not None:
@@ -76,7 +76,7 @@ def get_zb():
                 geo = geoserver+"?x="+wgs_x+"&y="+wgs_y 
                 result = request_data(geo).text 
                 print("子线程(%s)处理；百度：%s；WGS84：%s"%(threading.current_thread().name,bd_zb,wgs_zb)) 
-                sql2 = "update ZZ_PERSON set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS'),RESULT='%s' where id='%s'"%(update_date,str(result),row[0]) 
+                sql2 = "update ZZ_PERSON set x='{}',y='{}',update_date=to_date('{}','YYYY-MM-DD HH24:MI:SS'),RESULT='{}' where id='{}'".format(wgs_x,wgs_y,update_date,str(result),row[0]) 
             else:       
                 sql2 = "update ZZ_PERSON set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where id='%s'"%(update_date,row[0])            
             cursor.execute(sql2)
