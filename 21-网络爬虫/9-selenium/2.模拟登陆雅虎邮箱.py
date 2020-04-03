@@ -9,7 +9,7 @@ from selenium.webdriver.chrome.options import Options
 #一下三行为无头模式运行，无头模式不开启浏览器，也就是在程序里面运行的
 chrome_options = Options()
 chrome_options.add_argument("--headless")
-browser = webdriver.Chrome(executable_path=(r'C:\Users\dkgll\AppData\Local\Google\Chrome\Application\chromedriver.exe'), options=chrome_options)
+browser = webdriver.Chrome()
 # #如果不用上面三行，那么就用下面这一行。运行的时候回自动的开启浏览器，并在浏览器中自动运行，你可以看到自动运行的过程
 # browser = webdriver.Chrome(executable_path=(r'C:\Users\0923\AppData\Local\Google\Chrome\Application\chromedriver.exe'))
 #设置访问链接
