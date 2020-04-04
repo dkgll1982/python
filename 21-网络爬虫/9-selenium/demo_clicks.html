@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>点击操作演示操作</title>
+	</head>
+<script language="javascript">
+	function rcl(e){
+		if (!e) e = window.event;
+		document.f1.t2.value += "[右击]";
+	}
+	function dcl(e){
+		if (!e) e = window.event;
+		document.f1.t2.value += "[双击]";
+	}
+	function cl(e){
+		if (!e) e = window.event;
+		document.f1.t2.value += "[单击]";
+	}
+	function onclick1(s){
+		document.f1.t2.value = "onclick_" + s;
+	}
+	function mouseDown(e){
+		if (!e) e = window.event;
+		document.f1.t2.value += "[点主不松开]";
+	}
+	function mouseUp(e){
+		if (!e) e = window.event;
+		document.f1.t2.value = "";
+	}
+	function mouseEnter(e){
+		
+		if (!e) e = window.event;
+		document.f1.enter.style.backgroundColor="red";
+	}
+	function mouseLeave(e){
+		
+		if (!e) e = window.event;
+		document.f1.enter.style.backgroundColor="white";
+	}
+</script>
+	<body>
+		<form name="f1">
+			<textarea name="t2" style="width: 240px; height: 108px; margin: 0px;"></textarea><br>
+			<input type="button" onclick="document.f1.t2.value=''" value="清除" name="t1"style="margin-right:20px;">
+			<input type="button" value="双击" ondblclick="dcl(event)" style="margin-right:20px;">
+			<input type="button" value="单击" onclick="cl(event)" style="margin-right:20px;">
+			<input type="button" value="右击" oncontextmenu="rcl(event)" style="margin-right:20px;">
+			<input type="button" value="点住不放开" onmousedown="mouseDown(event)" onmouseup="mouseUp(event)" style="margin-right:20px;">
+			<input type="button" id="enter" value="鼠标一进来" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)" style="margin-right:20px;">
+		</form>
+
+	</body>
+</html>
+</html>

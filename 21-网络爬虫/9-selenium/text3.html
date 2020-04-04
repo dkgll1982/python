@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.area{
+				width: 150px;
+				height: 150px;
+				border-top: dotted;
+				border-right: dotted;
+				border-left: dotted;
+				border-bottom: dotted;
+			
+			}
+			.box1{
+				width: 50px;
+				height: 50px;
+				border-top: inset;
+				border-right: inset;
+				border-left: inset;
+				border-bottom: inset;
+				background-color: aqua;
+			
+			}
+			#show{
+			width: 110px;
+				height: 30px;
+				border-top: inset;
+				border-right: inset;
+				border-left: inset;
+				border-bottom: inset;
+				background-color:chartreuse;
+				position:absolute;
+				top: 40px;
+				left: 450px;
+			}
+			#fo{
+			width: 110px;
+				height: 30px;
+				border-top: inset;
+				border-right: inset;
+				border-left: inset;
+				border-bottom: inset;
+				background-color:chartreuse;
+				position:absolute;
+				top: 40px;
+				left: 350px;
+			}
+			#showMouse{
+			width: 110px;
+				height: 30px;
+				border-top: inset;
+				border-right: inset;
+				border-left: inset;
+				border-bottom: inset;
+				background-color:lightgreen;
+				position:absolute;
+				top: 90px;
+				left: 450px;
+			}
+			#mou{
+			width: 95px;
+				height: 30px;
+				border-top: inset;
+				border-right: inset;
+				border-left: inset;
+				border-bottom: inset;
+				background-color:lightgreen;
+				position:absolute;
+				top: 90px;
+				left: 350px;
+			}
+			#bigDiv{
+				width: 700px;
+				height: 700px;
+				position:absolute;
+				top: 20px;
+				left: 950px;
+			}
+		</style>
+		
+	<script type="text/javascript">
+        var drag_ = false
+        var D = new Function('obj', 'return document.getElementById(obj);')
+        var oevent = new Function('e', 'if (!e) e = window.event;return e')
+        function Move_obj(obj) {
+		console.info(1);
+            var x, y;
+            D(obj).onmousedown = function (e) {
+
+                drag_ = true;
+                with (this) {
+                    style.position = "absolute";
+                    var temp1 = offsetLeft; 
+                    var temp2 = offsetTop;
+                    x = oevent(e).clientX; 
+                    y = oevent(e).clientY;
+                  console.info("x="+x+",y="+y);
+                    document.onmousemove = function (e) {
+                        if (!drag_) return false;
+                        with (this) {
+                            style.left = temp1 + oevent(e).clientX - x + "px";
+                            style.top = temp2 + oevent(e).clientY - y + "px";
+							var lt = temp1 + oevent(e).clientX - x;
+							var tp = temp2 + oevent(e).clientY - y ;
+							
+							var showDiv = document.getElementById("show");
+							var showMouse= document.getElementById("showMouse");
+							showDiv.innerHTML = "x="+lt+",y="+tp;
+							showMouse.innerHTML = "x="+lt+",y="+tp;
+							 if((lt>10&&lt<105)&&(tp>10&&tp<105)){
+        						smalTo();
+								tored1();
+								
+							}else{
+								towhite1();
+								smalToWhite();
+								}
+								
+							if((lt>10&&lt<105)&&(tp>180&&tp<280)){
+        						tored2();
+								smalTo();
+							}else{
+								towhite2();
+								smalToWhite();
+								}
+								
+							if((lt>10&&lt<105)&&(tp>360&&tp<460)){
+        						tored3();	
+								smalTo();							
+							}else{
+								towhite3();
+								smalToWhite();
+								}
+                        }
+                    }
+                }
+                document.onmouseup = new Function("drag_=false");
+            }
+        }
+
+		function tored1(){
+			document.getElementById("area1").style.backgroundColor="gray";
+		}
+		function tored2(){
+			document.getElementById("area2").style.backgroundColor="#4CD964";
+		}
+		function tored3(){
+			document.getElementById("area3").style.backgroundColor="#EC971F";
+		}
+		function towhite1(){
+			document.getElementById("area1").style.backgroundColor="";
+		}
+		function towhite2(){
+			document.getElementById("area2").style.backgroundColor="";
+		}
+		function towhite3(){
+			document.getElementById("area3").style.backgroundColor="";
+		}
+		function smalTo(){
+			document.getElementById("box1").style.backgroundColor="red";
+		}
+
+		function smalToWhite(){
+			document.getElementById("box1").style.backgroundColor="";
+		}
+		function moveMove(ev){
+			ev = ev || window.event;
+		  var mousePos = mousePosition(ev);
+		  
+		  document.getElementById('showMouse').innerHTML = "x="+mousePos.x+",y="+mousePos.y;
+		  
+		}
+		function mousePosition(ev){
+		  if(ev.pageX || ev.pageY){//firefox、chrome等浏览器
+		   return {x:ev.pageX,y:ev.pageY};
+		  }
+		  return {// IE浏览器
+		   x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+		   y:ev.clientY + document.body.scrollTop - document.body.clientTop
+		  };
+		 }
+		 
+		 function bigToda(){
+			document.getElementById("bigDiv").style.backgroundColor="darkorchid";
+		}
+		function bigToWhite(){
+			document.getElementById("bigDiv").style.backgroundColor="";
+		}
+	</script>
+	</head>
+	<body onmousemove="moveMove(event)" id="don">
+		
+		<div id="area1" class="area" onmouseenter="tored1()" onmouseleave="towhite1()"></div><br />
+		<div id="area2" class="area" onmouseenter="tored2()" onmouseleave="towhite2()"></div><br />
+		<div id="area3" class="area" onmouseenter="tored3()" onmouseleave="towhite3()"></div><br />
+		<div id="box1" class="box1" style="position: absolute; left: 397px; top: 207px;" onmouseenter="smalTo()" onmouseleave="smalToWhite()" onmousedown="smalTo()" onmouseover="Move_obj('box1')">拖拽我吧！</div> 
+		<div id="fo" >方块位置：</div>
+		<div id="show" ></div>
+		<div id="mou">鼠标位置：</div><div id="showMouse" ></div>
+		<div id="bigDiv"  onmouseenter="bigToda()"  onmouseleave="bigToWhite()"></div>
+	</body>
+	
+ 
+ 
+</html>
