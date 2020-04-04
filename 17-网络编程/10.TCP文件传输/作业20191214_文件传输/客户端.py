@@ -29,7 +29,7 @@ while True:
         header_str = header.decode('gbk')
         header_json = json.loads(header_str)
         file_size = header_json['file_size']
-        full_path = r"E:\100-航天智慧\2-源码库\python\backup\\"+file_name
+        full_path = r"backup\\"+file_name
 
         client.send(b'1')       #解决粘包问题
 

@@ -5,8 +5,11 @@ from selenium.webdriver.common.action_chains import ActionChains
 import random
 # 参考链接：https://www.cnblogs.com/mengyu/p/6901489.html
 
+import sys,os  
+
+path = os.path.join(os.path.dirname(os.path.realpath(__file__)),"text3.html") 
 driver = webdriver.Chrome()
-driver.get('file:///E:/100-航天智慧/2-源码库/python/21-网络爬虫/9-selenium/text3.html')
+driver.get(path)
 driver.maximize_window()
 time.sleep(3)
 # 第一个操作:鼠标移动到某个元素

@@ -9,9 +9,22 @@
 # @Software: vscode 
 import sys 
 import os
+
 python = os.path.dirname(sys.executable)    #解释器所在的文件夹
 curpath = os.path.dirname(os.path.realpath(__file__))
 path = os.path.join(curpath, "sys变量.py") 
+
+print('*'*40)
+
+print(curpath)
+print(path)                       
+print(os.getcwd())                      #获取当前工作目录路径
+print(os.path.abspath('.'))             #获取当前工作目录路径
+print(os.path.abspath('sys变量.py'))    #获取当前目录文件下的工作目录路径
+print(os.path.abspath('..') )           #获取当前工作的父目录 ！注意是父目录路径
+print(os.path.abspath(os.curdir) )      #获取当前工作目录路径
+
+print('*'*40)
 
 # 显示导入依赖模块的操作系统的名称
 print(os.name)

@@ -11,6 +11,8 @@ from time import sleep
 
 # 后面是你的浏览器驱动位置，记得前面加r'','r'是防止字符转义的
 driver = webdriver.Chrome()
+driver.maximize_window()
+
 # 用get打开百度页面
 driver.get("http://www.baidu.com")
 # 查找页面的“设置”选项，并进行点击
@@ -40,9 +42,28 @@ sleep(2)
 # 点击搜索按钮
 driver.find_element_by_id('su').click()
 sleep(2)
-# 在打开的页面中找到“Selenium - 开源中国社区”，并打开这个页面
-driver.find_elements_by_link_text('美女_百度图片')[0].click()
-sleep(3)
 
-# 关闭浏览器
+#滚动到底部
+driver.execute_script('window.scrollTo(0, document.body.scrollHeight)')
+#driver.execute_script('alert("dkgll,滚动到底部了~~~")')
+sleep(2)
+
+#跳转到第4页
+for x in range(3):
+    a = driver.find_element_by_css_selector("a.n")
+    a.click()
+    sleep(2)
+
+    #滚动到底部
+    driver.execute_script('window.scrollTo(0, document.body.scrollHeight)')
+    sleep(2)
+
+# 在打开的页面中找到链接包含“美女”，并打开这个页面
+#eles = driver.find_elements_by_partial_link_text('美女')
+eles = driver.find_elements_by_xpath("//div[@id='content_left']//h3[@class='t']/a")
+ele = eles[len(eles)-1]
+ele.click() 
+
+sleep(10)
+# # 关闭浏览器
 driver.quit()

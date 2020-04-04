@@ -2,8 +2,12 @@
 import time
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
+import sys,os  
+
+path = os.path.join(os.path.dirname(os.path.realpath(__file__)),"demo_clicks.html") 
+
 driver = webdriver.Chrome()
-driver.get('file:///E:/100-航天智慧/2-源码库/python/21-网络爬虫/9-selenium/demo_clicks.html')
+driver.get(path)
 driver.maximize_window()
 # 首先我们需要获取到要操作的元素，然后再次进行操作
 doubleButtonElement = driver.find_element_by_xpath('/html/body/form/input[2]')   #获取双击按钮元素
