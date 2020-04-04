@@ -1,5 +1,17 @@
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 import time
+
+#By是selenium中内置的一个class，在这个class中有各种方法来定位元素
+#By所支持的定位器的分类：
+# CLASS_NAME = 'class name'
+# CSS_SELECTOR = 'css selector'
+# ID = 'id'
+# LINK_TEXT = 'link text'
+# NAME = 'name'
+# PARTIAL_LINK_TEXT = 'partial link text'
+# TAG_NAME = 'tag name'
+# XPATH = 'xpath'
 
 class ZentaoSelenium():
     def __init__(self):
@@ -14,19 +26,19 @@ class ZentaoSelenium():
         #请求url
         self.driver.get(self.login_url)
         #发送表单数据
-        userid = self.driver.find_element_by_id("account")
-        passwd = self.driver.find_element_by_name("password")
+        userid = self.driver.find_element(By.ID,"account")
+        passwd = self.driver.find_element(By.NAME,"password")
         userid.send_keys(self.username)
         passwd.send_keys(self.pwd)
         time.sleep(1)
         #提交
-        submit = self.driver.find_element_by_id("submit")
+        submit = self.driver.find_element(By.ID,"submit")
         submit.click()
     
     #注销    
     def logout(self):
         #退出登录
-        logout = self.driver.find_element_by_xpath("/html/body[@class='m-my-index']/header[@id='header']/div[@id='topbar']/div[@id='topnav']/a[1]")
+        logout = self.driver.find_element(By.XPATH,"/html/body[@class='m-my-index']/header[@id='header']/div[@id='topbar']/div[@id='topnav']/a[1]")
         logout.click()
 
     def start(self):

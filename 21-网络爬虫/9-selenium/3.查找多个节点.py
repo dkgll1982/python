@@ -1,11 +1,3 @@
-#!/usr/bin/env python 
-# -*- coding:utf-8 -*- 
-# @Author: guojun 
-# @Company: Aerospace Shenzhou Intelligent System Technology Co., Ltd 
-# @Site: https://user.qzone.qq.com/350606539/main 
-# @Date: 2020-04-04 12:20:42 
-# @Remark: 人生苦短，我用python！
-
 from selenium import webdriver
 from time import sleep
 
