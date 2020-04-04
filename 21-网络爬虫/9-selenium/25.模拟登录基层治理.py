@@ -2,6 +2,7 @@ import requests
 from selenium import webdriver
 from lxml import etree
 import time
+from selenium.common.exceptions import NoSuchElementException,TimeoutException 
 
 driver = webdriver.Chrome()
 driver.maximize_window()    #浏览器窗口最大化
@@ -20,11 +21,29 @@ btn = driver.find_element_by_xpath("/html/body/div[@id='app']/div[@class='applic
 #点击登录
 btn.click()
 
-#跳转到首页
-time.sleep(3)
+print('-'*40)
 
-for handle in driver.window_handles:
-    driver.switch_to_window(handle)
+#跳转到首页  
+try:
+    title = driver.find_element_by_xpath('/html')
+    print('title:',title.text)
+except TimeoutException:
+    print('Time Out')
+except NoSuchElementException as e:
+    print('No Logo')   
+except Exception as e:
+    print(e)
+    
+print('-'*40)
+#driver.switch_to.parent_frame()        #从子页面切换到父页面
+#logo = driver.find_element_by_class_name("/html/body/div[@id='main']/div[@id='main']/header/div[@class='top-menu']/div[@class='tm-wrap']/ul/li[3]/i[@class='iconSize glyphiconfont icon-glyphicons-cig-people']")
+
+# logo = browser.find_element_by_class_name("/html/body/div[@id='main']/div[@id='main']/header/div[@class='top-menu']/div[@class='tm-wrap']/ul/li[3]/i[@class='iconSize glyphiconfont icon-glyphicons-cig-people']")
+# print(logo.text)
+
+
+# for handle in driver.window_handles:
+#     driver.switch_to_window(handle)
 
 
 # 关闭浏览器
