@@ -4,106 +4,121 @@
     <meta charset="UTF-8">
     <title>Awesome-pyecharts</title>
             <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
-        <script type="text/javascript" src="https://assets.pyecharts.org/assets/themes/vintage.js"></script>
 
 </head>
 <body>
-    <div id="b009df3125614f4e8c2c9e4f45ddbdfc" class="chart-container" style="width:1400px; height:800px;"></div>
+    <div id="4c6ee85d195f44c8a510ea3bfa5d0eeb" class="chart-container" style="width:900px; height:500px;"></div>
     <script>
-        var chart_b009df3125614f4e8c2c9e4f45ddbdfc = echarts.init(
-            document.getElementById('b009df3125614f4e8c2c9e4f45ddbdfc'), 'vintage', {renderer: 'canvas'});
-        var option_b009df3125614f4e8c2c9e4f45ddbdfc = {
+        var chart_4c6ee85d195f44c8a510ea3bfa5d0eeb = echarts.init(
+            document.getElementById('4c6ee85d195f44c8a510ea3bfa5d0eeb'), 'white', {renderer: 'canvas'});
+        var option_4c6ee85d195f44c8a510ea3bfa5d0eeb = {
     "animation": true,
     "animationThreshold": 2000,
     "animationDuration": 1000,
-    "animationEasing": "elasticOut",
-    "animationDelay": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
     "animationDurationUpdate": 300,
     "animationEasingUpdate": "cubicOut",
     "animationDelayUpdate": 0,
+    "color": [
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3",
+        "#f05b72",
+        "#ef5b9c",
+        "#f47920",
+        "#905a3d",
+        "#fab27b",
+        "#2a5caa",
+        "#444693",
+        "#726930",
+        "#b2d235",
+        "#6d8346",
+        "#ac6767",
+        "#1d953f",
+        "#6950a1",
+        "#918597"
+    ],
     "series": [
         {
             "type": "bar",
-            "name": "\u5546\u5bb6A",
+            "name": "\u4e00\u5b63\u5ea6",
             "data": [
-                111,
-                20,
-                36,
-                10,
-                75,
-                90,
-                110,
-                75
-            ],
-            "barCategoryGap": "20%",
-            "label": {
-                "show": true,
-                "position": "top",
-                "margin": 8
-            },
-            "itemStyle": {
-                "color":         function (params) {            if (params.value > 0 && params.value < 50) {                return 'green';            } else if (params.value > 50 && params.value < 100) {                return 'orange';            }            return 'red';        }        ,
-                "opacity": 0.6
-            }
-        },
-        {
-            "type": "bar",
-            "name": "\u5546\u5bb6B",
-            "data": [
-                15,
-                10,
-                26,
-                30,
-                45,
-                120,
-                40,
-                46
-            ],
-            "barCategoryGap": "20%",
-            "label": {
-                "show": true,
-                "position": "top",
-                "margin": 8
-            },
-            "itemStyle": {
-                "color": "lightblue"
-            }
-        },
-        {
-            "type": "bar",
-            "name": "\u5546\u5bb6C",
-            "data": [
-                35,
-                21,
-                46,
-                10,
                 63,
-                40,
-                120,
-                45
+                142,
+                149,
+                125,
+                38,
+                65,
+                139,
+                143
             ],
             "barCategoryGap": "20%",
             "label": {
                 "show": true,
                 "position": "top",
                 "margin": 8
-            },
-            "itemStyle": {
-                "color": "pink"
+            }
+        },
+        {
+            "type": "bar",
+            "name": "\u4e8c\u5b63\u5ea6",
+            "data": [
+                18,
+                33,
+                100,
+                95,
+                64,
+                100,
+                84,
+                26
+            ],
+            "barCategoryGap": "20%",
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            }
+        },
+        {
+            "type": "bar",
+            "name": "\u4e09\u5b63\u5ea6",
+            "data": [
+                146,
+                74,
+                76,
+                83,
+                28,
+                40,
+                16,
+                117
+            ],
+            "barCategoryGap": "20%",
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
             }
         }
     ],
     "legend": [
         {
             "data": [
-                "\u5546\u5bb6A",
-                "\u5546\u5bb6B",
-                "\u5546\u5bb6C"
+                "\u4e00\u5b63\u5ea6",
+                "\u4e8c\u5b63\u5ea6",
+                "\u4e09\u5b63\u5ea6"
             ],
             "selected": {
-                "\u5546\u5bb6A": true,
-                "\u5546\u5bb6B": true,
-                "\u5546\u5bb6C": true
+                "\u4e00\u5b63\u5ea6": true,
+                "\u4e8c\u5b63\u5ea6": true,
+                "\u4e09\u5b63\u5ea6": true
             },
             "show": true,
             "padding": 5,
@@ -146,14 +161,14 @@
                 }
             },
             "data": [
-                "\u886c\u886b",
-                "\u7f8a\u6bdb\u886b",
-                "\u96ea\u7eba\u886b",
-                "\u88e4\u5b50",
-                "\u9ad8\u8ddf\u978b",
-                "\u889c\u5b50",
-                "\u907f\u5b55\u5957",
-                "\u53e3\u9999\u7cd6"
+                "\u5c0f\u7c73",
+                "\u4e09\u661f",
+                "\u82f9\u679c",
+                "\u534e\u4e3a",
+                "oppo",
+                "vivo",
+                "\u4e00\u52a0",
+                "\u5176\u4ed6"
             ]
         }
     ],
@@ -182,14 +197,14 @@
     ],
     "title": [
         {
-            "text": "\u5546\u5bb6\u8d27\u7269\u6570\u91cf",
-            "subtext": "\u5546\u5bb6A(<50:\u7eff,<100:\u9ec4,>100:\u7ea2)",
+            "text": "\u51fa\u8d27\u91cf",
+            "subtext": "\u6307\u6807(<50:\u7eff,<100:\u9ec4,>100:\u7ea2)",
             "padding": 5,
             "itemGap": 10
         }
     ]
 };
-        chart_b009df3125614f4e8c2c9e4f45ddbdfc.setOption(option_b009df3125614f4e8c2c9e4f45ddbdfc);
+        chart_4c6ee85d195f44c8a510ea3bfa5d0eeb.setOption(option_4c6ee85d195f44c8a510ea3bfa5d0eeb);
     </script>
 </body>
 </html>

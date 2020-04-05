@@ -24,7 +24,7 @@ class WeiBoSpider():
         self.base_dir = r'backup/爬虫/微博'
         self.headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.87 Safari/537.36',
-            'Cookie': 'SINAGLOBAL=3141108771060.63.1553863967185; UM_distinctid=16e88aa439529a-00db7a6cc5b9e6-7711439-144000-16e88aa43961ae; un=dkgll; wvr=6; UOR=,,www.baidu.com; login_sid_t=2abc3f4284d18af3a44480575e6a2d88; cross_origin_proto=SSL; _s_tentry=www.baidu.com; Apache=8075098235356.297.1585409863467; ULV=1585409863476:48:4:3:8075098235356.297.1585409863467:1585191715647; SCF=Asm90sASrBEdSoAUTl_xQ4mG-rF2FWxpJMzIoK33r9V9mXlrtpWb660mYCe1mYwWpj13TixYHyscSVOVVPU7r4I.; SUB=_2A25zex8EDeRhGedO7FEZ9S_MzD2IHXVQ8XfMrDV8PUNbmtAfLRfYkW9NXP80YHq-2wWl0gsjfOh276oZwwrX8qfy; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WWCdf6o_QAvdcfTjm28zmwZ5JpX5K2hUgL.Fo27S0eRSK27S022dJLoIEBLxKqL1hnL1K2LxKqLB-eLBozLxK.L1-2L12qLxK-LB.qL1het; SUHB=0WGN35qa2WUtkR; ALF=1616945875; SSOLoginState=1585409876; webim_unReadCount=%7B%22time%22%3A1585409892308%2C%22dm_pub_total%22%3A2%2C%22chat_group_client%22%3A0%2C%22allcountNum%22%3A72%2C%22msgbox%22%3A0%7D'
+            'Cookie': 'SINAGLOBAL=3141108771060.63.1553863967185; UM_distinctid=16e88aa439529a-00db7a6cc5b9e6-7711439-144000-16e88aa43961ae; un=dkgll; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WWCdf6o_QAvdcfTjm28zmwZ5JpX5K2hUgL.Fo27S0eRSK27S022dJLoIEBLxKqL1hnL1K2LxKqLB-eLBozLxK.L1-2L12qLxK-LB.qL1het; UOR=,,login.sina.com.cn; _s_tentry=login.sina.com.cn; Apache=2127291266101.1057.1586062059667; ULV=1586062059688:50:2:1:2127291266101.1057.1586062059667:1585969279494; WBStorage=42212210b087ca50|undefined; WBtopGlobal_register_version=3d5b6de7399dfbdb; SCF=AjShoweVB2eMIdWzoOQQ4HlW-oNrobjXx99gTO-x_uUce6YgVBpBAUgnL5cWnfuvijtgnplyZ3sbdQmyyYmHjgU.; SUB=_2A25zjRN4DeRhGedO7FEZ9S_MzD2IHXVQ-wOwrDV8PUNbmtAfLWvzkW9NXP80YKFCAbZ5p_AWcsI0-w7FbF0FCh3p; SUHB=0JvxupErcZ-_-4; ALF=1586666919; SSOLoginState=1586062120; un=dkgll'
         }
         if not os.path.exists(self.base_dir):
             os.mkdir(self.base_dir)
@@ -102,7 +102,7 @@ class WeiBoSpider():
     
     def start(self):        
         params = {
-            'q':'双十一',
+            'q':'双十一',   
             'Refer':'SWeibo_box'
         }
         response = self.send_request(self.url,params)
