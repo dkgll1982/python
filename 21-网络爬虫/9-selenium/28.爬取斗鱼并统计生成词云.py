@@ -116,6 +116,7 @@ class DouYuSpider():
     def create_wordcloud(self):
         words = jieba.lcut(self.all_name)
         fnl_words = [word for word in words if len(word) > 1]  # 去掉单字 
+        
         #词云对象
         w = wordcloud.WordCloud(
             width = 1000,
@@ -123,6 +124,7 @@ class DouYuSpider():
             font_path='Fonts/font1.ttf',
             max_words= 80
         )
+        
         # 将string变量传入w的generate()方法，给词云输入文字
         w.generate(' '.join(fnl_words))
         w.to_file(self.realpath('douyu_ciyun.png'))
