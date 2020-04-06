@@ -5,8 +5,8 @@ import sys
 import os
 
 # 获取文件当前所在的目录，并返回完整文件全路径 
-def realpath(filebame):
-    return os.path.join(os.path.dirname(os.path.realpath(__file__)), filebame) 
+def realpath(filename):
+    return os.path.join(os.path.dirname(os.path.realpath(__file__)), filename) 
 
 text = ''
 with open(realpath('lagou-job1000-ai-details.txt'), 'r',encoding='utf8') as f:
@@ -16,7 +16,7 @@ words = jieba.lcut(text)
 cuted = ' '.join(words)
 print(cuted[:100])
 
-fontpath = r'font\SourceHanSerifSC-Regular.otf'
+fontpath = r'Fonts\SourceHanSerifSC-Regular.otf'
 
 wc = WordCloud(font_path=fontpath,      # 设置字体
                background_color="white",# 背景颜色

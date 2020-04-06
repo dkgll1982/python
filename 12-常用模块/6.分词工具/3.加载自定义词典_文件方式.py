@@ -12,8 +12,8 @@ import sys
 import os 
 
 # 获取文件当前所在的目录，并返回完整文件全路径 
-def realpath(filebame):
-    return os.path.join(os.path.dirname(os.path.realpath(__file__)), filebame)
+def realpath(filename):
+    return os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)
 
 # 注意到，古明地觉四个字被进行了切割，可以如果我想让它作为整体出现呢
 # jieba分词会使用一个词典，根据词典里面的词进行分词，如果像人名之类的，不再jieba使用的词典里，那么分词就会出现不预期之内的结果

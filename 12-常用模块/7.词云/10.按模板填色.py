@@ -9,8 +9,8 @@ import os
 import imageio
 
 # 获取文件当前所在的目录，并返回完整文件全路径 
-def realpath(filebame):
-    return os.path.join(os.path.dirname(os.path.realpath(__file__)), filebame)
+def realpath(filename):
+    return os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)
 
 text = ''
 # 将外部文件包含的文本保存在text变量中
@@ -21,8 +21,10 @@ mk = imageio.imread(realpath("img\muban3.png"))
 
 # 构建词云对象w
 wc = WordCloud(background_color = "white",
-               font_path = r'font\SourceHanSerifSC-Regular.otf', 
+               font_path = r'Fonts\SourceHanSerifSC-Regular.otf', 
                mask = mk,
+               contour_width=1,
+               contour_color='steelblue'
               )
 # 将text字符串变量传入w的generate()方法，给词云输入文字
 wc.generate(text)

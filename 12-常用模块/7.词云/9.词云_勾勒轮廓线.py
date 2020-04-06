@@ -7,13 +7,17 @@ import sys
 import os
 # 导入imageio库中的imread函数，并用这个函数读取本地图片，作为词云形状图片
 import imageio
+import jieba
 
 # 获取文件当前所在的目录，并返回完整文件全路径
-def realpath(filebame):
-    return os.path.join(os.path.dirname(os.path.realpath(__file__)), filebame)
+def realpath(filename):
+    return os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)
  
 # 将外部文件包含的文本保存在string变量中
-string = open(realpath('hamlet.txt'),'r',encoding='utf-8').read()
+txt = open(realpath('hamlet.txt'),'r',encoding='utf-8').read()
+
+txtlist = jieba.lcut(txt)
+string = " ".join(txtlist)
 
 mk = imageio.imread(realpath(r"img\alice.png"))
 
@@ -29,3 +33,13 @@ w.generate(string)
 
 # 将词云图片导出到当前文件夹
 w.to_file(realpath("img\output9-contour.png"))
+
+print('*'*40)
+ 
+w = wordcloud.WordCloud(background_color="white",
+                        font_path='msyh.ttc',
+                        mask=mk )
+ 
+w.generate(string) 
+
+w.to_file(realpath("img\output9-nocontour.png"))

@@ -10,8 +10,8 @@ import os
 import imageio
 
 # 获取文件当前所在的目录，并返回完整文件全路径 
-def realpath(filebame):
-    return os.path.join(os.path.dirname(os.path.realpath(__file__)), filebame)
+def realpath(filename):
+    return os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)
 
 mk = imageio.imread(realpath("img\wujiaoxing.jpg"))
 w = wordcloud.WordCloud(mask=mk)
@@ -21,8 +21,11 @@ w = wordcloud.WordCloud(width=1000,
                         height=700,
                         background_color='white',
                         font_path='msyh.ttc',
-                        mask=mk,
-                        scale=15)
+                        prefer_horizontal = 0.1,
+                        max_words=100,                  #最大词数 默认200
+                        stopwords={"python","java"},    #不显示的单词  
+                        mask=mk,                        #面具模板， 指定词云形状图片，默认为矩形
+                        scale=25)                       #Scale 默认值1。值越大，图像密度越大越清晰
 
 # 对来自外部文件的文本进行中文分词，得到string
 f = open(realpath('关于实施乡村振兴战略的意见.txt'),encoding='utf-8')

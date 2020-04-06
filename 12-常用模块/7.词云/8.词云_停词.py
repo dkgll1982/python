@@ -3,15 +3,15 @@
 
 # 导入词云制作库wordcloud和中文分词库jieba
 import jieba
-import wordcloud
+from wordcloud import WordCloud,ImageColorGenerator 
 import sys
 import os
 # 导入imageio库中的imread函数，并用这个函数读取本地图片，作为词云形状图片
 import imageio
 
 # 获取文件当前所在的目录，并返回完整文件全路径
-def realpath(filebame):
-    return os.path.join(os.path.dirname(os.path.realpath(__file__)), filebame)
+def realpath(filename):
+    return os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)
 
 mk = imageio.imread(realpath("img\chinamap.jpg"))
 
@@ -19,7 +19,7 @@ mk = imageio.imread(realpath("img\chinamap.jpg"))
 # 设置中文停词
 stopwords = set('')
 stopwords.update(['曹躁','孔明','玄德','将军'])
-w = wordcloud.WordCloud(width=1000,
+w = WordCloud(width=1000,
                         height=700,
                         background_color='white',
                         font_path='msyh.ttc',
@@ -39,3 +39,11 @@ w.generate(string)
 
 # 将词云图片导出到当前文件夹
 w.to_file(realpath('img\output8-threekingdoms.png'))
+
+# 调用wordcloud库中的ImageColorGenerator()函数，提取模板图片各部分的颜色
+image_colors = ImageColorGenerator(mk)
+# 给词云对象按模板图片的颜色重新上色
+wc_color = w.recolor(color_func=image_colors)
+
+# 将词云图片导出到当前文件夹
+wc_color.to_file(realpath('img\output8-threekingdoms_color.png'))

@@ -5,8 +5,8 @@ from snapshot_selenium import snapshot
 import sys,os  
 
 #获取文件当前所在的目录，并返回完整文件全路径
-def realpath(filebame):
-    return os.path.join(os.path.dirname(os.path.realpath(__file__)),filebame)  
+def realpath(filename):
+    return os.path.join(os.path.dirname(os.path.realpath(__file__)),filename)  
   
 bar = Bar()
 bar.add_xaxis(["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"])

@@ -3,6 +3,12 @@
 
 # 导入wordcloud库，并定义两个函数
 from wordcloud import (WordCloud, get_single_color_func)
+import sys
+import os
+
+# 获取文件当前所在的目录，并返回完整文件全路径 
+def realpath(filename):
+    return os.path.join(os.path.dirname(os.path.realpath(__file__)), filename) 
 
 class SimpleGroupedColorFunc(object):
     """Create a color function object which assigns EXACT colors
@@ -68,7 +74,7 @@ class GroupedColorFunc(object):
     
 # 导入imageio库中的imread函数，并用这个函数读取本地图片，作为词云形状图片
 import imageio
-mk = imageio.imread("chinamap.png")
+mk = imageio.imread(realpath("img\chinamap.jpg"))
 
 w = WordCloud(width=1000,
               height=700,
@@ -82,7 +88,7 @@ w = WordCloud(width=1000,
 
 import jieba
 # 对来自外部文件的文本进行中文分词，得到string
-f = open('三国演义.txt',encoding='utf-8')
+f = open(realpath('三国演义.txt'),'r')
 txt = f.read()
 txtlist = jieba.lcut(txt)
 string = " ".join(txtlist)
@@ -111,4 +117,4 @@ grouped_color_func = GroupedColorFunc(color_to_words, default_color)
 w.recolor(color_func=grouped_color_func)
 
 # 将词云图片导出到当前文件夹
-w.to_file('output13-threekingdoms.png')
+w.to_file(realpath('img\output13-threekingdoms.png'))
