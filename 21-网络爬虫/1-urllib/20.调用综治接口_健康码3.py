@@ -169,8 +169,9 @@ class JKMSpider():
             data = {"sfzh":row[0],"mzt":row[1],"mffd":row[2]}
             jsonstr = self.send_request(data)
             print('获取第%d条身份证：%s健康码（%s）成功!'%(rowindex,row[0],row[1]))
-            sql2 = "INSERT INTO excel_table(TYPE,A,B,C,D) VALUES('jkm','%s','%s','%s','%s')"%(row[0],jsonstr,datetime.datetime.now().strftime('%Y-%m-%d %H'),row[1])
-            cursor.execute(sql2)
+            sql2 = "INSERT INTO excel_table(TYPE,A,B,C,D) VALUES('jkm',:1,:2,:3,:4)"
+            params = (row[0],jsonstr,datetime.datetime.now().strftime('%Y-%m-%d %H'),row[1])
+            cursor.execute(sql2,params)
           
         conn.commit() 
         cursor.close()

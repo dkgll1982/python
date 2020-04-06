@@ -32,6 +32,6 @@ wc = WordCloud(font_path=fontpath,      # 设置字体
                )
 wc.generate(cuted)
 
-plt.figure(dpi=100)       # 通过这里可以放大或缩小
-plt.imshow(wc, interpolation='catrom', vmax=1000)
+plt.figure(dpi = 100)       # 通过这里可以放大或缩小
+plt.imshow(wc, interpolation = 'catrom', vmax = 1000)
 plt.axis("off")             # 隐藏坐标
