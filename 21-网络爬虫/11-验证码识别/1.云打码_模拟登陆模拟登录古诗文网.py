@@ -27,33 +27,34 @@ page_text = session.get(url + login_page_url, headers=headers).text
 # 获取保存图片验证码
 tree = etree.HTML(page_text)
 code_img_url = url + tree.xpath('//*[@id="imgCode"]/@src')[0]
+print('---->',code_img_url)
 img_data = session.get(code_img_url, headers=headers).content
 filename = r'backup\爬虫\验证码\code_img.jpg'
 with open(filename, 'wb') as fp:
     fp.write(img_data)
- 
-# 使用云打码识别图片验证码
-ydm = YDMHttp(filename = filename, codetype = 1004, timeout = 10)
-cid, code_text = ydm.decode()
-# 以 f开头表示在字符串内支持大括号内的python 表达式
-print(f'验证码识别结果：{code_text}') 
+      
+# # 使用云打码识别图片验证码
+# ydm = YDMHttp(filename = filename, codetype = 1004, timeout = 10)
+# cid, code_text = ydm.decode()
+# # 以 f开头表示在字符串内支持大括号内的python 表达式
+# print(f'验证码识别结果：{code_text}') 
 
-# 登录请求的参数
-# 下面两个参数会变化，所以我们就动态获取：
-__VIEWSTATE = tree.xpath('//*[@id="__VIEWSTATE"]/@value')[0]
-__VIEWSTATEGENERATOR = tree.xpath('//*[@id="__VIEWSTATEGENERATOR"]/@value')[0]
-data = {
-    '__VIEWSTATE': __VIEWSTATE,
-    '__VIEWSTATEGENERATOR': __VIEWSTATEGENERATOR,
-    'from': 'http://so.gushiwen.org/user/collect.aspx',
-    'email': 'www.zhangbowudi@qq.com',
-    'pwd': 'bobo328410948',  # 你没看错，它就是明文
-    'code': code_text,
-    'denglu': '登录',
-}
+# # 登录请求的参数
+# # 下面两个参数会变化，所以我们就动态获取：
+# __VIEWSTATE = tree.xpath('//*[@id="__VIEWSTATE"]/@value')[0]
+# __VIEWSTATEGENERATOR = tree.xpath('//*[@id="__VIEWSTATEGENERATOR"]/@value')[0]
+# data = {
+#     '__VIEWSTATE': __VIEWSTATE,
+#     '__VIEWSTATEGENERATOR': __VIEWSTATEGENERATOR,
+#     'from': 'http://so.gushiwen.org/user/collect.aspx',
+#     'email': 'www.zhangbowudi@qq.com',
+#     'pwd': 'bobo328410948',  # 你没看错，它就是明文
+#     'code': code_text,
+#     'denglu': '登录',
+# }
 
-# 开始模拟登录：
-page_text = session.post(url + login_request_url,headers=headers, data=data).text
+# # 开始模拟登录：
+# page_text = session.post(url + login_request_url,headers=headers, data=data).text
 
-with open(r'backup\爬虫\gushiwen.html', 'w', encoding='utf-8') as fp:
-    fp.write(page_text)
+# with open(r'backup\爬虫\gushiwen.html', 'w', encoding='utf-8') as fp:
+#     fp.write(page_text)
