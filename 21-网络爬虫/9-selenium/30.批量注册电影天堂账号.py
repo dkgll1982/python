@@ -24,10 +24,7 @@ class BtJiaSpider():
         self.host = 'http://www.2btjia.com'
         self.regist_url = parse.urljoin(self.host,'/user-create.htm')   #注册URL
         self.login_url = parse.urljoin(self.host,'/user-login.htm')     #登陆URL
-        self.logout_url = parse.urljoin(self.host,'/user-logout.htm')   #注销URL
-        self.headers = {
-            
-        }
+        self.logout_url = parse.urljoin(self.host,'/user-logout.htm')   #注销URL 
         self.driver = webdriver.Chrome()
         self.wait = WebDriverWait(self.driver,30)
         self.driver.maximize_window()

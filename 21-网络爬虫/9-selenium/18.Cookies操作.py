@@ -11,7 +11,14 @@ from selenium import webdriver
 
 browser = webdriver.Chrome()
 browser.get("http://www.zhihu.com/explore")
-print('cookies1:',browser.get_cookies())
+
+# 可以按标准格式将保存的Cookie打印出来
+cookieStr = ''
+cookie = browser.get_cookies()
+for item in cookie:
+    cookieStr = cookieStr + item["name"] + "=" + item["value"] + ";"
+
+print('cookies1:',cookieStr)
 
 #不传domain，默认当前域名；
 #只要传了domain，则会强制在前面加上一个.，不管是一级还是二级域名；
