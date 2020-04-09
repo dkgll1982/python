@@ -22,7 +22,7 @@ import sys
 ak = "ZRyBcN55hT7nYsWUta0hfyTkn3NeBNNG"
 sk = "NGKBzEx1Qv66aq8xjvE2V6AXgr5oyinZ"
 #坐标计算网格服务
-geoserver = 'https://xixian.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
+geoserver = 'http://huzhou-jczl-wx.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
 
 #地址前缀
 city = ''
@@ -51,7 +51,7 @@ def request_data(urt):
         #'Accept-Encoding':'gzip, deflate', 
         #'Connection':'keep-alive',
         'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
-        'Cookie':"passport=75a948d0-36b6-4a45-a95b-1a772e6681e6; CIGToken=6b2e5acc-7ac6-4e4e-b9e5-c924c7f1e816; CIGUsername=%E7%AE%A1%E7%90%86%E5%91%98; CIGUserid=ADMIN"
+        'Cookie':"passport=4e38dcf2-4665-49db-a8e8-f3ee5bee23b3; CIGToken=27277f9d-1d7a-4037-8791-37c87add8269; CIGUsername=%E5%90%B4%E5%85%B4%E7%AE%A1%E7%90%86%E5%91%98; CIGUserid=WX-ADMIN"
     }      
     request = urllib.request.Request(url=urt,headers=head) 
     response = urllib.request.urlopen(request)
@@ -62,7 +62,7 @@ def request_data(urt):
 #获取查询的数据列表
 def get_zb(index,biao):
     os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
-    conn = cx_Oracle.connect('cigproxy','cigproxy','10.21.197.159:1521/orcl')
+    conn = cx_Oracle.connect('cigproxy','cigproxy','172.21.244.94:15225/orcl')
     cursor = conn.cursor() 
 
     #取数据起始位置
@@ -70,7 +70,7 @@ def get_zb(index,biao):
     #取数据结束位置
     end = str(pagecount*(index))
     #查询数据的sql
-    sql1 =  ("select * from (select ADDR from "+ biao+" where RESULT is null  ) where rownum<="+str(rowcount))      
+    sql1 =  ("select * from (select distinct GRID_ADDR from "+ biao+" where  update_data is null ) where rownum<="+str(rowcount))      
     sql2 = ""
 
     cursor.execute(sql1);    
@@ -78,6 +78,7 @@ def get_zb(index,biao):
 
     update_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     g = bdapi(ak,sk)
+    row_index = 0
     for row in rows: 
         url =g.get_url(city+row[0])
         try:
@@ -88,21 +89,24 @@ def get_zb(index,biao):
                 geo = geoserver+"?x="+wgs_x+"&y="+wgs_y
                 result = request_data(geo) 
                 print("子线程(%s)处理；百度：%s；WGS84：%s；获取网格地址：%s"%(threading.current_thread().name,bd_zb,wgs_zb,geo)) 
-                sql2 = "update "+ biao+" set wgs_x ='%s',wgs_y='%s',bd_x ='%s',bd_y='%s',result='%s',update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where ADDR='%s'"%(wgs_x,wgs_y,bd_x,bd_y,str(result),update_date,row[0]) 
+                sql2 = "update "+ biao+" set results='%s',update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where GRID_ADDR='%s'"%(str(result),update_date,row[0]) 
             else:       
-                sql2 = "update "+ biao+" set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where ADDR='%s'"%(update_date,row[0])            
+                sql2 = "update "+ biao+" set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where GRID_ADDR='%s'"%(update_date,row[0])            
             cursor.execute(sql2)
         except Exception as e:
             print('Error:',e)
         finally:
-            pass
+            row_index = row_index + 1
+            if row_index%100 == 0:
+                conn.commit()
+                
     conn.commit() 
     cursor.close()
     conn.close()    
 
 if __name__ == "__main__":  
     args = sys.argv 
-    biao = "BASE_ZB_WG9"
+    biao = "BASE_认领0409"
     print(biao)
     print("主线程(%s)启动"%(threading.current_thread().name))
     start = time.time() 

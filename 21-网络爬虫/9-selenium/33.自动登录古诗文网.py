@@ -60,7 +60,7 @@ class GuShiSpider():
         input_code = self.driver.find_element_by_id("code")  
         code_src = self.driver.find_element_by_id("imgCode").get_attribute('src')
        
-        path = parse.urljoin(self.host,code_src)
+        path = parse.urljoin(self.host,code_sr  c)
         print(path) 
         
         while True:

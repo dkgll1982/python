@@ -28,7 +28,7 @@ class photo_shuiying():
         self.key_column = ''
         self.base_dir = r'原始照片'
         self.sy_dir = r'水印照片'         # 添加水印后存储的路径
-        self.sy_img = r'sy.png'    # 要添加的水印图片位置
+        self.sy_img = r'backup\image\water.png'    # 要添加的水印图片位置
         self.log_file = r'log.txt'       # 日志文件路径
         self.file_name = file_name
         self.file_md5 = self.getfilemd5()
