@@ -45,7 +45,7 @@ except Exception as e:
  
 time.sleep(3)
   
-menu["事件管理"].click()    
+menu["人口管理"].click()    
  
 # for handle in driver.window_handles:
 #     driver.switch_to_window(handle)
