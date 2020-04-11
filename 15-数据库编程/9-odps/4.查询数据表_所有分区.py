@@ -26,7 +26,7 @@ class Matedata_odps:
         self.access_key = '0RG5GJpo2WjCCwpUkQzcwjGGzKX8Tn'                                      # 登陆密码
         self.project = 'hzdn_mplc_dev'                                                          # odps上的项目名称
         self.endpoint = 'http://service.cn-huzhou-hzdsj-d01.odps.ops.cloud.huzhou.gov.cn/api'   # 官方提供的接口
-        self.rowcount = 10
+        self.rowcount = 10000
         self.path = r'样例数据\\'                                                                #导出样例数据存放路径
 
         # 链接odps
@@ -134,7 +134,7 @@ class Matedata_odps:
     # 测试分区表：dws_disaster_shelter_memb
     # 测试错误表：dws_prsn_severe_psychopath_mpsb_m
     def start(self):
-        sql = 'SELECT DISTINCT "推送后的表名" table_name FROM test."BASE_表结构0228" where "推送后的表名" IS NOT NULL'
+        sql = 'SELECT DISTINCT "推送后的表名" table_name FROM test."BASE_表结构0228" where "推送后的表名"=\'dws_evt_administrative_review_mjb_m\''
         conn = cx_Oracle.connect(self.conn)
         cursor = conn.cursor()
         cursor.execute(sql)
