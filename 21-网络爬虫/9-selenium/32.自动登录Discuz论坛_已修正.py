@@ -17,6 +17,8 @@ from urllib import parse
 import re
 import random
 import string 
+from PIL import Image
+from ydmhttp import YDMHttp  # 导入上面整理好的云打码接口
 
 class DiscuzSpider():
     def __init__(self):
@@ -28,6 +30,8 @@ class DiscuzSpider():
         self.driver = webdriver.Chrome()
         self.wait = WebDriverWait(self.driver,20)
         self.base_dir = r'backup/爬虫/验证码/'
+        self.full_img = self.base_dir+'full_discuz.png'
+        self.code_img = self.base_dir+'ma_code_discuz.png'
         self.path = ''
         self.headers = {
             "referer":self.login_url, 
@@ -41,18 +45,7 @@ class DiscuzSpider():
     #登录
     def login(self):
         #加载首页
-        self.driver.get(self.login_url)
-        
-        cookie = self.driver.get_cookies()
-                
-        # 按标准格式将保存的Cookie打印出来
-        cookieStr = '' 
-        for item in cookie:
-            cookieStr = cookieStr + item["name"] + "=" + item["value"] + ";"
-
-        print(cookieStr)
-        #将Cookie加到header里
-        self.headers['cookies'] = cookieStr
+        self.driver.get(self.login_url) 
         
         #点击登录链接
         login_btn = self.driver.find_element_by_css_selector("button.pn.vm")
@@ -60,6 +53,8 @@ class DiscuzSpider():
         
         #延时等待直到弹窗加载完成
         self.wait.until(EC.presence_of_element_located((By.ID,"seccodeverify_cSA")))
+        
+        self.get_img()
         
         #表单输入框(用户名、密码、验证码)
         #注意：每次加载弹窗，id都会变化，但前缀不变，用模糊匹配方式查询
@@ -69,30 +64,24 @@ class DiscuzSpider():
         input_username.send_keys(self.username)
         input_pwd.send_keys(self.pwd)
         
-        input_code = self.driver.find_element_by_id("seccodeverify_cSA")  
-        code_src = self.driver.find_element_by_xpath("//span[@id='vseccode_cSA']/img[@class='vm']").get_attribute('src')
-       
-        path = parse.urljoin(self.host,code_src)
-        print(path) 
+        input_code = self.driver.find_element_by_id("seccodeverify_cSA")   
         
-        while True:
-            # 此处的坑：确保每次图片请求cookies是当前会话，即cookie保持一致
-            #下载验证码图片(注意此处消息头)     
-            response = self.send_request(parse.urljoin(self.host,code_src))
-            if response:
-                self.path = self.base_dir + 'code.png'
-                self.write_content(response.content)
-                print('验证码已下载到本地.')
-            
-            result = ''
-            
-            #1：人工输入验证码
-            while True:
-                result = input('请输入验证码：')
-                if not result:
-                    continue
-                else:
-                    break                   
+        retry_count = 0
+        while True:  
+            # #1：人工输入验证码
+            # while True:
+            #     result = input('请输入验证码：')
+            #     if not result:
+            #         continue
+            #     else:
+            #         break                   
+        
+            #2：云打码 
+            # # 使用云打码识别图片验证码
+            ydm = YDMHttp(filename = self.code_img, codetype = 1004, timeout = 10)
+            cid, result = ydm.decode()
+            # 以 f开头表示在字符串内支持大括号内的python 表达式
+            print(f'验证码识别结果：{result}') 
         
             #输入验证码
             input_code.send_keys(result) 
@@ -101,10 +90,14 @@ class DiscuzSpider():
             time.sleep(2) 
             code_state = self.driver.find_element_by_xpath("//span[@id='checkseccodeverify_cSA']/img[@class='vm']").get_attribute('src')
             print(f'获取验证码状态{code_state}')
-            #验证码不正确
+            #验证码正确
             if not code_state.find('error') >=0 :
                 break
             else:
+                retry_count = retry_count +1
+                if retry_count == 3:                        #重试最多三次
+                    print('您输入错误超过三次，系统强制退出！')
+                    break
                 print('您输入的验证码不正确,重新获取验证码.')
                 input_code.clear()
            
@@ -112,7 +105,31 @@ class DiscuzSpider():
         submit = self.driver.find_element_by_css_selector("button.pn.pnc")
         submit.click()
         time.sleep(1)
-
+        
+    #截取验证码图片
+    def get_img(self):
+        # 能否在5s内找到验证码元素，能才继续         
+        if WebDriverWait(self.driver,5).until(lambda the_driver:the_driver.find_element_by_xpath("//span[@id='vseccode_cSA']/img[@class='vm']"), "查找不到该元素"):
+            # 截下该网站的图片
+            self.driver.get_screenshot_as_file(self.full_img)
+            # 获得这个图片元素
+            img_ele = self.driver.find_element_by_xpath("//span[@id='vseccode_cSA']/img[@class='vm']")
+            # 得到该元素左上角的 x，y 坐标和右下角的 x，y 坐标
+            left = img_ele.location.get('x') + 100
+            upper = img_ele.location.get('y') +100
+            right = left + img_ele.size.get('width')+25
+            lower = upper + img_ele.size.get('height')+12 
+            # 打开之前的截图
+            img = Image.open(self.full_img)
+            # 对截图进行裁剪，裁剪的范围为之前验证的左上角至右下角范围
+            new_img = img.crop((left, upper, right, lower))
+            # 裁剪完成之后保存到指定路径
+            new_img.save(self.code_img)
+            
+            time.sleep(2) 
+        else:
+            print("找不到验证码元素")   
+            
     #发送请求
     def send_request(self,url):
         response = requests.get(url,headers = self.headers)

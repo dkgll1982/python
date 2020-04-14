@@ -28,7 +28,7 @@ for user in rs_user:
     print(userId)
     if user[2] == '':
         continue
-    blob = user[2].read() 
+    blob = user[2].read().dec 
     with open(r"backup\{}.jpeg".format(userId), "wb") as f:
         f.write(blob) 
 

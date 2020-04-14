@@ -70,7 +70,7 @@ def get_zb(index,biao):
     #取数据结束位置
     end = str(pagecount*(index))
     #查询数据的sql
-    sql1 =  ("select * from (select distinct GRID_ADDR from "+ biao+" where  update_data is null ) where rownum<="+str(rowcount))      
+    sql1 =  ("select * from (select distinct GRID_ADDR from "+ biao+" where GRID_ADDR is not null and update_date is null ) where rownum<="+str(rowcount))      
     sql2 = ""
 
     cursor.execute(sql1);    
@@ -89,7 +89,7 @@ def get_zb(index,biao):
                 geo = geoserver+"?x="+wgs_x+"&y="+wgs_y
                 result = request_data(geo) 
                 print("子线程(%s)处理；百度：%s；WGS84：%s；获取网格地址：%s"%(threading.current_thread().name,bd_zb,wgs_zb,geo)) 
-                sql2 = "update "+ biao+" set results='%s',update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where GRID_ADDR='%s'"%(str(result),update_date,row[0]) 
+                sql2 = "update "+ biao+" set x='%s',y='%s',results='%s',update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where GRID_ADDR='%s'"%(wgs_x,wgs_y,str(result),update_date,row[0]) 
             else:       
                 sql2 = "update "+ biao+" set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where GRID_ADDR='%s'"%(update_date,row[0])            
             cursor.execute(sql2)
@@ -106,7 +106,7 @@ def get_zb(index,biao):
 
 if __name__ == "__main__":  
     args = sys.argv 
-    biao = "BASE_认领0409"
+    biao = "BASE_认领0414"
     print(biao)
     print("主线程(%s)启动"%(threading.current_thread().name))
     start = time.time() 

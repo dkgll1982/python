@@ -52,33 +52,8 @@ class KaoShiSpider():
         
     #注册
     def regist(self): 
-        self.driver.get(self.regist_url)  
-        # 能否在5s内找到验证码元素，能才继续
-        if WebDriverWait(self.driver,5).until(lambda the_driver:the_driver.find_element_by_id("CaptchaImg"), "查找不到该元素"):
-            # 对于一次截屏无法到截到验证码的情况，需要滚动一段距离，然后验证码的y坐标也应该减去这段距离
-            scroll = 500
-            js = "document.documentElement.scrollTop='%s'" %scroll
-            self.driver.execute_script(js)
-            # 截下该网站的图片
-            self.driver.get_screenshot_as_file(self.full_img)
-            # 获得这个图片元素
-            img_ele = self.driver.find_element_by_id("CaptchaImg")
-            # 得到该元素左上角的 x，y 坐标和右下角的 x，y 坐标
-            left = img_ele.location.get('x') + 100
-            upper = img_ele.location.get('y') - 500+120
-            right = left + img_ele.size.get('width')+25
-            lower = upper + img_ele.size.get('height')+20 
-            # 打开之前的截图
-            img = Image.open(self.full_img)
-            # 对截图进行裁剪，裁剪的范围为之前验证的左上角至右下角范围
-            new_img = img.crop((left, upper, right, lower))
-            # 裁剪完成之后保存到指定路径
-            new_img.save(self.code_img)
-            
-            time.sleep(2) 
-        else:
-            print("找不到验证码元素")        
-        
+        self.driver.get(self.regist_url)       
+        self.get_img()              
         #表单输入框(用户名、密码、验证码) 
         input_username = self.driver.find_element_by_id("Edit:SP_User.0$UserName")
         input_name = self.driver.find_element_by_id("Edit:SP_User.0$Name")
@@ -121,6 +96,34 @@ class KaoShiSpider():
         
         #提交
         self.driver.find_element_by_id('T_Submit').click()
+
+    #截取验证码图片
+    def get_img(self):
+        # 能否在5s内找到验证码元素，能才继续
+        if WebDriverWait(self.driver,5).until(lambda the_driver:the_driver.find_element_by_id("CaptchaImg"), "查找不到该元素"):
+            # 对于一次截屏无法到截到验证码的情况，需要滚动一段距离，然后验证码的y坐标也应该减去这段距离
+            scroll = 500
+            js = "document.documentElement.scrollTop='%s'" %scroll
+            self.driver.execute_script(js)
+            # 截下该网站的图片
+            self.driver.get_screenshot_as_file(self.full_img)
+            # 获得这个图片元素
+            img_ele = self.driver.find_element_by_id("CaptchaImg")
+            # 得到该元素左上角的 x，y 坐标和右下角的 x，y 坐标
+            left = img_ele.location.get('x') + 100
+            upper = img_ele.location.get('y') - 500+120
+            right = left + img_ele.size.get('width')+25
+            lower = upper + img_ele.size.get('height')+20 
+            # 打开之前的截图
+            img = Image.open(self.full_img)
+            # 对截图进行裁剪，裁剪的范围为之前验证的左上角至右下角范围
+            new_img = img.crop((left, upper, right, lower))
+            # 裁剪完成之后保存到指定路径
+            new_img.save(self.code_img)
+            
+            time.sleep(2) 
+        else:
+            print("找不到验证码元素")   
 
     #发送请求
     def send_request(self,url):
