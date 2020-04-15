@@ -22,7 +22,7 @@ import sys
 ak = "ZRyBcN55hT7nYsWUta0hfyTkn3NeBNNG"
 sk = "NGKBzEx1Qv66aq8xjvE2V6AXgr5oyinZ"
 #坐标计算网格服务
-geoserver = 'http://huzhou-jczl-wx.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
+geoserver = 'https://xixian.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
 
 #地址前缀
 city = ''
@@ -62,7 +62,7 @@ def request_data(urt):
 #获取查询的数据列表
 def get_zb(index,biao):
     os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
-    conn = cx_Oracle.connect('cigproxy','cigproxy','172.21.244.94:15225/orcl')
+    conn = cx_Oracle.connect('cigproxy','cigproxy','136.2.34.65:15226/xe')
     cursor = conn.cursor() 
 
     #取数据起始位置
@@ -106,7 +106,7 @@ def get_zb(index,biao):
 
 if __name__ == "__main__":  
     args = sys.argv 
-    biao = "BASE_认领0414"
+    biao = "base_网格0415"
     print(biao)
     print("主线程(%s)启动"%(threading.current_thread().name))
     start = time.time() 
