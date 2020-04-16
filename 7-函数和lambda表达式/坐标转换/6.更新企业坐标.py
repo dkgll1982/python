@@ -21,12 +21,12 @@ import datetime
 ak = "Ge8QStRhgzfk5WajB2uHzlpO9Wul40oh"
 sk = "c9zBPUBLw3TQqEriSCWEz6vgSpjjLM4q"
 #坐标计算网格服务
-geoserver = 'https://anji.spacecig.com:8000/CIGService/rest/services/0/intersectFeaturesByXY';
+geoserver = 'http://huzhou-jczl-nth.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
 
 #线程数量
-threadcount = 10
+threadcount = 1
 #数据分段区间
-pagecount = 5000
+pagecount = 200
 #每次取数据行数
 rowcount = 100
 #线程循环次数
@@ -59,7 +59,7 @@ def request_data(urt):
 def get_zb(index):
     os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
     #ORACLE连接参数
-    conn = cx_Oracle.connect('cigproxy','cigproxy','172.21.246.244:15211/xe')
+    conn = cx_Oracle.connect('cigproxy','cigproxy','172.21.244.56:15221/orcl')
     cursor = conn.cursor() 
 
     #取数据起始位置
@@ -67,7 +67,7 @@ def get_zb(index):
     #取数据结束位置
     end = str(pagecount*(index))
     #查询数据的sql
-    sql1 =  ("select * from (select ID,FIRM_NAME,FIRM_ADDRESS,RN from ZZ_FIRM_BASE_INFO_ZB@DATABASE_LINK_AJ where update_date is null and FIRM_ADDRESS IS NOT NULL AND rn<="+end+" and rn>"+start+") where rownum<="+str(rowcount))      
+    sql1 =  ("select * from (select DISTINCT '湖州市'||FIRM_ADDRESS ADDR,FIRM_ADDRESS from ZZ_FIRM_BASE_INFO_ZB where update_date is null and FIRM_ADDRESS IS NOT NULL) where rownum<="+str(rowcount))      
     #修改返回结果的sql
     sql2 = ""
 
@@ -76,8 +76,9 @@ def get_zb(index):
 
     update_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     g = bdapi(ak,sk)
+    
     for row in rows: 
-        url =g.get_url(row[1])
+        url =g.get_url(row[0][0:30])
         try:
             bd_zb = g.get_zb(url)                                                               #得到百度坐标
             if bd_zb is not None:
@@ -86,15 +87,14 @@ def get_zb(index):
                 geo = geoserver+"?x="+wgs_x+"&y="+wgs_y
                 result = request_data(geo) 
                 print("子线程(%s)处理；百度：%s；WGS84：%s；获取网格地址：%s"%(threading.current_thread().name,bd_zb,wgs_zb,geo)) 
-                sql2 = "update ZZ_FIRM_BASE_INFO_ZB@DATABASE_LINK_AJ set bd_x ='%s',bd_y ='%s',wgs_x='%s',wgs_y='%s',result='%s',update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where id='%s'"%(bd_x,bd_y,wgs_x,wgs_y,str(result),update_date,row[0]) 
+                sql2 = "update ZZ_FIRM_BASE_INFO_ZB set bd_x ='%s',bd_y ='%s',wgs_x='%s',wgs_y='%s',result='%s',update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where FIRM_ADDRESS='%s'"%(bd_x,bd_y,wgs_x,wgs_y,str(result),update_date,row[1]) 
             else:       
-                sql2 = "update ZZ_FIRM_BASE_INFO_ZB@DATABASE_LINK_AJ set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where id='%s'"%(update_date,row[0])            
+                sql2 = "update ZZ_FIRM_BASE_INFO_ZB set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where FIRM_ADDRESS='%s'"%(update_date,row[1])            
             cursor.execute(sql2)
         except Exception as e:
             print('Error:',e)
-        finally:
-            pass
-    conn.commit() 
+        finally:  
+            conn.commit() 
     cursor.close()
     conn.close()    
 
@@ -103,20 +103,7 @@ if __name__ == "__main__":
     start = time.time() 
 
     for x in range(xhcount):
-        #任何进程默认就会启动一个线程，成为主线程，主线程就可以启动新的子线程
-        #current_thread(): 返回当前线程的实例 
-        ThreadList = []
-
-        #创建子线程
-        for x in range(threadcount):
-            ThreadList.append(threading.Thread(target=get_zb,name="Thread"+str(x),args=(x,)))
-        #启动子线程
-        for thread in ThreadList:
-            thread.start() 
-        #等待线程结束
-        for thread in ThreadList:
-            thread.join()  
-
+        get_zb(x) 
         time.sleep(2)
         
     end = time.time()

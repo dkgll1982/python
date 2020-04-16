@@ -10,5 +10,6 @@ header = {
 postdata = {"userid":"admin", "password":"DFYOPS1RrpdVlu2U"}  
 r = s.post("https://jd.spacecig.com/iam/saml/login",data=postdata)
 print(r.cookies)   
+# 处理返回的JSON格式数据
 r = s.get('https://jd.spacecig.com/zhzlbackend/realPerson/person/familyPersons1?keyword=&personType=&dwdm=null&name=&cardNum=&gender=&maritalStatus=&politicalStatus=&education=&startBirthdayDate=&endBirthdayDate=&focusService=&focusControl=&isActualAddr=&death=&offset=0&limit=10&orderby=&ordertype=')
 print(r.json())
