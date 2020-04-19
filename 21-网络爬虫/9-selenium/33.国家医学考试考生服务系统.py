@@ -12,6 +12,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.chrome.options import Options
 import time
 import requests
 from urllib import parse
@@ -29,8 +30,10 @@ class KaoShiSpider():
         super().__init__()
         self.host = 'http://www2.nmec.org.cn'
         self.regist_url = parse.urljoin(self.host, 'wangbao/nme/sp/root/account/signup.html')  
-        self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
+        #注意：无界面模式、有界面模式的截图位置不一样,需要分别处理 
+        self.hasBrowser = False
+        self.driver = self.ChromeDriverBrowser() if self.hasBrowser else self.ChromeDriverNOBrowser()
+ 
         self.wait = WebDriverWait(self.driver,20)
         self.base_dir = r'backup/爬虫/验证码/'
         self.full_img = self.base_dir+'full.png'
@@ -39,6 +42,20 @@ class KaoShiSpider():
             "referer":'http://www2.nmec.org.cn/wangbao/nme/sp/root/account/signup.html',
             "user_agent":'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36'
         }
+        
+    # 无界面模式
+    def ChromeDriverNOBrowser(self):
+        chrome_options = Options()
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--disable-gpu')
+        driverChrome = webdriver.Chrome(executable_path=r"D:\Programing\Python\chromedriver",chrome_options=chrome_options)
+        return driverChrome
+    
+    # 有界面的就简单了
+    def ChromeDriverBrowser(self):
+        driverChrome = webdriver.Chrome(executable_path=r"D:\Programing\Python\chromedriver")
+        return driverChrome 
+
     #生成随机字符串
     def random_str(self,min,max):
         return random.choice('abcdefghijklmnopqrstuvwxyz')+''.join(random.sample(string.ascii_letters + string.digits, random.randint(min,max)))
@@ -81,20 +98,20 @@ class KaoShiSpider():
         input_answer.send_keys('zhangsran123456789')
         input_email.send_keys('DFGF2DGD@SINA.COM')  
         
-        #1：人工输入验证码 
+        # 1：人工输入验证码 
         #input_captcha.send_keys(input('请输入验证码：'))    
         
-        #2：云打码 
-        # # 使用云打码识别图片验证码
+        # 2：云打码 
+        # 使用云打码识别图片验证码
         ydm = YDMHttp(filename = self.code_img, codetype = 1004, timeout = 10)
         cid, code_text = ydm.decode()
-        # 以 f开头表示在字符串内支持大括号内的python 表达式
+        # 以f开头表示在字符串内支持大括号内的python 表达式
         print(f'验证码识别结果：{code_text}') 
         input_captcha.send_keys(code_text)    
         
         time.sleep(5)
         
-        #提交
+        # 提交
         self.driver.find_element_by_id('T_Submit').click()
 
     #截取验证码图片
@@ -109,11 +126,19 @@ class KaoShiSpider():
             self.driver.get_screenshot_as_file(self.full_img)
             # 获得这个图片元素
             img_ele = self.driver.find_element_by_id("CaptchaImg")
-            # 得到该元素左上角的 x，y 坐标和右下角的 x，y 坐标
-            left = img_ele.location.get('x') + 100
-            upper = img_ele.location.get('y') - 500+120
-            right = left + img_ele.size.get('width')+25
-            lower = upper + img_ele.size.get('height')+20 
+            
+            # 得到该元素左上角的 x，y 坐标和右下角的 x，y 坐标            
+            if self.hasBrowser:
+                left = img_ele.location.get('x') + 65
+                upper = img_ele.location.get('y') - 500+120
+                right = left + img_ele.size.get('width')+25
+                lower = upper + img_ele.size.get('height')+20
+            else:
+                left = img_ele.location.get('x')
+                upper = img_ele.location.get('y') - 500 
+                right = left + img_ele.size.get('width') + 10
+                lower = upper + img_ele.size.get('height')
+            
             # 打开之前的截图
             img = Image.open(self.full_img)
             # 对截图进行裁剪，裁剪的范围为之前验证的左上角至右下角范围
