@@ -22,11 +22,11 @@ import datetime
 def get_zb(index):
     os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
     # ORACLE连接参数
-    conn = cx_Oracle.connect('test', 'esri@123', '10.21.198.127:15223/xe')
+    conn = cx_Oracle.connect('cigproxy', 'cigproxy', '172.21.244.56:15221/ORCL')
     cursor = conn.cursor()
 
     # 查询数据的sql
-    sql1 = 'SELECT * FROM test.SJ_JWD where update_date is null'
+    sql1 = 'SELECT * FROM SJ_JWD where update_date is null'
     # 修改返回结果的sql
     sql2 = ""
 
@@ -36,9 +36,9 @@ def get_zb(index):
     update_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     for row in rows:
         try:
-            wgs_zb = bd09_to_wgs84(float(row[9]), float(row[10]))  # 将百度坐标转为WGS84坐标
+            wgs_zb = bd09_to_wgs84(float(row[4]), float(row[5]))  # 将百度坐标转为WGS84坐标
             wgs_x, wgs_y = str(wgs_zb[0]), str(wgs_zb[1])
-            sql2 = "update test.SJ_JWD set wgs_x='%s',wgs_y='%s',update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where id='%s'" % (
+            sql2 = "update SJ_JWD set wgs_x='%s',wgs_y='%s',update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where OBJECTID='%s'" % (
                 wgs_x, wgs_y, update_date, row[0])
             cursor.execute(sql2)
         except Exception as e:
