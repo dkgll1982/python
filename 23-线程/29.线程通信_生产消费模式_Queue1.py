@@ -32,6 +32,7 @@ def product(id,q):
 #消费者
 def customer(id,q):
     while True:
+        # 阻塞程序，等待队列消息。
         item = q.get()
         if item is None:
             break
@@ -41,9 +42,10 @@ def customer(id,q):
         q.task_done()
     print('消费完毕！')
 
-if __name__ =="__main__":
-    #消息队列
-    q = queue.Queue()
+if __name__ =="__main__": 
+    # maxsize默认为0，不受限
+    # 一旦>0，而消息数又达到限制，q.put()也将阻塞 
+    q = queue.Queue(maxsize=0)
 
     #启动生产者
     for i in range(4):

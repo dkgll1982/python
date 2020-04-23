@@ -1,3 +1,5 @@
+# 参考链接：https://blog.csdn.net/weixin_34318326/article/details/90195822?depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1&utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1
+
 from odps import ODPS
 #链接odps
 o = ODPS(access_id='AABc4DQCdfGbucSy', #登陆账号
