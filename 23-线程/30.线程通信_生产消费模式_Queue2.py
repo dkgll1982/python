@@ -50,8 +50,7 @@ class Student(Thread):
     def run(self):
         while True:
             # 阻塞程序，时刻监听老师，接收消息
-            msg = self.queue.get()
-            print(msg)
+            msg = self.queue.get() 
             # 一旦发现点到自己名字，就赶紧答到
             if msg == self.name:
                 print("{}：到！".format(self.name))
