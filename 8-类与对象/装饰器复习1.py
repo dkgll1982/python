@@ -15,9 +15,9 @@ def sum1():
     print (sum)
 
 def timeit(func,*a):
-    start = time.clock()
+    start = time.time()
     func(*a)
-    end =time.clock()
+    end =time.time()
     print("time used:", end - start)
 
 timeit(sum1)
@@ -30,9 +30,9 @@ import time
 
 def timeit2(func):
     def test():
-        start = time.clock()
+        start = time.time()
         func()
-        end =time.clock()
+        end =time.time()
         print("time used:", end - start)
     return test
 
