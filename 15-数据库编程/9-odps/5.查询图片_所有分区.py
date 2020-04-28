@@ -27,7 +27,7 @@ class Matedata_odps:
         self.access_key = '0RG5GJpo2WjCCwpUkQzcwjGGzKX8Tn'                                      # 登陆密码
         self.project = 'hzdn_mplc_dev'                                                          # odps上的项目名称
         self.endpoint = 'http://service.cn-huzhou-hzdsj-d01.odps.ops.cloud.huzhou.gov.cn/api'   # 官方提供的接口
-        self.rowcount = 2
+        self.rowcount = 10
         self.path = r'样例数据\\'                                                                #导出样例数据存放路径
 
         # 链接odps
@@ -64,11 +64,20 @@ class Matedata_odps:
                 else:
                     for item in l: 
                         try:  
+                            print('-------------------------------')
+                            sql = "select * from hzdn_mplc_dev.dws_prsn_census_person_photo_mpsb_m limit 3"
+                            instance  = self.op.run_sql(sql)
+                             
+                            with instance.open_reader(tunnel=True,encoding='gbk') as reader:
+                                for record in reader:
+                                    print(record['photo_id'])
+                                
                             for value in self.op.read_table(table_name, start = 0, limit = self.rowcount, partition = item):
-                                data.append(value) 
+                                print(value)
+                                #data.append(value) 
                             print('查询:{}表({})分区[{}]成功！'.format(table_comment,table_name,item))
                         except Exception as e:
-                            msg = '错误1:查询{}表({})分区[{}]错误,错误信息：{}！'.format(table_comment,table_name,item,e)
+                            msg = '错误1:查询{}表({})分区[{}]错误,错误信息:{}！'.format(table_comment,table_name,item,e)
                             print(msg)  
                             self.save_log(msg)
                             

@@ -19,18 +19,16 @@ os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
 
 db_orcl = cx_Oracle.connect("cigproxy/cigproxy@172.21.246.244:15211/xe")
 cr_orcl = db_orcl.cursor()
-cr_orcl.execute("select * from test.dws_person_photo_mpsb_m WHERE rownum=1 and photo_id='3305000001002012919' ")
+cr_orcl.execute("select * from test.dws_person_photo_mpsb_m WHERE rownum=1 and photo_id='3300000001007080649' ")
 rs_user = cr_orcl.fetchall()
 
 
 for user in rs_user:
     userId = user[0]
-    print(userId)
     if user[2] == '':
-        continue
-    blob = user[2].read().dec 
-    with open(r"backup\{}.jpeg".format(userId), "wb") as f:
-        f.write(blob) 
+        continue 
+    with open(r"backup\{}.png".format(userId), "wb") as f:
+        f.write(user[2].read()) 
 
 db_orcl.commit()
 cr_orcl.close() 
