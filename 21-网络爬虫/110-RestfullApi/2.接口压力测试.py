@@ -1,5 +1,3 @@
-
-
 import threading
 import requests
 import time
@@ -34,9 +32,6 @@ class Multi_thread():
             except Exception as e:
                 print(e)
 
-
-
-
     def start(self,sumthread,sumget,URL2,param):
         threads = []
         n_t=1
@@ -56,7 +51,6 @@ class Multi_thread():
         print('总响应最小时长：', min(restime))
         print('总响应时长：', sum(restime))
         print('平均响应时长：', sum(restime) / len(restime))
-
 
         if (len(Fail))==0:
             print(str(sumthread)+'个线程，每个线程压力请求'+str(sumget)+'次,共计'+str(sumthread*sumget)+'次，没有请求异常')
