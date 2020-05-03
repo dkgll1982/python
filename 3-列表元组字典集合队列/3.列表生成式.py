@@ -6,6 +6,8 @@
 # @File    : 列表生成式
 # @Software: PyCharm
 
+print((x for x in range(1,10)))
+
 L = [('Bob', 75), ('Adam', 92), ('Bart', 66), ('Lisa', 88)]
 
 def by_name(s):
