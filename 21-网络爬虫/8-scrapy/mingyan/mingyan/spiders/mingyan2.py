@@ -12,7 +12,7 @@ class Mingyan2Spider(scrapy.Spider):
     allowed_domains = ['lab.scrapyd.cn']
     
     start_urls = [  # 另外一种写法，无需定义start_requests方法
-        'http://lab.scrapyd.cn/page/1/',
+        'http://lab.scrapyd.cn',
         'http://lab.scrapyd.cn/page/2/',
     ]
 
