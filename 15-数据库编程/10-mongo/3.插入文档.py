@@ -19,3 +19,4 @@ x = mycol.insert_many(mylist)
  
 # 输出插入的所有文档对应的 _id 值
 print(x.inserted_ids)
+ 

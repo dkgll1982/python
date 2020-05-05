@@ -14,7 +14,7 @@ if "sites" in collist:   # 判断 sites 集合是否存在
   print("集合已存在！")
   
 #向集合中插入一个文档
-mydict = { "name": "RUNOOB", "alexa": "10000", "url": "https://www.runoob.com" }
+mydict =  {'serial_number': '23', 'movie_name': '当幸福来敲门', 'introduce': '导演:加布里尔·穆奇诺GabrieleMuccino主演:威尔·史密斯WillSmith...2006/美国/剧情传记家庭', 'star': '9.1', 'evaluate': '1075432人评价', 'describle': '平民励志片。 '}
 x = mycol.insert_one(mydict) 
 print(x)
 print(x)

@@ -21,6 +21,11 @@ USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:61.0) Gecko/20100
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
+mongo_host = 'localhost'
+mongo_port = 27017
+mongo_db_name = 'douban'
+mongo_db_connect = 'movie'
+
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 
@@ -64,9 +69,10 @@ ROBOTSTXT_OBEY = False
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'douban.pipelines.DoubanPipeline': 300,
-#}
+#这个不开启，无法保存数据
+ITEM_PIPELINES = {
+   'douban.pipelines.DoubanPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
