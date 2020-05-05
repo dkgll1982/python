@@ -18,7 +18,8 @@ class DoubanPipeline:
         client = pymongo.MongoClient(host = host,port = port)
         mydb = client[self.dbname]
         self.post = mydb[self.sheetname]
-        
+    
+    #存数据    
     def process_item(self, item, spider):
         data = dict(item) 
         self.post.insert_one(data)

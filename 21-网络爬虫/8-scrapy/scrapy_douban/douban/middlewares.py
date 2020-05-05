@@ -6,7 +6,14 @@
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+from fake_useragent import UserAgent
 
+#设置代理和随机user-agent
+
+class my_useragent(object):
+    def process_request(self,request,spider): 
+        ua = UserAgent()
+        request.headers['user-Agent'] = ua.random
 
 class DoubanSpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
