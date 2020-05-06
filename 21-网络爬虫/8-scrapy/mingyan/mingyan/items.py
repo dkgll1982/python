@@ -10,5 +10,6 @@ import scrapy
 
 class MingyanItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    fileName = scrapy.Field()
+    text = scrapy.Field()
+    tags = scrapy.Field() 

@@ -13,6 +13,7 @@ BOT_NAME = 'mingyan'
 
 SPIDER_MODULES = ['mingyan.spiders']
 NEWSPIDER_MODULE = 'mingyan.spiders'
+DATA_DIR = 'data'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -64,9 +65,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'mingyan.pipelines.MingyanPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'mingyan.pipelines.MingyanPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
