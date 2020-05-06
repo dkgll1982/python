@@ -5,8 +5,7 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 
-from mingyan.settings import DATA_DIR
-from urllib import parse
+from mingyan.settings import DATA_DIR 
 
 class MingyanPipeline:
     def __init__(self):

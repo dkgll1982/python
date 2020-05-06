@@ -38,5 +38,5 @@ class argsSpiderSpider(scrapy.Spider):
                 
         next_page = response.css('li.next a::attr(href)').extract_first()
         if next_page is not None:
-            next_page = response.urljoin(next_page)
+            next_page = response.urljoin(next_page)                     #页面相对路径改为绝对路径
             yield scrapy.Request(next_page, callback=self.parse)
