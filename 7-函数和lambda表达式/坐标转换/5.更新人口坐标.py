@@ -21,7 +21,7 @@ import requests
 ak = "LKnE67ysMkrG0LHwyG2GHPlc00LtMfSW"
 sk = "3hPe7iy3Ydq003v6wYbKn6pq7sHgGCRj"
 #坐标计算网格服务
-geoserver = 'https://xixian.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
+geoserver = 'https://xixian-qinhan.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
  
 #线程循环次数
 xhcount = 200
@@ -57,7 +57,10 @@ def get_zb():
     sql1 =  ("""select ID,case when R_ADDR not like '%西咸新区%' then '西咸新区'||R_ADDR ELSE R_ADDR END ADDR 
                 from zz_person
                 where g_id not in(select departmentid from a4_sys_department where d_level=4 and state=1) 
-                and r_addr is not null AND update_date is null and ROWNUM<100 """)      
+                    and r_addr is not null 
+                    and r_addr<>'-' 
+                    AND (update_date is null or trunc(update_date)<>trunc(sysdate)) 
+                    and ROWNUM<100 """)      
     #修改返回结果的sql
     sql2 = ""
 

@@ -220,7 +220,7 @@ if __name__ == '__main__':
     ak = "LKnE67ysMkrG0LHwyG2GHPlc00LtMfSW"
     sk = "3hPe7iy3Ydq003v6wYbKn6pq7sHgGCRj"
     g = bdapi(ak,sk);
-    url = g.get_url("西咸新区沣沣西新城大王街道康中村一组")
+    url = g.get_url("陕西省西咸新区沣东新城三桥街道杨何村北何村82号")
     print(url)
     bd_zb = g.get_zb(url)
     wgs_zb =  bd09_to_wgs84(bd_zb[0], bd_zb[1])
