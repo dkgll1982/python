@@ -1,17 +1,19 @@
 import pyodbc
 
 # 第一种连接方式：驱动名称等参数
-# DRIVER = "{OSCAR ODBC DRIVER}"
-# SERVER = "127.0.0.1"
-# PORT = 2003
-# UID = "SYSDBA"
-# PWD = "szoscar55"
-# CONN = "DRIVER=%s;SERVER=%s,%s;UID=%s;PWD=%s" % (
-#     DRIVER, SERVER, PORT, UID, PWD)
-#第一种连接方式：DSN名称
-conn = pyodbc.connect('DSN=st,UID=SYSDBA,PWD=szoscar55')
+DRIVER = "{OSCAR ODBC DRIVER}"
+SERVER = "127.0.0.1"
+PORT = 2003
+UID = "SYSDBA"
+PWD = "szoscar55"
+CONN = "DRIVER=%s;SERVER=%s,%s;UID=%s;PWD=%s" % (
+    DRIVER, SERVER, PORT, UID, PWD)
+conn = pyodbc.connect(CONN)
 
-sqlStr = 'select * from "PUBLIC"."TEST"'
+#第二种连接方式：DSN名称
+# conn = pyodbc.connect('DSN=st,UID=SYSDBA,PWD=szoscar55')
+
+sqlStr = 'select * from "PUBLIC"."DOMAINS"'
 
 cursor = conn.cursor()
 

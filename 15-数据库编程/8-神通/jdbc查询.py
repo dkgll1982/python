@@ -17,11 +17,11 @@ import jaydebeapi
 # conn.close()
 
 #测试神通数据库连接（3.6运行正常，3.8运行报错）
-url = 'jdbc:oscar://10.21.197.160:2003/osrdb'
+url = 'jdbc:oscar://127.0.0.1:2003/osrdb'
 user = 'SYSDBA'
 password = 'szoscar55'
 dirver = 'com.oscar.Driver'
-jarFile = r'data\oscarJDBC16.jar'
+jarFile = r'D:\Programing\ShenTong\bin\lib\oscarJDBC16.jar'
 sqlStr = 'select TABLE_NAME,NUM_ROWS from USER_TABLES WHERE ROWNUM<10'
 # conn=jaydebeapi.connect('oracle.jdbc.driver.OracleDriver',['jdbc:oracle:thin:@127.0.0.1/orcl','scott','tiger'],'D:\\MY_TOOLS\\ojdbc6.jar')
 conn = jaydebeapi.connect(dirver, [url, user, password], jarFile)
