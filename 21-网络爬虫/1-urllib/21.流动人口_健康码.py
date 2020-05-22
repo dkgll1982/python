@@ -24,7 +24,7 @@ class JKMSpider():
         self.dbpwd = 'esri@123'
         self.dbserver = '10.21.198.126:15214/xe'
         self.datatype = 'jkm_ldrk'
-        self.city = '湖州市'
+        self.city = '杭州市'
         self.mzt = '绿码'
         
         self.pagecount = 10        #每次取数据行数
@@ -96,7 +96,7 @@ class JKMSpider():
             rowindex = rowindex + 1  
             data = {"sfzh":row[0],"mzt":self.mzt,"mffd":self.city}
             jsonstr = self.send_request(data)
-            print('获取第%d条身份证：%s健康码（%s）成功!'%(rowindex,row[0],row[1]))
+            print('获取第%d条身份证：%s健康码（%s）成功!'%(rowindex,row[0],row[1]),jsonstr)
             sql2 = "INSERT INTO excel_table(TYPE,A,B,C,D) VALUES(:1,:2,:3,:4,:5)"
             params = (self.datatype,row[0],jsonstr,datetime.datetime.now().strftime('%Y-%m-%d %H'),row[1])
             cursor.execute(sql2,params)

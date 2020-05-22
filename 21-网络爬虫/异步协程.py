@@ -26,7 +26,6 @@ def get_host_ip():
         ip = s.getsockname()[0]
     finally:
         s.close()
-
     return ip
 
 # 获取查询的数据列表 
@@ -41,7 +40,6 @@ def get_data():
         ip+"%' join BASE_SPT_SERC tc  ON ','||Tc.INTERFACE||',' LIKE ',%'||TA.KEY||',%' and tc.key='dd2c61ca9fe746f486a8135c92a23194')"
     cursor.execute(sql1)
     return cursor.fetchall()  # 得到所有数据集
-
 
 async def get_page(name,url):
     async with aiohttp.ClientSession() as session:
