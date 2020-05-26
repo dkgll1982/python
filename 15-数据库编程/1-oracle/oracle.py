@@ -10,10 +10,10 @@ import cx_Oracle
 import os
 
 os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
-conn = cx_Oracle.connect('cigproxy/cigproxy@127.0.0.1/orcl')
+conn = cx_Oracle.connect('cigwbj/esri@123@10.21.198.126:15214/xe')
 cursor = conn.cursor()
 
-cursor.execute("SELECT * FROM User_Tab_Comments where comments is not null and table_type='TABLE' AND rownum<20")
+cursor.execute("SELECT * FROM User_Tab_Comments where comments is not null and table_type='TABLE' AND rownum<=20")
 rows = cursor.fetchall()  # 得到所有数据集
 for row in rows:
     print("%s, %s, %s" % (row[0], row[1], row[2]))
