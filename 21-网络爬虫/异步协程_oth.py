@@ -15,14 +15,14 @@ os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
 def get_data(): 
     conn = cx_Oracle.connect('cigwbj', 'esri@123', '10.21.198.126:15214/xe')
     cursor = conn.cursor() 
-    sql1 = f"select * from(select tb.name,url_str FROM base_spt_url ta join base_spt_interface tb on tb.enable=1 and ta.key=tb.key and tb.ip like '%{ip}%' and ta.key like 'jkm%')"
+    sql1 = f"select * from(select tb.name,url_str FROM base_spt_url ta join base_spt_interface tb on tb.enable=1 and ta.key=tb.key and tb.ip like '%{ip}%' and ta.key not like 'jkm%')"
     cursor.execute(sql1)
-    return cursor.fetchone()                    # 得到所有数据集
+    return cursor.fetchall()                    # 得到所有数据集
  
 #判断是否工作时间
 def is_worktime():
     # 范围时间(晚上9点终止运行)
-    d1_time =  datetime.datetime.strptime(str(datetime.datetime.now().date())+'6:20', '%Y-%m-%d%H:%M') 
+    d1_time =  datetime.datetime.strptime(str(datetime.datetime.now().date())+'0:00', '%Y-%m-%d%H:%M') 
     d2_time =  datetime.datetime.strptime(str(datetime.datetime.now().date())+'6:50', '%Y-%m-%d%H:%M')   
     # 当前时间
     c_time = datetime.datetime.now()
@@ -43,15 +43,15 @@ async def get_page(name,url):
                 
 start = time.time()
 
-while True:
+for i in range(1400):
     if is_worktime():
         print('非工作时间，停止运行！')
         break
     
     tasks = []
     loop = asyncio.get_event_loop()
-    row = get_data()
-    for i in range(100): 
+    rows = get_data()
+    for row in rows: 
         c = get_page(row[0],row[1])
         task = asyncio.ensure_future(c)
         tasks.append(task)
