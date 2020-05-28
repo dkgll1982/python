@@ -81,7 +81,7 @@ class sptspider():
                         '&'||'additional='||GET_UTF8_STR('{\"powerMatters\":\"' || TC.SXBM||'\",\"subPowerMatters\":\"' || TC.ZXBM||'\",\"accesscardId\":\"sjgl\",\"materialName\":\"' || TC.zxmc||'\",\"sponsorName\":\"大数据管理中心\"}') additional,
                         example
                     FROM BASE_SPT_INTERFACE TA
-                        JOIN BASE_SPT_SERC TB ON ','||TB.INTERFACE||',' LIKE '%,'||TA.KEY||',%' and tb.status='0'
+                        JOIN BASE_SPT_SERC TB ON ','||TB.INTERFACE||',' LIKE '%,'||TA.KEY||',%'
                         JOIN BASE_SPT_QLSX TC ON (','||tC.deptID2||',' like '%,'||tb.deptid||',%' and tC.zxmc is not null and tC.zxbm is not null and tC.state=1) 
                         JOIN (select to_char((SYSDATE - TO_DATE('1970-1-1 8', 'YYYY-MM-DD HH24')) * 86400000 + TO_NUMBER(TO_CHAR(SYSTIMESTAMP(3), 'FF'))) create_date,SERC,app_key from (
                             select create_date,row_number() over(partition by app_key order by create_date desc nulls last) rn,requestsecret SERC,app_key from base_spt_keysecret 
@@ -122,7 +122,7 @@ class sptspider():
         conn = self.pool.connection()
         cursor = conn.cursor()      
         #此处需要更新配置的应用key，秘钥信息。否则请求会报签名错误  
-        sql = "select key,serc,dept from base_spt_serc where interface is not null and status=0"
+        sql = "select key,serc,dept from base_spt_serc where interface is not null and DEPT='大数据局'"
         cursor.execute(sql)
         row = cursor.fetchall() 
         cursor.close() 

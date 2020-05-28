@@ -8,7 +8,7 @@
 # @Last Modified time: 2019-08-04 11:03:12 
 # @Software: vscode 
 
-import time
+import time,datetime
 # 将当前时间转换为时间字符串
 print(time.asctime())
 # 将指定时间转换时间字符串，时间元组的后面3个元素没有设置
@@ -37,7 +37,7 @@ print(time.strptime(st, '%Y年%m月%d日'))
 print(time.time())
 # 返回本地时区的时间偏移，以秒为单位
 print(time.timezone) # 在国内东八区输出-28800
-
+print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f'))
 
 
 
