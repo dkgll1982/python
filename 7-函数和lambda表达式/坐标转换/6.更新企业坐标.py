@@ -21,7 +21,7 @@ import datetime
 ak = "Ge8QStRhgzfk5WajB2uHzlpO9Wul40oh"
 sk = "c9zBPUBLw3TQqEriSCWEz6vgSpjjLM4q"
 #坐标计算网格服务
-geoserver = 'http://huzhou-jczl-nth.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
+geoserver = 'http://huzhou-jczl-cx.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
 
 #线程数量
 threadcount = 1

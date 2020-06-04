@@ -122,11 +122,12 @@ class sptspider():
         conn = self.pool.connection()
         cursor = conn.cursor()      
         #此处需要更新配置的应用key，秘钥信息。否则请求会报签名错误  
-        sql = "select key,serc,dept from base_spt_serc where interface is not null and DEPT='大数据局'"
+        sql = "select key,serc,dept from base_spt_serc where interface is not null and DEPT='湖州市政法委'"
         cursor.execute(sql)
         row = cursor.fetchall() 
         cursor.close() 
         conn.close()
+        
         return row
     
     #判断是否工作时间
