@@ -26,19 +26,25 @@ sql ='''
 url = 'http://59.202.115.11/gateway/api/001008005007017/dataSharing/LQ2aKKb7t6bb90cd.htm'
 params = {
 	"appKey": "ccd1d2a835c246788f54a177395f6ca6",
-	"sign": "953463363b54929af6c5306fb1c5818b",
-	"requestTime": "1591167314482",
+	"sign": "46938c7e0f7fd0a4c416e0d785bd0120",
+	"requestTime": "1591844081429",
 	"additional": "{\"powerMatters\":\"许可-00757-000\",\"subPowerMatters\":\"许可-00757-001\",\"accesscardId\":\"sjgl\",\"materialName\":\"机动车驾驶证初学申领\",\"sponsorName\":\"大数据管理中心\"}",
-	"encryptEntity": "{\"encryptParam\":\"TyMBKWYg251nau9sNCuAZc3FjX/LyZ0FXclv5BADA3j5cBOjU8IB3O0jqaxQ8wVoGLyNSh1vx+h9AyYS8rhbKcAdjX6kKKyDcGfboa11KMDsuJAA2T0u9qBGzPZWYcu+qqhEjXuBvFlIWqlZG5aMV7tOiEKnzx/8xLxTc9or68SAdb/whfT9TkI+wN9Pc0gmgkjLOyWD56yvLfnx3f1skaRQMs1mGxnUEcxtB6j1YHFGRBhLOu99MI6sf8zOyPkyMXcp/bvoX1A8g6c4+EDH1x2LneQHMHSICX/e7wEhfshplcmZNHBLC981CAYoI8azRKJpRVHF3kHrCNHPwqoalyoTNpFuFOJEKvdow5C89whClx5efCdiHtuuBBVP1fUXowO4PkcVIwD1mzdY1r+bk/0y7ezJ76PvsZHjDGQFn/tPF3s2WAc4MID+2h/eSF+78GaoBjocUXFZzi4BV9kWLHRoI8Gajr098tiRH3FAEcmCe1ZUyCf+quuuXL/RCNKlqVUcgPNRXLq1PKo3WxO+YuSGYoDnR/4U0HsaKGnpUgljpvjkG3/7eHFTCIQPklBc/DEtxWRY5UeAKe5J/JrWsk7pUogyGO/pzV/bXImCrh+tf8htsERH8bmmtaaHnngLML7oXJK30dyU3MmJCsDLcKkl28sN6zPkYVcmxCeJZy4ZJs1ntcI8kF99TSzdb1JBMBBrwSY9CB3gY3jwc1XzxXZMkgzcX51SXh3VReFdeDWPvlPgJwviJN1+MMpSJFDFqHPu7UyJZgU7p8GoN3ocHYvqdBGYoDH9l6h70L9dNc6BkTBV6Y05iirDlWkvv4foELIpgzOLkgrPSccOnMxO0A==\",\"sign\":\"Dwm+sZQG2X8B6ORT+dUCrRSiuv1QIX2tN9k7/krBhPiy1elgm2SSp0yjtfaZAKrGC/gyB6lOVwTk0NRWGBzA8kvBjnOMRsJFfc0XgTsET+eplIV74xUpd+EwN1J/tWBV4MRj2mlGNB6+rQAWk4jB/jnOyLe6SBkg4mjay4OfIt4=\",\"userId\":\"27fe2fc3-21eb-4d3d-ad86-e468c17c85ff\"}"
-}
+	"encryptEntity": "{\"encryptParam\":\"bc5upAnW8lZb3qgVh415XBekvEdI4VoFZ05fRsDwBYkW9krL8hXRKs4Yx69Yix/6y3wB/TR9rlqqQ8TnXeNSHe43CJdd/L0ivrVns84ttUY0LF04sf0QdzJGGiUC4s0QDLAUqA73sZSlSFXIfKZdbKCYzo6Qw/WtU8nsFPmAQBo8yC+j40qGhLuBCJ/mG7JTvX1ECqx9EoG5//7ZtGahWgmtYJFHcQcIm32MMn7mZBEXqDQqLgUA3tEWBB+eWMYYC2X0k5k1h03OKMcOa8s3rpDVfJCIQdrPrt9IxYaFNPVVoL2nLh3cBbP/kPK349yTTHB4r9swHG9YBgTkQbOAMoZRcE0YyQi3cvy+4jIwx7Wf3zYHBTfwEoXih1LY5IF23bxqnvaN5arauRI3ZqIz9teHRiXQ/ZEWhJvHG8riaGCcnrhkiTzmza8fQnMaD5a/AJnZsYEXmPxDZL2mMBM8XyR3c5tQcj+jTuUcchqvvkZKYW5Yd05fLBizAFTvTfJYtcQFU6VrB3c1g2NGSAdEWTNN+ZXQTJc8rJramH2Q9lrAwHLGld8N+6H1HhUNoN8qEIPrfETnZCIfwW1TPKCaUXU3PDm+Cl1gxegCv1ToquZTcnNYEiXPheASkrPxHdtGe0rKsF8pmVTR0YACyQknrakpWEaRaqd7aN+Nh4JXmk6Q8MMJsL09dndTjzgppxNLe8ifeRsSeLFw1sxRqj42Fx/ZphKU7XMtb91X7eU/FwqfnXKdCzeXuJPwvOr+/SPL7zxsUXBDaB3YJP4a24+clWSjnvorKOVgN3S888alSyUBjMyoBsUEIZGEfraeeBSMFwyMQfn7l/kJd8NilLDqt1Y1InrwzivGagH8mvm/Xp2+5m8Dy3KDEqlWuxpp/NWPPncdSfsC2IjT4/HnCuiqYj6TuBnB/VKEuGwJs1TH3gKRIsT+4bjveY9USc1xkxU8obxZArb1ud9pNtI5OgyCX8IqHkf2pVngCfdzdtTUDkVUvqAM18NM/aQs3RywVnSqtpt95hKfLVPbOYU71LRukItWa8r3DCH+53CIHWveiC9Pf1jKOCYs9NS3SKTNYOvxldiNUlNrQIMtnoHFSI5ozkXxoJLIcGE8y276yFZS1zSSfdy1yOoHOQ24TQ4ZWocNvd7zURIuNQQZbkpveJyafs3lN0uPNAUoseMol5afcCpju2Ozs3kdXeorQX7wquqcFNdQ51SVDO1CC4hepKVQyTRlzxTAqv5rUYnaNKUpGZRIKD4Syer1Kj/UK5PTwPrfLk+vCRk09whMlR+D+skJLtzPuNb53MTe3p+a2gmeH3V/8XZ6LxzwYyCucm2Ttn5Us3PSqfSuWO390Bo6CuPItA==\",\"sign\":\"C7smDdv74YhMpo7MRg53BUAmjsEiZkx3Zc7hPskFsPQpvzaoLPiMmbU9BvJGaPYmZyje+13J9ZP7R8SdmuFMmooU5s1/f7b6Z1TnteZodvtL3BRDJNdtlFdkt+CYGRAdmxgjt2UpX/csa6OUqj9ZrsDXxrAE5vX8knjSeAUlE0g=\",\"userId\":\"cc0689a0-d286-43f3-ba91-658f1bc1f125\"}"
 
+}
 req = requests.get(url,params=params) 
-text = req.text
+text = req.text 
+
+with open(r'D:\5.txt','w') as f:
+    f.write(text)
+    
+    
 json_str = json.loads(text)
 datas = json_str['datas'] 
 data = json.loads(datas)
-print(data['data'])
-
+with open(r'D:\4.txt','w') as f:
+    f.write(data['data'])
+    
 # SELECT  key,BASEURL||appKey||sign||requestTime||additional||'&'||example as url,APP_KEY  FROM (
 #                     SELECT (lower(utl_raw.cast_to_raw(DBMS_OBFUSCATION_TOOLKIT.MD5(
 #                         INPUT_STRING => TB.KEY||TD.SERC||td.CREATE_DATE)))) sign,
