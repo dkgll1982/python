@@ -1,3 +1,11 @@
+#!/usr/bin/env python 
+# -*- coding:utf-8 -*- 
+# @Author: guojun 
+# @Company: Aerospace Shenzhou Intelligent System Technology Co., Ltd 
+# @Site: https://user.qzone.qq.com/350606539/main 
+# @Date: 2020-06-15 17:13:31 
+# @Remark: 人生苦短，我用python！
+
 import requests
 import json
 import cx_Oracle
@@ -68,27 +76,27 @@ class sptspider():
         sql = "INSERT INTO BASE_SPT_KEYSECRET(REQUESTSECRETENDTIME,REFRESHSECRETENDTIME,REQUESTSECRET,REFRESHSECRET,create_user,APP_KEY)VALUES(:1,:2,:3,:4,:5,:6)"
         params = (requestSecretEndTime,refreshSecretEndTime,requestSecret,refreshSecret,'python',appkey)           
         cursor.execute(sql,params)
-        #删除旧的api地址
-        sql = "delete from base_spt_url where APP_KEY=:1"
-        cursor.execute(sql,[appkey])
-        #插入新的api地址
-        sql = """INSERT INTO base_spt_url(key,url_str,APP_KEY)
-                SELECT  key,BASEURL||appKey||sign||requestTime||additional||'&'||example as url,APP_KEY  FROM (
-                    SELECT TB.KEY AS APP_KEY,ROW_NUMBER() OVER(PARTITION BY TA.KEY ORDER BY TA.KEY) AS RN, TA.KEY,BASEURL BaseUrl,'?appKey='||GET_UTF8_STR(TB.KEY) appKey,
-                        '&'||'sign='||GET_UTF8_STR(lower(utl_raw.cast_to_raw(DBMS_OBFUSCATION_TOOLKIT.MD5(
-                        INPUT_STRING => TB.KEY||TD.SERC||td.CREATE_DATE)))) sign,
-                        '&'||'requestTime='||GET_UTF8_STR(td.CREATE_DATE) requestTime,
-                        '&'||'additional='||GET_UTF8_STR('{\"powerMatters\":\"' || TC.SXBM||'\",\"subPowerMatters\":\"' || TC.ZXBM||'\",\"accesscardId\":\"sjgl\",\"materialName\":\"' || TC.zxmc||'\",\"sponsorName\":\"大数据管理中心\"}') additional,
-                        example
-                    FROM BASE_SPT_INTERFACE TA
-                        JOIN BASE_SPT_SERC TB ON ','||TB.INTERFACE||',' LIKE '%,'||TA.KEY||',%'
-                        JOIN BASE_SPT_QLSX TC ON (','||tC.deptID2||',' like '%,'||tb.deptid||',%' and tC.zxmc is not null and tC.zxbm is not null and tC.state=1) 
-                        JOIN (select to_char((SYSDATE - TO_DATE('1970-1-1 8', 'YYYY-MM-DD HH24')) * 86400000 + TO_NUMBER(TO_CHAR(SYSTIMESTAMP(3), 'FF'))) create_date,SERC,app_key from (
-                            select create_date,row_number() over(partition by app_key order by create_date desc nulls last) rn,requestsecret SERC,app_key from base_spt_keysecret 
-                            ) where rn=1) TD ON TD.APP_KEY=TB.KEY
-                ) TA 
-                WHERE RN=1 and APP_KEY=:1""" 
-        cursor.execute(sql,[appkey])
+        # #删除旧的api地址
+        # sql = "delete from base_spt_url where APP_KEY=:1"
+        # cursor.execute(sql,[appkey])
+        # #插入新的api地址
+        # sql = """INSERT INTO base_spt_url(key,url_str,APP_KEY)
+        #         SELECT  key,BASEURL||appKey||sign||requestTime||additional||'&'||example as url,APP_KEY  FROM (
+        #             SELECT TB.KEY AS APP_KEY,ROW_NUMBER() OVER(PARTITION BY TA.KEY ORDER BY TA.KEY) AS RN, TA.KEY,BASEURL BaseUrl,'?appKey='||GET_UTF8_STR(TB.KEY) appKey,
+        #                 '&'||'sign='||GET_UTF8_STR(lower(utl_raw.cast_to_raw(DBMS_OBFUSCATION_TOOLKIT.MD5(
+        #                 INPUT_STRING => TB.KEY||TD.SERC||td.CREATE_DATE)))) sign,
+        #                 '&'||'requestTime='||GET_UTF8_STR(td.CREATE_DATE) requestTime,
+        #                 '&'||'additional='||GET_UTF8_STR('{\"powerMatters\":\"' || TC.SXBM||'\",\"subPowerMatters\":\"' || TC.ZXBM||'\",\"accesscardId\":\"sjgl\",\"materialName\":\"' || TC.zxmc||'\",\"sponsorName\":\"大数据管理中心\"}') additional,
+        #                 example
+        #             FROM BASE_SPT_INTERFACE TA
+        #                 JOIN BASE_SPT_SERC TB ON ','||TB.INTERFACE||',' LIKE '%,'||TA.KEY||',%'
+        #                 JOIN BASE_SPT_QLSX TC ON (','||tC.deptID2||',' like '%,'||tb.deptid||',%' and tC.zxmc is not null and tC.zxbm is not null and tC.state=1) 
+        #                 JOIN (select to_char((SYSDATE - TO_DATE('1970-1-1 8', 'YYYY-MM-DD HH24')) * 86400000 + TO_NUMBER(TO_CHAR(SYSTIMESTAMP(3), 'FF'))) create_date,SERC,app_key from (
+        #                     select create_date,row_number() over(partition by app_key order by create_date desc nulls last) rn,requestsecret SERC,app_key from base_spt_keysecret 
+        #                     ) where rn=1) TD ON TD.APP_KEY=TB.KEY
+        #         ) TA 
+        #         WHERE RN=1 and APP_KEY=:1""" 
+        # cursor.execute(sql,[appkey])
         conn.commit()
         print(f'获取【{deptname}】秘钥成功，当前秘钥：{requestSecret}')
         cursor.close()
@@ -111,9 +119,9 @@ class sptspider():
         cursor.close() 
         conn.close()
         if row is not None: 
-            current_time = int(round(time.time() * 1000))             #13位的时间戳
+            current_time = int(round(time.time() * 1000))                   #13位的时间戳
             diff = math.ceil((row[0]-current_time)/1000)
-            return args,row[4]+1,diff,True if diff < 60 else False         #每隔14分钟刷新一次秘钥 (此处判断不要采用服务器时间，可能服务器时间未矫正)      
+            return args,row[4]+1,diff,True if diff < 60 else False          #每隔14分钟刷新一次秘钥 (此处判断不要采用服务器时间，可能服务器时间未矫正)      
         else:
             return args,1,30,True
         
@@ -132,17 +140,21 @@ class sptspider():
     
     #判断是否工作时间
     def is_worktime(self):
-        # 范围时间(晚上9点终止运行)
-        d_time =  datetime.datetime.strptime(str(datetime.datetime.now().date())+'23:50', '%Y-%m-%d%H:%M')   
+        endtime = os.getenv("endtime")
+        if endtime is None:
+            endtime = '18:30' 
+        # 范围时间
+        d1_time =  datetime.datetime.strptime(str(datetime.datetime.now().date())+'8:10', '%Y-%m-%d%H:%M') 
+        d2_time =  datetime.datetime.strptime(str(datetime.datetime.now().date())+endtime, '%Y-%m-%d%H:%M')   
         # 当前时间
         c_time = datetime.datetime.now()
-        # 判断当前时间是否在范围时间内
-        return True if c_time < d_time else False
+        # 判断当前时间是否在范围时间内（8:10——18:20停止运行）
+        return True if c_time >d1_time and c_time <d2_time else False
             
     def start (self): 
         data = self.get_appinfo()
         while True:
-            if not self.is_worktime():
+            if self.is_worktime():
                 print('非工作时间，停止运行！')
                 break
             # 创建一个包含4条线程的线程池

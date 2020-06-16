@@ -17,10 +17,25 @@ import sys
 from jpype import *
 import jpype 
 import json
+from DBUtils.PooledDB import PooledDB
 
+endtime = os.getenv("endtime")
+if endtime is None:
+    endtime = '18:30' 
+    
 os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
 app_key = 'ccd1d2a835c246788f54a177395f6ca6'
-row_count = 500
+userId= "cc0689a0-d286-43f3-ba91-658f1bc1f125";
+privateKey = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBANql8gtIgx+LJGmV024PzHJJ/qO5Fvj5aaXXC1ZVyTsxbOMylU65jc3u1ig83M8y/iCHrvbLzQ1D0GY15ywepJAkykUZxaQhA1/hnSGMwQA1IvSk7xsRfzM4CgNtPqJgfY6Q5/wRfa+90vvHnzPf6/NgKCf4RJ3UOL2i6JT6jA/PAgMBAAECgYEAo6xjkyS121AKcuuQOSyka82OS7sLQldaSaW/u+I94AywqSa9dBAc4dJvB/H/jS9r4qgPRnnrRonEIC8rnPBXWJmmMJRYt96cvCRcmWfHcv8G2yg+3Zq48ImduIhfRwgABZz+2mFJVtO7cef3mV/9CWV+rkvVGHO+dMBZM+YT/WECQQDvO2kulclJrHvcHOnVKzyMgPn5TMavicpYOo6N+gU90DNcjgjQWazPK3LuTyejiOD9pMERJLHyv45cZVtBL1xxAkEA6fkxyWXB/t06wLc+rnQzs5on+BtXMom3B5e3AdhIH8vj19iFZRMf70YjfP/+VjRclGjM9ord+Eha9pnpt5FQPwJAeTAAbV/lctPUfsGK1rirWIWxm89/ysajYSRwuI1SAGkqy5UL8/epad0ZwI0KiHY7e2Hth7CuEElnZXjWzGOgkQJBAK09KsTxSFO6YH9C7vFi7skj8kY9kDHGUDQZ/JIsHzMT128BTbvKDlIvP6WVMi+H86ibdG9z4OiuQlPnIGsf+CcCQGm7E8gzp/KCtDMsa797yapJOfCKlE3B9LKnu04li2fDAvS20ULVk+vZHHUhlCuav4cL+sJKAWQNZ5iuLh+6Xbg=";
+
+#jvm = r'C:\Program Files\Java\jre1.8.0_181\bin\server\jvm.dll'  #jvm.dll启动成功 
+jvm = getDefaultJVMPath()  # 直接获取环境变量的jvm
+#jpype.startJVM(jvm, "-Djava.class.path=D:\\data\\gtapi.jar")    #jar包的位置
+jpype.startJVM(jvm, "-Djava.class.path=/opt/gtapi.jar")         #jar包的位置
+pdf = JClass('testrsr.PdfControllerTest')                       #java的类名
+
+row_count = 1               #每次查询数量
+dept = 'wx'                 #区县标记
 
 JsonObject = {
     "isAllCity":"0",
@@ -38,10 +53,29 @@ JsonObject = {
     "qyca":"0"
 }
 
+url = 'http://59.202.115.11/gateway/api/001008005007017/dataSharing/LQ2aKKb7t6bb90cd.htm'
+params = {
+    "appKey": app_key
+}
+
+#数据库连接参数/连接池
+user='cigwbj'
+password='esri@123'
+host='10.21.198.126'
+port='15214'
+sid='xe'
+dsn = cx_Oracle.makedsn(host,port,sid)
+pool = PooledDB(cx_Oracle,
+                mincached = 20,
+                blocking = True,
+                user = user,
+                password = password,
+                dsn = dsn)
+
 # 获取查询的数据列表 
 def get_data(): 
-    conn = cx_Oracle.connect('cigwbj', 'esri@123', '10.21.198.126:15214/xe')
-    cursor = conn.cursor() 
+    conn = pool.connection()
+    cursor = conn.cursor()    
     sql1 = """  SELECT TA.*,TB.*,'zfw'||to_char(sysdate,'yyyymmdd')||'-'||lpad(CIG_API_SEQ.NEXTVAL,7,'0') cdbh FROM (
                     SELECT lower(utl_raw.cast_to_raw(DBMS_OBFUSCATION_TOOLKIT.MD5(INPUT_STRING => TB.KEY||TD.SERC||td.CREATE_DATE))) sign,
                         td.CREATE_DATE requestTime
@@ -55,39 +89,61 @@ def get_data():
                         where rn=1 and APP_KEY='{}'
                     ) TD ON TD.APP_KEY=TB.KEY
                 ) TA,(
-                    select PARA1 ZJH,PARA2 NAME from base_spt_para  where type_id='gtfw' AND PARA1 NOT IN(
-                        SELECT PARA1 FROM BASE_SPT_XTDJ_TB WHERE TYPE_ID='gtfw'
-                    )
-                ) TB
-                WHERE ROWNUM<{}""".format(app_key,row_count)
+                    select * from (
+                        select PARA1 ZJH,PARA2 NAME,PARA3 XZQBM from base_spt_para  where type_id='gtfw' AND PARA1 NOT IN(
+                            SELECT PARA1 FROM BASE_SPT_XTDJ_TB WHERE TYPE_ID='gtfw'
+                        ) and DATA_FROM = '{}' order by dbms_random.value()
+                    ) where rownum=1
+                ) TB""".format(app_key,dept)  
     cursor.execute(sql1)
-    return cursor.fetchone()                    # 得到所有数据集
+    row = cursor.fetchall()                    # 得到所有数据集
+    cursor.close() 
+    conn.close()
+    return row
  
+#保存结果 
+def save_data(code,msg,zjh,name,data,datacount): 
+    conn = pool.connection()
+    cursor = conn.cursor()  
+    params = [zjh,name,code,msg,data,datacount]     
+    sql = "INSERT INTO BASE_SPT_XTDJ_TB(ID,TYPE_ID,KEY,NAME,PARA1,PARA2,PARA3,PARA4,CODE,MSG,BODY,STATE,CREATE_USER,CREATE_DATE,DATA_COUNT) values(SYS_GUID(),'gtfw','gtfw','国土房屋查询',:1,:2,null,null,:3,:4,:5,'1','ADMIN',SYSDATE,:6)"
+    cursor.execute(sql,params)
+    conn.commit() 
+    cursor.close()
+    conn.close()
+
 #判断是否工作时间
 def is_worktime():
-    # 范围时间(晚上9点终止运行)
-    d1_time =  datetime.datetime.strptime(str(datetime.datetime.now().date())+'6:20', '%Y-%m-%d%H:%M') 
-    d2_time =  datetime.datetime.strptime(str(datetime.datetime.now().date())+'6:50', '%Y-%m-%d%H:%M')   
+    # 范围时间
+    d1_time =  datetime.datetime.strptime(str(datetime.datetime.now().date())+'8:00', '%Y-%m-%d%H:%M') 
+    d2_time =  datetime.datetime.strptime(str(datetime.datetime.now().date())+endtime, '%Y-%m-%d%H:%M')   
     # 当前时间
     c_time = datetime.datetime.now()
-    # 判断当前时间是否在范围时间内
+    # 判断当前时间是否在范围时间内（8:00——18:30停止运行）
     return True if c_time >d1_time and c_time <d2_time else False
             
-async def get_page(name,url):
-    async with aiohttp.ClientSession(timeout = aiohttp.ClientTimeout(total = 10)) as session:   #10s超时  
+async def get_page(url,params,zjh,name):
+    async with aiohttp.ClientSession(timeout = aiohttp.ClientTimeout(total = 15)) as session:   #10s超时  
         try:
-            async with await session.get(url=url) as res: 
+            async with await session.get(url = url,params = params) as res: 
                 if res.status == 200:
                     page_text = await res.text()   # read()  json() 
-                    print('%s-接口:%s,结果:%s'%(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f'),name,page_text[2:23]))    
+                    result = json.loads(page_text)
+                    code = result["code"]
+                    data = json.dumps(
+                        json.loads(result['datas'])['fwxxlist'] if code == '00' else result,
+                        indent=4,
+                        ensure_ascii=False)
+                    print('国土-接口:%s,人口:%s-%s,结果:%s'%(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f'),zjh,name,data.replace('\n','').replace(' ','')[2:50]))     
+                    save_data(code,result["msg"],zjh,name,data,result["dataCount"])
                 else:
-                    print("{}-Error: {}".format(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f'),res))
+                    print("国土-接口:{},人口:{}-{},Error:{}".format(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f'),zjh,name,res))
         except Exception as e:
-            print("{}-请求超时错误{}".format(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f'),e))
+            print("国土-接口:{},人口:{}-{},请求超时错误{}".format(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f'),zjh,name,e))
                 
 start = time.time()
-
-while True:
+ 
+while True: 
     if is_worktime():
         print('非工作时间，停止运行！')
         break
@@ -100,9 +156,23 @@ while True:
         JsonObject["name"] = row[3]
         JsonObject["xzqbm"] = row[4]
         JsonObject["cdbh"] = row[5]
-        c = get_page(row[0],row[1])
+        obj = json.dumps(JsonObject)
+        
+        try: 
+            #获取加密后的值
+            params["encryptEntity"] = pdf.GetEncrypResult(userId,privateKey,obj)
+            params["sign"] = row[0]
+            params["requestTime"] = row[1]
+            params["additional"] = "{\"powerMatters\":\"许可-00757-000\",\"subPowerMatters\":\"许可-00757-001\",\"accesscardId\":\"sjgl\",\"materialName\":\"机动车驾驶证初学申领\",\"sponsorName\":\"大数据管理中心\"}"            
+        except Exception:
+            print("获取加密结果超时错误！")
+            break        
+        
+        c = get_page(url,params,row[2],row[3])
         task = asyncio.ensure_future(c)
         tasks.append(task)
+        
     loop.run_until_complete(asyncio.wait(tasks))
 
 print('总耗时：', time.time()-start)
+shutdownJVM()
