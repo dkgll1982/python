@@ -27,13 +27,13 @@ tasks = [
 def get_task(task_id):
     task = filter(lambda t: t['id'] == task_id, tasks) 
     l = list(task) 
-    if not 'Referer' in request.headers:    #防盗链
-        abort(403)
-    else:
-        if request.headers['Referer']!='jczl.com':
-            abort(403)
-        elif len(l) == 0:
-            abort(404)
+    #if not 'Referer' in request.headers:    #防盗链
+    #    abort(403)
+    #else:
+        #if request.headers['Referer']!='jczl.com':
+        #    abort(403)
+        #elif len(l) == 0:
+        #    abort(404)
     return jsonify({'task': l[0]})
 
 @app.errorhandler(403)

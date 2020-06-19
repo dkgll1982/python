@@ -107,7 +107,7 @@ class Matedata_odps:
         #list(data[0]._name_indexes.keys())                         # 取sql查询结果的字段名 
         sheet.append(colname)    
         for record in data: 
-            self.save_image(record[0],record[2])
+            #self.save_image(record[0],record[2])
             sheet.append(record.values)                             # 取每条记录
             
         if len(data) == 0:
