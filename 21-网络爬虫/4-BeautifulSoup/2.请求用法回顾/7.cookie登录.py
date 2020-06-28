@@ -20,6 +20,8 @@ print(urlunparse(data))
 
 from urllib.parse import urljoin
 
+
+print(urljoin('http:', '//www.cnblogs.com'))
 print(urljoin('http://www.baidu.com', 'FAQ.html'))
 print(urljoin('http://www.baidu.com', 'https://pythonsite.com/FAQ.html'))
 print(urljoin('http://www.baidu.com/about.html', 'https://pythonsite.com/FAQ.html'))

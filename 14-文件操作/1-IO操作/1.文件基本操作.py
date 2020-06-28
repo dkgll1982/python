@@ -1,4 +1,8 @@
 import time,datetime 
+import os
+
+IMAGES_STORE = os.path.join(os.path.dirname(os.path.dirname(__file__)),'images')
+print(IMAGES_STORE)
 
 try:
     #使用with语句，Python可以自动调用close()方法

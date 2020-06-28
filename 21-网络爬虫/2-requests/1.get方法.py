@@ -1,12 +1,16 @@
 import requests 
 
-url = 'http://jczl.giscloud.cx/CIGService/rest/services/0/intersectFeaturesByXY'
+url = 'http:/699pic.com/image/xuanzhuanqiu.html'
 params = {
     "x":'119.880306363',
     "y":"31.063869536"
 }
+header = {
+    "host": "699pic.com",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"
+}
 
-req = requests.get(url,params=params)
+req = requests.get(url = url,params=params,headers = header)
 print(type(req),req.status_code,req.encoding,req.headers,req.url)
 print('')
 print('---->',req.text)
