@@ -26,7 +26,7 @@ class AnaimalSpider(object):
         }
         if not os.path.exists(self.file_path):
             os.mkdir(self.file_path) 
-    
+      
     def send_request(self,url):
         print('当前请求Url:%s'%url)
         return requests.get(url,headers = self.headers)
