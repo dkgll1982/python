@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # 參考：https://www.cnblogs.com/Kctrina/p/9523553.html
+# 参考：https://blog.csdn.net/qq_24076135/article/details/78319055
  
 import scrapy
 from lxml import etree

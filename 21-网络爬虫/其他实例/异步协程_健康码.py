@@ -15,9 +15,12 @@ os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
 def get_data(): 
     conn = cx_Oracle.connect('cigwbj', 'esri@123', '10.21.198.126:15214/xe')
     cursor = conn.cursor() 
-    sql1 = f"select * from(select tb.name,url_str FROM base_spt_url ta join base_spt_interface tb on tb.enable=1 and ta.key=tb.key and tb.ip like '%{ip}%' and ta.key like 'jkm%')"
+    sql1 = f"select * from(select tb.name,url_str FROM base_spt_url ta join base_spt_interface tb on tb.enable=1 and ta.key=tb.key and tb.ip like '%{ip}%' and ta.key like 'jkm%' and ta.app_key='f8485b22aa154e4bb58ae1353d62b0b0')"
     cursor.execute(sql1)
-    return cursor.fetchone()                    # 得到所有数据集
+    row =  cursor.fetchone()                 
+    cursor.close() 
+    conn.close() 
+    return row
  
 #判断是否工作时间
 def is_worktime():

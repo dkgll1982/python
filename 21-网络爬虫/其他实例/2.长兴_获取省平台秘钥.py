@@ -83,7 +83,7 @@ class sptspider():
             #插入新的api地址
             sql = """INSERT INTO base_spt_url(key,url_str,APP_KEY)
                     SELECT  key,BASEURL||appKey||sign||requestTime||additional||'&'||example as url,APP_KEY  FROM (
-                        SELECT TB.KEY AS APP_KEY,ROW_NUMBER() OVER(PARTITION BY TA.KEY ORDER BY TA.KEY) AS RN, TA.KEY,BASEURL BaseUrl,'?appKey='||GET_UTF8_STR(TB.KEY) appKey,
+                        SELECT TB.KEY AS APP_KEY,ROW_NUMBER() OVER(PARTITION BY TA.KEY,TB.KEY ORDER BY TA.KEY) AS RN, TA.KEY,BASEURL BaseUrl,'?appKey='||GET_UTF8_STR(TB.KEY) appKey,
                             '&'||'sign='||GET_UTF8_STR(lower(utl_raw.cast_to_raw(DBMS_OBFUSCATION_TOOLKIT.MD5(
                             INPUT_STRING => TB.KEY||TD.SERC||td.CREATE_DATE)))) sign,
                             '&'||'requestTime='||GET_UTF8_STR(td.CREATE_DATE) requestTime,
