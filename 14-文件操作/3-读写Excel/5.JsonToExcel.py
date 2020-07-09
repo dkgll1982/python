@@ -13,8 +13,8 @@ import pandas as pd
 
 data = [] # 用于存储每一行的Json数据
 
-j = json.load(open(r'backup/js/test.json', 'r', encoding='utf-8')) 
-data.append(j)
+j = json.load(open(r'backup/接口.json', 'r', encoding='utf-8')) 
+data.append(j['data'])
 df = pd.DataFrame() # 最后转换得到的结果
 for line in data:
     for i in line:  

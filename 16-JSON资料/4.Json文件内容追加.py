@@ -13,8 +13,7 @@ with open(r'backup/test2.json','a+',encoding="utf-8") as f:
     data['a']="我爸是赵四"
     data['b']="我爸是李刚"  # 可以在第二遍运行时修改一下看看效果
     data['e']="我爸是李刚"
-    if data['ee']: 
-        
+    if data != {}:          
         data['ee'].append({'a3':'嵌套'+str(len(data['ee']))}) 
     else:
         data['ee'] = [{'a3':'嵌套啊'}]

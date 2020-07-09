@@ -10,12 +10,10 @@ def json_append(file_name,key,json_data):
         else:
             f.seek(0)
             data = json.load(f) 
-        if data[key]:  
+        if data != {}:  
             data[key][len(data[key]):len(data[key])] = json_data 
         else:
             data[key] = json_data 
-
-        print('{}添加后的{}值：'.format(key,data))
         
         # 设置文件当前位置 0代表开始处 其实有两个参数 offset,whence （whence常用有三个参数0，1，2；0 代表从文件开头开始算起，1 代表从当前位置开始算起，2 代表从文件末尾算起。）
         f.seek(0)                       
