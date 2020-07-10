@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for image699pic project
+# Scrapy settings for Postbar project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -8,18 +8,18 @@
 #     https://docs.scrapy.org/en/latest/topics/settings.html
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-BOT_NAME = 'image699pic'
 
-SPIDER_MODULES = ['image699pic.spiders']
-NEWSPIDER_MODULE = 'image699pic.spiders'
+BOT_NAME = 'Postbar'
+
+SPIDER_MODULES = ['Postbar.spiders']
+NEWSPIDER_MODULE = 'Postbar.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'image699pic (+http://www.yourdomain.com)'
+#USER_AGENT = 'Postbar (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-#关闭机器人协议，改成False
-ROBOTSTXT_OBEY = False
+ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -39,22 +39,21 @@ ROBOTSTXT_OBEY = False
 #TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-DEFAULT_REQUEST_HEADERS = {
-  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-  'Accept-Language': 'en',
-  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36'
-}
+#DEFAULT_REQUEST_HEADERS = {
+#   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+#   'Accept-Language': 'en',
+#}
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'image699pic.middlewares.Image699PicSpiderMiddleware': 543,
+#    'Postbar.middlewares.PostbarSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'image699pic.middlewares.Image699PicDownloaderMiddleware': 543,
+#    'Postbar.middlewares.PostbarDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -66,9 +65,12 @@ DEFAULT_REQUEST_HEADERS = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'image699pic.pipelines.Images699Pipeline': 1,
+    'Postbar.pipelines.PostbarPipeline': 300,
 }
+#图片保存地址，此处会存放在当前执行路径下我的images目录下
 IMAGES_STORE = 'images'
+#过期天数
+IMAGES_EXPIRES = 1
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

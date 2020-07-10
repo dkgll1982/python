@@ -29,6 +29,6 @@ class Images699Pipeline(ImagesPipeline):
         if not os.path.exists(category_path):
             os.makedirs(category_path)
         image_name=path.replace("full/","")
-        image_path=os.path.join(category_path,image_name)
+        image_path=os.path.join(category,image_name)
         return image_path
     
