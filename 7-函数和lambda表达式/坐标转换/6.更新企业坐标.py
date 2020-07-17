@@ -21,7 +21,7 @@ import datetime
 ak = "Ge8QStRhgzfk5WajB2uHzlpO9Wul40oh"
 sk = "c9zBPUBLw3TQqEriSCWEz6vgSpjjLM4q"
 #坐标计算网格服务
-geoserver = 'http://huzhou-jczl-cx.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
+geoserver = 'http://huzhou-jczl.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
 
 #线程数量
 threadcount = 1
@@ -30,7 +30,7 @@ pagecount = 200
 #每次取数据行数
 rowcount = 100
 #线程循环次数
-xhcount = 50
+xhcount = 200
 
 # 大致计算公式如下
 # 公式1：线程循环次数 = 数据分段区间/每次取数据行数，如5000/100=50，即需要约50次循环才能跑完区间的所有的数据 
@@ -59,7 +59,7 @@ def request_data(urt):
 def get_zb(index):
     os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
     #ORACLE连接参数
-    conn = cx_Oracle.connect('cigproxy','cigproxy','172.21.244.56:15221/orcl')
+    conn = cx_Oracle.connect('test','esri@123','172.21.246.244:15211/XE')
     cursor = conn.cursor() 
 
     #取数据起始位置
@@ -67,7 +67,7 @@ def get_zb(index):
     #取数据结束位置
     end = str(pagecount*(index))
     #查询数据的sql
-    sql1 =  ("select * from (select DISTINCT '湖州市'||FIRM_ADDRESS ADDR,FIRM_ADDRESS from ZZ_FIRM_BASE_INFO_ZB where update_date is null and FIRM_ADDRESS IS NOT NULL) where rownum<="+str(rowcount))      
+    sql1 =  ("select * from (select nbxh,ZS from ZZ_FIRM_INFO_ODPS where STREET is null AND ZS LIKE '浙江省湖州市%' AND update_date is null) where rownum<="+str(rowcount))      
     #修改返回结果的sql
     sql2 = ""
 
@@ -78,7 +78,7 @@ def get_zb(index):
     g = bdapi(ak,sk)
     
     for row in rows: 
-        url =g.get_url(row[0][0:30])
+        url =g.get_url(row[1][0:30])
         try:
             bd_zb = g.get_zb(url)                                                               #得到百度坐标
             if bd_zb is not None:
@@ -87,9 +87,9 @@ def get_zb(index):
                 geo = geoserver+"?x="+wgs_x+"&y="+wgs_y
                 result = request_data(geo) 
                 print("子线程(%s)处理；百度：%s；WGS84：%s；获取网格地址：%s"%(threading.current_thread().name,bd_zb,wgs_zb,geo)) 
-                sql2 = "update ZZ_FIRM_BASE_INFO_ZB set bd_x ='%s',bd_y ='%s',wgs_x='%s',wgs_y='%s',result='%s',update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where FIRM_ADDRESS='%s'"%(bd_x,bd_y,wgs_x,wgs_y,str(result),update_date,row[1]) 
+                sql2 = "update ZZ_FIRM_INFO_ODPS set result='%s',update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where NBXH='%s'"%(str(result),update_date,row[0]) 
             else:       
-                sql2 = "update ZZ_FIRM_BASE_INFO_ZB set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where FIRM_ADDRESS='%s'"%(update_date,row[1])            
+                sql2 = "update ZZ_FIRM_INFO_ODPS set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where NBXH='%s'"%(update_date,row[0])            
             cursor.execute(sql2)
         except Exception as e:
             print('Error:',e)
