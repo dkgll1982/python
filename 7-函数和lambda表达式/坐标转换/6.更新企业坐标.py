@@ -9,7 +9,7 @@
 # @Software: vscode   
 
 import cx_Oracle
-import os
+import os,sys
 import urllib.request 
 from 坐标转换 import bd09_to_wgs84,bdapi 
 import threading,time
@@ -30,7 +30,7 @@ pagecount = 200
 #每次取数据行数
 rowcount = 100
 #线程循环次数
-xhcount = 200
+xhcount = 20
 
 # 大致计算公式如下
 # 公式1：线程循环次数 = 数据分段区间/每次取数据行数，如5000/100=50，即需要约50次循环才能跑完区间的所有的数据 
@@ -67,10 +67,11 @@ def get_zb(index):
     #取数据结束位置
     end = str(pagecount*(index))
     #查询数据的sql
-    sql1 =  ("select * from (select nbxh,ZS from ZZ_FIRM_INFO_ODPS where STREET is null AND ZS LIKE '浙江省湖州市%' AND update_date is null) where rownum<="+str(rowcount))      
+    args = sys.argv
+    sql1 =  ("select * from (select nbxh,REPLACE(GRID_ADDR,'&#') GRID_ADDR from ZZ_FIRM_INFO_ODPS where COMMUNITY is null AND GRID_ADDR LIKE '浙江省湖州市%' AND UPDATE_DATE is null) where rownum<="+str(rowcount))      
     #修改返回结果的sql
     sql2 = ""
-
+    print(sql1)
     cursor.execute(sql1);    
     rows = cursor.fetchall()  # 得到所有数据集
 

@@ -45,7 +45,7 @@ if __name__ == "__main__":
     ak = "LKnE67ysMkrG0LHwyG2GHPlc00LtMfSW"
     sk = "3hPe7iy3Ydq003v6wYbKn6pq7sHgGCRj"
     g = bdapi(ak,sk);
-    url = g.get_url(city+"湖州港湖花园西区11号楼1楼")
+    url = g.get_url(city+"浙江省湖州市德清县武康街道德清大道299号401-1室")
     print(url)
     bd_zb = g.get_zb(url)
     wgs_zb =  bd09_to_wgs84(bd_zb[0], bd_zb[1])

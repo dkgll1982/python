@@ -71,7 +71,7 @@ class CaiPiaoSpider():
                 detail_res = self.send_request(self.detail_url.format(qihao))
                 if detail_res:
                     self.parse_detail(detail_res)
-                    if row_index%100 == 0:      #每100条提交一次
+                    if row_index%10 == 0:      #每100条提交一次
                         self.conn.commit()
                     row_index += 1
                 time.sleep(1)                   #别爬太快
@@ -113,23 +113,23 @@ class CaiPiaoSpider():
         
     # 查询数据    
     def get_data(self):
-        sql = 'select qihao from BASE_SSQ_INFO'
+        sql = 'select qihao from SSQ_INFO'
         self.cursor.execute(sql)
         return self.cursor.fetchall()  # 得到所有数据集 
    
     # 执行添加记录的SQL    
     def insert_record(self,dict):
-        sql = """INSERT INTO BASE_SSQ_INFO(qihao,haoma,kjrq,jzrq,xiaoliang,jiangchi)
+        sql = """INSERT INTO SSQ_INFO(qihao,haoma,kjrq,jzrq,xiaoliang,jiangchi)
                  select :qihao,:haoma,:kjrq,:jzrq,:xiaoliang,:jiangchi from dual where not exists(
-                     select * from BASE_SSQ_INFO where qihao=:qihao
+                     select * from SSQ_INFO where qihao=:qihao
                  ) """
         self.cursor.execute(sql,dict) 
         
     # 执行添加详情的SQL    
     def insert_detail(self,params):
-        sql = """INSERT INTO BASE_SSQ_ZJXX(qihao,"type","num",prize)
+        sql = """INSERT INTO SSQ_ZJXX(qihao,"type","num",prize)
                  select :qihao,:type,:num,:prize from dual where not exists(
-                         select * from base_ssq_zjxx where qihao =:qihao and "type"=:type
+                         select * from ssq_zjxx where qihao =:qihao and "type"=:type
                 ) """
         self.cursor.executemany(sql,params)  
 
