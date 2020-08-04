@@ -33,11 +33,11 @@ filename = r'backup\爬虫\验证码\code_img.jpg'
 with open(filename, 'wb') as fp:
     fp.write(img_data)
       
-# # 使用云打码识别图片验证码
-# ydm = YDMHttp(filename = filename, codetype = 1004, timeout = 10)
-# cid, code_text = ydm.decode()
-# # 以 f开头表示在字符串内支持大括号内的python 表达式
-# print(f'验证码识别结果：{code_text}') 
+# 使用云打码识别图片验证码
+ydm = YDMHttp(filename = filename, codetype = 1004, timeout = 10)
+cid, code_text = ydm.decode()
+# 以 f开头表示在字符串内支持大括号内的python 表达式
+print(f'验证码识别结果：{code_text}') 
 
 # # 登录请求的参数
 # # 下面两个参数会变化，所以我们就动态获取：

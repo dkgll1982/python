@@ -3,6 +3,7 @@ import time
 import requests 
 # 验证码类型：http://www.yundama.com/price.html
 
+#2020-08-03测试已跑路
 class YDMHttp:
     apiurl = 'http://api.yundama.com/api.php'
     # 使用你自己的云打码账户：
