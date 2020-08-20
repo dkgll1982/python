@@ -7,6 +7,7 @@
 # @Last Modified by: guojun 
 # @Last Modified time: 2019-08-14 15:38:25 
 # @Software: vscode  
+# 2020-8-20：计算江都企业/场所网格
 
 import cx_Oracle
 import os
@@ -22,7 +23,7 @@ import sys
 ak = "ZRyBcN55hT7nYsWUta0hfyTkn3NeBNNG"
 sk = "NGKBzEx1Qv66aq8xjvE2V6AXgr5oyinZ"
 #坐标计算网格服务
-geoserver = 'https://xixian.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
+geoserver = 'https://jd.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
 
 #地址前缀
 city = ''
@@ -62,7 +63,7 @@ def request_data(urt):
 #获取查询的数据列表
 def get_zb(index,biao):
     os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
-    conn = cx_Oracle.connect('cigproxy','cigproxy','136.2.34.65:15226/xe')
+    conn = cx_Oracle.connect('cigproxy','cigproxy','127.0.0.1:1521/orcl')
     cursor = conn.cursor() 
 
     #取数据起始位置
@@ -70,8 +71,7 @@ def get_zb(index,biao):
     #取数据结束位置
     end = str(pagecount*(index))
     #查询数据的sql
-    sql1 =  ("select * from (select distinct GRID_ADDR from "+ biao+" where GRID_ADDR is not null and update_date is null ) where rownum<="+str(rowcount))      
-    sql2 = ""
+    sql1 =  "SELECT 序号,replace('江苏省'||企业名称,'101#') dr FROM BASE_CS where result IS NULL and 企业名称 is not  null"
 
     cursor.execute(sql1);    
     rows = cursor.fetchall()  # 得到所有数据集
@@ -80,7 +80,7 @@ def get_zb(index,biao):
     g = bdapi(ak,sk)
     row_index = 0
     for row in rows: 
-        url =g.get_url(city+row[0])
+        url =g.get_url(row[1])
         try:
             bd_zb = g.get_zb(url)                                                               #得到百度坐标
             if bd_zb is not None:
@@ -89,9 +89,9 @@ def get_zb(index,biao):
                 geo = geoserver+"?x="+wgs_x+"&y="+wgs_y
                 result = request_data(geo) 
                 print("子线程(%s)处理；百度：%s；WGS84：%s；获取网格地址：%s"%(threading.current_thread().name,bd_zb,wgs_zb,geo)) 
-                sql2 = "update "+ biao+" set x='%s',y='%s',results='%s',update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where GRID_ADDR='%s'"%(wgs_x,wgs_y,str(result),update_date,row[0]) 
-            else:       
-                sql2 = "update "+ biao+" set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where GRID_ADDR='%s'"%(update_date,row[0])            
+                sql2 = "update BASE_CS set RESULT='%s' where 序号=%s"%(str(result),row[0]) 
+            #else:       
+            #    sql2 = "update "+ biao+" set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where GRID_ADDR='%s'"%(update_date,row[0])            
             cursor.execute(sql2)
         except Exception as e:
             print('Error:',e)
@@ -106,7 +106,7 @@ def get_zb(index,biao):
 
 if __name__ == "__main__":  
     args = sys.argv 
-    biao = "base_网格0415"
+    biao = "BASE_CS"
     print(biao)
     print("主线程(%s)启动"%(threading.current_thread().name))
     start = time.time() 

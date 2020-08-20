@@ -21,19 +21,19 @@ import datetime
 ak = "LKnE67ysMkrG0LHwyG2GHPlc00LtMfSW"
 sk = "3hPe7iy3Ydq003v6wYbKn6pq7sHgGCRj"
 #坐标计算网格服务
-geoserver = 'https://xixian.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
+geoserver = 'http://huzhou-jczl.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
 
 #地址前缀
 city = ''
 
 #线程数量
-threadcount = 10
+threadcount = 1
 #数据分段区间
-pagecount = 1000
+pagecount = 1500
 #每次取数据行数
-rowcount = 20
+rowcount = 1000
 #线程循环次数
-xhcount = 100
+xhcount = 1
 
 # 大致计算公式如下
 # 公式1：线程循环次数 = 数据分段区间/每次取数据行数，如5000/100=50，即需要约50次循环才能跑完区间的所有的数据 
@@ -61,7 +61,7 @@ def request_data(urt):
 #获取查询的数据列表
 def get_zb(index):
     os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
-    conn = cx_Oracle.connect('cigproxy','cigproxy','127.0.0.1:1521/orcl')
+    conn = cx_Oracle.connect('cigwbj','esri@123','10.21.198.126:15214/xe')
     cursor = conn.cursor() 
 
     #取数据起始位置
@@ -69,7 +69,7 @@ def get_zb(index):
     #取数据结束位置
     end = str(pagecount*(index))
     #查询数据的sql
-    sql1 =  ("select * from (select ADDR from BASE_ZB_WG2 where RESULT is null and rn<="+end+" and rn>"+start+") where rownum<="+str(rowcount))      
+    sql1 =  ("select * from (select addr from ZZ_addr where update_date is null)  where rownum<="+str(rowcount))      
     sql2 = ""
 
     cursor.execute(sql1);    
@@ -87,15 +87,15 @@ def get_zb(index):
                 geo = geoserver+"?x="+wgs_x+"&y="+wgs_y
                 result = request_data(geo) 
                 print("子线程(%s)处理；百度：%s；WGS84：%s；获取网格地址：%s"%(threading.current_thread().name,bd_zb,wgs_zb,geo)) 
-                sql2 = "update BASE_ZB_WG2 set wgs_x ='%s',wgs_y='%s',bd_x ='%s',bd_y='%s',result='%s',update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where ADDR='%s'"%(wgs_x,wgs_y,bd_x,bd_y,str(result),update_date,row[0]) 
+                sql2 = "update ZZ_addr set wgs_x ='%s',wgs_y = '%s',bd_x ='%s',bd_y = '%s',result = '%s',update_date = to_date('%s','YYYY-MM-DD HH24:MI:SS') where ADDR = '%s'"%(wgs_x,wgs_y,bd_x,bd_y,str(result),update_date,row[0]) 
             else:       
-                sql2 = "update BASE_ZB_WG2 set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where ADDR='%s'"%(update_date,row[0])            
+                sql2 = "update ZZ_addr set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where ADDR='%s'"%(update_date,row[0])            
             cursor.execute(sql2)
+            conn.commit() 
         except Exception as e:
             print('Error:',e)
         finally:
             pass
-    conn.commit() 
     cursor.close()
     conn.close()    
 
