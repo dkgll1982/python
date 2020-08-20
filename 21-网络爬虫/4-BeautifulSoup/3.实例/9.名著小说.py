@@ -11,8 +11,7 @@ import time
 import os
 import re
 import requests
-import urllib
-
+import urllib 
 
 class SanGuoSpider():
     def __init__(self):
