@@ -9,6 +9,7 @@
 import os
 import requests
 from lxml import html
+from lxml import etree
 import urllib
 
 def createFile(filePath):
@@ -33,14 +34,16 @@ def downloadImg(title,url):
         pageUrl= url[:-5] + '_' + str(i) + url[-5:]
         # print(pageUrl)
         response=requests.get(pageUrl).text
-        selector = html.fromstring(response)
+        #selector = html.fromstring(response)
+        selector = etree.HTML(response)
         imgUrl = selector.xpath('/html/body/div[4]/div/div[2]/div/div[2]/div[1]/div[1]/a/img/@src')[0]
         # print(imgUrl)
         title = title.replace('/', '-').replace(' ', '')
         imgDetailPath=newPath+'/%s_%s.jpg'%(title,i)
         urllib.request.urlretrieve(imgUrl, imgDetailPath)
 
-imgPath = os.getcwd() + '/img'
+#imgPath = os.getcwd() + '/img'
+imgPath = r'backup\image\壁纸'
 createFile(imgPath)
 page=1
 while 1:
