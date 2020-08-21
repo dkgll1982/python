@@ -7,6 +7,7 @@
 # @Remark: 人生苦短，我用python！
 
 from pyquery import PyQuery as pq
+
 html = ''' 
 <div id="wrap">
     <ul class="s_from">

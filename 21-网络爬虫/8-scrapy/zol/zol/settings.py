@@ -76,7 +76,7 @@ IMAGES_STORE = os.path.join(os.path.dirname(os.path.dirname(__file__)),'img')
 
 # IMAGES_STORE是设置的是图片保存的路径。
 # IMAGES_EXPIRES是设置的项目保存的最长时间。
-# IMAGES_MIN_HEIGHT和IMAGES_MIN_WIDTH是设置的图片尺寸大小 
+# IMAGES_MIN_HEIGHT和IMAGES_MIN_WIDTH是设置的图片尺寸大小,丢掉那些过小的图片
 IMAGES_EXPIRES = 90
 IMAGES_MIN_HEIGHT = 100
 IMAGES_MIN_WIDTH = 100

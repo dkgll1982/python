@@ -1,3 +1,12 @@
+#!/usr/bin/env python 
+# -*- coding:utf-8 -*- 
+# @Author: guojun 
+# @Company: Aerospace Shenzhou Intelligent System Technology Co., Ltd 
+# @Site: https://user.qzone.qq.com/350606539/main 
+# @Date: 2020-08-21 09:52:34 
+# @Remark: 人生苦短，我用python！
+# 参考链接：https://www.cnblogs.com/zhangxinqi/p/9210211.html
+
 from lxml import etree
  
 wb_data = """
@@ -9,10 +18,12 @@ wb_data = """
                  <li class="item-1"><a href="link4.html">fourth item</a></li>
                  <li class="item-0"><a href="link5.html">fifth item 
         """
-html = etree.HTML(wb_data)          #初始化生成一个XPath解析对象
+html = etree.HTML(wb_data)                      #初始化生成一个XPath解析对象并对HTML文本进行自动修正。
 print(html)
-result = etree.tostring(html)        #解析对象输出代码
-print(result.decode("utf-8"))
+result = etree.tostring(html,encoding='utf-8')  #解析对象输出代码，输出修正后的结果，类型是bytes
+print(type(html))
+print(type(result))
+print(result.decode("utf-8"))                   #利用decode()方法将其转成str类型
 
 #发现属性要改成小写，才能识别，不清楚是否是bug
 data = html.xpath('//li[2]/attribute::dataar-tidanchor')

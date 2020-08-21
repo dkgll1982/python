@@ -71,6 +71,7 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #这个不开启，无法保存数据
+#每个pipeline后面有一个数值，这个数组的范围是0-1000，这个数值确定了他们的运行顺序，数字越小越优先
 ITEM_PIPELINES = {
    'douban.pipelines.DoubanPipeline': 300,
 }

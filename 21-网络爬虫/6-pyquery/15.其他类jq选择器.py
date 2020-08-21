@@ -39,8 +39,18 @@ print(doc('li:lt(4)'))
 print('+'*40)
 print(doc('li:gt(4)'))
 print('*'*40)
-d = doc("li[class*='item']")
-print(d)
+
+#[class*= col-]  代表包含  col-  的类名 ，比如说 col-md-4 ,demo-col-2(这个是虚构的)等都可以匹配到。
+#[class^=col-]  代表 以 col- 开头的类名，比如说 col-md-4
+#[class$=col-] 代表以 col- 结尾的类名 
+d = doc("li[class*='active']")
+print('*=',d)
+print('#'*40)
+d = doc("li[class^='item']")
+print('^=',d)
+print('#'*40)
+d = doc("li[class$='-0']")
+print('$=',d)
 print('#'*40)
 li = doc('li:nth-child(4)')
 print(li)

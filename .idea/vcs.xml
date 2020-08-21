@@ -2,5 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/21-网络爬虫/手把手带你学会Python爬虫/1-18天代码/18day/proxy_pool" vcs="Git" />
   </component>
 </project>

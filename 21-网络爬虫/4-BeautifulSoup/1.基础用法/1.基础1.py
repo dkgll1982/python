@@ -37,7 +37,7 @@ print(tag2[0].parent.name)
 print(beau.title)
 print(beau.title.name)
 print(beau.title.string,type(beau.title.string))
-#tag的 .contents 属性可以将tag的子节点以列表的方式输出:
+#tag的.contents 属性可以将tag的子节点以列表的方式输出:
 print(beau.head,beau.head.contents)
 #遍历子节点（直到子级，不进行多级遍历）
 for x in beau.head.children:print('head-children:',x) 

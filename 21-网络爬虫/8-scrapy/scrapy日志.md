@@ -15,4 +15,5 @@ logging :
         实例化一个ogger = logging.getLogger(__name__)
         在任何py文件中调用logger即可
 """
-参考链接：https://www.cnblogs.com/ywjfx/p/11079621.html
+参考链接1：https://www.cnblogs.com/ywjfx/p/11079621.html
+参考链接2：https://blog.csdn.net/weixin_41666747/article/details/82716688?utm_source=blogxgwz9
