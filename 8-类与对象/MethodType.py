@@ -6,9 +6,6 @@
 # @File    : MethodType
 # @Software: PyCharm
 
-#!/usr/bin/python
-# -*-coding:utf-8-*-
-
 from types import MethodType
 
 class Student(object):

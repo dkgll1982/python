@@ -6,9 +6,6 @@
 # @File    : 继承-supper
 # @Software: PyCharm
 
-# !/usr/bin/python
-# -*- coding: UTF-8 -*-
-
 class FooParent(object):
     def __init__(self):
         self.parent = 'I\'m the parent.'
