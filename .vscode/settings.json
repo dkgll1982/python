@@ -38,5 +38,6 @@
         "**/pip3": true,              //隐藏目录 
         "**/build": true,             //隐藏目录 
         "**/dist": true,              //隐藏目录 
-    } 
+    }, 
+    "guides.indent.hideBackgroundOnSelection": false
 }

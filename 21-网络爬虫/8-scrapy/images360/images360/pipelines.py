@@ -4,6 +4,7 @@
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 
 # useful for handling different item types with a single interface
+
 from itemadapter import ItemAdapter
 import pymysql
 
@@ -18,19 +19,19 @@ class MySQLPipeline:
     @classmethod
     def from_crawler(cls, crawler):
         return cls(
-            host = crawler.settings.get('MYSQL_HOST'),
-            database = crawler.settings.get('MYSQL_DATABASE'),
-            user = crawler.settings.get('MYSQL_USER'),
-            password = crawler.settings.get('MYSQL_PASSWORD'),
-            port = crawler.settings.get('MYSQL_PORT'),
+            host=crawler.settings.get('MYSQL_HOST'),
+            database=crawler.settings.get('MYSQL_DATABASE'),
+            user=crawler.settings.get('MYSQL_USER'),
+            password=crawler.settings.get('MYSQL_PASSWORD'),
+            port=crawler.settings.get('MYSQL_PORT'),
         )
 
     def open_spider(self, spider):
-        self.db = pymysql.connect(self.host, 
-                                  self.user, 
-                                  self.password, 
-                                  self.database, 
-                                  charset='utf8', 
+        self.db = pymysql.connect(self.host,
+                                  self.user,
+                                  self.password,
+                                  self.database,
+                                  charset='utf8',
                                   port=self.port)
         self.cursor = self.db.cursor()
 
@@ -46,9 +47,11 @@ class MySQLPipeline:
         self.db.commit()
         return item
 
+
 from scrapy import Request
 from scrapy.exceptions import DropItem
 from scrapy.pipelines.images import ImagesPipeline
+
 
 class ImagePipeline(ImagesPipeline):
     def get_media_requests(self, item, info):
@@ -59,7 +62,7 @@ class ImagePipeline(ImagesPipeline):
         if not image_paths:
             raise DropItem('Image Downloaded Failed')
         return item
-    
+
     def file_path(self, request, response=None, info=None):
         url = request.url
         file_name = url.split('/')[-1]

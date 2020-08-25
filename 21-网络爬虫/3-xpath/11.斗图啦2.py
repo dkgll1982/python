@@ -15,7 +15,7 @@ import os
 
 class DouTuLaSpider(object):
     def __init__(self):
-        super().__init__()
+        super().__init__() 
         self.file_path = r'backup/爬虫/斗图啦'
         self.url = "http://www.doutula.com/article/list/?page="
         #防爬首先查询cookie、refer，再找其他没有见过的项

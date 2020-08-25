@@ -24,6 +24,7 @@ def dashrepl(matchobj):
         return ' '
     else: return '-'
 
+
 print(re.sub('(?P<groupName>-{1,2})', dashrepl, 'pro----gram-files'))
 
 inputStr = "hello 123 world 456";

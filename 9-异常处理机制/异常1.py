@@ -3,6 +3,7 @@
 # @Author  : suixin
 # @Email   : 350606539@QQ.com
 # @File    : 异常.py
+
 import sys
 
 raise Exception("错误的信息，下面不在执行")
