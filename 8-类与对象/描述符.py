@@ -7,13 +7,6 @@
 # @Last Modified by: guojun 
 # @Last Modified time: 2019-10-20 21:14:53 
 # @Software: vscode 
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# @Time    : 2018-08-13 10:30
-# @Author  : guojun
-# @Site    : https://user.qzone.qq.com/350606539/main
-# @File    : 装饰器
-# @Software: PyCharm
 
 # 参考链接：
 # https://www.cnblogs.com/Jimmy1988/p/6808237.html

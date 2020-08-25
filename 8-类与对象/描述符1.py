@@ -8,12 +8,6 @@
 # @Last Modified time: 2019-10-20 21:14:53 
 # @Software: vscode 
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# @Time    : 2018-08-13 10:30
-# @Author  : guojun
-# @Site    : https://user.qzone.qq.com/350606539/main
-# @File    : 装饰器
-# @Software: PyCharm 
  
 #某个类，只要是内部定义了方法 __get__, __set__, __delete__ 中的一个或多个，就可以称为描述符 
 #描述符类
