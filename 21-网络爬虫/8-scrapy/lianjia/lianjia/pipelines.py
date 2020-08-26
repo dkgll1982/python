@@ -15,6 +15,7 @@ class LianjiaPipeline (object):
             self.file = open('MyData.json ', "w", encoding="utf-8")
         except Exception as err:
             print(err)
+            
     # 写入
     def process_item (self, item, spider):
         dict_item = dict (item)
@@ -22,6 +23,7 @@ class LianjiaPipeline (object):
         json_str = json.dumps(dict_item , ensure_ascii=False) + "\n" 
         self.file.write(json_str)
         return item
+    
     # 关闭文件
     def close_spider (self,spider):
         self.file.close()

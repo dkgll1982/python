@@ -1,3 +1,13 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Author  : guojun
+# @Company : 航天神舟智慧系统技术有限公司
+# @Site    : https://user.qzone.qq.com/350606539/main
+# @Date    : 2020-08-26 16:05
+# @File    : main
+# @Software: PyCharm
+# 参考链接：https://boyinthesun.cn/post/python-scrapy/
+
 import scrapy
 from lianjia.items import LianjiaItem
 
