@@ -1,3 +1,12 @@
+#!/usr/bin/env python 
+# -*- coding:utf-8 -*- 
+# @Author: guojun 
+# @Company: Aerospace Shenzhou Intelligent System Technology Co., Ltd 
+# @Site: https://user.qzone.qq.com/350606539/main 
+# @Date: 2020-08-26 09:21:35 
+# @Remark: 人生苦短，我用python！
+# 参考链接：https://blog.csdn.net/ZHUYAN1209/article/details/104409148
+
 import scrapy
 import re
 from wzry.items import WzryItem 
