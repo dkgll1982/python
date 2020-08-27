@@ -54,7 +54,7 @@ class ShuCaiSpider():
     def send_request(self,pageNum=0):
         form_data={
             "pageNum": pageNum,
-            "pname": self.pname,        #為空查詢所有蔬菜
+            "pname": self.pname,        #为空查询所有蔬菜
             "reltime": "蔬菜"
         }
         req = None

@@ -29,6 +29,7 @@ class MySQLPipeline:
         #     password=crawler.settings.get('MYSQL_PASSWORD'),
         #     port=crawler.settings.get('MYSQL_PORT'),
         # )
+        #返回MySQLPipeline对象本身，cls()函数体参数对应的是MySQLPipeline对象本身的参数
         return cls(crawler.settings)
 
     def open_spider(self, spider):
@@ -41,6 +42,7 @@ class MySQLPipeline:
         self.cursor = self.db.cursor()
 
     def close_spider(self, spider):
+        self.cursor.close()
         self.db.close()
 
     def process_item(self, item, spider):
