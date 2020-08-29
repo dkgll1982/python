@@ -28,5 +28,6 @@ class ImagesSpider(scrapy.Spider):
             item['id'] = image.get('id')
             item['url'] = image.get('qhimg_url')
             item['title'] = image.get('site')
-            item['thumb'] = image.get('qhimg_thumb')
+            item['thumb'] = image.get('qhimg_thumb')            
+            item['image_urls'] = image.get('qhimg_url')
             yield item

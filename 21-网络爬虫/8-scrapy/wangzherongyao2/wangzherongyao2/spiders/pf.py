@@ -16,10 +16,13 @@ class PfSpider(scrapy.Spider):
     start_urls = ['https://pvp.qq.com/web201605/herolist.shtml']
 
     def parse(self, response):
+        #第一步：获取英雄列表
         pf_urls = response.xpath('//ul[@class="herolist clearfix"]/li/a/@href').extract()
         for pf_url in pf_urls:
+            #第二步：循环跳转到每个英雄的详情页
             yield scrapy.Request(url='https://pvp.qq.com/web201605/%s' % pf_url, callback=self.pf_parse)
 
+    #解析英雄的详情页信息
     def pf_parse(self, response):
         item = Wangzherongyao2Item()
         item['hero_name'] = response.xpath('//h2[@class="cover-name"]/text()').extract_first()
@@ -28,8 +31,10 @@ class PfSpider(scrapy.Spider):
         item['image_urls'] = []
         for num in range(1, len(item['pf_names'])+1):
             # //game.gtimg.cn/imgs/yxzj/img201606/heroimg/166/166-mobileskin-1.jpg
-            # 去除-后面的字符，再重新进行拼接
-            image_url_head = response.xpath('//a[@class="hero-video"]/img/@src').extract_first()[:-5]
+            # 去除-后面的字符，再重新进行拼接，数字1,2,3,4,5....依次排序
+            # 研究发现此处获取的背景图片规则是根据默认的第一张背景图片进行排序，图片在<div class="zk-con1 zk-con"里 
+            # "background:url('//game.gtimg.cn/images/yxzj/img201606/skin/hero-info/515/515-bigskin-1.jpg')
+            image_url_head = response.xpath('//a[@class="hero-video"]/img/@src').extract_first()[:-5].replace('heroimg','skin/hero-info').replace('mobileskin','bigskin')
             image_url = "https:{}{}.jpg".format(image_url_head, num)
             item['image_urls'].append(image_url)
         yield item

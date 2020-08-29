@@ -74,7 +74,15 @@ IMAGES_EXPIRES=90
 #设置允许重定向，否则可能找不到图片
 MEDIA_ALLOW_REDIRECTS=True
 
-AUTOTHROTTLE_ENABLED = True
+#下载图片是比较消耗服务器的资源以及流量。如果图片资源比较大，爬虫程序一直在下载图片。
+#这会对目标网站造成一定的影响。同时，爬虫有可能遭到封杀的情况。
+#开启限速，启用AutoThrottle扩展
+AUTOTHROTTLE_ENABLED = True 
+#初始下载延迟
+#AUTOTHROTTLE_START_DELAY = 5 
+#在高延迟的情况下设置的最大下载延迟
+#AUTOTHROTTLE_MAX_DELAY = 60
+
 
 # 切换User_Agent
 MY_USER_AGENTS = [

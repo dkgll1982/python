@@ -1,4 +1,4 @@
-# Scrapy settings for images360 project
+# Scrapy settings for weiyituku project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,34 +7,34 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'images360'
+BOT_NAME = 'weiyituku'
 
-SPIDER_MODULES = ['images360.spiders']
-NEWSPIDER_MODULE = 'images360.spiders'
+SPIDER_MODULES = ['weiyituku.spiders']
+NEWSPIDER_MODULE = 'weiyituku.spiders'
 
-MYSQL_HOST = 'localhost'
-MYSQL_DATABASE = 'images360'
-MYSQL_PORT = 3306
-MYSQL_USER = 'root'
-MYSQL_PASSWORD = '123456'
 
-MAX_PAGE = 50
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'images360 (+http://www.yourdomain.com)'
+#USER_AGENT = 'weiyituku (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
 import os
 
+# 抓取最大页数
+MAX_PAGE = 2
+
 #图片保存目录
 IMAGES_STORE = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'images')
-
-#缩略图名字，值为它们的大小尺寸
-IMAGES_THUMBS = {
-    'small': (50, 50),
-    'big': (270, 270),
-}
+# 过滤小图片
+# 图片最小宽度
+IMAGES_MIN_WIDTH = 500
+# 图片最小高度
+IMAGES_MIN_HEIGHT = 500
+# 图片过期时间
+IMAGES_EXPIRES = 90
+# 防止ip被封，每页延迟0.5s爬取
+#DOWNLOAD_DELAY = 0.5
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -62,13 +62,13 @@ IMAGES_THUMBS = {
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'images360.middlewares.Images360SpiderMiddleware': 543,
+#    'weiyituku.middlewares.WeiyitukuSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'images360.middlewares.Images360DownloaderMiddleware': 543,
+#    'weiyituku.middlewares.WeiyitukuDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -80,8 +80,7 @@ IMAGES_THUMBS = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'images360.pipelines.MySQLPipeline': 300,
-   'images360.pipelines.ImagePipeline': 300,
+   'weiyituku.pipelines.ImagePipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

@@ -31,7 +31,7 @@ class PicSpider(Spider):
     def parse(self, response): 
         item = PicscrapyItem()
         # 获取页面所有的img标签地址，待下载
-        # 注意：这里取得是全站的页面图片。很粗，未做任何过滤，如果有些小图片或者某些类型图片不需要，最好是按照范围进行筛查 
+        # 注意：这里取得是全站的页面图片。粒度很粗，未做任何过滤，如果有些小图片或者某些类型图片不需要，最好是按照范围进行筛查 
         img_list = response.xpath('//img')
         for img in img_list:
             alt = img.xpath('./@alt').extract_first()   
