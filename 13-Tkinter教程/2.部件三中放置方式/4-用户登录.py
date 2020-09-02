@@ -52,12 +52,12 @@ def usr_login():
     # 这里设置异常捕获，当我们第一次访问用户信息文件时是不存在的，所以这里设置异常捕获。
     # 中间的两行就是我们的匹配，即程序将输入的信息和文件中的信息匹配。
     try:
-        with open('usrs_info.pickle', 'rb') as usr_file:
+        with open(r'data\usrs_info.pickle', 'rb') as usr_file:
             usrs_info = pickle.load(usr_file)
     except FileNotFoundError:
         # 这里就是我们在没有读取到`usr_file`的时候，程序会创建一个`usr_file`这个文件，并将管理员
         # 的用户和密码写入，即用户名为`admin`密码为`admin`。
-        with open('usrs_info.pickle', 'wb') as usr_file:
+        with open('data\usrs_info.pickle', 'wb') as usr_file:
             usrs_info = {'admin': 'admin'}
             pickle.dump(usrs_info, usr_file)
             usr_file.close()    # 必须先关闭，否则pickle.load()会出现EOFError: Ran out of input
@@ -84,7 +84,7 @@ def usr_sign_up():
         nn = new_name.get()
  
         # 这里是打开我们记录数据的文件，将注册信息读出
-        with open('usrs_info.pickle', 'rb') as usr_file:
+        with open(r'data\usrs_info.pickle', 'rb') as usr_file:
             exist_usr_info = pickle.load(usr_file)
         # 这里就是判断，如果两次密码输入不一致，则提示Error, Password and confirm password must be the same!
         if np != npf:
@@ -97,7 +97,7 @@ def usr_sign_up():
         # 最后如果输入无以上错误，则将注册输入的信息记录到文件当中，并提示注册成功Welcome！,You have successfully signed up!，然后销毁窗口。
         else:
             exist_usr_info[nn] = np
-            with open('usrs_info.pickle', 'wb') as usr_file:
+            with open(r'data\usrs_info.pickle', 'wb') as usr_file:
                 pickle.dump(exist_usr_info, usr_file)
             tkinter.messagebox.showinfo('Welcome', 'You have successfully signed up!')
             # 然后销毁窗口。

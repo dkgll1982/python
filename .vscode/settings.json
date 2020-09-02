@@ -39,5 +39,8 @@
         "**/build": true,             //隐藏目录 
         "**/dist": true,              //隐藏目录 
     }, 
-    "guides.indent.hideBackgroundOnSelection": false
+    "guides.indent.hideBackgroundOnSelection": false,
+    "fileheader.Author": "suixin",
+    "fileheader.LastModifiedBy": "suixin",
+    "fileheader.tpl": "#!/usr/bin/env python \r\n# -*- coding:utf-8 -*-  \r\n# @Author: {author} \r\n# @Company: Aerospace Shenzhou Intelligent System Technology Co., Ltd  \r\n# @Site: https://user.qzone.qq.com/350606539/main \r\n# @Date: {createTime} \r\n# @Remark: Life is short, I use python！"
 }
