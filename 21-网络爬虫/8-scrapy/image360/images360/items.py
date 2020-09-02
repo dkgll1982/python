@@ -14,7 +14,7 @@ class Images360Item(scrapy.Item):
     url = scrapy.Field()
     title = scrapy.Field()
     thumb = scrapy.Field()    
-    #图片链接
+    # 图片链接
     image_urls = scrapy.Field()
     # 图片存储路径
     # image_paths = scrapy.Field()

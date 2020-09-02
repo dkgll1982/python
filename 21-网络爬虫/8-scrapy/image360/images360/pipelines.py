@@ -61,6 +61,7 @@ class MySQLPipeline:
 from scrapy import Request
 from scrapy.exceptions import DropItem
 from scrapy.pipelines.images import ImagesPipeline
+from scrapy.utils.project import get_project_settings #获取配置的方法
 
 # 自定义 创建下载及存储的特殊管道类
 class ImagePipeline(ImagesPipeline):

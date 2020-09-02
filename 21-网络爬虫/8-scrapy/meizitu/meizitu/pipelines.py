@@ -3,7 +3,7 @@ import hashlib
 import re
 from scrapy.pipelines.images import ImagesPipeline
 from scrapy import Request
-from scrapy.utils.python import to_bytes
+from scrapy.utils.python import to_bytes 
 
 class PicscrapyPipeline(ImagesPipeline):
     def get_media_requests(self, item, info):
