@@ -8,7 +8,6 @@
 
 import scrapy
 import json
-import re
 from urllib import parse
 from ..items import BaiduTupianItem
 
