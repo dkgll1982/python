@@ -45,8 +45,11 @@ class HupunbaPipeline:
     def close_spider(self,spider):
         print('爬取结束，断开数据库连接')
         # 这个会在结束时开始时第一次进入pipelines.py进入，之后不再进入
-        self.conn.close()        
-        
+        self.conn.close()
+
+    # 每个item piple组件是一个独立的pyhton类，必须实现以process_item(self, item, spider)方法
+    # 每个item pipeline组件都需要调用该方法，这个方法必须返回一个具有数据的dict, 或者item对象，
+    # 或者抛出DropItem异常，被丢弃的item将不会被之后的pipeline组件所处理
     def process_item(self, item, spider):
         try:
             self.cursor.execute(
@@ -69,4 +72,3 @@ class HupunbaPipeline:
             print("插入错误")
  
         return item
-    
