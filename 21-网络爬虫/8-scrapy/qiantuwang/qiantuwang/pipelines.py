@@ -18,7 +18,7 @@ class qiantuwangPipeline:
     def process_item(self, item, spider):
         #  ensure_ascii=False 可以解决 json 文件中 乱码的问题。
         #  这里是一个字典一个字典存储的，后面加个 ',\n' 以便分隔和换行。
-        text = json.dumps(dict(item) , ensure_ascii=False) + ',\n'  
+        text = json.dumps(dict(item), ensure_ascii=False, indent=4) + ',\n'  
         self.filename.write(text)
 
         return item 

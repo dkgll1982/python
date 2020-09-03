@@ -4,7 +4,7 @@
 import scrapy
 from qiantuwang.items import qiantuwangItem
 
-# 导入 ItemLoader 功能类
+# 导入ItemLoader功能类
 from scrapy.loader import ItemLoader
 # optimize  优化
 # 爬虫项目优化

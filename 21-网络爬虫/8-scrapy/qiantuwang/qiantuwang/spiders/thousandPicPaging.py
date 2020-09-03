@@ -1,3 +1,5 @@
+#参考链接：https://www.cnblogs.com/BlueSkyyj/p/9951440.html
+
 # -*- coding: utf-8 -*-
 import scrapy
 # 导入链接规则匹配类，用来提取符合规则的连接
@@ -14,9 +16,9 @@ class ThousandpicpagingSpider(CrawlSpider):
     start_urls = ['http://www.58pic.com/c/']
 
     # Response里链接的提取规则，返回的符合匹配规则的链接匹配对象的列表
-    # http://www.58pic.com/c/1-0-0-03.html  根据翻页连接地址，
-    # 找到 相应的 正则表达式   1-0-0-03  -> \S-\S-\S-\S\S  而且 这里使用 allow
-    # 不能使用 restrict_xpaths ，使用 他的话，正则将失效
+    # http://www.58pic.com/c/1-0-0-03.html 根据翻页连接地址，
+    # 找到相应的正则表达式1-0-0-03 -> \S-\S-\S-\S\S 而且这里使用 allow
+    # 不能使用restrict_xpaths，使用他的话，正则将失效
     page_link = LinkExtractor(allow='http://www.58pic.com/c/\S-\S-\S-\S\S.html', allow_domains='www.58pic.com')
 
     rules = (
