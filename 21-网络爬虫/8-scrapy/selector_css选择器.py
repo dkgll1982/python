@@ -45,8 +45,11 @@ print(f'所有的a标签：{a}')
 
 # 提取属性我们是用：“标签名::attr(属性名)”，
 # 比如我们要提取url表达式就是：a::attr(href)，要提取图片地址的表达式就是：img::attr(src)
-a = selector.css('a::text').extract() 
-print(f'所有的a标签文本：{a}')
+a = selector.css('div.div a:last_child::attr(href)').extract() 
+print(f'最后一个的a标签文本：{a}')
+
+img = selector.css('div.div a:last_child img::attr(src)').extract() 
+print(f'最后一个的img标签文本：{img}')
 
 img = selector.css('img::attr(src)').extract() 
 print(f'所有的img标签链接：{img}')
@@ -129,5 +132,5 @@ print("div的文本:%s" % div)
 # 简单属性选择器根据属性的存在选择任何元素，而不管属性的值。
 a = selector.css("a[target]").extract()
 print("具有target属性的a标签：",a)
-a = selector.css("a[href]").extract()
+a = selector.css("a[href]").extract_first()
 print("具有href属性的a标签：",a) 

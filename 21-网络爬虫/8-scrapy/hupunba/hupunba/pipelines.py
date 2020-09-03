@@ -30,6 +30,7 @@ class HupunbaPipeline:
         )
         
     # 数据库的连接初始化工作可以放在该函数里。也可以放到__init__()方法里
+    # 蜘蛛打开的时候执行的
     def open_spider(self,spider):
         print("准备创建一个数据库")
         # 这个会在项目开始时第一次进入pipelines.py进入，之后不再进入
@@ -43,6 +44,7 @@ class HupunbaPipeline:
         self.cursor = self.conn.cursor()
         self.conn.commit()
         
+    # 蜘蛛关闭的时候执行的    
     def close_spider(self,spider):
         print('爬取结束，断开数据库连接')
         # 这个会在结束时开始时第一次进入pipelines.py进入，之后不再进入
@@ -50,8 +52,14 @@ class HupunbaPipeline:
 
     # 每个item piple组件是一个独立的pyhton类，必须实现以process_item(self, item, spider)方法
     # 每个item pipeline组件都需要调用该方法，这个方法必须返回一个具有数据的dict, 或者item对象，
-    # 或者抛出DropItem异常，被丢弃的item将不会被之后的pipeline组件所处理
-    def process_item(self, item, spider):
+    # 或者抛出DropItem异常，被丢弃的item将不会被之后的pipeline组件所处理   
+    def process_item(self, item, spider): 
+        '''
+            spider就是爬取数据的蜘蛛，item就是爬取到的数据，
+            执行完数据库插入之后，需要执行返回，也就是需要：return item。
+            以上方法是必须要实现的方法
+            无论你是插入mysql、mongodb还是其他数据库，都必须实现这么一个方法
+        '''
         try:
             self.cursor.execute(
                 "insert into player_info( playerimg,playerteam,playername,playernumber,playerjob,playertall,playerweight,playerbirthday,playercont,playersal) "

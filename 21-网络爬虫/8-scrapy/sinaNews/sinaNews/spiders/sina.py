@@ -23,7 +23,7 @@ class SinaSpider(scrapy.Spider):
         #爬取所有大类
         for i in range(0, len(parentTitle)):
             # 指定大类目录的路径和目录名
-            parentFilename = "../Data/" + parentTitle[i]
+            parentFilename = "../data/" + parentTitle[i]
 
             #如果目录不存在，则创建目录
             if(not os.path.exists(parentFilename)):

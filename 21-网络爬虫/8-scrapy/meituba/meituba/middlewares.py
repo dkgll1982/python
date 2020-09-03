@@ -2,36 +2,14 @@
 #
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-# 下载中间件：更换代理IP，更换Cookies，更换header（如User-Agent，referer），自动重试。
 
 from scrapy import signals
 
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
 
-import random
 
-class RandomUserAgentMiddleware(object):
-
-    def __init__(self, user_agents):
-        self.user_agents = user_agents
-
-    @classmethod
-    def from_crawler(cls, crawler):
-        # 在settings.py文件中加载MY_USER_AGENTS的值
-        s = cls(user_agents=crawler.settings.get('MY_USER_AGENTS'))
-        return s
-
-    def process_request(self, request, spider):
-        # 随机设置User-Agent的值
-        agent = random.choice(self.user_agents)
-        # 将其赋给Request
-        request.headers['User-Agent'] = agent
-        # proxy = random.choice(self.proxy)
-        # request.meta['proxy'] = proxy
-        return None
-
-class Wangzherongyao2SpiderMiddleware:
+class MeitubaSpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
     # passed objects.
@@ -78,7 +56,7 @@ class Wangzherongyao2SpiderMiddleware:
         spider.logger.info('Spider opened: %s' % spider.name)
 
 
-class Wangzherongyao2DownloaderMiddleware:
+class MeitubaDownloaderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the downloader middleware does not modify the
     # passed objects.
