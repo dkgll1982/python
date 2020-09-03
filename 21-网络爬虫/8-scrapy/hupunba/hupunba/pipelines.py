@@ -3,7 +3,7 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 # 参考链接：https://blog.csdn.net/qq_41532599/article/details/80367457
-
+# Item Pipeline用法：https://www.cnblogs.com/zhaof/p/7196197.html?utm_source=itdadao&utm_medium=referral
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
 import pymysql 
@@ -20,6 +20,7 @@ class HupunbaPipeline:
     # 而在中间件，管道及拓展中，from_crawler方法调用是在相应的类实例化以前，在使用上要做区分。    
     @classmethod
     def from_crawler(cls, crawler):
+        #此处返回的是类，即HupunbaPipeline本身，cls的参数即HupunbaPipeline的参数
         return cls(
             host = crawler.settings.get('MYSQL_HOST'),
             port = crawler.settings.getint('MYSQL_PORT'),          #注意数据类型，此处端口是数值类型
