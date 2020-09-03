@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 
 class RocketsSpider(scrapy.Spider):
     name = 'rockets'
+    #start_urls 不受域限制，下一页会被限制
     allowed_domains = ['hupu.com']
     start_urls = ['https://nba.hupu.com/players/rockets/']
 
