@@ -5,8 +5,14 @@
 
 import scrapy
 
-
 class TestCrawlspiderItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    # 每页的帖子链接
+    url = scrapy.Field()
+    # 帖子标题
+    title = scrapy.Field()
+    # 帖子编号
+    number = scrapy.Field()
+    # 帖子内容
+    content = scrapy.Field()

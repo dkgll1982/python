@@ -101,3 +101,23 @@ class TestCrawlspiderDownloaderMiddleware:
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+# scrapy框架配置随机延时、UA、IP：https://blog.csdn.net/qq_42988748/article/details/84493004
+# 设置随机延时
+class RandomDelayMiddleware(object):
+    def __init__(self, delay):
+        self.delay = delay
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        delay = crawler.spider.settings.get("RANDOM_DELAY", 10)
+        if not isinstance(delay, int):
+            raise ValueError("RANDOM_DELAY need a int")
+        return cls(delay)
+
+    def process_request(self, request, spider):
+        # delay = random.randint(0, self.delay)
+        delay = random.uniform(0, self.delay)
+        delay = float("%.1f" % delay)
+        logging.debug("### random delay: %s s ###" % delay)
+        time.sleep(delay)

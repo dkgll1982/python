@@ -12,12 +12,18 @@ BOT_NAME = 'test_CrawlSpider'
 SPIDER_MODULES = ['test_CrawlSpider.spiders']
 NEWSPIDER_MODULE = 'test_CrawlSpider.spiders'
 
+# log日志文件默认保存在当前目录，下面为日志级别，当大于或等于INFO时将被保存
+LOG_FILE = 'dongguan.log'
+LOG_LEVEL = 'INFO'
+
+# 爬取深度设置
+# DEPTH_LIMIT = 1
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'test_CrawlSpider (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -37,10 +43,11 @@ ROBOTSTXT_OBEY = True
 #TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-#DEFAULT_REQUEST_HEADERS = {
-#   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-#   'Accept-Language': 'en',
-#}
+DEFAULT_REQUEST_HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36'},
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language': 'en',
+}
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
@@ -50,9 +57,14 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'test_CrawlSpider.middlewares.TestCrawlspiderDownloaderMiddleware': 543,
-#}
+
+# 爬取时间间隔，爬取过快会被封
+DOWNLOAD_DELAY = 1
+# 设置随机延时 
+RANDOM_DELAY = 1
+DOWNLOADER_MIDDLEWARES = {
+   'test_CrawlSpider.middlewares.RandomDelayMiddleware': 150,
+}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -62,9 +74,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'test_CrawlSpider.pipelines.TestCrawlspiderPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'test_CrawlSpider.pipelines.TestCrawlspiderPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
