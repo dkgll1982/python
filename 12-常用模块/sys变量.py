@@ -39,3 +39,10 @@ fk_package.print_blank_triangle(5)
 im = fk_package.Item(4.5)
 print(im)
 fk_package.print_multiple_chart(5)
+
+def get_cur_info():
+    print(sys._getframe().f_code.co_filename)       #当前文件名
+    print(sys._getframe().f_code.co_name)           #当前函数名
+    print(sys._getframe().f_lineno)                 #行号
+
+get_cur_info() 

@@ -25,7 +25,7 @@ def dashrepl(matchobj):
     else: return '-'
 
 
-print(re.sub('(?P<groupName>-{1,2})', dashrepl, 'pro----gram-files'))
+print(re.sub('(?P<groupName>-{1,2})', dashrepl, 'pro----gram-files'))   # 'pro--gram files'
 
 inputStr = "hello 123 world 456";
 #分组定义是(?P<自定义分组名称>正则字符串)
@@ -36,14 +36,14 @@ patten = re.compile(r"hello (\w+), nihao \1")
 print(patten.match(inputStr))
 
 replacedStr = re.sub(patten, "crifanli", inputStr);
-print(replacedStr)
+print('====》',replacedStr)
 print( re.sub("\d+", "222",  "hello 123 world 456"))
 
 #检索和替换
 phone = "2004-959-559 # 这是一个电话号码"
  
 # 删除注释
-num = re.sub(r'#.*$', "", phone)
+num = re.sub(r'\s+#.*$', "", phone)
 # re.search匹配整个字符串， 直到找到一个匹配，如果整个字符串都没匹配到，则返回None
 print('查询匹配 :',re.search(r'#.*$',phone))
 print("电话号码 :[%s]"%num)

@@ -17,11 +17,11 @@ import re
 # 示例参考：https://www.cnblogs.com/4wheel/p/8497121.html
 
 s = 'qew rty uio pas dfg hjk lzx cvb nm' 
-print(0,re.findall('(\w+\s+\w+)',s))
-print(1,re.findall('\w+\s+\w+',s))
+print(0,re.findall('(\w+\s+\w+)\s+\w+',s))           
+print(1,re.findall('\w+\s+\w+',s))                          
 print(2,re.findall('(\w+)\s+\w+',s)) 
 print(3,re.findall('((\w+)\s+\w+)',s))
-print(4,re.findall('(\w+(\w+)\s+\w+)(\s+\w+)',s))
+print(4,re.findall('(\s+\w+)',s))
 print(0,re.findall('\w+\w+\s+\w+\s+\w+',s))
 print(1,re.findall('\w+\w+\s+\w+','qew rty uio'))
 print(2,re.findall('\w+(\w+)\s+\w+','qew rty'))
@@ -38,7 +38,8 @@ print('-'*40)
 
 #如果有括号括，则返回元组的第0项是匹配到的整个字符串’abcde’
 #如果没有，则返回元组的第0项就是第一对括号’bc’
-#并且当存在多层括号嵌套时，各组的排序遵循从左到右，从外到内的原则。即对于正则表达式(a(bc)((d)(e)))，'abcde’是第0组，'bc’是第1组，'de’是第2组，'d’是第3组，而’e’则是第4组。
+#并且当存在多层括号嵌套时，各组的排序遵循从左到右，从外到内的原则。
+# 即对于正则表达式(a(bc)((d)(e)))，'abcde’是第0组，'bc’是第1组，'de’是第2组，'d’是第3组，而’e’则是第4组。
 #原文链接：https://blog.csdn.net/qq_32925781/article/details/83315468
 print(re.findall(r'(a(bc)((d)(e)))','abcde'))
 print(re.findall(r'a(bc)((d)(e))','abcde'))

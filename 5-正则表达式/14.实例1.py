@@ -1,4 +1,4 @@
-import re
+import re,sys
 
 match = re.match(r'\Aabc', 'abc')
 print('匹配结果：',match)
@@ -10,83 +10,70 @@ print('匹配结果：',match)
 search = re.match(r'[a-zA-Z]','W123Eeewwee', flags=re.I)
 print('匹配结果：',search)
 
-print('-'*60)
+print('-'*60) 
 
-class Seq():
-    def __init__(self,index):
-        self.__index__=index
-    def __iter__(self):
-        return self
-    def __next__(self):
-        self.__index__+=1
-        return self.__index__
-s = Seq(24) 
 # re.match 尝试从字符串的起始位置匹配一个模式，如果不是起始位置    . 匹配除换行符（\n）以外的任意字符
-print(str(s.__next__())+":",re.match(r".*\bname\b.*","my.name|is guojun"))
-print(str(s.__next__())+":",re.match(".","Ab"))
-print(str(s.__next__())+":",re.match(".","8"))
-print(str(s.__next__())+":",re.match(".","-"))
-print(str(s.__next__())+":",re.match("^((?!\_$).)*$","_33333——_"))
-print(str(s.__next__())+":",re.match(".","10086"))        # 注意，只匹配第一个字符  
-print(str(s.__next__())+":",re.match(".*","10086"))       # *表示匹配0到多个字符
-print(str(s.__next__())+":",re.match(r"(\d?)(\d?)\1-\2","121-2286"))     # *表示匹配1到多个字符
-print(str(s.__next__())+":",re.match("\d+","e10086"))     # *表示匹配1到多个字符
-print(str(s.__next__())+":",re.match("\d+","10086e"))     # *表示匹配1到多个字符
-print(str(s.__next__())+":",re.match(".?","10086"))       # *表示匹配0到1个字符
-print(str(s.__next__())+":",re.match(".","\n10086"))      # 注意，在正则中\n(换行键是无法匹配的) 
-print(str(s.__next__())+":",re.match(".?\d\d\d","\t10086"))     
-print(str(s.__next__())+":",re.match("(.*)\\bgood\\b(.*)","today is a good day")) 
-print(str(s.__next__())+":",re.match(".*(\\bgood\\b).*","today is a good day").group(1)) 
-print(str(s.__next__())+":",re.match("[123456789]","6这个真是一个悲伤的故事 "))       
-print(str(s.__next__())+":",re.match("[0-9]","6这个真是一个悲伤的故事 "))       
-print(str(s.__next__())+":",re.match("[a-z\s]+","this is good day"))                           #\s为匹配空格
-print(str(s.__next__())+":",re.match("[a-z0-9A-Z王小明]+","小this is good day")) 
-print(str(s.__next__())+":",re.match("[\u4e00-\u9fa5]+","大幅的发生"))                          #汉字。匹配中文字符的正则表达式： [\u4e00-\u9fa5]
-
-s = Seq(48) 
+print(str(sys._getframe().f_lineno)+":",re.match(r".*\bname\b.*","my.name|is guojun"))
+print(str(sys._getframe().f_lineno)+":",re.match(".","Ab"))
+print(str(sys._getframe().f_lineno)+":",re.match(".","8"))
+print(str(sys._getframe().f_lineno)+":",re.match(".","-"))
+print(str(sys._getframe().f_lineno)+":",re.match("^((?!\_$).)*$","_33333——_"))
+print(str(sys._getframe().f_lineno)+":",re.match(".","10086"))        # 注意，只匹配第一个字符  
+print(str(sys._getframe().f_lineno)+":",re.match(".*","10086"))       # *表示匹配0到多个字符
+print(str(sys._getframe().f_lineno)+":",re.match(r"(\d?)(\d?)\1-\2","121-2286"))     # *表示匹配1到多个字符
+print(str(sys._getframe().f_lineno)+":",re.match("\d+","e10086"))     # *表示匹配1到多个字符
+print(str(sys._getframe().f_lineno)+":",re.match("\d+","10086e"))     # *表示匹配1到多个字符
+print(str(sys._getframe().f_lineno)+":",re.match(".?","10086"))       # *表示匹配0到1个字符
+print(str(sys._getframe().f_lineno)+":",re.match(".","\n10086"))      # 注意，在正则中\n(换行键是无法匹配的) 
+print(str(sys._getframe().f_lineno)+":",re.match(".?\d\d\d","\t10086"))     
+print(str(sys._getframe().f_lineno)+":",re.match("(.*)\\bgood\\b(.*)","today is a good day")) 
+print(str(sys._getframe().f_lineno)+":",re.match(".*(\\bgood\\b).*","today is a good day").group(1)) 
+print(str(sys._getframe().f_lineno)+":",re.match("[123456789]","6这个真是一个悲伤的故事 "))       
+print(str(sys._getframe().f_lineno)+":",re.match("[0-9]","6这个真是一个悲伤的故事 "))       
+print(str(sys._getframe().f_lineno)+":",re.match("[a-z\s]+","this is good day"))                           #\s为匹配空格
+print(str(sys._getframe().f_lineno)+":",re.match("[a-z0-9A-Z王小明]+","小this is good day")) 
+print(str(sys._getframe().f_lineno)+":",re.match("[\u4e00-\u9fa5]+","大幅的发生"))                          #汉字。匹配中文字符的正则表达式： [\u4e00-\u9fa5]
+ 
 #1、一个正则表达式，只含有汉字、数字、字母、下划线不能以下划线开头和结尾：
 #?!表示之后的字符串内容需要不匹配表达式才能成功，即字符串不能等于后边的内容
-print(str(s.__next__())+":",re.match("^(?!_)(?<!_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$","大幅的发生")) 
-print(str(s.__next__())+":",re.match("^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$","大幅的发生"))   
-print(str(s.__next__())+":",re.match("我今年\d*岁了","我今年5岁了")) 
-print(str(s.__next__())+":",re.match("我今年\d+岁了","我今年5岁了")) 
-print(str(s.__next__())+":",re.match("我今年\d?岁了","我今年5岁了")) 
-print(str(s.__next__())+":",re.match("我今年\d{0,10}岁了","我今年5岁了")) 
-
-s = Seq(58) 
+print(str(sys._getframe().f_lineno)+":",re.match("^(?!_)(?<!_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$","大幅的发生")) 
+print(str(sys._getframe().f_lineno)+":",re.match("^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$","大幅的发生"))   
+print(str(sys._getframe().f_lineno)+":",re.match("我今年\d*岁了","我今年5岁了")) 
+print(str(sys._getframe().f_lineno)+":",re.match("我今年\d+岁了","我今年5岁了")) 
+print(str(sys._getframe().f_lineno)+":",re.match("我今年\d?岁了","我今年5岁了")) 
+print(str(sys._getframe().f_lineno)+":",re.match("我今年\d{0,10}岁了","我今年5岁了")) 
+ 
 #字符转义
-#print(str(s.__next__())+":",re.match("c:\\","c:\\a\\b"))     # error 报错，因为\\转义后就变成了\了 
-print(str(s.__next__())+":",re.match("c:\\\\","c:\\a\\b"))    #正确 
-print(str(s.__next__())+":",re.match(r"c:\\","c:\\a\\b"))     # 正确，在前面加“r”表示匹配的字符不进行转义，以后匹配符不要再写出上面的的转义了
-print(str(s.__next__())+":",re.match(".*\\bliu","i is liu fas fsa5 662 2a"))  # 注意为什么使用点  
-print(str(s.__next__())+":",re.match(r".*\bliu","i is liu fas fsa5 662 2a"))   #结果同上      
+#print(str(sys._getframe().f_lineno)+":",re.match("c:\\","c:\\a\\b"))     # error 报错，因为\\转义后就变成了\了 
+print(str(sys._getframe().f_lineno)+":",re.match("c:\\\\","c:\\a\\b"))    #正确 
+print(str(sys._getframe().f_lineno)+":",re.match(r"c:\\","c:\\a\\b"))     # 正确，在前面加“r”表示匹配的字符不进行转义，以后匹配符不要再写出上面的的转义了
+print(str(sys._getframe().f_lineno)+":",re.match(".*\\bliu","i is liu fas fsa5 662 2a"))  # 注意为什么使用点  
+print(str(sys._getframe().f_lineno)+":",re.match(r".*\bliu","i is liu fas fsa5 662 2a"))   #结果同上      
 
-#分组
-s = Seq(65) 
-print(str(s.__next__())+":",re.match("100|[1-9][0-9]|[0-9]","2"))            # 匹配100以内的数
-print(str(s.__next__())+":",re.match("0|100|[1-9]?\d$","22"))                #[1-9]?\d$匹配的是1位数或2位数，不含0，因此加上0和100两组
-print(str(s.__next__())+":",re.match("\d+(183|192|168)\.(li|wang|liu)","452168.wang").groups()) #groups()返回一个包含所有分组字符串的元组。
+#分组 
+print(str(sys._getframe().f_lineno)+":",re.match("100|[1-9][0-9]|[0-9]","2"))            # 匹配100以内的数
+print(str(sys._getframe().f_lineno)+":",re.match("0|100|[1-9]?\d$","22"))                #[1-9]?\d$匹配的是1位数或2位数，不含0，因此加上0和100两组
+print(str(sys._getframe().f_lineno)+":",re.match("\d+(183|192|168)\.(li|wang|liu)","452168.wang").groups()) #groups()返回一个包含所有分组字符串的元组。
 
 s = 'abc.|123'
 s1 = r'abc\.\|123'
 s2 = r'abc\1\3|123'
 print(re.escape(s),re.escape(s1),re.escape(s2)) 
-
-s = Seq(79) 
+ 
 # re.search 扫描整个字符串并返回第一个成功的匹配，如果匹配失败search()就返回None。
 # re.match方法与re.search方法的区别
 # re.match只匹配字符串的开始，如果字符串开始不符合正则表达式， 则匹配失败，并返货None； 
 # re.search匹配整个字符串， 直到找到一个匹配，如果整个字符串都没匹配到，则返回None。
-print(str(s.__next__())+":",re.search("\d+","10086d0f8g6233fd234fdds23fddsf").group(0))     
-print(str(s.__next__())+":",re.search("\d?","10086d0f8g6233fd234fdds23fddsf"))         
-print(str(s.__next__())+":",re.search("\d*","10086d0f8g6233fd234fdds23fddsf"))         
-print(str(s.__next__())+":",re.search("\d{1,2}","10086d0f8g6233fd234fdds23fddsf"))        
-print(str(s.__next__())+":",re.findall("\d{1,2}","10086d0f8g6233fd234fdds23fddsf"))       
-print(str(s.__next__())+":",re.findall("[^\d]{1,2}","10086d0f8g6233fd234fdds23fddsf")) 
-print(str(s.__next__())+":",re.search('4[^369]*[369]','24dfvea3142459').group())                #search匹配是从整体里找符合条件的
-print(str(s.__next__())+":",re.findall('4[^369]*[369]','24dfvea3142459'))   
+print(str(sys._getframe().f_lineno)+":",re.search("\d+","10086d0f8g6233fd234fdds23fddsf").group(0))     
+print(str(sys._getframe().f_lineno)+":",re.search("\d?","10086d0f8g6233fd234fdds23fddsf"))         
+print(str(sys._getframe().f_lineno)+":",re.search("\d*","10086d0f8g6233fd234fdds23fddsf"))         
+print(str(sys._getframe().f_lineno)+":",re.search("\d{1,2}","10086d0f8g6233fd234fdds23fddsf"))        
+print(str(sys._getframe().f_lineno)+":",re.findall("\d{1,2}","10086d0f8g6233fd234fdds23fddsf"))       
+print(str(sys._getframe().f_lineno)+":",re.findall("[^\d]{1,2}","10086d0f8g6233fd234fdds23fddsf")) 
+print(str(sys._getframe().f_lineno)+":",re.search('4[^369]*[369]','24dfvea3142459').group())                #search匹配是从整体里找符合条件的
+print(str(sys._getframe().f_lineno)+":",re.findall('4[^369]*[369]','24dfvea3142459'))   
 #实例: 匹配邮箱：首字母不能为_，中间可以为任意字符，@符号前可以为4-20个字符。邮箱前缀为163、qq等，后缀为com、cn等
-print(str(s.__next__()+1)+":",re.match(r'^[a-zA-Z0-9]\w{3,19}@(163|263|sina|google|sohu|qq|myspace).(com|cn|edu|cx|net|cy|tr)','a_949978171@QQ.com',flags=re.I))
+print(str(sys._getframe().f_lineno+1)+":",re.match(r'^[a-zA-Z0-9]\w{3,19}@(163|263|sina|google|sohu|qq|myspace).(com|cn|edu|cx|net|cy|tr)','a_949978171@QQ.com',flags=re.I))
 
 #实例：匹配电话号码
 mylist = ['010-8989345','020-321532','0103425431','0111-3713456','03743713456']        #匹配显示   区号与号码
@@ -96,11 +83,10 @@ for i in mylist:
         print('96：区号：%s,号码：%s'%(a.group('G1'),a.group('G2')))    #表示分组1的内容 
     else:
         print('没有找到') 
-
-s = Seq(101) 
+ 
 #用空格分割
-print(str(s.__next__())+":",re.split(r'\s+', 'a b   c'))
-print(str(s.__next__())+":",re.split(r'[\s\,\|\\\、]+', 'a,b,c | d\j、dd\ddf、dfd'))
+print(str(sys._getframe().f_lineno)+":",re.split(r'\s+', 'a b   c'))
+print(str(sys._getframe().f_lineno)+":",re.split(r'[\s\,\|\\\、]+', 'a,b,c | d\j、dd\ddf、dfd'))
 
 '''
 正则一般是用来匹配，比如电话号码和人匹配
