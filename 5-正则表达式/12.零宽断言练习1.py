@@ -11,6 +11,24 @@
 
 import re 
 
+
+strTest = "123456789 , 987654321"  
+
+# 此位置后面匹配表达式exp，这个位置不是字符（因此匹配返回无结果），仅仅是一个位置
+# 下边的例子，后边的位置是5，5的前边是34
+re1 = re.compile(r"\d{2}(?=5)\d{2}")         #3456,7654
+# 此位置前面匹配表达式exp
+# 下边的例子，前边的位置是5，5的后边是67
+re2 = re.compile(r"\d{2}(?<=5)\d{2}")        #4567,6543   
+print(re.findall(re1,strTest))
+print(re.findall(re2,strTest))     
+    
+re1 = re.compile(r"(?=5)\d{2}")             #56,54
+print(re.findall(re1,strTest))
+
+re2 = re.compile(r"(?<=5)\d{2}")            #67,43
+print(re.findall(re2,strTest))
+
 strTest = "aeaa1141aaa , 3bbb222&, 333ccc"  
 
 re1 = re.compile(r"\d{1}(?=[a-zA-Z])[a-zA-Z]+")     #右边匹配表达式

@@ -23,7 +23,8 @@ def get_person():
  
     for town in town_list:
         sql =  (""" SELECT * FROM (
-                        SELECT PLACE_NAME 场所登记名称,OLD_PLACE_NAME 场所名称,PLACE_ADDR 场所地址,tb.place_type_max_value 场所大类,tb.place_type_value 场所小类,
+                        SELECT PLACE_NAME 场所登记名称,OLD_PLACE_NAME 场所名称,PLACE_ADDR 场所地址,tb.TYPE_MAX_NAME 场所大类,
+                        tb.TYPE_NAME 场所小类,
                             decode(TA.IS_KEY_PLACE,'1','重点场所','一般场所') 是否重点,
                             listagg(to_char(TD.VALUE),',') within group(order by td.key) over(partition by ta.id) AS 平安检查类型,DISPLAYNAME 所属网格,
                             CASE D_LEVEL 
@@ -46,8 +47,8 @@ def get_person():
                             LEFT JOIN ZZ_PLACE_TYPE_MAP TC ON TA.ID=TC.PLACE_ID
                             LEFT JOIN DOMAINS TD ON TC.SAFE_CHECK_TYPE=TD.key AND TD.DOMAINNAME='safeCheckType'
                             LEFT JOIN A4_SYS_DEPARTMENT TE ON TA.DEPARTMENT_ID=TE.DEPARTMENTID
-                        WHERE TA.DEL_FLAG=0 order by DEPARTMENT_ID
-                    )
+                        WHERE TA.IS_CLAIM=0 order by DEPARTMENT_ID
+                    )                     
                     WHERE 乡镇="""+"'{}'".format(town)) 
             
         cursor.execute(sql);
@@ -60,7 +61,7 @@ def get_person():
     conn.close()
 
 def save_excel(rows,town):    
-    dir = r'backup\德清重点场所'
+    dir = r'backup\德清认领场所'
     # 然后创建一个目录:
     if not os.path.exists(dir): 
         os.mkdir(dir) 

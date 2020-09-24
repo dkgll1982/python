@@ -39,3 +39,52 @@ f = open(r'backup\stus.txt', 'w', encoding='utf-8')
 #indent：应该是一个非负的整型，如果是0，或者为空，则一行显示数据，
 # 否则会换行且按照indent的数量显示前面的空白，这样打印出来的json数据也叫pretty-printed json
 json.dump(stus, f, indent=4, ensure_ascii=False)
+
+t = {
+    "pp":'''    INSERT INTO ZZ_ADD_PERSON_HISTORY(ID,NAME,CARD_NUM,GENDER,DEPARTMENT_ID,ADD_DATE,FOCUS_TYPE,ADD_AUDIT_STATUS,PERSON_TYPE,CREATE_USERID,
+        CREATE_USER,CREATE_DATE,DATA_SOURCES,ADD_OBJECT) 
+    select CREATEGUID() id,tb.name,tb.card_num,gender,g_id DEPARTMENT_ID,sysdate add_date,'易肇精患' FOCUS_TYPE,0 ADD_AUDIT_STATUS,'203' PERSON_TYPE,
+             'ADMIN' CREATE_USERID,'ODPS'||TO_CHAR(SYSDATE,'YYYYMMDD') CREATE_USER,SYSDATE CREATE_DATE,'2' DATA_SOURCES,          
+              '{'||
+    '"cardNum": "'||tb.card_num||'",'||
+    '"name": "'||tb.name||'",'||
+    '"personType": "'||tb.person_type||'",'||
+    '"gId": "'||tb.g_id||'",'||
+    '"gridName": "'||tc.displayname||'",'||
+    '"dType": "",'||
+    '"rAddr": "'||tb.r_addr||'",'||
+    '"illName": "",'||
+    '"mType": "02",'||
+    '"guardian": "",'||
+    '"gCardNum": "",'||
+    '"gUsedName": "",'||
+    '"gPhone": "",'||
+    '"treat": "02",'||
+    '"eFamily": "",'||
+    '"hosReason": "",'||
+    '"inLow": "",'||
+    '"hosName": "",'||
+    '"rehabName": "",'||
+    '"isSeriousIll": "",'||
+    '"supCase": ['||
+    'null'||
+    '],'||
+    '"supCase[]": [],'||
+    '"focusType": "203",'||
+    '"focusTypeName": "精神病人",'||
+    '"dangerLevel": "",'||
+    '"createDate": "'||to_char(sysdate,'yyyy-mm-dd hh24:mi:ss')||'"'||
+    '}' ADD_OBJECT 
+            from ODPS_PRSN_SEVERE_PSYCHOPATH ta
+            join zz_person tb on ta.p_id=tb.id 
+            join a4_sys_department tc on tb.g_id=tc.departmentid
+            where not exists(
+                select * from ZZ_ADD_PERSON_HISTORY td where tb.card_num=td.card_num and person_type='203' 
+            ) and tb.id not in(
+                select p_id from ZZ_PERSON_PSYCHIATRIC where p_id is not null
+            ) 
+'''
+}
+json_dicts = json.dumps(t, indent=4, ensure_ascii=False)
+tt = json.loads(json_dicts)
+print(tt)

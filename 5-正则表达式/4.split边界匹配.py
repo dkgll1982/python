@@ -1,7 +1,7 @@
 import re
 
-print(re.match(r'\d+?','1234'))
-print(re.match(r'\d*?','1234'))
+print(re.match(r'\d+?','1234'))   #1
+print(re.match(r'\d*?','1234'))     
 print(re.match(r'\d??','1234'))
 
 #\b，\B是单词边界,不匹配任何实际字符,所以是看不到的;\B是\b的非(补)。 
