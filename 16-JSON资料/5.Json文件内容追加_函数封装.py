@@ -25,21 +25,21 @@ def json_append(file_name,key,json_data):
 if __name__ == "__main__":
     file_name = r'backup\test2.json'
     key = 'ee'
-    json_data = [
-        {
-        "a3": "嵌套啊"
-        },
-        {
-        "a3": "嵌套啊"
-        },
-        {
-        "a3": "嵌套2"
-        },
-        {
-        "a3": "嵌套3"
-        },
-        {
-        "a3": "嵌套4"
-        }
+    json_data =[
+        {'id': 'e8d0bc60-ff93-11e9-806b-a3b23f8b848b', 
+         'placeName': '浙江来伊份食品有限公司湖州南街店', 
+         'oldPlaceName': '浙江来伊份食品有限公司湖州南街店', 
+         'placeAddr': '浙江省湖州市吴兴区江南工贸大街459号', 
+         'isKeyPlace': '一般场所', 
+         'displayName': '朝阳街道/北齐巷社区/北齐巷社区网格', 
+         'checkDate': '2020-09-22', 
+         'checkLevel': '县级检查', 
+         'RN': 1, 
+         'safeType': '小食杂店', 
+         'task_num': ['PC2020092200002'], 
+         'checkUserName': ['杨扶新'], 
+         'description': ['灭火器有遮挡物，无每月检查表'], 
+         'ill_list': ['未配备灭火器等基本消防器材；备注：灭火器遮挡物检查表']
+         }
     ]
     json_append(file_name,key,json_data)
