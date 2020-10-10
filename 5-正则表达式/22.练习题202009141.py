@@ -12,7 +12,6 @@ import sys
 
 index = 0
 
-
 class Seq():
     def __init__(self):
         global index
@@ -25,7 +24,6 @@ class Seq():
     def __next__(self):
         self.__index__ += 1
         return self.__index__
-
 
 # 1、匹配一行文字中的所有开头的字母内容
 s = "i love you not because of who you are, but because of who i am when i am with you"

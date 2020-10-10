@@ -1,3 +1,12 @@
+#!/usr/bin/env python 
+# -*- coding:utf-8 -*-  
+# @Author: suixin 
+# @Company: Aerospace Shenzhou Intelligent System Technology Co., Ltd  
+# @Site: https://user.qzone.qq.com/350606539/main 
+# @Date: 2020-10-10 14:00:18 
+# @Remark: Life is short, I use python！
+# 参考链接：https://blog.csdn.net/uvyoaa/article/details/80854459
+ 
 import re
 
 print(re.match(r'\d+?','1234'))   #1

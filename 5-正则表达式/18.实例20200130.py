@@ -33,6 +33,7 @@ print( re.match("^t","this is good day"))
 print( re.match("\d+","10086"))     
 print( re.match("[\d]","10086")) 
 
+print('-'*40)
 print(re.match('.*?(?=\d).*?$','11d'))  
 print(re.match('^.*(?<=\d).*$','11d1'))  
 print(re.match('(db)+','dbdbms'))
@@ -42,8 +43,8 @@ print(re.match('(a(b)c)d','abcd').groups())
 
 print(re.findall("[^ ]+", "a little boy")) #[^abc] --> 除a b c之外任意字符
 #search()函数会在整个字符串内查找模式匹配,只到找到第一个匹配然后返回一个包含匹配信息的对象,
-print(re.search(r"(https|http|ftp)://\S"," https://www.baidu.com，https://www.360.cn"))
-#print(re.findall(r"(https|http|ftp)://.*com$+"," https://www.baidu.com，http://www.360.cn"))
+print(re.search(r"(https|http|ftp)://\w+"," https://www.baidu.com，https://www.360.cn"))
+print(re.findall(r"(https|http|ftp)://.*cn$"," https://www.baidu.com，http://www.360.cn"))
 #match()函数只检测字符串开头位置是否匹配，匹配成功才会返回结果，否则返回None
 print(re.match(r"(https|http|ftp)://\S+"," https://www.baidu.com"))
 print(re.search(r"(?P<dog>ab)cdef",'abcdefghti').group('dog'))

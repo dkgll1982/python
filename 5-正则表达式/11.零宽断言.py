@@ -7,10 +7,9 @@
 # @Remark: Life is short, I use python！
 # 参考链接：https://www.cnblogs.com/zsvslx/p/10536893.html 
 # 参考链接：https://blog.csdn.net/dnxbjyj/article/details/70946508
-# 总结：真他嘛的晦涩难懂，多敲把，下次忘了害得重新敲~~~~~~~~~~~~~~~~~~~~~~~~
+# 总结：真他妈的晦涩难懂，多敲吧，下次忘了还得重新敲~~~~~~~~~~~~~~~~~~~~~~~~
 
 import re 
-
 
 #查询url是否以http://www.开头
 s1=re.findall(r'(?=http:\/\/www\.)(?P<name>.*)','http://www.baidu.com') #结果是：['http://www.baidu.com']
@@ -26,7 +25,7 @@ print(s2)
 s2 = re.findall('.*(?=world)',atr)
 print(s2)
 s2 = re.findall('(?=he).*(?<=ld)',atr)
-print(s2)
+print(28,s2)
 s2 = re.findall('(?<=he).*(?=ld)',atr)
 print(s2)
 s2 = re.findall('(?=he)(\w+)',atr)

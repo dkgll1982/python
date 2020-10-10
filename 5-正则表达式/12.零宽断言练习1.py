@@ -7,10 +7,9 @@
 # @Remark: Life is short, I use python！
 # 参考链接：https://www.cnblogs.com/zsvslx/p/10536893.html 
 # 参考链接：https://blog.csdn.net/dnxbjyj/article/details/70946508
-# 总结：真他嘛的晦涩难懂，多敲吧，下次忘了还得重新敲~~~~~~~~~~~~~~~~~~~~~~~~
+# 总结：真他妈的晦涩难懂，多敲吧，下次忘了还得重新敲~~~~~~~~~~~~~~~~~~~~~~~~
 
 import re 
-
 
 strTest = "123456789 , 987654321"  
 
@@ -19,7 +18,7 @@ strTest = "123456789 , 987654321"
 re1 = re.compile(r"\d{2}(?=5)\d{2}")         #3456,7654
 # 此位置前面匹配表达式exp
 # 下边的例子，前边的位置是5，5的后边是67
-re2 = re.compile(r"\d{2}(?<=5)\d{2}")        #4567,6543   
+re2 = re.compile(r"\d{2}(?<=45)\d{2}")        #4567,6543   
 print(re.findall(re1,strTest))
 print(re.findall(re2,strTest))     
     

@@ -33,8 +33,7 @@ m0 = '''在一九四九年新中国成立
        比一九九零年低百分之五点二
        人一九九六年击败俄军,取得实质独立'''
 # 中文处理涉及到编码问题
-result = re.findall(
-    u"[\u96f6|\u4e00|\u4e8c|\u4e09|\u56db|\u4e94|\u516d|\u4e03|\u516b|\u4e5d]+\u5e74", m0)
+result = re.findall(u"[\u96f6|\u4e00|\u4e8c|\u4e09|\u56db|\u4e94|\u516d|\u4e03|\u516b|\u4e5d]+\u5e74", m0)
 print(f"{sys._getframe().f_lineno}行第{Seq().__next__()}题:{result}")
 
 # 2、提取有效的python标识符集合

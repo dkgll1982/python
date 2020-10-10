@@ -52,7 +52,7 @@ print(f"电话号码是:[{num}]")
 num = re.sub(r'\D', "", phone,count=6)
 print(f"电话号码是:[{num}]")
 
-# repl 参数是一个函数的情况
+# repl参数是一个函数的情况
 # 将匹配的数字乘以 2
 def double(matched):
     value = int(matched.group('value'))
@@ -62,7 +62,7 @@ s = 'A23G4HFD567'
 print(re.sub('(?P<value>\d+)', double, s))
 
 # findall:在字符串中找到正则表达式所匹配的所有子串，并返回一个列表，如果没有找到匹配的，则返回空列表。
-# 注意:match 和 search 是匹配一次 findall 匹配所有。 
+# 注意:match和search是匹配一次findall 匹配所有。 
 pattern = re.compile(r'\d+')   # 查找数字
 result1 = re.findall('\d+','runoob 123 google 456')
 result2 = pattern.findall('run88oob123google456', 0, 10)
@@ -74,6 +74,6 @@ for match in result3:
     print('---->:',match.group() )
     
 # re.split(pattern, string[, maxsplit=0, flags=0])
-# maxsplit	分隔次数，maxsplit=1 分隔一次，默认为 0，不限制次数 
+# maxsplit分隔次数，maxsplit=1 分隔一次，默认为 0，不限制次数 
 result4 = pattern.split('run88oob123google456E',maxsplit=3) 
 print(result4)

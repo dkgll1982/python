@@ -7,7 +7,7 @@
 # @Remark: Life is short, I use python！
 # 参考链接：https://www.cnblogs.com/zsvslx/p/10536893.html 
 # 参考链接：https://blog.csdn.net/dnxbjyj/article/details/70946508
-# 总结：真他嘛的晦涩难懂，多敲把，下次忘了害得重新敲~~~~~~~~~~~~~~~~~~~~~~~~
+# 总结：真他妈的晦涩难懂，多敲吧，下次忘了还得重新敲~~~~~~~~~~~~~~~~~~~~~~~~
 
 import re 
 
@@ -35,6 +35,9 @@ print('*'*40)
 s = 'abc.xyz'
 print(re.sub(r'(.*)\.(.*)', r'\2.\1', s))
 
+s = '111-222-333-444-555-666'
+print(re.sub(r'(\d+)\-(\d+)', r'\2-\1', s))
+
 s = 'aaa.txt'
 # 提取不是.txt结尾的文件
 # 后边不匹配txt
@@ -52,4 +55,3 @@ print(re.findall(re2,A))
 # 匹配不以do结尾的单词,此处有雷
 re2 = re.compile(r'\b\w+\W(?!do)')
 print(re.findall(re2,A))
-
