@@ -34,6 +34,7 @@ def get_task(task_id):
         #    abort(403)
         #elif len(l) == 0:
         #    abort(404)
+    print(l[0])
     return jsonify({'task': l[0]})
 
 @app.errorhandler(403)

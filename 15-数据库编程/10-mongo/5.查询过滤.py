@@ -10,6 +10,6 @@ mycol = mydb["sites"]
 myquery = { "name": "RUNOOB" }
  
 mydoc = mycol.find(myquery).limit(2)
- 
+print(mydoc) 
 for x in mydoc:
   print(x)

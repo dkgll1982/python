@@ -14,11 +14,21 @@ import urllib.request
 import xlsxwriter
 import time
  
-town_list = ['雷甸镇','舞阳街道','莫干山镇','德清县','阜溪街道','新市镇','新安镇','武康街道','下渚湖街道','乾元镇','洛舍镇','禹越镇','钟管镇']
+town_list = ['开发区',
+'南浔镇',
+'练市镇',
+'双林镇',
+'菱湖镇',
+'和孚镇',
+'旧馆镇',
+'石淙镇',
+'善琏镇',
+'千金镇',
+'南浔古镇旅游度假区']
 
 def get_person():
     os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
-    conn = cx_Oracle.connect('cigproxy','cigproxy','172.21.188.219:15223/orcl')
+    conn = cx_Oracle.connect('cigproxy','Htzhcig_5873','172.21.244.81:15227/orcl')
     cursor = conn.cursor() 
  
     for town in town_list:
@@ -44,7 +54,7 @@ def get_person():
     conn.close()
 
 def save_excel(rows,town):    
-    dir = r'backup\德清认领人口'
+    dir = r'backup\南浔认领人口'
     # 然后创建一个目录:
     if not os.path.exists(dir): 
         os.mkdir(dir) 

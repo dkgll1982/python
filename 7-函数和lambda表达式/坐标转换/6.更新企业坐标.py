@@ -21,7 +21,7 @@ import datetime
 ak = "Ge8QStRhgzfk5WajB2uHzlpO9Wul40oh"
 sk = "c9zBPUBLw3TQqEriSCWEz6vgSpjjLM4q"
 #坐标计算网格服务
-geoserver = 'http://huzhou-jczl.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
+geoserver = 'http://huzhou-jczl-aj.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
 
 #线程数量
 threadcount = 1
@@ -30,7 +30,7 @@ pagecount = 200
 #每次取数据行数
 rowcount = 100
 #线程循环次数
-xhcount = 20
+xhcount = 100
 
 # 大致计算公式如下
 # 公式1：线程循环次数 = 数据分段区间/每次取数据行数，如5000/100=50，即需要约50次循环才能跑完区间的所有的数据 
@@ -59,7 +59,7 @@ def request_data(urt):
 def get_zb(index):
     os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
     #ORACLE连接参数
-    conn = cx_Oracle.connect('test','esri@123','172.21.246.244:15211/XE')
+    conn = cx_Oracle.connect('cigproxy','Htzhcig_5873','172.21.145.30:15211/XE')
     cursor = conn.cursor() 
 
     #取数据起始位置
@@ -68,10 +68,11 @@ def get_zb(index):
     end = str(pagecount*(index))
     #查询数据的sql
     args = sys.argv
-    sql1 =  ("select * from (select nbxh,REPLACE(GRID_ADDR,'&#') GRID_ADDR from ZZ_FIRM_INFO_ODPS where COMMUNITY is null AND GRID_ADDR LIKE '浙江省湖州市%' AND UPDATE_DATE is null) where rownum<="+str(rowcount))      
+    sql1 =  '''select id,case when place_addr not like '%安吉%' THEN '浙江省湖州市安吉县'||PLACE_ADDR ELSE PLACE_ADDR END PLACE_ADDR
+            from zz_place_common_zb WHERE (UPDATE_USER<>'admin20201012' OR UPDATE_USER IS NULL) AND ROWNUM<'''+str(rowcount)
+
     #修改返回结果的sql
-    sql2 = ""
-    print(sql1)
+    sql2 = "" 
     cursor.execute(sql1);    
     rows = cursor.fetchall()  # 得到所有数据集
 
@@ -88,9 +89,9 @@ def get_zb(index):
                 geo = geoserver+"?x="+wgs_x+"&y="+wgs_y
                 result = request_data(geo) 
                 print("子线程(%s)处理；百度：%s；WGS84：%s；获取网格地址：%s"%(threading.current_thread().name,bd_zb,wgs_zb,geo)) 
-                sql2 = "update ZZ_FIRM_INFO_ODPS set result='%s',update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where NBXH='%s'"%(str(result),update_date,row[0]) 
+                sql2 = "update zz_place_common_zb set result='%s',UPDATE_USER='admin20201012',update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where id='%s'"%(str(result),update_date,row[0]) 
             else:       
-                sql2 = "update ZZ_FIRM_INFO_ODPS set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where NBXH='%s'"%(update_date,row[0])            
+                sql2 = "update zz_place_common_zb set UPDATE_USER='admin20201012',update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where id='%s'"%(update_date,row[0])            
             cursor.execute(sql2)
         except Exception as e:
             print('Error:',e)

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
  
-import pymongo
+import pymongo 
  
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 mydb = myclient["douban"]
@@ -13,8 +13,9 @@ print(x)
 
 # find() 方法可以查询集合中的所有数据，类似 SQL 中的 SELECT * 操作。
 x = mycol.find()
-for x in mycol.find():
-  print(x)
+print(x.count(True))
+for y in mycol.find():
+  print(y)
 
 # 查询指定字段的数据
 # 我们可以使用 find() 方法来查询指定字段的数据，将要返回的字段对应值设置为 1。

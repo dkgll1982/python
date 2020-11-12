@@ -58,6 +58,7 @@ class sptspider():
     def parse_request(self,response,appkey,deptname): 
         text = response.text
         j = json.loads(text) 
+        print(j)
         if j["code"] == '00':       #成功
             d = j["datas"]
             refreshSecret = d["refreshSecret"]
@@ -66,7 +67,7 @@ class sptspider():
             requestSecretEndTime = d["requestSecretEndTime"]
             self.update_serc(appkey,refreshSecret,refreshSecretEndTime,requestSecret,requestSecretEndTime,deptname)
         else:
-            print("【{deptname}】请求秘钥错误，返回结果：{}".format(text))
+            print(f"【{deptname}】请求秘钥错误，返回结果：{text}")
     
     #保存秘钥    
     def update_serc(self,appkey,refreshSecret,refreshSecretEndTime,requestSecret,requestSecretEndTime,deptname):  
@@ -135,7 +136,7 @@ class sptspider():
             conn = self.pool.connection()
             cursor = conn.cursor()      
             #此处需要更新配置的应用key，秘钥信息。否则请求会报签名错误  
-            sql = "select key,serc,dept from base_spt_serc where interface is not null and status=0"
+            sql = "select key,serc,dept from base_spt_serc where interface is not null and deptid='63'"
             cursor.execute(sql)
             row = cursor.fetchall() 
             cursor.close() 
