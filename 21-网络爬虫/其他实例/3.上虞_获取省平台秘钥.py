@@ -15,13 +15,13 @@ class sptspider():
     def __init__(self):
         super().__init__()
         os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
-        self.SecretByKeyUrl = 'http://59.202.115.11/gateway/app/refreshTokenByKey.htm'  #48小时调用
-        self.SecretBySecUrl = 'http://59.202.115.11/gateway/app/refreshTokenBySec.htm'  #15分钟调用
-        user='cigwbj'
-        password='esri@123'
-        host='10.21.198.126'
-        port='15214'
-        sid='xe'
+        self.SecretByKeyUrl = 'http://172.23.31.13/gateway/app/refreshTokenByKey.htm'  #48小时调用
+        self.SecretBySecUrl = 'http://172.23.31.13/gateway/app/refreshTokenBySec.htm'  #15分钟调用
+        user='cigproxy'
+        password='cigproxy'
+        host='10.23.179.64'
+        port='15223'
+        sid='orcl'
         dsn = cx_Oracle.makedsn(host,port,sid)
         #连接池
         self.pool = PooledDB(cx_Oracle,
@@ -136,7 +136,7 @@ class sptspider():
             conn = self.pool.connection()
             cursor = conn.cursor()      
             #此处需要更新配置的应用key，秘钥信息。否则请求会报签名错误  
-            sql = "select key,serc,dept from base_spt_serc where interface is not null and deptid='64'"
+            sql = "select key,serc,dept from base_spt_serc where interface is not null and deptid='63'"
             cursor.execute(sql)
             row = cursor.fetchall() 
             cursor.close() 

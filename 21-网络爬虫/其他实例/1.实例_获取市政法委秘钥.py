@@ -149,7 +149,7 @@ class sptspider():
         # 当前时间
         c_time = datetime.datetime.now()
         # 判断当前时间是否在范围时间内（8:10——18:20停止运行）
-        return True if c_time >d1_time and c_time <d2_time else False
+        return True if not c_time >d1_time and c_time <d2_time else False
             
     def start (self): 
         data = self.get_appinfo()

@@ -24,7 +24,7 @@ town_list = ['开发区',
 '石淙镇',
 '善琏镇',
 '千金镇',
-'南浔古镇旅游度假区']
+'南浔古镇旅游度假区','南浔区']
 
 def get_person():
     os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
@@ -32,17 +32,21 @@ def get_person():
     cursor = conn.cursor() 
  
     for town in town_list:
-        sql =  (""" SELECT 身份证号码,姓名,性别,出生日期,户籍地址,现住地址,联系方式,NVL(乡镇,'德清县') 乡镇,NVL(所属网格,'德清县') 所属网格,nvl(网格层级,1) 网格层级,NVL(认领网格,'德清县') 认领网格 FROM (
+        sql =  (""" 
+                SELECT 身份证号码,姓名,性别,出生日期,户籍地址,现住地址,联系方式,乡镇,认领级别,认领网格,人口类型 FROM (
+                    SELECT 身份证号码,姓名,性别,出生日期,户籍地址,现住地址,联系方式,乡镇,认领级别,NVL(认领网格,所属网格) 认领网格,人口类型 
+                    FROM (
                         SELECT CARD_NUM 身份证号码,NAME 姓名,DECODE(GENDER,'1','男','2','女') 性别,TO_CHAR(BIRTH_DATE,'YYYY-MM-DD') 出生日期,
                             R_ADDR 现住地址,D_ADDR 户籍地址,PHONE 联系方式,DECODE(PERSON_TYPE,'1','户籍人口','2','流动人口') 人口类型,
-                            CASE INSTR(tb.DISPLAYNAME,'/') when 0 THEN tb.DISPLAYNAME ELSE SUBSTR(tb.DISPLAYNAME,1,INSTR(tb.DISPLAYNAME,'/')-1) END 乡镇,
-                            tc.DISPLAYNAME 认领网格,
-                            TB.DISPLAYNAME 所属网格,TB.D_LEVEL 网格层级 FROM ZZ_PERSON TA
-                        LEFT JOIN A4_SYS_DEPARTMENT TB ON TA.G_ID=TB.DEPARTMENTID AND TB.STATE=1
-                        LEFT JOIN A4_SYS_DEPARTMENT TC ON TA.CLAIM_G_ID=TC.DEPARTMENTID AND TB.STATE=1
-                        WHERE DEL_FLAG=0
-                    ) where 网格层级<>4 and 乡镇='{}'
-                    order by 乡镇,网格层级,所属网格,身份证号码""".format(town)) 
+                            NVL(tc.l2_departmentname,'南浔区') 乡镇,
+                            tc.departmentfullname 认领网格,NVL(TB.departmentfullname,'南浔区') 所属网格,CLAIM_level 认领级别 
+                        FROM ZZ_PERSON TA
+                        LEFT JOIN SYS_FULL_DEPT TB ON TA.G_ID=TB.DEPARTMENTID  
+                        LEFT JOIN SYS_FULL_DEPT TC ON TA.CLAIM_G_ID=TC.DEPARTMENTID 
+                        WHERE IS_CLAIM=0 and CLAIM_level IS NOT NULL and BITAND(3377699720527872, CLAIM_G_ID) =1125899906842624
+                    ) 
+                ) WHERE 乡镇='{}'
+                order by 乡镇,认领级别,认领网格,身份证号码""".format(town)) 
             
         cursor.execute(sql);
         rows = cursor.fetchall()  # 得到所有数据集
@@ -84,9 +88,9 @@ def save_excel(rows,town):
     sheet.write('F1', '现住地址', bold)
     sheet.write('G1', '联系方式', bold)
     sheet.write('H1', '乡镇', bold) 
-    sheet.write('I1', '所属网格', bold)
-    sheet.write('J1', '网格层级', bold)
-    sheet.write('K1', '认领网格', bold)
+    sheet.write('I1', '认领级别', bold)
+    sheet.write('J1', '认领网格', bold)
+    sheet.write('K1', '人口类型', bold)
 
     rowindex = 0 
     for row in rows:
