@@ -1,4 +1,25 @@
 import json
+
+li = [{
+		"zZ": "浙江省绍兴市上虞区百官街道江东路１０３号",
+		"cSRQ": "19460227",
+		"mLPH": 'null',
+		"qFJG": "上虞市公安局",
+		"jGSSXQ": "浙江省上虞县",
+		"zPID": "3306000001002209767",
+		"xB": "男",
+		"xZJD": "百官街道",
+		"mZ": "汉族",
+		"yXQXQSRQ": "20061229",
+		"mLXZ": "１０３号",
+		"yXQXJZRQ": 'null',
+		"xM": "赵佰寿",
+		"cYM": 'null'
+}]
+print('====', json.dumps(li[0],
+                         indent=4,
+                         ensure_ascii=False)
+    )
 dicts = {
     "pp": '''    INSERT INTO ZZ_ADD_PERSON_HISTORY(ID,NAME,CARD_NUM,GENDER,DEPARTMENT_ID,ADD_DATE,FOCUS_TYPE,ADD_AUDIT_STATUS,PERSON_TYPE,CREATE_USERID,
         CREATE_USER,CREATE_DATE,DATA_SOURCES,ADD_OBJECT) 
