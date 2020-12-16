@@ -123,7 +123,7 @@ class AnFangSpider(object):
                     unit[0]["description"].append(task_row["description"]) 
                     
                     check_url = f"http://huzhou-jczl-wx.spacecig.com/zhzlbackend/anfang/anfangCheck/detail?id={task_id}"
-                    check_res = self.send_request(check_url,self.header,None)·     #获取暗访检查信息
+                    check_res = self.send_request(check_url,self.header,None)     #获取暗访检查信息
                     if check_res:
                         check_rows = check_res.get('data')["items"][0]["items"]
                         for check_row in check_rows:

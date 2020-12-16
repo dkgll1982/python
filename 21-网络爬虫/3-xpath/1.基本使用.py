@@ -12,7 +12,7 @@ from lxml import etree
 wb_data = """
         <div>
             <ul>
-                 <li class="item-0"><a href="link1.html">first item</a></li>
+                 <li class="item-0"><a href="link1.html">first item</a><a href="link12.html">first2 item</a></li>
                  <li class="item-1" id="t1" dataar-Tidanchor="981451" ><a href="link2.html">second item </li>
                  <li class="item-inactive"><a href="link3.html">third item</a></li>
                  <li class="item-1"><a href="link4.html">fourth item</a></li>
@@ -33,11 +33,17 @@ html_data = html.xpath('/html/body/div/ul/li/a')
 print(html)
 for i in html_data:
     print(i.text)
- 
+  
+#请理解下边两行的区别：
+# ul//a：选择属于 ul 元素的后代的所有 a 元素，而不管它们位于 rl 之下的什么位置 (即不管是属于ul的子节点还是多级后代节点，全部查出来)
+# ul/a：选择属于 ul 元素的直接子节点 a 元素，(即只包含子节点，不包含多级子节点)
+
+# html_data = html.xpath('/html/body/div/ul//a/text()')
+# html_data = html.xpath('/html/body/div/ul/a/text()')
 html_data = html.xpath('/html/body/div/ul/li/a/text()')
 print(html)
 for i in html_data:
-    print(i) 
+    print('----->',i) 
     
 html_data = html.xpath('/html/body/div/ul/li/a/@href')
 for i in html_data:

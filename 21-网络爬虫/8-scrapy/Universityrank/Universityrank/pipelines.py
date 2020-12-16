@@ -8,7 +8,7 @@
 from itemadapter import ItemAdapter
 import json
 
-class SchoolonlinePipeline:
+class UniversityrankPipeline:
     # 打开文件
     def open_spider(self, spider):
         try:

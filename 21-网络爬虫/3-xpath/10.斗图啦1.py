@@ -11,7 +11,6 @@ class DouTuLaSpider():
 
     # 发送请求
     def send_request(self, url):
-        print(url)
         response = requests.get(url=url, headers=self.headers)
         return response
 

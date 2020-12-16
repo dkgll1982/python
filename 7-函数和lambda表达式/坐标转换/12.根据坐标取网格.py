@@ -18,7 +18,7 @@ import datetime
 import sys
  
 #坐标计算网格服务
-geoserver = 'http://huzhou-jczl-cx.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
+geoserver = 'https://jd.spacecig.com/CIGService/rest/services/0/intersectFeaturesByXY';
 
 #地址前缀
 city = ''
@@ -26,11 +26,11 @@ city = ''
 #线程数量
 threadcount = 1
 #数据分段区间
-pagecount = 1000
+pagecount = 210
 #每次取数据行数
-rowcount = 1000
+rowcount = 200
 #线程循环次数
-xhcount = 10
+xhcount = 1
 
 # 大致计算公式如下
 # 公式1：线程循环次数 = 数据分段区间/每次取数据行数，如5000/100=50，即需要约50次循环才能跑完区间的所有的数据 
@@ -47,7 +47,7 @@ def request_data(urt):
         #'Accept-Encoding':'gzip, deflate', 
         #'Connection':'keep-alive',
         'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
-        'Cookie':"passport=4e38dcf2-4665-49db-a8e8-f3ee5bee23b3; CIGToken=27277f9d-1d7a-4037-8791-37c87add8269; CIGUsername=%E5%90%B4%E5%85%B4%E7%AE%A1%E7%90%86%E5%91%98; CIGUserid=WX-ADMIN"
+        'Cookie':"passport=d3fe78f5-804d-4738-b198-7854882c4329; CIGToken=19ab6a95-cb52-4e80-9600-ad2c60247a5b; CIGUsername=%E7%AE%A1%E7%90%86%E5%91%98; CIGUserid=ADMIN"
     }      
     request = urllib.request.Request(url=urt,headers=head) 
     response = urllib.request.urlopen(request)
@@ -58,19 +58,15 @@ def request_data(urt):
 #获取查询的数据列表
 def get_zb(index,biao):
     os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
-    conn = cx_Oracle.connect('cigproxy','mhG9Fi1gmIhPWrMJ','10.21.198.127:15223/xe')
+    conn = cx_Oracle.connect('cigproxy','Htzhcig123','172.21.104.155:15211/xe')
     cursor = conn.cursor() 
 
     #取数据起始位置
-    start = str(pagecount*(index-1))
+    #start = str(pagecount*(index-1))
     #取数据结束位置
-    end = str(pagecount*(index))
+    #end = str(pagecount*(index))
     #查询数据的sql
-    sql1 = '''select id,'X='||X||'&Y='||Y ZB from zz_place_common_0603 where department_id in(
-                select to_number(原网格ID) g_id from test.BASE_坐标计算0603 
-                union 
-                select 1219977138929664 from dual
-            ) and X>0 and update_date is null and rownum<={}'''.format(rowcount)  
+    sql1 = ("select * from (select id,'X='||X||'&Y='||Y ZB from ZZ2_DZ_BUILDING_METADATA where CACLUTE_DATE is null) where rownum<="+str(rowcount))
     sql2 = ""
 
     cursor.execute(sql1);    
@@ -86,9 +82,9 @@ def get_zb(index,biao):
             dict = json.loads(result)
             print(dict)
             if dict.get("gridId"): 
-                sql2 = "update "+ biao+" set result=%d,update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where id='%s'"%(int(dict.get("gridId")),update_date,row[0]) 
+                sql2 = "update "+ biao+" set result=%d,CACLUTE_DATE=to_date('%s','YYYY-MM-DD HH24:MI:SS') where id='%s'"%(int(dict.get("gridId")),update_date,row[0]) 
             else:       
-                sql2 = "update "+ biao+" set update_date=to_date('%s','YYYY-MM-DD HH24:MI:SS') where id='%s'"%(update_date,row[0])            
+                sql2 = "update "+ biao+" set CACLUTE_DATE=to_date('%s','YYYY-MM-DD HH24:MI:SS') where id='%s'"%(update_date,row[0])            
             cursor.execute(sql2)
         except Exception as e:
             print('Error:',e)
@@ -103,7 +99,7 @@ def get_zb(index,biao):
 
 if __name__ == "__main__":  
     args = sys.argv 
-    biao = "zz_place_common_0603"
+    biao = "ZZ2_DZ_BUILDING_METADATA"
     print(biao)
     print("主线程(%s)启动"%(threading.current_thread().name))
     start = time.time() 

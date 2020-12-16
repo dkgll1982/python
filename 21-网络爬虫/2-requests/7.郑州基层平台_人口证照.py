@@ -23,9 +23,9 @@ from DBUtils.PooledDB import PooledDB
 class ApiSpider(object):    
     def __init__(self): 
         super().__init__()
-        self.index = 0
+        self.index = 984
         #接口编码 
-        self.api_code = 'zxrksjhzp'                
+        self.api_code = 'zfw_zz_rkxx'                
         self.host = 'http://172.17.217.98:8086/CSB/zzubShareService/zfw'
         self.token_url = parse.urljoin(self.host,f'?_api_name=token&_api_version=1.0.0') 
         os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
@@ -50,14 +50,14 @@ class ApiSpider(object):
             'Content-Length': '40',
             'ContentType': 'application/x-www-form-urlencoded',
             # 密钥 
-            'Authorization': 'Basic MDU3ZTdhYmMtMTg0Mi00YTZhLTg2OTYtNmI1MWQ2MmM2NmM4OkEyVjVNRFUzWlRESFlNTVRNVEcwTUkwMFlUWkhMVEcyT1RZVE5NSTFNV1EyTU1NMk5NTTQ='
+            'Authorization': 'Basic YTE1NzAzZjEtMGVhYy00OTAzLWEwNTktZWM1YjcyOTM1NTIwOkEyVjVZVEUxTlpBWlpKRVRNR1ZIWVkwME9UQVpMV0VXTlRLVFpXTTFZSkNZT1RNMU5USVc='
         }
         
         data = {
             "grant_type":'client_credentials',
             "scope":"service"   
         }
-        response = requests.post(url = self.token_url, headers = headers, data = data, timeout = 30)       
+        response = requests.post(url = self.token_url, headers = headers, data = data)       
         if response.status_code == 200:
             try:         
                 return response.json()
@@ -70,9 +70,10 @@ class ApiSpider(object):
     def get_pagedata(self,token):      
         # 密钥 
         headers = {
-            'Authorization': f"bearer {token}"
-        }        
-        index = 1
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.87 Safari/537.36',
+            'ContentType': 'application/x-www-form-urlencoded',  
+            'Authorization': "bearer b5430db3-507a-418c-8a33-49ec3f9569b5"
+        }         
         params = {
             '_api_name': self.api_code,
             '_api_version': '1.0.0' 
@@ -82,7 +83,7 @@ class ApiSpider(object):
             self.index += 1
             print(f"正在获取第{self.index}页数据...")           
             params["page"] = self.index 
-            response = requests.get(url = self.host,params = params, headers = headers, timeout = 10)   
+            response = requests.get(url = self.host,params = params, headers = headers)   
             if response.status_code == 200:
                 try:         
                     res_data = response.json()
@@ -90,7 +91,7 @@ class ApiSpider(object):
                         data = res_data["value"]    #返回的是一个List
                         if data:                    #不为空则表示分页数据存在，否则表示已取完  
                             #return data
-                            li =[{"type_id":'hjrkxp',"card_num":row['zxrks_1_sfzhm'],"body":str(row)} for row in data] 
+                            li =[{"type_id":'zfw_zz_rkxx',"card_num":row['zfw_z_1_sfzh'],"body":str(row)} for row in data] 
                             self.save_data(li)               
                         else:
                             print(f"当前第{self.index}页已经是最后一页！")
@@ -119,11 +120,11 @@ class ApiSpider(object):
             print("数据库插入错误！",e)
         
     def start(self):    
-        res = self.get_token() 
-        if res:
-            token = res["access_token"]
-            print(f"第一步获取access_token：{token}")
-            self.get_pagedata(token)
+        # res = self.get_token() 
+        # if res:
+        #     token = res["access_token"]
+        #     print(f"第一步获取access_token：{token}")
+        self.get_pagedata(None)
                
 if __name__=='__main__':  
     start = time.time()

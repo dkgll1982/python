@@ -23,7 +23,7 @@ class BizhiSpider():
             os.mkdir(self.base_dir)
             
     #返回列表第一条
-    def first(self,list):
+    def li_first(self,list):
         return list[0] if list else '' 
     
     #发送请求
@@ -34,15 +34,15 @@ class BizhiSpider():
     
     #解析请求
     def parse_request(self, response):
-        html = etree.HTML(response.content)
-        img_url = self.first(html.xpath("//img[@id='bigImg']/@src"))    #图片地址
+        html = etree.HTML(response.content)                                                 #初始化生成一个XPath解析对象
+        img_url = self.li_first(html.xpath("//img[@id='bigImg']/@src"))                     #图片地址
         img_name = ''.join(html.xpath("//h3//text()")).replace('\r','').replace(
-            '\n','').replace('\t','').replace('/','_').replace('（','_').replace('）','')  #图片名称
-        img_response = self.send_request(img_url)                       #发送图片请求 
-        self.write_content(img_response,img_name,self.base_dir)         #下载图片
+            '\n','').replace('\t','').replace('/','_').replace('（','_').replace('）','')   #图片名称
+        img_response = self.send_request(img_url)                                           #发送图片请求 
+        self.write_content(img_response,img_name,self.base_dir)                             #下载图片
         #获取下一页的链接地址
-        next_url = self.first(html.xpath("//a[@id='pageNext']/@href"))
-        if next_url.find('.html') != -1:                                #最后一页的链接是javascript:;终止爬取
+        next_url = self.li_first(html.xpath("//a[@id='pageNext']/@href"))
+        if next_url.find('.html') != -1:                                                    #最后一页的链接是javascript:;终止爬取
             response = self.send_request(urllib.parse.urljoin(self.host,next_url))
             self.parse_request(response) 
         
@@ -53,7 +53,7 @@ class BizhiSpider():
             f.write(response.content)
 
     def start(self): 
-        start_url = '265_1288_2.html'           #爬取起始页
+        start_url = '4623_57562_2.html'           #爬取起始页
         self.url = urllib.parse.urljoin(self.host, start_url)
         response = self.send_request(self.url)
         if response:

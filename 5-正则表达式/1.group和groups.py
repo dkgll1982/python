@@ -73,6 +73,8 @@ print(str(sys._getframe().f_lineno)+":",re.match(r"(\d{3})(\d{1})(\1)(\2)", "212
 print(str(sys._getframe().f_lineno)+":",re.match(r"<(a>)\w+(</)\1", "<a>这是一个正确的链接</A>", flags=re.I))
 print(str(sys._getframe().f_lineno)+":",re.match(r"<(a>)\w+(</)\1", "<a>这是一个错误的链接</b>", flags=re.I))
 
+#match与fullmatch最大的区别：它不但是“从头匹配”，而且是“从头到尾”都要匹配。用来检测整个pattern对象是否与字符串相匹配，match则只需要匹配从开头到不能匹配的位置就结束了
 # 如果整个字符串string都匹配RE表达式，就返回对应的match object，如果不匹配就返回None；
 # 再次提示：返回长度为0与None的意义截然不同。
 print(str(sys._getframe().f_lineno)+":",re.fullmatch(r"[a-zA-Z0-9-]+", "121-2286"))     # *表示匹配1到多个字符
+

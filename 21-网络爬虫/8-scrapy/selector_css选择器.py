@@ -28,6 +28,9 @@ body= '''<html>
                     <h4>幸福的歌声传遍四方 </h4>    
                 </div>  
                 <div class="div">
+                    <p lang="en">单打独斗</p>
+                    <p lang="en-us">点点滴滴</p>
+                    <a id ="a0" class="hello world">图片0<img src="https://gss2.bdstatic.com/9fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=5ed1e4838eb1cb133e693b15e56f3173/0bd162d9f2d3572c7ba613b08913632762d0c312.jpg" />链接以a开头的标签链接</a>
                     <a id ="a1" class="a">图片1<img src="https://gss2.bdstatic.com/9fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=5ed1e4838eb1cb133e693b15e56f3173/0bd162d9f2d3572c7ba613b08913632762d0c312.jpg" /></a>
                     <a id ="a2" class="a" target="_blank">图片2<img src="https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/s%3D220/sign=3000f11f034f78f0840b9df149300a83/03087bf40ad162d9393e0d5711dfa9ec8b13cdad.jpg" /></a>
                     <a class="a" href="/" target="_top">图片3<img src="http://5b0988e595225.cdn.sohucs.com/q_70,c_lfill,w_300,h_200,g_faces/images/20200105/8cd5207bdd4d426d9167912559c69063.jpeg" /></a>
@@ -37,10 +40,10 @@ body= '''<html>
 selector = Selector(text=body) 
 
 # 标签内容的提取“::text”
-title = selector.css('title::text' ).extract_first() 
+title = selector.css('title::text').extract_first() 
 print(f'标题：{title}')
 
-a = selector.css('a' ).extract() 
+a = selector.css('a').extract() 
 print(f'所有的a标签：{a}')
 
 # 提取属性我们是用：“标签名::attr(属性名)”，
@@ -69,6 +72,22 @@ print(f'a1的img标签链接：{img}')
 # [attribute〜= value] 选择器选择具有包含指定单词的属性值的元素。
 # element1 [attr〜=“value”] 也称为部分属性值选择器
 # 部分属性值选择器基于属性的空格分隔值的一部分选择任何元素
+
+a0 = selector.css('a[id^="a"][class~=hello]').extract() 
+print(f'所有链接以a开头并且包含独立单词hello的标签链接：{a0}')
+
+a0 = selector.css('a[id^="a"][class~=hell]').extract() 
+print(f'所有链接以a开头并且包含独立单词hell的标签链接：{a0}')
+
+a0 = selector.css('a[id^="a"][class*=hell]').extract() 
+print(f'所有链接以a开头并且包字符串hell的标签链接：{a0}')
+
+a0 = selector.css('a[id^="a"][class*=hello]').extract() 
+print(f'所有链接以a开头并且包字符串hello的标签链接：{a0}')
+
+#[attribute|=value] 属性中必须是完整且唯一的单词，或者以-分隔开
+p = selector.css('p[lang|=en]').extract() 
+print(f'属性中必须是完整且唯一的单词，或者以-分隔开：{p}')
 
 img = selector.css('a[id^="a"] img::attr(src)').extract() 
 print(f'所有链接以a开头的img标签链接：{img}')

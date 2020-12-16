@@ -30,5 +30,5 @@ class LabSpider(scrapy.Spider):
             f = open(fileName, "a+")            # 追加写入文件
             f.write(text)                       # 写入名言内容
             f.write('\n')                       # 换行
-            f.write('标签：'+tags)              # 写入标签
+            f.write('标签：'+tags)               # 写入标签
             f.close()                           # 关闭文件操作

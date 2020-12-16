@@ -5,9 +5,10 @@
 
 import scrapy
 
-class SchoolonlineItem(scrapy.Item):
+class UniversityrankItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    type = scrapy.Field()
+    rank = scrapy.Field()
     school = scrapy.Field()
-    num = scrapy.Field()
+    area = scrapy.Field()
+    score = scrapy.Field()

@@ -77,7 +77,7 @@ class HupunbaPipeline:
                  item['playersal'])
                 )
             self.conn.commit()
-        except pymysql .Error :
+        except pymysql.Error :
             print("插入错误")
  
         return item

@@ -15,7 +15,7 @@ import jaydebeapi
 # curs.close()
 # conn.close()
 
-url = 'jdbc:oscar://10.21.197.160:2003/osrdb'
+url = 'jdbc:oscar://10.21.197.162:2003/osrdb'
 user = 'SYSDBA'
 password = 'szoscar55'
 dirver = 'com.oscar.Driver'

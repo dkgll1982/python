@@ -41,7 +41,9 @@ print(img)
 img = selector.xpath('//img[substring(@src,string-length(@src)-string-length("jpeg")+1)="jpeg"]').extract()
 print(img)
 
+#text()方法变成多个分段字符串的列表
 p = selector.xpath('//body//div[@class="p"]//text()').extract() 
 print(p)
+#string变成一个字符串的列表
 p = selector.xpath('string(//body//div[@class="p"])').extract() 
 print(p)

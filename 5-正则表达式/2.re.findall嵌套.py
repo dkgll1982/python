@@ -17,21 +17,22 @@ import re
 # 示例参考：https://www.cnblogs.com/4wheel/p/8497121.html
 
 s = 'qew rty uio pas dfg hjk lzx cvb nm' 
-print(0,re.findall('(\w+\s+\w+)\s+\w+',s))           
-print(1,re.findall('\w+\s+\w+',s))                          
-print(2,re.findall('(\w+)\s+\w+',s)) 
-print(3,re.findall('((\w+)\s+\w+)',s))
-print(4,re.findall('(\s+\w+)',s))
-print(0,re.findall('\w+\w+\s+\w+\s+\w+',s))
-print(1,re.findall('\w+\w+\s+\w+','qew rty uio'))
-print(2,re.findall('\w+(\w+)\s+\w+','qew rty'))
-print(3,re.findall('\w+\w+\s+\w+(\s+\w+)','qew rty uio'))
+print(0,re.findall('((\w)+)',s))   
+print(0,re.findall('(\w+\s+\w+)\s+\w+',s))   #qew rty，pas dfg，lzx cvb
+print(1,re.findall('\w+\s+\w+',s))           #qew rty， uio pas， dfg hjk， lzx cvb
+print(2,re.findall('((\w)+)\s+\w+',s))         #qew，uio，dfg，lzx
+print(3,re.findall('((\w+)\s+\w+)',s))       #（qew rty，（qew）），（uio pas，（uio）），（dfg hjk，（dfg）），（lzx cvb，（lzx））
+print(4,re.findall('(\s+\w+)',s))            # rty， uio， pas， dfg， hjk， lzx， cvb， nm
+print(0,re.findall('\w+\w+\s+\w+\s+\w+',s))  #qew rty uio，pas dfg hjk。lzx cvb nm
+print(1,re.findall('\w+\w+\s+\w+','qew rty uio'))   #qew rty
+print(2,re.findall('\w+(\w+)\s+\w+','qew rty'))     #w
+print(3,re.findall('\w+\w+\s+\w+(\s+\w+)','qew rty uio')) # uio
 
 print('-'*40)
-print(re.findall('((\w+)\w+\s+\w+)(\w+)',s))  
-print(re.findall('\w+\w+\s+\w+\w+',s))   
+print(re.findall('((\w+)\w+\s+\w+)(\w+)',s))  #(qew rt,qe,y), (uio pa,ui,s), ('dfg hj', 'df', 'k'), ('lzx cv', 'lz', 'b')]
+print(re.findall('\w+\w+\s+\w+\w+',s))        #qew rty， uio pas， dfg hjk， lzx cvb
 #[('qew rt','qe','y'), ('uio pa','ui','s'),('dfg hj','df','k'),('lzx cv','lz','b')]
-print(re.findall('(\w+(\s+)\w+)(\w+)',s)) 
+print(re.findall('(\w+(\s+)\w+)(\w+)',s))     #(qew rt,' ',y)
 #[('qew rt',' ','y'),('uio pa',' ','s'),('dfg hj',' ','k'),('lzx cv',' ','b')]
 print('-'*40)
 #可以发现是否将整个正则表达式用括号括起来会影响findall的返回结果。
@@ -46,7 +47,8 @@ print(re.findall(r'a(bc)((d)(e))','abcde'))
 
 print('-'*40)
 
-print(re.findall(r'(^(\d{3})+)','1234567'))
+print(re.findall(r'((\d{3})+)','1234567890'))
+print(re.findall(r'(^(\d{3})+)','1234567890'))
 print(re.findall(r'((\d{3})+$)','1234567'))
 print(re.findall(r'(?=(\d{3})+$)','1234567'))
 

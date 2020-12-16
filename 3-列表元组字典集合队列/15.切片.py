@@ -21,6 +21,9 @@ L = ['Michael', 'Sarah', 'Tracy', 'Bob', 'Jack', 'chen', 'chen2', 'chen3', 'chen
 #取前三个元素
 print(L[:3])
 
+#从第三位开始取数据
+print(L[2:])
+
 #取第3到第5个数
 print(L[2:5])
 
