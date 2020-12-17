@@ -6,6 +6,7 @@ curpath = os.path.dirname(os.path.realpath(__file__))
 path = os.path.join(curpath, "test.xml")  
 
 DOMTree = parse(path)
+
 collection = DOMTree.documentElement
 if collection.hasAttribute("shelf"):
     print("Root element : %s" % collection.getAttribute("shelf"))

@@ -8,11 +8,11 @@
 
 </head>
 <body>
-    <div id="b009df3125614f4e8c2c9e4f45ddbdfc" class="chart-container" style="width:1400px; height:800px;"></div>
+    <div id="4c5afd7bf3204c9281ea8ea230b52653" class="chart-container" style="width:1400px; height:800px;"></div>
     <script>
-        var chart_b009df3125614f4e8c2c9e4f45ddbdfc = echarts.init(
-            document.getElementById('b009df3125614f4e8c2c9e4f45ddbdfc'), 'vintage', {renderer: 'canvas'});
-        var option_b009df3125614f4e8c2c9e4f45ddbdfc = {
+        var chart_4c5afd7bf3204c9281ea8ea230b52653 = echarts.init(
+            document.getElementById('4c5afd7bf3204c9281ea8ea230b52653'), 'vintage', {renderer: 'canvas'});
+        var option_4c5afd7bf3204c9281ea8ea230b52653 = {
     "animation": true,
     "animationThreshold": 2000,
     "animationDuration": 1000,
@@ -25,6 +25,7 @@
         {
             "type": "bar",
             "name": "\u5546\u5bb6A",
+            "legendHoverLink": true,
             "data": [
                 111,
                 20,
@@ -35,7 +36,17 @@
                 110,
                 75
             ],
+            "showBackground": false,
+            "barMinHeight": 0,
             "barCategoryGap": "20%",
+            "barGap": "30%",
+            "large": false,
+            "largeThreshold": 400,
+            "seriesLayoutBy": "column",
+            "datasetIndex": 0,
+            "clip": true,
+            "zlevel": 0,
+            "z": 2,
             "label": {
                 "show": true,
                 "position": "top",
@@ -49,6 +60,7 @@
         {
             "type": "bar",
             "name": "\u5546\u5bb6B",
+            "legendHoverLink": true,
             "data": [
                 15,
                 10,
@@ -59,7 +71,17 @@
                 40,
                 46
             ],
+            "showBackground": false,
+            "barMinHeight": 0,
             "barCategoryGap": "20%",
+            "barGap": "30%",
+            "large": false,
+            "largeThreshold": 400,
+            "seriesLayoutBy": "column",
+            "datasetIndex": 0,
+            "clip": true,
+            "zlevel": 0,
+            "z": 2,
             "label": {
                 "show": true,
                 "position": "top",
@@ -72,6 +94,7 @@
         {
             "type": "bar",
             "name": "\u5546\u5bb6C",
+            "legendHoverLink": true,
             "data": [
                 35,
                 21,
@@ -82,7 +105,17 @@
                 120,
                 45
             ],
+            "showBackground": false,
+            "barMinHeight": 0,
             "barCategoryGap": "20%",
+            "barGap": "30%",
+            "large": false,
+            "largeThreshold": 400,
+            "seriesLayoutBy": "column",
+            "datasetIndex": 0,
+            "clip": true,
+            "zlevel": 0,
+            "z": 2,
             "label": {
                 "show": true,
                 "position": "top",
@@ -119,10 +152,15 @@
         "axisPointer": {
             "type": "line"
         },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
         "textStyle": {
             "fontSize": 14
         },
-        "borderWidth": 0
+        "borderWidth": 0,
+        "padding": 5
     },
     "xAxis": [
         {
@@ -189,7 +227,7 @@
         }
     ]
 };
-        chart_b009df3125614f4e8c2c9e4f45ddbdfc.setOption(option_b009df3125614f4e8c2c9e4f45ddbdfc);
+        chart_4c5afd7bf3204c9281ea8ea230b52653.setOption(option_4c5afd7bf3204c9281ea8ea230b52653);
     </script>
 </body>
 </html>

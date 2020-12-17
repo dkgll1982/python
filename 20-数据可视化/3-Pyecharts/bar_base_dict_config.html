@@ -8,11 +8,11 @@
 
 </head>
 <body>
-    <div id="935d6fcc22c34d9181b88f61c4a6608c" class="chart-container" style="width:900px; height:500px;"></div>
+    <div id="e258a74bd6154856b3e35d42930c024a" class="chart-container" style="width:900px; height:500px;"></div>
     <script>
-        var chart_935d6fcc22c34d9181b88f61c4a6608c = echarts.init(
-            document.getElementById('935d6fcc22c34d9181b88f61c4a6608c'), 'macarons', {renderer: 'canvas'});
-        var option_935d6fcc22c34d9181b88f61c4a6608c = {
+        var chart_e258a74bd6154856b3e35d42930c024a = echarts.init(
+            document.getElementById('e258a74bd6154856b3e35d42930c024a'), 'macarons', {renderer: 'canvas'});
+        var option_e258a74bd6154856b3e35d42930c024a = {
     "animation": true,
     "animationThreshold": 2000,
     "animationDuration": 1000,
@@ -25,16 +25,27 @@
         {
             "type": "bar",
             "name": "\u5546\u5bb6A",
+            "legendHoverLink": true,
             "data": [
-                107,
-                24,
-                131,
-                57,
-                75,
-                124,
-                28
+                66,
+                35,
+                92,
+                123,
+                47,
+                20,
+                44
             ],
+            "showBackground": false,
+            "barMinHeight": 0,
             "barCategoryGap": "20%",
+            "barGap": "30%",
+            "large": false,
+            "largeThreshold": 400,
+            "seriesLayoutBy": "column",
+            "datasetIndex": 0,
+            "clip": true,
+            "zlevel": 0,
+            "z": 2,
             "label": {
                 "show": true,
                 "position": "top",
@@ -44,16 +55,27 @@
         {
             "type": "bar",
             "name": "\u5546\u5bb6B",
+            "legendHoverLink": true,
             "data": [
-                97,
-                146,
-                89,
-                22,
-                39,
-                43,
-                129
+                86,
+                69,
+                101,
+                126,
+                76,
+                30,
+                145
             ],
+            "showBackground": false,
+            "barMinHeight": 0,
             "barCategoryGap": "20%",
+            "barGap": "30%",
+            "large": false,
+            "largeThreshold": 400,
+            "seriesLayoutBy": "column",
+            "datasetIndex": 0,
+            "clip": true,
+            "zlevel": 0,
+            "z": 2,
             "label": {
                 "show": true,
                 "position": "top",
@@ -85,10 +107,15 @@
         "axisPointer": {
             "type": "line"
         },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
         "textStyle": {
             "fontSize": 14
         },
-        "borderWidth": 0
+        "borderWidth": 0,
+        "padding": 5
     },
     "xAxis": [
         {
@@ -112,13 +139,13 @@
                 }
             },
             "data": [
-                "\u6cb3\u9a6c",
-                "\u87d2\u86c7",
-                "\u8001\u864e",
-                "\u5927\u8c61",
-                "\u5154\u5b50",
-                "\u718a\u732b",
-                "\u72ee\u5b50"
+                "\u5468\u4e00",
+                "\u5468\u4e8c",
+                "\u5468\u4e09",
+                "\u5468\u56db",
+                "\u5468\u4e94",
+                "\u5468\u516d",
+                "\u5468\u65e5"
             ]
         }
     ],
@@ -150,7 +177,7 @@
         "subtext": "\u6211\u4e5f\u662f\u901a\u8fc7 dict \u8fdb\u884c\u914d\u7f6e\u7684"
     }
 };
-        chart_935d6fcc22c34d9181b88f61c4a6608c.setOption(option_935d6fcc22c34d9181b88f61c4a6608c);
+        chart_e258a74bd6154856b3e35d42930c024a.setOption(option_e258a74bd6154856b3e35d42930c024a);
     </script>
 </body>
 </html>
