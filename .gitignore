@@ -11,6 +11,8 @@ build
 21-网络爬虫/8-scrapy/*/*/images
 21-网络爬虫/8-scrapy/*/img
 21-网络爬虫/8-scrapy/*/*/img
+21-网络爬虫/8-scrapy/*/*/txt
+21-网络爬虫/8-scrapy/*/*/*/txt
 21-网络爬虫/8-scrapy/*/*.log
 21-网络爬虫/8-scrapy/*/*/*.log
 21-网络爬虫/8-scrapy/*/*/data 

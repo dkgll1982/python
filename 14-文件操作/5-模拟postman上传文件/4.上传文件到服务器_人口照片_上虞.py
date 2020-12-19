@@ -15,7 +15,7 @@ import requests
 import json
 import os,sys,base64 
 import datetime
-from DBUtils.PooledDB import PooledDB
+from dbutils.pooled_db import PooledDB
 
 os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
 

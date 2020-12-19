@@ -18,7 +18,7 @@ import hashlib
 import os
 from concurrent.futures import ThreadPoolExecutor
 import threading
-from DBUtils.PooledDB import PooledDB
+from dbutils.pooled_db import PooledDB
 
 class ApiSpider(object):    
     def __init__(self): 

@@ -17,7 +17,7 @@ import sys
 from jpype import *
 import jpype 
 import json
-from DBUtils.PooledDB import PooledDB
+from dbutils.pooled_db import PooledDB
 
 endtime = os.getenv("endtime")
 if endtime is None:

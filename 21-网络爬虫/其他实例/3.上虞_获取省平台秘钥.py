@@ -8,7 +8,7 @@ import os
 import math
 from concurrent.futures import ThreadPoolExecutor
 import threading
-from DBUtils.PooledDB import PooledDB
+from dbutils.pooled_db import PooledDB
 #注意点：https://blog.csdn.net/mxdzchallpp/article/details/80411514 （python多线程操作数据库问题）
 
 class sptspider():

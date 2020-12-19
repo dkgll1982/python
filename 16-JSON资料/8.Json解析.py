@@ -3,7 +3,7 @@ import cx_Oracle
 from concurrent.futures import ThreadPoolExecutor
 import time
 import os
-from DBUtils.PooledDB import PooledDB
+from dbutils.pooled_db import PooledDB
 
 class GuoTuSpider():
     def __init__(self):

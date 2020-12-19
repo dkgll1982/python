@@ -23,13 +23,14 @@ class SpiderSpider(scrapy.Spider):
             item["url"] = url_one 
             yield scrapy.Request(url = url_one, meta={'item':item}, callback = self.parse1) 
 
-    def parse1(self,response): 
+    def parse1(self, response):
         item = response.meta['item']
-		#提取标题
-        item["title"] = response.xpath("//div[@id='main_body']/h1/text()").extract() 
-		#提取文本，因为文本中有不可避免的空格，因此处理下
+        item['title'] = response.xpath("//div[@id='main_body']/h1/text()").extract()  
         lis = []
         for i in response.xpath("//*[@id='content']/p/text()").extract():
-            lis.append(re.sub("\s+","",i).strip()) 
+            #lis.append(re.sub('\s+','',i).strip())
+            lis.append(i+'\n')
+        # for i in response.xpath("//*[@id='content']/p/text()").extract():
+        #     lis.append(re.sub(r"\s+","",i).strip()) 
         item["text"] = lis 
-        yield item 
+        yield item

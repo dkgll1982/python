@@ -14,8 +14,8 @@ class Xiaoshuo136BookPipeline:
         item = dict(item)
         # 自定义目录，保存到本地
         for i in range(len(item["title"])): 
-            path = r'backup\爬虫\小说\花千骨\\' + item["title"][i]
-            self.file = open(path, "wb", encoding="utf-8")
+            path = r'txt\\' + item["title"][i].replace(' ','_').replace('(','').replace(')','').replace('：','').replace('，','')
+            self.file = open(path+'.txt', "w")
             for j in item["text"]:
                 self.file.write(j)
 
