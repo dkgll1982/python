@@ -3,6 +3,8 @@ backup
 __pycache__
 .vs
 .idea
+audio
+venv
 video
 dist
 build

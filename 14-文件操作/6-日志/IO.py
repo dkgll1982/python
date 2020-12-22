@@ -15,12 +15,12 @@ import os.path
 import time
 #第一步：创建一个logger
 logger = logging.getLogger()
-logger.setLevel(logging.INFO);
+logger.setLevel(logging.INFO)
 #第二步：创建一个Handler，写入日志文件
 logpath = r"backup\\Logs\\"
 logname=logpath+"3.txt"
 
-fh = logging.FileHandler(logname,'w');
+fh = logging.FileHandler(logname,'w')
 fh.setLevel(logging.INFO) #输出到file的log总开关
 
 #日志输出-控制台和文件
@@ -31,7 +31,7 @@ ch.setLevel(logging.INFO)  # 输出到console的log等级的开关
 formatter = logging.Formatter("%(asctime)s - %(levelno)s - %(name)s - %(levelname)s - %(message)s - %(pathname)s")
 fh.setFormatter(formatter)
 #第四步：将Logger添加到Handler里面
-logger.addHandler(fh);
+logger.addHandler(fh)
 
 ch.setFormatter(formatter)
 logger.addHandler(ch)

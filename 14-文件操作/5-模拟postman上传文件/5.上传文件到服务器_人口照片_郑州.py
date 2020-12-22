@@ -92,11 +92,10 @@ class PostPhoto(object):
         conn = self.pool.connection()
         cursor = conn.cursor()    
         sql1 = '''select para1 CARD_NUM,body from base_spt_xtdj_tb TA
-                    JOIN zz_person TB ON TA.para1=TB.CARD_NUM AND type_id='zfw_zz_rkxx' and body not like '%''sgats_2_zp'': None%'
-                where TB.ID NOT IN(
-                    SELECT B_ID FROM cigproxy.zz_attachment TC WHERE file_type='per-image' AND B_ID IS NOT NULL
-                )
-                AND ROWNUM<=100'''  
+                  where key='zfw_zz_rkxx_1' AND NOT EXISTS(
+                    SELECT * FROM cigproxy.zz_attachment TB WHERE file_type='per-image' AND Tb.B_ID=TA.COLUMN1 
+                  ) 
+                  AND ROWNUM<=100'''  
         cursor.execute(sql1)
         row = cursor.fetchall()                    # 得到所有数据集
         cursor.close() 

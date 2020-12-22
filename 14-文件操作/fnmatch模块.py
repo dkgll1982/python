@@ -8,7 +8,7 @@
 # @Last Modified time: 2019-08-04 13:23:03 
 # @Software: vscode 
 
-import os;
+import os
 from pathlib import *
 import fnmatch
 rootdir = "."
