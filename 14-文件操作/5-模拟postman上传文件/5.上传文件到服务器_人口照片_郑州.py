@@ -171,5 +171,5 @@ if __name__ == "__main__":
     pt.start()
 
     end = time.time() 
-    print("上传照片数据完成！！！""总耗时：%0.2fs"%(end -start)); 
+    print("上传照片数据完成！！！""总耗时：%0.2fs"%(end -start))
     
