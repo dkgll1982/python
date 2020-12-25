@@ -23,9 +23,9 @@ from dbutils.pooled_db import PooledDB
 class ApiSpider(object):    
     def __init__(self): 
         super().__init__()
-        self.index = 984
+        self.index = 0
         #接口编码 
-        self.api_code = 'zfw_zz_rkxx'                
+        self.api_code = 'zxrksjhzp'                
         self.host = 'http://172.17.217.98:8086/CSB/zzubShareService/zfw'
         self.token_url = parse.urljoin(self.host,f'?_api_name=token&_api_version=1.0.0') 
         os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
@@ -50,7 +50,7 @@ class ApiSpider(object):
             'Content-Length': '40',
             'ContentType': 'application/x-www-form-urlencoded',
             # 密钥 
-            'Authorization': 'Basic YTE1NzAzZjEtMGVhYy00OTAzLWEwNTktZWM1YjcyOTM1NTIwOkEyVjVZVEUxTlpBWlpKRVRNR1ZIWVkwME9UQVpMV0VXTlRLVFpXTTFZSkNZT1RNMU5USVc='
+            'Authorization': 'Basic MDU3ZTdhYmMtMTg0Mi00YTZhLTg2OTYtNmI1MWQ2MmM2NmM4OkEyVjVNRFUzWlRESFlNTVRNVEcwTUkwMFlUWkhMVEcyT1RZVE5NSTFNV1EyTU1NMk5NTTQ='
         }
         
         data = {
@@ -72,7 +72,7 @@ class ApiSpider(object):
         headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.87 Safari/537.36',
             'ContentType': 'application/x-www-form-urlencoded',  
-            'Authorization': "bearer b5430db3-507a-418c-8a33-49ec3f9569b5"
+            'Authorization': "bearer 8458243c-2150-4934-a885-29843429d8a9"
         }         
         params = {
             '_api_name': self.api_code,
@@ -91,7 +91,7 @@ class ApiSpider(object):
                         data = res_data["value"]    #返回的是一个List
                         if data:                    #不为空则表示分页数据存在，否则表示已取完  
                             #return data
-                            li =[{"type_id":'zfw_zz_rkxx',"card_num":row['zfw_z_1_sfzh'],"body":str(row)} for row in data] 
+                            li =[{"type_id":'zxrksjhzp2',"card_num":row['zxrks_1_sfzhm'],"body":str(row)} for row in data] 
                             self.save_data(li)               
                         else:
                             print(f"当前第{self.index}页已经是最后一页！")

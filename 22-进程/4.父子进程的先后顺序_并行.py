@@ -11,7 +11,7 @@
 from multiprocessing import Process
 from time import sleep
 import time
-import os;
+import os
 
 def run(int):
     print("子进程%d启动"%int)

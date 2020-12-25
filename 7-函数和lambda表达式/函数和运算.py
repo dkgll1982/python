@@ -9,7 +9,7 @@
 # @Software: vscode 
 
 import sys
-import time;  # 引入time模块
+import time   # 引入time模块
 
 a = 21
 b = 10
@@ -41,10 +41,10 @@ b = 5
 c = a//b 
 print ("7 - c 的值为：", c)
 
-print('1--',a and b);
-print('2--',a or b);
-print('3--',not(a and b));
-print('4--',c is b);
+print('1--',a and b)
+print('2--',a or b)
+print('3--',not(a and b))
+print('4--',c is b)
 
 
 a = 20

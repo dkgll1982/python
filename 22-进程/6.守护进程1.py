@@ -10,14 +10,14 @@
 
 from multiprocessing import Process
 from time import sleep 
-import os;
-num = 100;
+import os
+num = 100
 
 def run(str):
     print("子进程启动,参数：%s"%str)
     global num
     num+=1
-    sleep(1);
+    sleep(1)
     print("子进程结束%d"%(num))
 
 if __name__ == "__main__":

@@ -92,7 +92,7 @@ class PostPhoto(object):
         conn = self.pool.connection()
         cursor = conn.cursor()    
         sql1 = '''select para1 CARD_NUM,body from base_spt_xtdj_tb TA
-                  where key='zfw_zz_rkxx_1' AND NOT EXISTS(
+                  where key='zxrksjhzp2' AND NOT EXISTS(
                     SELECT * FROM cigproxy.zz_attachment TB WHERE file_type='per-image' AND Tb.B_ID=TA.COLUMN1 
                   ) 
                   AND ROWNUM<=100'''  
@@ -100,8 +100,7 @@ class PostPhoto(object):
         row = cursor.fetchall()                    # 得到所有数据集
         cursor.close() 
         conn.close()
-        return row
-    
+        return row 
 
     def createFile(self,filePath):
         if os.path.exists(filePath):
@@ -111,10 +110,19 @@ class PostPhoto(object):
             try:
                 os.mkdir(filePath)
                 print('新建文件夹：%s'%filePath)
-            except Exception as e:
+            except:
                 os.makedirs(filePath)
                 print('新建多层文件夹：%s' % filePath)
 
+    # 因为Base64是把3个字节变为4个字节，所以，Base64编码的长度永远是4的倍数，
+    # 因此，需要加上=把Base64字符串的长度变为4的倍数，就可以正常解码了。
+    # 参考链接：https://www.liaoxuefeng.com/wiki/897692888725344/949441536192576
+    def decode_base64(self,data):
+        missing_padding = 4 - len(data) % 4
+        if missing_padding:                 #字符串末尾补齐"="
+            data += '=' * missing_padding
+        return base64.b64decode(data)
+        
     #base64转成本地图片
     def base64toimg(self,cardnum,data):
         dt = datetime.datetime.now().strftime('%Y%m%d%H')    
@@ -132,7 +140,7 @@ class PostPhoto(object):
         #lob字转成字符串类型，否则报“TypeError: the JSON object must be str, bytes or bytearray, not LOB”的错误
         try:
             #zp字段值可能为空，为空则进行异常捕获
-            zp = base64.b64decode(eval(row[1].read())['sgats_2_zp'])
+            zp = self.decode_base64(eval(row[1].read())['sgats_2_zp'])
             
             file_name = self.base64toimg(cardnum,zp)
             
