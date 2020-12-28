@@ -10,7 +10,7 @@
     "python.testing.nosetestsEnabled": false,
     "python.testing.unittestEnabled": false,
     "python.testing.promptToConfigure": false, 
-    "python.languageServer": "Jedi",
+    "python.languageServer": "Microsoft",
     "python.autoComplete.addBrackets": true,
     
      //-------- Search configuration --------
