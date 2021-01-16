@@ -23,6 +23,7 @@ body= '''<html>
                     <a id ="a2" class="a">图片2<img src="https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/s%3D220/sign=3000f11f034f78f0840b9df149300a83/03087bf40ad162d9393e0d5711dfa9ec8b13cdad.jpg" /></a>
                     <a class="a" href="/">图片3<img src="http://5b0988e595225.cdn.sohucs.com/q_70,c_lfill,w_300,h_200,g_faces/images/20200105/8cd5207bdd4d426d9167912559c69063.jpeg" /></a>
                 </div>
+                <div class="page"><a href="/4kdongman/index_13.html">上一页</a><a href="/4kdongman/index.html">1</a><span class="slh">…</span><a href="/4kdongman/index_12.html">12</a><a href="/4kdongman/index_13.html">13</a><b>14</b><a href="/4kdongman/index_15.html">15</a><a href="/4kdongman/index_16.html">16</a><a href="/4kdongman/index_17.html">17</a><a href="/4kdongman/index_18.html">18</a><span class="slh">…</span><a href="/4kdongman/index_147.html">147</a><a href="/4kdongman/index_15.html">下一页</a></div>
             </body>
         </html>'''
 selector = Selector(text=body) 
@@ -47,3 +48,8 @@ print(p)
 #string变成一个字符串的列表
 p = selector.xpath('string(//body//div[@class="p"])').extract() 
 print(p)
+
+#选取下一页的链接地址。
+next_link = selector.xpath("//div[@class='page']/a[contains(text(),'下一页')]")
+print(next_link.xpath("@href").extract()[0])
+print(next_link.xpath("@href").get())

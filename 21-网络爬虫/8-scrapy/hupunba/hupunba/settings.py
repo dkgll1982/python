@@ -14,7 +14,7 @@ NEWSPIDER_MODULE = 'hupunba.spiders'
 
 MYSQL_HOST = 'localhost'
 MYSQL_PORT = '3306'
-MYSQL_DBNMAE = 'testdb'
+MYSQL_DBNMAE = 'cig'
 MYSQL_USER = 'root'
 MYSQL_PASSWORD = '123456'
 

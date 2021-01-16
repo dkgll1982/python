@@ -9,7 +9,7 @@
 from urllib.parse import urljoin
 from scrapy.spiders import Spider
 from scrapy.http import Request
-from meizitu.items import PicscrapyItem
+from ..items import PicscrapyItem
 # 在你需要输出日志的地方设置，比如 your_spider.py
 import logging
 

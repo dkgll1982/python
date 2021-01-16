@@ -3,6 +3,7 @@
 # 注意：已不能运行，该页面是js渲染的，无法爬取
 
 import scrapy
+from ..items import TencentpositionItem
  
 class TxzpSpider(scrapy.Spider):
     """
@@ -21,7 +22,7 @@ class TxzpSpider(scrapy.Spider):
         print(response.text)
         for each in response.xpath("//div[@class='recruit-list']"): 
             # 初始化模型对象
-            item = TencentItem()
+            item = TencentpositionItem()
             # 职位名称
             item['positionname'] = each.xpath("./a[@class='recruit-list-link']/h4[@class='recruit-title']/text()").extract()[0]
             # 详情连接
