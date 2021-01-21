@@ -11,10 +11,10 @@ from itemadapter import ItemAdapter
 class BosszhipingPipeline:
     f1,f2 = None,None
     def open_spider(self,spider):
-        self.f1 = open('a.txt','w',encoding='utf-8')
-        self.f2 = open('b.txt', 'w', encoding='utf-8')
+        self.f1 = open(r'data\a.txt','w',encoding='utf-8')
+        self.f2 = open(r'data\b.txt', 'w', encoding='utf-8')
+        
     def process_item(self, item, spider):
-
         #item在同一时刻只可以接收到某一个指定item对象
         if item.__class__.__name__ == 'FirstItem':
             job_title = item['job_title']

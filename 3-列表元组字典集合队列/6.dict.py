@@ -6,7 +6,8 @@
 # @File    : dict
 # @Software: PyCharm
 
-scores = {'语文': 89, '数学': 92, '英语': 93} 
+scores = {'语文': 89, '数学': 92, '英语': 93}
+print(type(scores))
 scores['政治']=40
 scores['数学']=40  
 #删除元素，找不到传回Default设定的内容，没有设定则传回KeyError

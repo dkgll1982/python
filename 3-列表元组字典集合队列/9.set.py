@@ -52,7 +52,7 @@ print(li)
 
 s = set([3,4,5,1,2,56,12,652,235]);
 s.add(2)
-print(s)
+print('---------------',s)
 
 def myfun(func,):
     if func == "abs":

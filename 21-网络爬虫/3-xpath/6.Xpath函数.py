@@ -16,7 +16,7 @@ text = '''
         <li class="sp item-3" name="four"><a href="https://hao.360.cn/?a1004">hao123</a>
         <li class="sp item-3" name="four"><a data_Attention="2149" href="https://daojian.360.cn/?a1004">刀剑 online</a>
 '''
-html = etree.HTML(text)
+html = etree.HTML(text) 
 
 #starts-with函数:选取name值以'o'开头的节点
 result = html.xpath('//li[starts-with(@name,"o")]/a/text()') 
@@ -32,3 +32,7 @@ print(result)
 #text()函数:选取节点文本包含s或b的a节点
 result = html.xpath('//a[contains(text(),"s") or contains(text(),"b")]/text()') 
 print(result)
+
+# 高阶用法：xpath定位，利用属性结合正则和contains、starts-with
+# https://blog.csdn.net/u012765157/article/details/84837603?utm_medium=distribute.pc_relevant_bbs_down.none-task-blog-baidujs-2.nonecase&depth_1-utm_source=distribute.pc_relevant_bbs_down.none-task-blog-baidujs-2.nonecase
+

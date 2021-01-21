@@ -26,7 +26,7 @@ body= '''<html>
                 <div class="page"><a href="/4kdongman/index_13.html">上一页</a><a href="/4kdongman/index.html">1</a><span class="slh">…</span><a href="/4kdongman/index_12.html">12</a><a href="/4kdongman/index_13.html">13</a><b>14</b><a href="/4kdongman/index_15.html">15</a><a href="/4kdongman/index_16.html">16</a><a href="/4kdongman/index_17.html">17</a><a href="/4kdongman/index_18.html">18</a><span class="slh">…</span><a href="/4kdongman/index_147.html">147</a><a href="/4kdongman/index_15.html">下一页</a></div>
             </body>
         </html>'''
-selector = Selector(text=body) 
+selector = Selector(text = body) 
 title = selector.xpath('//title/text() ' ).extract_first() 
 print(f'标题：{title}')
 href = selector.xpath('//@href | //@src' ).extract() 

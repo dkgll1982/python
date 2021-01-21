@@ -80,8 +80,8 @@ IMAGES_THUMBS = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'images360.pipelines.MySQLPipeline': 300,
-   'images360.pipelines.ImagePipeline': 300,
+   #'images360.pipelines.MySQLPipeline': 300,
+   'images360.pipelines.ImagePipeline': 100,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

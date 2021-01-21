@@ -57,6 +57,7 @@ class MySQLPipeline:
         self.db.commit()
         return item
 
+#注：ImagePipeline的优先级别应该比存入数据库的级别高
 
 from scrapy import Request
 from scrapy.exceptions import DropItem
@@ -79,7 +80,7 @@ class ImagePipeline(ImagesPipeline):
            (False,
                Failure(...))]
     ''' 
-    # 接收item对象并将获取item对象中的url发送请求
+    # 将item中的url取出来通过Request继续放入到调度器中执行
     def get_media_requests(self, item, info):
         # 地址是列表的情况
         # for image_url in item['image_urls']:

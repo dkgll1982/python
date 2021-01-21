@@ -33,7 +33,7 @@ class YgwzSpider(CrawlSpider):
     
     def parse_item(self, response):
         print(response.url)
-        item = DongguanItem()
+        item = TestCrawlspiderItem()
         item['url'] = response.url
         item['title'] = response.xpath('//div[@class="pagecenter p3"]//strong/text()').extract()[0]
         item['number'] = response.xpath('//div[@class="pagecenter p3"]//strong/text()').extract()[0].split(' ')[-1].split(':')[-1]

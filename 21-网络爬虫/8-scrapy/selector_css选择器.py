@@ -8,6 +8,7 @@
 
 # W3Cschool-CSS 选择器： https://www.w3cschool.cn/cssref/css-selectors.html
 from scrapy import Selector
+from scrapy.linkextractors import LinkExtractor
 
 body= '''<html>
             <head>
@@ -153,3 +154,15 @@ a = selector.css("a[target]").extract()
 print("具有target属性的a标签：",a)
 a = selector.css("a[href]").extract_first()
 print("具有href属性的a标签：",a) 
+
+print('+'*100)
+
+
+
+
+
+
+
+
+
+
