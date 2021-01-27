@@ -13,7 +13,7 @@ build
 21-网络爬虫/8-scrapy/*/*/images
 21-网络爬虫/8-scrapy/*/img
 21-网络爬虫/8-scrapy/*/*/img
-21-网络爬虫/8-scrapy/*/files
+21-网络爬虫/8-scrapy/*/files                                           
 21-网络爬虫/8-scrapy/*/*/files
 21-网络爬虫/8-scrapy/*/File
 21-网络爬虫/8-scrapy/*/*/File
@@ -23,3 +23,4 @@ build
 21-网络爬虫/8-scrapy/*/*/*.log
 21-网络爬虫/8-scrapy/*/*/data 
 21-网络爬虫/3-xpath/img
+debug.log

@@ -2,6 +2,9 @@ import re
 # 参考链接：https://www.cnblogs.com/cute/p/9186208.html
 # 参考链接：https://www.cnblogs.com/zsvslx/p/10536893.html
 
+l = "window.open('http:/www.runoob.com',%20'_blank',%20'location=yes,height=570,width=520,scrollbars=yes,status=yes)"
+print(re.findall(r"window.open\('(.*?)'," , l ,re.M|re.S))
+
 # (?=pattern)前向肯定断言的语法|(?<=pattern)后向肯定断言的语法：
 # 需要注意的是，如果在匹配的过程中，需要同时用到前向肯定断言和后向肯定断言，
 # 那么必须将后向肯定断言写在正则语句的前面，前向肯定断言写在正则语句的后面，表示后向肯定模式之后，前行肯定模式之前。

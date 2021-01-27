@@ -1,6 +1,14 @@
 from selenium import webdriver
 
+option = webdriver.ChromeOptions()
+# 隐藏窗口
+option.add_argument('headless')
+# 防止打印一些无用的日志
+option.add_experimental_option("excludeSwitches", ['enable-automation','enable-logging'])
+# 无头浏览器
+# browser = webdriver.Chrome(chrome_options=option)
 browser = webdriver.Chrome()
+
 browser.get("http://www.zhihu.com/explore")
 
 #获取元素属性 get_attribute('class')
