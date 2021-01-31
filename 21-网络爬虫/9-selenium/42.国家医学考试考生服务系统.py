@@ -123,6 +123,8 @@ class KaoShiSpider():
             js = "document.documentElement.scrollTop='%s'" %scroll
             self.driver.execute_script(js)
             # 截下该网站的图片
+            #get_screenshot_as_file(self, filename)
+            #这个方法是获取当前window的截图，出现IOError时候返回False,截图成功返回True。
             self.driver.get_screenshot_as_file(self.full_img)
             # 获得这个图片元素
             img_ele = self.driver.find_element_by_id("CaptchaImg")

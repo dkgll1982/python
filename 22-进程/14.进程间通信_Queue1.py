@@ -38,7 +38,7 @@ if __name__ == "__main__":
     pw = Process(target = write,args=(q,))
     pr = Process(target = read,args=(q,))
 
-    pw.start();
+    pw.start()
     pr.start()
 
     #join()方法可以在当前位置阻塞主进程，带执行join()的进程结束后再继续执行主进程的代码逻辑。

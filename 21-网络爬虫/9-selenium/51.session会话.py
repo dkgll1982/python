@@ -4,7 +4,7 @@ import requests
 import sys
 import time
 from lxml import etree
-import cPickle
+import pickle
 import os
 # reload(sys)
 # sys.setdefaultencoding('utf-8')
@@ -15,12 +15,12 @@ class Zhihu:
 
     def save_session(self,session): #保存session，下次可直接使用，避免再次登录
         with open('session.txt','wb') as f:
-            cPickle.dump(session, f)
+            pickle.dump(session, f)
             print("Cookies have been writed.")
 
     def load_session(self):     #加载session
         with open('session.txt', 'rb') as f:
-            s = cPickle.load(f)
+            s = pickle.load(f)
         return s
 
     def GetCookies(self):       #初次登录用selenium模拟，并获得cookies

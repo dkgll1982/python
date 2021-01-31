@@ -23,4 +23,7 @@ build
 21-网络爬虫/8-scrapy/*/*/*.log
 21-网络爬虫/8-scrapy/*/*/data 
 21-网络爬虫/3-xpath/img
+21-网络爬虫/10-scrapy+senium/*.log
+21-网络爬虫/10-scrapy+senium/*/*.log
+21-网络爬虫/10-scrapy+senium/*/*/*.log
 debug.log

@@ -7,6 +7,7 @@
 # @Last Modified by: guojun
 # @Last Modified time: 2019-11-22 15:51:20
 # @Software: vscode
+# __lt__富比较学习：https://blog.csdn.net/jh_210/article/details/107687055
 
 #Python3中已经不能使用cmp()函数了，被如下五个函数替代: 
 #import operator       #首先要导入运算符模块
