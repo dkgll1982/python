@@ -6,7 +6,7 @@
         {
             "name": "Python: Current File",
             "type": "python",
-            "request": "launch", 
+            "request": "launch",  
             "program": "${file}"
         },
         {
