@@ -32,7 +32,8 @@ class LoginSpider(scrapy.Spider):
     #start_urls = ['http://huzhou-jczl-cx.spacecig.com/zhzlbackend/places/placeSafeCheck/pajczkForAdmin?offset=11&limit=10&orderby=&ordertype=&keyword=&departmentId=&placeStaffnum=&safeType=&controlLevel=&isKeyPlace=&placeKeyAttributeNum=&createStartDate=&createEndDate=&visitSit=&checkLevel=&visitStartDate=&visitEndDate=&checkIllegal=&placeAddress=&chargePerson=&chargePersonPhone=&chargePersonCardNum=&placeStatus=&isEvent=&isCheck=&isDishonest=&isPunished=&newCheckLevel=&gkdj=&createUser=&isFirm=&placeTypeAll=']
     api = 'http://huzhou-jczl-cx.spacecig.com/zhzlbackend/places/placeSafeCheck/pajczkForAdmin?offset={}&limit={}&orderby=&ordertype=&keyword=&departmentId=&placeStaffnum=&safeType=&controlLevel=&isKeyPlace=&placeKeyAttributeNum=&createStartDate=&createEndDate=&visitSit=&checkLevel=&visitStartDate=&visitEndDate=&checkIllegal=&placeAddress=&chargePerson=&chargePersonPhone=&chargePersonCardNum=&placeStatus=&isEvent=&isCheck=&isDishonest=&isPunished=&newCheckLevel=&gkdj=&createUser=&isFirm=&placeTypeAll='
     
-    def __init__(self):
+    #2021/01/31：scrapyd部署时：spider 的init函数 需要改成 __init__(*args,**kwargs)
+    def __init__(self,*args,**kwargs):
         # 浏览器实例化的操作只会被执行一次
         chrome_option  = Options()
         

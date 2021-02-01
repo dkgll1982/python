@@ -68,7 +68,7 @@ ITEM_PIPELINES = {
 
 #图片存储路径
 import os
-IMAGES_STORE = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'images') 
+IMAGES_STORE = 'images'
 #设置图片通道失效时间
 IMAGES_EXPIRES=90 
 #设置允许重定向，否则可能找不到图片
