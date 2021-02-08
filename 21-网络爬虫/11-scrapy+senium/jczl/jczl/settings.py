@@ -13,9 +13,9 @@ SPIDER_MODULES = ['jczl.spiders']
 NEWSPIDER_MODULE = 'jczl.spiders'
 
 
-MYSQL_HOST = 'localhost'
-MYSQL_PORT = '3306'
-MYSQL_DBNMAE = 'cig'
+MYSQL_HOST = '10.21.197.160'
+MYSQL_PORT = '13307'
+MYSQL_DBNMAE = 'test'
 MYSQL_USER = 'root'
 MYSQL_PASSWORD = '123456'
 

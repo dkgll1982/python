@@ -37,16 +37,23 @@ class LoginSpider(scrapy.Spider):
         # 浏览器实例化的操作只会被执行一次
         chrome_option  = Options()
         
-        #chrome_option.add_argument('--headless')            # 无头，服务器上线时可加上，测试时可见比较好
+        chrome_option.set_headless()
+        chrome_option.add_argument('--no-sandbox')              #　让Chrome在root权限下跑  
+        chrome_option.add_argument('--disable-dev-shm-usage')
+        chrome_option.add_argument('--headless')                # 无头，服务器上线时可加上，测试时可见比较好
+        chrome_option.add_argument('blink-settings=imagesEnabled=false')
         chrome_option.add_argument('--ignore-certificate-errors')  
         chrome_option.add_argument('--allow-insecure-localhost') 
-        chrome_option.add_argument('--disable-infobars')     # 去掉提示：Chrome正收到自动测试软件的控制
+        chrome_option.add_argument('--disable-gpu')
+        chrome_option.add_argument('--disable-infobars')        # 去掉提示：Chrome正收到自动测试软件的控制
         chrome_option.add_experimental_option("excludeSwitches", ["enable-automation"])
         chrome_option.add_experimental_option('useAutomationExtension', False)
-        chrome_option.add_argument('--start-maximized')      # 最大化运行（全屏窗口）,不设置，取元素会报错
+        chrome_option.add_argument('--start-maximized')         # 最大化运行（全屏窗口）,不设置，取元素会报错
         
         # 声明webdriver对象，可以全局使用
-        self.chrome = webdriver.Chrome(chrome_options = chrome_option)    
+        #self.chrome = webdriver.Chrome(chrome_options = chrome_option)    
+        #Linux环境可加上chromedriver路径
+        self.chrome = webdriver.Chrome(chrome_options = chrome_option,executable_path='/usr/local/bin/chromedriver')    
         # 解决Webdriver Forbidden.反爬问题      
         self.chrome.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
             "source": """
@@ -76,7 +83,6 @@ class LoginSpider(scrapy.Spider):
             item = JczlItem()
             item['id'] = a['id'] 
             item['placeName'] = a['placeName'] 
-            item['oldPlaceName'] = a['oldPlaceName'] 
             item['oldPlaceName'] = a['oldPlaceName'] 
             item['placeAddr'] = a['placeAddr'] 
             item['areaName'] = a['areaName'] 

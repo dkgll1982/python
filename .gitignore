@@ -26,5 +26,6 @@ build
 21-网络爬虫/11-scrapy+senium/*.log
 21-网络爬虫/11-scrapy+senium/*/*.log
 21-网络爬虫/11-scrapy+senium/*/*/*.log
+21-网络爬虫/13-增量爬虫/data 
 debug.log
 created_gif.gif
