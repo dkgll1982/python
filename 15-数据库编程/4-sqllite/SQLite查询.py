@@ -13,7 +13,7 @@ import sqlite3
 
 # ①、打开或创建数据库
 # 也可以使用特殊名:memory:代表创建内存中的数据库
-conn = sqlite3.connect('15-数据库编程/sqllite/first.db')
+conn = sqlite3.connect('15-数据库编程/4-sqllite/first.db')
 # ②、获取游标
 c = conn.cursor()
 # ③、调用执行select语句查询数据

@@ -18,7 +18,7 @@ lua_script = '''
     end
 '''
 
-lua_url = "http://127.0.0.1:8050/execute?lua_source="+quote(lua_script)
+lua_url = "http://10.21.197.162:8050/execute?lua_source="+quote(lua_script)
 response = requests.get(lua_url)
 
 with open(r'backup/爬虫/cpml.html','w',encoding='utf-8') as f:

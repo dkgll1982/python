@@ -16,7 +16,7 @@ lua_script = '''
         } 
     end
  '''
-splash_url = 'http://localhost:8050/execute?lua_source='+quote(lua_script)
+splash_url = 'http://10.21.197.162:8050/execute?lua_source='+quote(lua_script)
 print(splash_url)
 
 headers = { 
