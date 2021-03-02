@@ -54,5 +54,6 @@ print(re.findall(r'(?=(\d{3})+$)','1234567'))
 
 print(re.findall(r'((\w+)(\w+)(\w+))','sdsfdd fdsdsfd')) 
 print(re.findall(r'((\w+?)(\w+)(\w+))','sdsfdd fdsdsfd')) 
+
 print(re.findall(r'(\w+)','sdsfdd fdsdsfd')) 
 print(re.findall(r'(\w+?)','sdsfdd fdsdsfd')) 
