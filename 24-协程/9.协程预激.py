@@ -25,9 +25,7 @@ def coroutinue(func):
         return gen  # 返回生成器
     return primer
 
-
 # 使用方法如下
-
 @coroutinue
 def simple_coro(a):
     a = yield

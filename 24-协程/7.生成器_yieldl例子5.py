@@ -11,6 +11,7 @@
 def a():
     print ("do a() will not print out")
     yield 5
+    
 a()
 
 print ("===============test a()")
